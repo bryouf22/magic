@@ -1,0 +1,14 @@
+%h1 Listes de souhait
+
+= link_to new_wishlist_path, class: 'btn btn-xs btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  Nouvelle liste de souhait
+
+%section.deck-list
+
+- if @wishlists.any?
+  %ul
+    - @wishlists.each do |wishlist|
+      %li= wishlist.name
+- else
+  %p Aucune liste de souhait trouvée

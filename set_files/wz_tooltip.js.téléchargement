@@ -1,0 +1,29 @@
+function lib_bwcheck(){ this.ver=navigator.appVersion
+this.agent=navigator.userAgent
+this.dom=document.getElementById?1:0
+this.opera5=this.agent.indexOf("Opera 5")>-1
+this.ie5=(this.ver.indexOf("MSIE 5")>-1 && this.dom && !this.opera5)?1:0; this.ie6=(this.ver.indexOf("MSIE 6")>-1 && this.dom && !this.opera5)?1:0; this.ie4=(document.all && !this.dom && !this.opera5)?1:0; this.ie=this.ie4||this.ie5||this.ie6
+this.mac=this.agent.indexOf("Mac")>-1
+this.ns6=(this.dom && parseInt(this.ver) >= 5) ?1:0; this.ns4=(document.layers && !this.dom)?1:0; this.bw=(this.ie6 || this.ie5 || this.ie4 || this.ns4 || this.ns6 || this.opera5)
+return this
+}
+var bw=new lib_bwcheck()
+fromX= -1
+fromY= 21
+ns4center= 0
+useFading= 0
+animation= 0
+detectiontype= 0
+delay= 100
+var px = bw.ns4||window.opera?"":"px"; if(document.layers){ scrX= innerWidth; scrY= innerHeight; onresize= function(){if(scrX!= innerWidth || scrY!= innerHeight){history.go(0)} };}
+function makeTooltip(obj){ this.elm= document.getElementById? document.getElementById(obj):bw.ie4?document.all[obj]:bw.ns4?document.layers[obj]:0; this.css= bw.ns4?this.elm:this.elm.style; this.wref= bw.ns4?this.elm.document:this.elm; this.obj= obj+'makeTooltip'; eval(this.obj+'=this'); this.w= bw.ns4? this.elm.clip.width: this.elm.offsetWidth; this.h= bw.ns4? this.elm.clip.height: this.elm.offsetHeight;}; makeTooltip.prototype.measureIt= function(){ this.w= bw.ns4? this.elm.clip.width: this.elm.offsetWidth; this.h= bw.ns4? this.elm.clip.height: this.elm.offsetHeight;}; makeTooltip.prototype.writeIt= function(text){ if (bw.ns4) {this.wref.write(text); this.wref.close()}
+else this.wref.innerHTML= text;}; var mouseX=0,mouseY=0,setX=0,setY=0; function getMousemove(e){ mouseX= (bw.ns4||bw.ns6)? e.pageX: bw.ie&&bw.win&&!bw.ie4? (event.clientX-2)+document.body.scrollLeft : event.clientX+document.body.scrollLeft; mouseY= (bw.ns4||bw.ns6)? e.pageY: bw.ie&&bw.win&&!bw.ie4? (event.clientY-2)+document.body.scrollTop : event.clientY+document.body.scrollTop; if (isLoaded && hovering && animation) placeIt();}; function placeIt(){ if (detectiontype==1) setX= mouseX+fromX+tooltip.w > screenWscrolled ? screenWscrolled-tooltip.w: mouseX+fromX; if (detectiontype==1) setY= mouseY+fromY+tooltip.h > screenHscrolled ? screenHscrolled-tooltip.h: mouseY+fromY; if (detectiontype==0) setX= mouseX+fromX+tooltip.w > screenWscrolled ? mouseX-fromX-tooltip.w: mouseX+fromX; if (detectiontype==0) setY= mouseY+fromY+tooltip.h > screenHscrolled ? mouseY-fromY-tooltip.h: mouseY+fromY; if (setX<0) setX= 0; if (setY<0) setY= 0; tooltip.css.left= setX+px; tooltip.css.top= setY+px;}; var hovering=false, screenWscrolled=0, screenHscrolled=0; makeTooltip.prototype.showTimer= null; function popUp(message){ if(isLoaded){ clearTimeout(tooltip.popTimer); dopopOut(); if (bw.ns4){ var text= '<span class="netscape4Style">' + message + '</span>'; tooltip.writeIt(text);}
+if (!bw.ns4) tooltip.writeIt(message); screenWscrolled= screenW + (bw.ie?document.body.scrollLeft:pageXOffset); screenHscrolled= screenH + (bw.ie?document.body.scrollTop:pageYOffset); hovering= true; if (bw.ie4) setTimeout('tooltip.measureIt(); placeIt();', delay/2); else { tooltip.measureIt(); placeIt();}
+if (useFading) tooltip.showTimer= setTimeout('tooltip.blendIn()', delay); if (!useFading) tooltip.showTimer= setTimeout('tooltip.css.visibility="visible"', delay);}
+}; makeTooltip.prototype.popTimer= null; function popOut(){ if (isLoaded) tooltip.popTimer= setTimeout('dopopOut()', 30)
+}; function dopopOut(){ hovering= false; clearTimeout(tooltip.showTimer); tooltip.css.visibility= 'hidden'; clearTimeout(tooltip.fadeTimer); tooltip.i= 0;}; var scrollbarWidth= bw.ns6&&bw.win?14:bw.ns6&&!bw.win?16:bw.ns4?16:0; function measureScreen() { tooltip.css.top= 0+px; tooltip.css.left= 0+px; screenW= (bw.ie?document.body.clientWidth:innerWidth) - scrollbarWidth; screenH= (bw.ie?document.body.clientHeight:innerHeight);}; makeTooltip.prototype.blendIn= function(){ if (bw.ie && bw.win && !bw.ie4) { this.css.filter= 'blendTrans(duration=0.5)'; this.elm.filters.blendTrans.apply(); this.css.visibility= 'visible'; this.elm.filters.blendTrans.play();}
+else { this.css.visibility= 'visible'; if (!bw.ns4) this.fadeIt();}
+}; makeTooltip.prototype.step= 8; makeTooltip.prototype.i= 0; makeTooltip.prototype.fadeTimer= null; makeTooltip.prototype.fadeIt= function(){ this.i+= this.step; this.css.MozOpacity= this.i/100; if (this.i<100) this.fadeTimer= setTimeout(this.obj+'.fadeIt()', 40); else this.i= 0;}; var isLoaded= false; function popupInit(){ bw.opera5 = (navigator.userAgent.indexOf("Opera")>-1 && document.getElementById)?true:false
+if (bw.opera5) bw.ns6 = 0
+bw.win= (navigator.userAgent.indexOf('Windows')>-1)
+tooltip= new makeTooltip('divTooltip'); tooltip.elm.onmouseover= function(){ clearTimeout(tooltip.popTimer); if(bw.ns4){setTimeout('clearTimeout(tooltip.popTimer)',20)};}; tooltip.elm.onmouseout= dopopOut; if (bw.ns4) document.captureEvents(Event.MOUSEMOVE); document.onmousemove= getMousemove; measureScreen(); if (!bw.ns4) onresize= measureScreen; if (!bw.ns4) tooltip.elm.className= 'normalStyle'; if (bw.ie && bw.win && !bw.ie4) tooltip.css.filter= 'alpha(opacity=100)'; isLoaded= true;}; if(bw.bw && !isLoaded) onload= popupInit; 

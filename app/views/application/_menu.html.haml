@@ -1,0 +1,24 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Magic Project', root_path, class: 'navbar-brand'
+    .collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li= link_to 'Extensions', extension_sets_path
+        %li= link_to 'Liste de souhait', wishlists_path
+        %li= link_to 'Mes decks', decks_path
+        %li= link_to 'Ma collection', card_collections_path
+      = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
+        .form-group
+          = form.text_field(:term, class: 'form-control', placeholder: "Rechercher une carte")
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to 'Mon compte', user_account_path
+          %li= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'connexion-link'
+        - else
+          %li= link_to 'Se connecter', new_user_session_path, class: 'connexion-link'

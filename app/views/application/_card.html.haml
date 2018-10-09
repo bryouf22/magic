@@ -1,0 +1,22 @@
+.row.card-view
+  .col-md-4
+    .card-title
+      .pull-left= @card.name_fr
+      .pull-right= @card.cost
+  .col-md-2
+    = image_tag @card.image.url if @card.image.present?
+  .col-md-4
+    %ul
+      %li lien gatherer
+      %li prix mkm
+      %li autres extensionx
+      %li présent dans les deck
+      %li ajouter a la wishlist
+      - if user_signed_in? && current_user.decks.any?
+        %li.add-to-deck
+          ajouter à
+          = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
+            - decks = current_user.decks.collect { |d| [d.name, d.id] }
+            = form.hidden_field(:card_id, value: @card.id)
+            = form.select(:deck_id, options_for_select(decks))
+            = form.submit('ok', class: 'btn btn-xs btn-success')

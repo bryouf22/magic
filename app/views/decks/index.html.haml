@@ -1,0 +1,15 @@
+%h1 Listes des decks
+
+= link_to new_deck_path, class: 'btn btn-xs btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  Nouveau deck
+
+%section.deck-list
+
+- if @decks.any?
+  %ul
+    - @decks.each do |deck|
+      %li= link_to deck.name, deck_path(deck.id)
+
+- else
+  %p Aucun deck trouvé

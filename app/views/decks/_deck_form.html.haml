@@ -1,0 +1,9 @@
+= form_for(@deck, url: url, method: method, html: { class: 'deck-form' }) do |form|
+  - errors = @deck.errors&.messages || {}
+  .form-group{ class: errors[:name].present? ? 'has-error has-feedback' : ''}
+    = form.label(:name, errors[:name]&.first || 'Nom')
+    = form.text_field(:name, class: 'form-control')
+    - if (errors[:name])
+      %span.glyphicon.glyphicon-remove.form-control-feedback
+  .form-group
+    = form.submit('Valider', class: 'btn btn-primary')

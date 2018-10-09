@@ -1,0 +1,12 @@
+%h1
+  Rechercher :
+  = "'#{@term}'"
+
+%p= "#{@results.count} résultat(s)"
+
+%table.table
+  - @results.each do |card|
+    %tr
+      %td.col-md-8= card.name_fr
+      %td.col-md-1
+        = link_to 'voir', card_path(card.id), class: 'btn btn-primary btn-xs'

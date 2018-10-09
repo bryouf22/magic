@@ -1,0 +1,6 @@
+%table.table
+  = image_tag(@set.set_visual.url) if @set.set_visual.present?
+  - @cards.each do |card|
+    %tr
+      %td= link_to (card.name_fr || card.name), extension_set_card_path(@set.id, card), data: { toggle: :popover, content: image_tag(card.image&.url || '') }
+      %td= image_tag(card.icone_url || '', class: 'img-responsive')

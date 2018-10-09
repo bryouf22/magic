@@ -1,0 +1,3 @@
+%h1 Editer #{@deck.name}
+
+= render partial: 'deck_form', locals: { deck: @deck, method: :post, url: decks_path }

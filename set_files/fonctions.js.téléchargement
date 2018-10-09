@@ -1,0 +1,238 @@
+
+
+
+function setCheckboxes(the_form, do_check)
+{
+    var elts      = (typeof(document.forms[the_form].elements['selected_db[]']) != 'undefined')
+                  ? document.forms[the_form].elements['selected_db[]']
+                  : (typeof(document.forms[the_form].elements['selected_tbl[]']) != 'undefined')
+          ? document.forms[the_form].elements['selected_tbl[]']
+          : document.forms[the_form].elements['selected_fld[]'];
+    var elts_cnt  = (typeof(elts.length) != 'undefined')
+                  ? elts.length
+                  : 0;
+
+    if (elts_cnt) {
+        for (var i = 0; i < elts_cnt; i++) {
+            elts[i].checked = do_check;
+        } // end for
+    } else {
+        elts.checked        = do_check;
+    } // end if... else
+
+    return true;
+}
+
+function confirmation(the_form)
+{
+	if (confirm("Etes vous sûr de vouloir supprimer ces éléments ?") == true )
+	{
+		document.forms[the_form].submit();
+	}
+}
+
+function confirmationAction(the_form, action)
+{
+	document.forms[the_form].elements['action'].value = action;
+	if (confirm("Etes vous sûr de vouloir supprimer ces éléments ?") == true )
+	{
+		document.forms[the_form].submit();
+	}
+}
+
+function submitForm(the_form, action)
+{
+	document.forms[the_form].elements['action'].value = action;
+	document.forms[the_form].submit();
+}
+
+
+
+function openGrade()
+{
+	popupWin = window.open('', 'grade', 'scrollbars,resizable,width=600,height=550,top')
+}
+
+function openCarteClasseur()
+{
+	popupWin = window.open('', 'carteClasseur', 'scrollbars,resizable,width=1000,height=700,top')
+}
+
+function openCarte()
+{
+	popupWin = window.open('', 'carte', 'scrollbars,resizable,width=1000,height=700,top')
+}
+
+function openUser()
+{
+	popupWin = window.open('', 'user', 'scrollbars,resizable,width=1000,height=700,top')
+}
+
+function openColorPicker(champ)
+{
+	popupWin = window.open('colorpicker.php?champ='+champ, 'Color', 'scrollbars,resizable,width=400,height=310,top');
+	//document.getElementById(champ).focus();
+}
+
+function Carte(url,x,y,name){
+	carte=window.open("","","directories=0,location=0,menubar=0,reziseable=0,scrollbars=0,status=0,toolbar=0,width="+(x+20)+",height="+(600));
+	carte.document.open();
+  	carte.document.write("<HTML><HEAD><TITLE>S.M.F. - "+name+"</TITLE></HEAD>");
+  	carte.document.write("<BODY BGCOLOR=white TEXT=black BACKGROUND='';>");
+  	carte.document.write("<CENTER><IMG SRC='");
+  	carte.document.write(""+url+"' WIDTH="+x+" HEIGHT="+y+"></CENTER></BODY></HTML>");
+  	carte.document.close();
+}
+
+function reloadMoteurCarte(page, order, tri) {
+	document.forms['moteur_recherche_carte'].elements['page'].value = page;
+	document.forms['moteur_recherche_carte'].elements['tri'].value = tri;
+	document.forms['moteur_recherche_carte'].elements['order'].value = order;
+	document.forms['moteur_recherche_carte'].submit();
+}
+
+
+function reloadMoteurDeck(page) {
+	document.forms['moteur_deck'].elements['page'].value = page;
+	document.forms['moteur_deck'].submit();
+}
+
+function reloadMoteurUser(page) {
+	document.forms['moteur_user'].elements['page'].value = page;
+	document.forms['moteur_user'].submit();
+}
+
+
+function reloadMoteurArticle(page) {
+	document.forms['moteur_article'].elements['page'].value = page;
+	document.forms['moteur_article'].submit();
+}
+
+function reloadMoteur(page) {
+	document.forms['moteur_page'].elements['page'].value = page;
+	document.forms['moteur_page'].submit();
+}
+
+function reloadMoteurCarteVente(page, order, tri) {
+	document.forms['moteur_recherche_carte'].elements['page'].value = page;
+	document.forms['moteur_recherche_carte'].elements['tri'].value = tri;
+	document.forms['moteur_recherche_carte'].elements['order'].value = order;
+	document.forms['moteur_recherche_carte'].submit();
+}
+
+function checkKey(e, forme ,page, ordre, tri) {
+		var key;
+
+		if (window.event) {
+		   key = window.event.keyCode;	   
+		}
+		else if (e) {
+		   key = e.which;
+		}
+
+		if (key==13 && page <= document.forms[forme].elements['maxpage'].value && page > 0) {
+			document.forms[forme].elements['page'].value = page;
+			document.forms[forme].elements['order'].value = ordre;
+			document.forms[forme].elements['tri'].value = tri;
+			return true;
+		}
+		
+		if ((key >= 48 && key <= 57) || key == 8 || key == 0)
+			return true;
+			
+		return false;
+	}
+
+function reduceTable(id) {
+	if (document.getElementById && document.getElementById('Table'+id) != null)
+	{
+		document.getElementById('Table'+id).style.visibility='hidden';
+		document.getElementById('Table'+id).style.display='none';
+		document.getElementById('Lien'+id+'1').style.visibility='visible';
+		document.getElementById('Lien'+id+'1').style.display='block';
+		document.getElementById('Lien'+id+'2').style.visibility='hidden';
+		document.getElementById('Lien'+id+'2').style.display='none';
+	}
+}
+
+function showTable(id) {
+	if (document.getElementById && document.getElementById('Table'+id) != null)
+	{
+		document.getElementById('Table'+id).style.visibility='visible';
+		document.getElementById('Table'+id).style.display='block';
+		document.getElementById('Lien'+id+'1').style.visibility='hidden';
+		document.getElementById('Lien'+id+'1').style.display='none';
+		document.getElementById('Lien'+id+'2').style.visibility='visible';
+		document.getElementById('Lien'+id+'2').style.display='block';
+	} 
+}
+
+
+function ajouter_au_panier(f) {
+	var l1    = f.elements["quantite"];
+	var index = l1.selectedIndex;
+	if(index >= 1) {
+	   var xhr_object = null;
+		
+	   if(window.XMLHttpRequest) // Firefox
+	      xhr_object = new XMLHttpRequest();
+	   else if(window.ActiveXObject) // Internet Explorer
+	      xhr_object = new ActiveXObject("Microsoft.XMLHTTP");
+	   else { // XMLHttpRequest non supporté par le navigateur
+	      alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest...");
+	      return;
+	   }
+	   try {
+	   	xhr_object.open("POST", "http://www.smfcorp.net/include/php/ajax/panier.ajax.php", true);
+	  } catch (E) {
+	  	xhr_object.open("POST", "http://smfcorp.net/include/php/ajax/panier.ajax.php", true);
+	  }
+		
+	    xhr_object.onreadystatechange = function() {
+	      if(xhr_object.readyState == 4)
+	         eval(xhr_object.responseText);
+	   }
+			
+	    xhr_object.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    
+	    var data = "quantite="+l1.options[index].value+"&carte="+f.elements["carte"].value+"&prix="+f.elements["prix"].value+"&idMC="+f.elements["num_produit"].value;
+	    xhr_object.send(data);
+	    document.getElementById('panier').submit();
+	}
+}
+	
+function ajouter_au_panier_produit(f, nom) {
+	var l1    = f.elements["quantite"];
+	var index = l1.selectedIndex;
+	if(index >= 1) {
+	   var xhr_object = null;
+		
+	   if(window.XMLHttpRequest) // Firefox
+	      xhr_object = new XMLHttpRequest();
+	   else if(window.ActiveXObject) // Internet Explorer
+	      xhr_object = new ActiveXObject("Microsoft.XMLHTTP");
+	   else { // XMLHttpRequest non supporté par le navigateur
+	      alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest...");
+	      return;
+	   }
+	   
+	   try {
+	   	xhr_object.open("POST", "http://www.smfcorp.net/include/php/ajax/panier.ajax.php", true);
+	  } catch (E) {
+	  	xhr_object.open("POST", "http://smfcorp.net/include/php/ajax/panier.ajax.php", true);
+	  }
+		
+	    xhr_object.onreadystatechange = function() {
+	      if(xhr_object.readyState == 4)
+	         eval(xhr_object.responseText);
+	   }
+			
+	    xhr_object.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	    
+	    var data = "quantite="+l1.options[index].value+"&carte=ed"+f.elements["edition"].value+"&prix="+f.elements["prix"].value+"&idMC="+f.elements["num_produit"].value;
+	    xhr_object.send(data);
+	    document.getElementById(nom).submit();
+	}
+}
+
+
