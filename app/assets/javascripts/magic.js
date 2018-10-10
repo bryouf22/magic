@@ -1,4 +1,4 @@
-$(function () {
+$(document).ready(function() {
   $('[data-toggle="popover"]').popover({
     html: true,
     trigger: 'hover',
@@ -13,5 +13,4 @@ $(function () {
       return false;
     }
   });
-})
-
+});

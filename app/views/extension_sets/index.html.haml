@@ -1,10 +1,7 @@
-%table.table
+%table.table.js-extension-cards
   - @extensions.each do |set|
     %tr
-      %td.col-md-8= set.name
+      %td.col-md-8= link_to set.name, extension_set_path(set.id)
       %td.col-md-3= set.cards.count
       %td.col-md-1
         = link_to 'voir', extension_set_path(set.id), class: 'btn btn-primary btn-xs'
-        = link_to edit_extension_set_path(set.id), class: 'btn btn-warning btn-xs' do
-          %span.glyphicon.glyphicon-pencil
-

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
+  get '/manifest', to: 'welcome#manifest', as: :manifest
+
   get 'mon-compte', to: 'account#index', as: :user_account
 
   get 'rechercher', to: 'card_search#new', as: :card_search
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   resources :decks do
     resources :cards, controller: 'decks/cards', except: :index
   end
+
   resources :wishlists do
     resources :cards, controller: 'wishlists/cards', except: :index
   end

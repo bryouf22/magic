@@ -28,17 +28,19 @@
 
 class Card < ApplicationRecord
 
-
-  # ajouter bitfield
+  # TODO : ajouter bitfield
   # pour le format
   # voir : https://github.com/grosser/bitfields
 
+  MANA_COST_MAPPING = { w: :white, u: :blue, b: :black, r: :red, g: :green }
 
-  # create colors associations
+  scope :green,     -> { color_ids.include?(Color.green) }
+  scope :red,       -> { color_ids.include?(Color.red)   }
+  scope :blue,      -> { color_ids.include?(Color.blue)  }
+  scope :white,     -> { color_ids.include?(Color.white) }
+  scope :black,     -> { color_ids.include?(Color.black) }
+  scope :colorless, -> { where('color_ids is ?', nil) }
 
-  belongs_to :extension_set
-
-  mount_uploader :image, CardImageUploader
 
   enum type: {
     instant:            1,
@@ -60,6 +62,12 @@ class Card < ApplicationRecord
     mythic:   4
   }
 
+  belongs_to :extension_set
+
+  before_save :set_colors
+
+  mount_uploader :image, CardImageUploader
+
   def icone_url
     case rarity
     when 'commun'
@@ -73,5 +81,28 @@ class Card < ApplicationRecord
     else
       extension_set.commun_logo&.url
     end
+  end
+
+  def colorless?
+    !color_ids.present?
+  end
+
+  def colors
+    return nil unless color_ids.any?
+    colors = []
+    color_ids.each do |id|
+      colors << Color::COLORS_MAPPING.invert[id].to_s
+    end
+    colors
+  end
+
+  private
+
+  def set_colors
+    c_ids = []
+    MANA_COST_MAPPING.each do |mana_c, color|
+      c_ids << Color.__send__(color) if mana_cost&.include?(mana_c.to_s)
+    end
+    self['color_ids'] = c_ids.any? ? c_ids.uniq : nil
   end
 end

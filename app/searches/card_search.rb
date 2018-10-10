@@ -6,6 +6,6 @@ class CardSearch < Searchlight::Search
 
   def search_term
     t = I18n.transliterate(term).downcase
-    query.where('`cards`.`name_clean` LIKE ? OR `cards`.`name_fr_clean` LIKE ?', "%#{t}%", "%#{t}%")
+    query.where("cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?", "%#{t}%", "%#{t}%")
   end
 end
