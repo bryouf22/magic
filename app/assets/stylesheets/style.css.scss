@@ -113,8 +113,11 @@ form {
 ul.cards-list {
   list-style-type: none;
   padding: 0;
-  &.classic li {
-    width: 325px;
+  &.classic  {
+    display: block;
+    li {
+      width: 325px;
+    }
   }
   li {
     float: left;

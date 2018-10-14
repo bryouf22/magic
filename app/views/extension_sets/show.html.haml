@@ -39,9 +39,34 @@
         = '|'
         =link_to 'cartes déjà présente dans mes listes de souhait', '#'
   %hr
-  %ul.cards-list.classic
-    - if user_signed_in?
+  - if user_signed_in?
+    %ul.cards-list.classic
       = render partial: 'extension_sets/show/card_checkbox_view', collection: @white_cards, as: :card
-    - else
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/card_checkbox_view', collection: @bue_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/card_checkbox_view', collection: @black_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/card_checkbox_view', collection: @red_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/card_checkbox_view', collection: @green_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/card_checkbox_view', collection: @gold_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/card_checkbox_view', collection: @colorless_cards, as: :card
+  - else
+    %ul.cards-list.classic
       = render partial: 'extension_sets/show/simple_view', collection: @white_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/simple_view', collection: @blue_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/simple_view', collection: @black_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/simple_view', collection: @red_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/simple_view', collection: @green_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/simple_view', collection: @gold_cards, as: :card
+    %ul.cards-list.classic
+      = render partial: 'extension_sets/show/simple_view', collection: @colorless_cards, as: :card
 
