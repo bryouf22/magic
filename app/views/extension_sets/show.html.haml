@@ -1,7 +1,7 @@
 = image_tag(@set.set_visual.url) if @set.set_visual.present?
 
 .views-selection
-  = 'vue normal|'
+  = 'vue normal |'
   = link_to 'vue visuel', extension_set_path(slug: @set.slug, params: { view: :visual })
 %br
 
