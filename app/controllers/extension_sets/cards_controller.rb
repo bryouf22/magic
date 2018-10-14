@@ -1,7 +1,7 @@
 class ExtensionSets::CardsController < ApplicationController
 
   def show
-    @set  = ExtensionSet.find(params[:extension_set_id])
+    @set  = ExtensionSet.where(slug: params[:slug]).first!
     @card = @set.cards.where(id: params[:id]).first.decorate
   end
 end

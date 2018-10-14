@@ -1,5 +1,25 @@
+* {
+  font-family: Verdana;
+}
+
+/* a {
+  color: #1e6e00;
+  &:hover {
+    color: #00360c;
+  }
+} */
+
 .navbar {
   margin-bottom: 0;
+  .container-fluid {
+    max-width: 1300px;
+    .navbar-brand {
+      padding-left: 0;
+    }
+    #menu-card-search {
+      margin-right: -45px;
+    }
+  }
   .connexion-link {
     font-weight: bold;
   }
@@ -8,8 +28,7 @@
 .main-container {
   max-width: 1300px;
   margin: auto;
-  // border-left: 1px solid #ccc;
-  // border-right: 1px solid #ccc;
+  width: unset;
   padding: 30px 0;
   p.notice {
     border: 2px solid #055400;
@@ -74,6 +93,97 @@ form {
   .form-group {
     &.has-error {
       color: #a94442;
+    }
+  }
+}
+
+.options {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .modes {
+    .selection-mode {
+      margin-top: 15px;
+    }
+  }
+}
+
+ul.cards-list {
+  list-style-type: none;
+  padding: 0;
+  &.classic li {
+    width: 325px;
+  }
+  li {
+    float: left;
+    .list-checkbox i {
+      float: right;
+      margin-right: 15px;
+    }
+  }
+  &.visual {
+    li {
+      text-align: center;
+      width: 200px;
+      padding: 10px 10px 10px 0;
+      min-height: 340px;
+    }
+  }
+}
+
+// pretty checkbox my customisation
+.pretty {
+  .state label:after {
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+}
+
+// Custom radio css
+.pretty-radio {
+  position: absolute;
+  left: -9999px;
+  &:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  &:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  & + label {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    line-height: 15px;
+    display: inline-block;
+    font-weight: normal;
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #bdc3c7;
+      border-radius: 100%;
+      background: #fff;
+    }
+    &:after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background: #5cb85c ;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
     }
   }
 }

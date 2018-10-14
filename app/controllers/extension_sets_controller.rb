@@ -1,12 +1,16 @@
 class ExtensionSetsController < ApplicationController
 
+  after_action :list_by_colors, only: :show
+
   def index
     @extensions = ExtensionSet.all
   end
 
   def show
-    @set    = ExtensionSet.find(params[:id])
-    @cards  = @set.cards
+    @set    = ExtensionSet.where(slug: params[:slug]).first!
+    @cards  = @set.cards.order('name_fr_clean ASC')
+    list_by_colors
+    render :visual if view == 'visual'
   end
 
   def edit
@@ -24,6 +28,10 @@ class ExtensionSetsController < ApplicationController
   end
 
   private
+
+  def view
+    params[:view].presence || :classic
+  end
 
   def update_params
     params.require(:extension_set).permit(:name, :release_date, :set_visual, :commun_logo, :uncommun_logo, :rare_logo, :mythic_logo)

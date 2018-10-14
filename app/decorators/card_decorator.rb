@@ -1,4 +1,5 @@
 class CardDecorator < Draper::Decorator
+  decorates_finders
   delegate_all
 
   def cost
@@ -8,6 +9,22 @@ class CardDecorator < Draper::Decorator
       result << h.image_tag(mana_img_path(c))
     end
     result.html_safe
+  end
+
+  def title
+    card.name_fr || card.name || ''
+  end
+
+  def visual
+    image_fr&.url || image&.url || ''
+  end
+
+  def rule_text
+    text_fr || text || ''
+  end
+
+  def flavor
+    flavor_text_fr || flavor_text || ''
   end
 
   private

@@ -2,7 +2,7 @@
 #
 # Table name: extension_sets
 #
-#  id            :integer          not null, primary key
+#  id            :bigint(8)        not null, primary key
 #  name          :string
 #  release_date  :datetime
 #  set_visual    :string
@@ -12,6 +12,7 @@
 #  uncommun_logo :string
 #  rare_logo     :string
 #  mythic_logo   :string
+#  slug          :string
 #
 
 require 'test_helper'

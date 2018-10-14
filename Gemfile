@@ -69,3 +69,4 @@ gem 'devise'
 gem 'searchlight'
 gem 'pg'
 # gem "select2-rails"
+gem "font-awesome-rails"

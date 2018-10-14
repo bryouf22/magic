@@ -2,10 +2,10 @@
 #
 # Table name: card_collections
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  card_ids   :integer
+#  card_ids   :integer          is an Array
 #  user_id    :integer
 #
 

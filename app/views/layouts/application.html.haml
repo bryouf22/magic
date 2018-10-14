@@ -6,6 +6,7 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
+    %link{ rel: "stylesheet", type: "text/css", href: "https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" }
     = javascript_include_tag 'application'
     %link{ rel: "apple-touch-icon", sizes: "57x57", href: "#{asset_path('favicon/apple-icon-57x57.png')}" }
     %link{ rel: "apple-touch-icon", sizes: "60x60", href: "#{asset_path('favicon/apple-icon-60x60.png')}" }

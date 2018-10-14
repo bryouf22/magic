@@ -3,6 +3,8 @@
     .card-title
       .pull-left= @card.name_fr
       .pull-right= @card.cost
+    .text= card.rule_text
+    .flavor_text= card.flavor
   .col-md-2
     = image_tag @card.image.url if @card.image.present?
   .col-md-4

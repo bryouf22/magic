@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_204721) do
+ActiveRecord::Schema.define(version: 2018_10_14_130657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2018_10_10_204721) do
     t.integer "gatherer_id"
     t.string "name_clean"
     t.string "name_fr_clean"
+    t.string "image_fr"
+    t.string "type_fr"
+    t.text "text_fr"
+    t.text "flavor_text"
+    t.text "flavor_text_fr"
+    t.string "power_str"
+    t.string "defense_str"
+    t.string "color_indicator"
+    t.integer "loyalty"
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
@@ -68,6 +77,7 @@ ActiveRecord::Schema.define(version: 2018_10_10_204721) do
     t.string "uncommun_logo"
     t.string "rare_logo"
     t.string "mythic_logo"
+    t.string "slug"
   end
 
   create_table "main_decks", force: :cascade do |t|
@@ -101,7 +111,7 @@ ActiveRecord::Schema.define(version: 2018_10_10_204721) do
     t.datetime "updated_at", null: false
     t.integer "card_ids", array: true
     t.integer "user_id"
-    t.string "string"
+    t.string "name"
   end
 
 end

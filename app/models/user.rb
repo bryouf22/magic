@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint(8)        not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
@@ -19,7 +19,13 @@ class User < ApplicationRecord
   has_many :decks
   has_many :wishlists
 
+  after_create :create_card_collection
+
   private
 
-  # TODO after create callback: créer une card collection
+  # TODO : after create callback: créer une card collection
+
+  def create_card_collection
+    CardCollection.create(user_id: id)
+  end
 end

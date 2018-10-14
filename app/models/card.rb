@@ -2,7 +2,7 @@
 #
 # Table name: cards
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  name_fr          :string
 #  name             :string
 #  extension_set_id :integer
@@ -12,7 +12,7 @@
 #  text             :text
 #  cmc              :integer
 #  mana_cost        :string
-#  color_ids        :integer
+#  color_ids        :integer          is an Array
 #  image            :string
 #  power            :integer
 #  defense          :integer
@@ -24,23 +24,35 @@
 #  gatherer_id      :integer
 #  name_clean       :string
 #  name_fr_clean    :string
+#  image_fr         :string
+#  type_fr          :string
+#  text_fr          :text
+#  flavor_text      :text
+#  flavor_text_fr   :text
+#  power_str        :string
+#  defense_str      :string
+#  color_indicator  :string
+#  loyalty          :integer
 #
 
 class Card < ApplicationRecord
 
-  # TODO : ajouter bitfield
-  # pour le format
-  # voir : https://github.com/grosser/bitfields
+  # TODO : ajouter bitfield pour le format (https://github.com/grosser/bitfields)
 
   MANA_COST_MAPPING = { w: :white, u: :blue, b: :black, r: :red, g: :green }
 
-  scope :green,     -> { color_ids.include?(Color.green) }
-  scope :red,       -> { color_ids.include?(Color.red)   }
-  scope :blue,      -> { color_ids.include?(Color.blue)  }
-  scope :white,     -> { color_ids.include?(Color.white) }
-  scope :black,     -> { color_ids.include?(Color.black) }
+  # https://edgeguides.rubyonrails.org/active_record_postgresql.html#array
+  # TODO : scope also_white
+  # TODO : scope also_red etc
+  scope :green,     -> { where(color_ids: [Color.green]) }
+  scope :red,       -> { where(color_ids: [Color.red])   }
+  scope :blue,      -> { where(color_ids: [Color.blue])  }
+  scope :white,     -> { where(color_ids: [Color.white]) }
+  scope :black,     -> { where(color_ids: [Color.black]) }
+  scope :gold,      -> { where("array_length(color_ids, 1) >= 2") }
   scope :colorless, -> { where('color_ids is ?', nil) }
-
+  # TODO : gérer les cartes hybrides
+  # http://www.magic-ville.com/fr/carte?ref=grn221
 
   enum type: {
     instant:            1,
@@ -64,9 +76,10 @@ class Card < ApplicationRecord
 
   belongs_to :extension_set
 
-  before_save :set_colors
+  before_create :set_colors, :set_name_fr_clean
 
-  mount_uploader :image, CardImageUploader
+  mount_uploader :image,    CardImageUploader
+  mount_uploader :image_fr, CardImageUploader
 
   def icone_url
     case rarity
@@ -98,11 +111,18 @@ class Card < ApplicationRecord
 
   private
 
+  # TODO : gérer les cartes hybrides
+  # http://www.magic-ville.com/fr/carte?ref=grn221
   def set_colors
     c_ids = []
     MANA_COST_MAPPING.each do |mana_c, color|
       c_ids << Color.__send__(color) if mana_cost&.include?(mana_c.to_s)
     end
     self['color_ids'] = c_ids.any? ? c_ids.uniq : nil
+  end
+
+  def clean_names
+    self[name_fr_clean] = I18n.transliterate(name_fr || '').downcase
+    self[name_clean]    = I18n.transliterate(name || '').downcase
   end
 end
