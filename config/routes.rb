@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'mes-decks', to: 'decks#user_decks', as: :user_decks
   get 'decks', to: 'decks#index', as: :decks
+  get 'mes-decks/nouveau', to: 'decks#new', as: :new_deck
+  get 'mes-decks/:slug', to: 'decks#show', as: :deck
 
   get 'ma-collection', to: 'card_collections#show', as: :card_collection
 

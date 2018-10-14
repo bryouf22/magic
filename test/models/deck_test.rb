@@ -10,6 +10,7 @@
 #  format_ids :integer          is an Array
 #  user_id    :integer
 #  status     :integer          default("personal"), not null
+#  slug       :string
 #
 
 require 'test_helper'

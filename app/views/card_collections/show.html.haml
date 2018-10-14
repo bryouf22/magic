@@ -1,0 +1,31 @@
+%h1 Ma collection
+
+%ul.cards-list.visual
+- @white_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @blue_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @black_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @red_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @green_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @gold_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @colorless_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'

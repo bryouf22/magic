@@ -10,6 +10,7 @@
 #  format_ids :integer          is an Array
 #  user_id    :integer
 #  status     :integer          default("personal"), not null
+#  slug       :string
 #
 
 class Deck < ApplicationRecord
@@ -25,6 +26,7 @@ class Deck < ApplicationRecord
   enum status: { personal: 1, published: 2 }
 
   after_create :add_composition
+  before_save :update_slug
 
   def cards
     Card.where(id: main_deck.card_ids + sideboard.card_ids)
@@ -36,4 +38,9 @@ class Deck < ApplicationRecord
     MainDeck.create(deck_id: id)
     Sideboard.create(deck_id: id)
   end
+
+  def update_slug
+    self[:slug] = name.parameterize
+  end
+
 end

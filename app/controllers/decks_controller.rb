@@ -26,8 +26,7 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck = current_user.decks.where(id: params[:id]).first
-    @deck = Deck.published.find(params[:id]) unless @deck
+    @deck = current_user.decks.where(slug: params[:slug]).first
   end
 
   def edit

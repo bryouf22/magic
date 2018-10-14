@@ -76,7 +76,7 @@ class Card < ApplicationRecord
 
   belongs_to :extension_set
 
-  before_create :set_colors, :set_name_fr_clean
+  before_create :set_colors, :clean_names
 
   mount_uploader :image,    CardImageUploader
   mount_uploader :image_fr, CardImageUploader
@@ -115,14 +115,14 @@ class Card < ApplicationRecord
   # http://www.magic-ville.com/fr/carte?ref=grn221
   def set_colors
     c_ids = []
-    MANA_COST_MAPPING.each do |mana_c, color|
+    { w: :white, u: :blue, b: :black, r: :red, g: :green }.each do |mana_c, color|
       c_ids << Color.__send__(color) if mana_cost&.include?(mana_c.to_s)
     end
     self['color_ids'] = c_ids.any? ? c_ids.uniq : nil
   end
 
   def clean_names
-    self[name_fr_clean] = I18n.transliterate(name_fr || '').downcase
-    self[name_clean]    = I18n.transliterate(name || '').downcase
+    self[:name_fr_clean] = I18n.transliterate(name_fr || '').downcase
+    self[:name_clean]    = I18n.transliterate(name || '').downcase
   end
 end

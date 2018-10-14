@@ -2,7 +2,9 @@ class CardCollectionsController < ApplicationController
 
   before_action :authenticate_user!
 
-  def index
-    @cardCollection = current_user.card_collection
+  def show
+    @card_collection = current_user.card_collection
+    @cards = @card_collection.cards
+    list_by_colors
   end
 end

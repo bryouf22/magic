@@ -9,7 +9,7 @@
 - if @decks.any?
   %ul
     - @decks.each do |deck|
-      %li= link_to deck.name, deck_path(deck.id)
+      %li= link_to deck.name, deck_path(slug: deck.slug)
 
 - else
   %p Aucun deck trouvé
