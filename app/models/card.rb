@@ -77,6 +77,8 @@ class Card < ApplicationRecord
 
   belongs_to :extension_set
 
+  has_many :reprints, class_name: 'Card', foreign_key: 'reprint_card_ids', primary_key: 'card_id'
+
   before_create :set_colors, :clean_names
 
   mount_uploader :image,            CardImageUploader
