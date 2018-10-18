@@ -33,13 +33,14 @@
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
+#  reverse_image    :string
+#  reverse_image_fr :string
+#  reprint_card_ids :integer          default([]), is an Array
 #
 
 class Card < ApplicationRecord
 
   # TODO : ajouter bitfield pour le format (https://github.com/grosser/bitfields)
-
-  MANA_COST_MAPPING = { w: :white, u: :blue, b: :black, r: :red, g: :green }
 
   # https://edgeguides.rubyonrails.org/active_record_postgresql.html#array
   # TODO : scope also_white
@@ -78,8 +79,10 @@ class Card < ApplicationRecord
 
   before_create :set_colors, :clean_names
 
-  mount_uploader :image,    CardImageUploader
-  mount_uploader :image_fr, CardImageUploader
+  mount_uploader :image,            CardImageUploader
+  mount_uploader :reverse_image,    CardImageUploader
+  mount_uploader :image_fr,         CardImageUploader
+  mount_uploader :reverse_image_fr, CardImageUploader
 
   def icone_url
     case rarity
@@ -109,14 +112,22 @@ class Card < ApplicationRecord
     colors
   end
 
+  #
+  # TODO : faire un belongs_to card pour les cartes doubles, les cartes a inversion, et les cartes a inversion (www.magic-ville.com/fr/carte?ref=chk002)
+  #
+
   private
 
   # TODO : gérer les cartes hybrides
   # http://www.magic-ville.com/fr/carte?ref=grn221
   def set_colors
     c_ids = []
-    { w: :white, u: :blue, b: :black, r: :red, g: :green }.each do |mana_c, color|
-      c_ids << Color.__send__(color) if mana_cost&.include?(mana_c.to_s)
+    Color::MANA_COST_MAPPING.each do |mana_c, colors|
+      if mana_cost&.include?(mana_c.to_s)
+        Array.wrap(colors).each do |color|
+          c_ids << Color.__send__(color)
+        end
+      end
     end
     self['color_ids'] = c_ids.any? ? c_ids.uniq : nil
   end

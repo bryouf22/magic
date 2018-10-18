@@ -121,6 +121,7 @@ ul.cards-list {
   }
   li {
     float: left;
+
     .list-checkbox i {
       float: right;
       margin-right: 15px;
@@ -133,6 +134,11 @@ ul.cards-list {
       padding: 10px 10px 10px 0;
       min-height: 340px;
     }
+  }
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }
 
