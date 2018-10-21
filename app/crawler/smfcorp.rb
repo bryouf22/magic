@@ -158,7 +158,7 @@ class Smfcorp
     when'Two or Red'
       'p'
     when'Two or Green'
-      'k'
+      'q'
     else
       value
     end

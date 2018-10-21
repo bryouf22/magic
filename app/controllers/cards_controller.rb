@@ -9,7 +9,7 @@ class CardsController < ApplicationController
   def add_to
     case action_params
     when 'collection'
-      current_user.card_collection.add_cards(card_ids)
+      # current_user.card_collection.add_cards(card_ids)
     when 'wishlist'
     when 'deck'
     end

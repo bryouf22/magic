@@ -11,7 +11,6 @@
     %ul
       %li lien gatherer
       %li prix mkm
-      %li autres extensionx
       %li présent dans les deck
       %li ajouter a la wishlist
       - if user_signed_in? && current_user.decks.any?
@@ -21,4 +20,10 @@
             - decks = current_user.decks.collect { |d| [d.name, d.id] }
             = form.hidden_field(:card_id, value: @card.id)
             = form.select(:deck_id, options_for_select(decks))
-            = form.submit('ok', class: 'btn btn-xs btn-success')
+
+      - if @card.reprint_cards.any?
+        - if @card.reprint_cards.count < 3
+          - @card.reprint_cards.each do |reprint|
+            %li= link_to "Version #{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
+        - else
+          / TODO faire un select avec un event on change  qui redirige vers le chemin extension_set_card_path de la carte reprint

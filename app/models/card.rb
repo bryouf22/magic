@@ -6,7 +6,7 @@
 #  name_fr          :string
 #  name             :string
 #  extension_set_id :integer
-#  type             :integer
+#  card_type        :integer
 #  detailed_type    :string
 #  rarity           :integer
 #  text             :text
@@ -35,7 +35,6 @@
 #  loyalty          :integer
 #  reverse_image    :string
 #  reverse_image_fr :string
-#  reprint_card_ids :integer          default([]), is an Array
 #
 
 class Card < ApplicationRecord
@@ -45,17 +44,20 @@ class Card < ApplicationRecord
   # https://edgeguides.rubyonrails.org/active_record_postgresql.html#array
   # TODO : scope also_white
   # TODO : scope also_red etc
-  scope :green,     -> { where(color_ids: [Color.green]) }
-  scope :red,       -> { where(color_ids: [Color.red])   }
-  scope :blue,      -> { where(color_ids: [Color.blue])  }
-  scope :white,     -> { where(color_ids: [Color.white]) }
-  scope :black,     -> { where(color_ids: [Color.black]) }
-  scope :gold,      -> { where("array_length(color_ids, 1) >= 2") }
-  scope :colorless, -> { where('color_ids is ?', nil) }
-  # TODO : gérer les cartes hybrides
-  # http://www.magic-ville.com/fr/carte?ref=grn221
+  scope :green,       -> { where(color_ids: [Color.green]) }
+  scope :red,         -> { where(color_ids: [Color.red])   }
+  scope :blue,        -> { where(color_ids: [Color.blue])  }
+  scope :white,       -> { where(color_ids: [Color.white]) }
+  scope :black,       -> { where(color_ids: [Color.black]) }
+  scope :gold,        -> { where("array_length(color_ids, 1) >= 2") }
+  scope :colorless,   -> { where('color_ids is ?', nil) }
+  scope :also_red,    -> { where("? = ANY(color_ids)", Color.red)}
+  scope :also_blue,   -> { where("? = ANY(color_ids)", Color.blue)}
+  scope :also_black,  -> { where("? = ANY(color_ids)", Color.blue)}
+  scope :also_green,  -> { where("? = ANY(color_ids)", Color.green)}
+  scope :also_white,  -> { where("? = ANY(color_ids)", Color.white)}
 
-  enum type: {
+  enum card_type: {
     instant:            1,
     land:               2,
     sorcery:            3,
@@ -76,6 +78,9 @@ class Card < ApplicationRecord
   }
 
   belongs_to :extension_set
+
+  has_many :reprints, foreign_key: :card_id
+  has_many :reprint_cards, through: :reprints
 
   before_create :set_colors, :clean_names
 
@@ -112,14 +117,11 @@ class Card < ApplicationRecord
     colors
   end
 
-  #
-  # TODO : faire un belongs_to card pour les cartes doubles, les cartes a inversion, et les cartes a inversion (www.magic-ville.com/fr/carte?ref=chk002)
-  #
+  # TODO : faire un belongs_to card pour les cartes doubles, les cartes a inversion, et les cartes recto verso (www.magic-ville.com/fr/carte?ref=chk002)
+  # (on ne gère pas recto verso de la meme facon, c'est géré via reverse image)
 
   private
 
-  # TODO : gérer les cartes hybrides
-  # http://www.magic-ville.com/fr/carte?ref=grn221
   def set_colors
     c_ids = []
     Color::MANA_COST_MAPPING.each do |mana_c, colors|

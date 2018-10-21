@@ -8,11 +8,7 @@
 #  user_id    :integer
 #
 
-class CardCollection < ApplicationRecord
+require 'rails_helper'
 
-  belongs_to :user
-  validates :user, presence: true, uniqueness: true
-
-  has_many :card_lists, as: :card_listable
-  has_many :cards, through: :card_lists
+RSpec.describe CardCollection, :type => :model do
 end

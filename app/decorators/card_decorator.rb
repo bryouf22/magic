@@ -27,6 +27,10 @@ class CardDecorator < Draper::Decorator
     flavor_text_fr || flavor_text || ''
   end
 
+  def name_with_set
+    "#{name_fr} - #{extension.set.name}"
+  end
+
   private
 
   def mana_img_path(c)
