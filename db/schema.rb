@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_135833) do
+ActiveRecord::Schema.define(version: 2018_10_21_153209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_135833) do
     t.integer "loyalty"
     t.string "reverse_image"
     t.string "reverse_image_fr"
+    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
