@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_184951) do
+ActiveRecord::Schema.define(version: 2018_10_21_135833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,15 +18,32 @@ ActiveRecord::Schema.define(version: 2018_10_18_184951) do
   create_table "card_collections", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "card_ids", array: true
     t.integer "user_id"
+  end
+
+  create_table "card_decks", force: :cascade do |t|
+    t.bigint "card_id"
+    t.bigint "deck_id"
+    t.integer "occurences_in_main_deck"
+    t.integer "occurences_in_sideboard"
+    t.index ["card_id"], name: "index_card_decks_on_card_id"
+    t.index ["deck_id"], name: "index_card_decks_on_deck_id"
+  end
+
+  create_table "card_lists", force: :cascade do |t|
+    t.bigint "card_id"
+    t.integer "card_listable_id"
+    t.string "card_listable_type"
+    t.string "number"
+    t.string "foils_number"
+    t.index ["card_id"], name: "index_card_lists_on_card_id"
   end
 
   create_table "cards", force: :cascade do |t|
     t.string "name_fr"
     t.string "name"
     t.integer "extension_set_id"
-    t.integer "type"
+    t.integer "card_type"
     t.string "detailed_type"
     t.integer "rarity"
     t.text "text"
@@ -55,7 +72,6 @@ ActiveRecord::Schema.define(version: 2018_10_18_184951) do
     t.integer "loyalty"
     t.string "reverse_image"
     t.string "reverse_image_fr"
-    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
@@ -84,18 +100,11 @@ ActiveRecord::Schema.define(version: 2018_10_18_184951) do
     t.string "slug"
   end
 
-  create_table "main_decks", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "deck_id"
-    t.integer "card_ids", default: [], array: true
-  end
-
-  create_table "sideboards", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "deck_id"
-    t.integer "card_ids", default: [], array: true
+  create_table "reprints", force: :cascade do |t|
+    t.bigint "card_id"
+    t.bigint "reprint_card_id"
+    t.index ["card_id"], name: "index_reprints_on_card_id"
+    t.index ["reprint_card_id"], name: "index_reprints_on_reprint_card_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -113,7 +122,6 @@ ActiveRecord::Schema.define(version: 2018_10_18_184951) do
   create_table "wishlists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "card_ids", array: true
     t.integer "user_id"
     t.string "name"
   end

@@ -15,17 +15,17 @@
 
 class Deck < ApplicationRecord
 
-  validates :name, presence: { message: 'Vous devez renseigner un nom.' }
+  validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
+  validates :name,    uniqueness: { scope: :user_id, message: "Vous possèdez déjà un deck avec ce nom !" }
   validates :user_id, presence: true
-  validates :name, uniqueness: { scope: :user_id, message: "Vous possèdez déjà un deck avec ce nom !" }
 
   belongs_to :user
-  has_one :main_deck
-  has_one :sideboard
+
+  has_many :card_decks
+  has_many :cards, through: :card_decks
 
   enum status: { personal: 1, published: 2 }
 
-  after_create :add_composition
   before_save :update_slug
 
   def cards
@@ -34,13 +34,7 @@ class Deck < ApplicationRecord
 
   private
 
-  def add_composition
-    MainDeck.create(deck_id: id)
-    Sideboard.create(deck_id: id)
-  end
-
   def update_slug
     self[:slug] = name.parameterize
   end
-
 end

@@ -16,14 +16,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   has_one :card_collection
+
   has_many :decks
   has_many :wishlists
 
   after_create :create_card_collection
 
   private
-
-  # TODO : after create callback: créer une card collection
 
   def create_card_collection
     CardCollection.create(user_id: id)

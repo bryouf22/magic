@@ -39,6 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'pry-byebug', require: true
   gem 'pry-rails', require: true
+  gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
@@ -70,3 +71,4 @@ gem 'searchlight'
 gem 'pg'
 # gem "select2-rails"
 gem "font-awesome-rails"
+gem "interactor-rails", "~> 2.0"

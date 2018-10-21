@@ -17,11 +17,11 @@ class Color
     j: [:black, :green],
     k: [:red, :white],
     l: [:green, :blue],
-    m: [],
-    n: [],
-    o: [],
-    p: [],
-    k: [],
+    m: [:white],
+    n: [:blue],
+    o: [:black],
+    p: [:red],
+    q: [:green],
   }
 
   COLORS_MAPPING.each do |name, id|
@@ -29,11 +29,6 @@ class Color
       id
     end
   end
-
-  # TODO : gérer les cartes hybrides
-  # http://www.magic-ville.com/fr/carte?ref=grn221
-  # http://gatherer.wizards.com/Pages/Card/Details.aspx?printed=true&name=Surgical%20Extraction
-  # http://gatherer.wizards.com/Pages/Card/Details.aspx?printed=true&multiverseid=173296
 
   # rule
   # http://www.magiccorporation.com/gathering-lexique-view-43-couleur.html
