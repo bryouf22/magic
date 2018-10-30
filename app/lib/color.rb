@@ -22,6 +22,7 @@ class Color
     o: [:black],
     p: [:red],
     q: [:green],
+    x: [],
   }
 
   COLORS_MAPPING.each do |name, id|

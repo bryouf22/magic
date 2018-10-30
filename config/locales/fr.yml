@@ -1,0 +1,15 @@
+fr:
+  enum:
+    extension_set:
+      set_type:
+        block_set: 'Bloc'
+        basic_edition: 'Edition de base'
+        from_the_vault: 'From the vault'
+        dual_deck: 'Duel deck'
+        reedition: 'Réédition'
+        premium_deck: 'Premium deck'
+        humouristic: 'Humouristique'
+        starter: 'Pour débuter'
+        other: 'Autre'
+        online: 'Magic en ligne'
+        masterpiece: 'Masterpiece'

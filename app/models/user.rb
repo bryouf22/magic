@@ -15,10 +15,10 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
-  has_one :card_collection
+  has_one :card_collection, dependent: :destroy
 
-  has_many :decks
-  has_many :wishlists
+  has_many :decks, dependent: :destroy
+  has_many :wishlists, dependent: :destroy
 
   after_create :create_card_collection
 

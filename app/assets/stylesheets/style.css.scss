@@ -8,7 +8,18 @@
     color: #00360c;
   }
 } */
-
+html {
+  overflow-y: visible;
+}
+img.list-set-logo {
+  max-width: 150px;
+  width: auto;
+  max-height: 50px;
+  height: auto;
+}
+h3 {
+  font-size: 18px;
+}
 .navbar {
   margin-bottom: 0;
   .container-fluid {
@@ -44,6 +55,27 @@
     border-radius: 0;
     padding: 20px;
   }
+}
+
+span.rarity-common {
+  color: #000000;
+  font-weight: bold;
+  font-size: 13px;
+}
+span.rarity-uncommon {
+  color: #AEAEAE;
+  font-weight: bold;
+  font-size: 13px;
+}
+span.rarity-rare {
+  color: #C4AA00;
+  font-weight: bold;
+  font-size: 13px;
+}
+span.rarity-mythic {
+  color: #D71E00;
+  font-weight: bold;
+  font-size: 13px;
 }
 
 .popover {

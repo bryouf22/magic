@@ -11,8 +11,12 @@ class CardDecorator < Draper::Decorator
     result.html_safe
   end
 
-  def title
-    card.name_fr || card.name || ''
+  def title(show_rarity: false)
+    if show_rarity
+      "#{h.content_tag(:span, "#{rarity[0].upcase}", class: "rarity-#{rarity}")} #{(card.name_fr || card.name || '')}".html_safe
+    else
+      card.name_fr || card.name || ''
+    end
   end
 
   def visual
@@ -48,6 +52,8 @@ class CardDecorator < Draper::Decorator
         'mana/green.gif'
       when 'w'
         'mana/white.gif'
+      else
+        "mana/#{c}.png"
       end
     end
   end

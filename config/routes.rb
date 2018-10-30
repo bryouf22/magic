@@ -28,4 +28,10 @@ Rails.application.routes.draw do
   get 'ma-liste-:name/:id', controller: 'wishlists/cards', action: :show, as: :wishlist_card
 
   post '/ajouter', to: 'cards#add_to', as: :add_to
+
+  get '/admin', controller: 'admin/board', action: :index
+  namespace 'admin' do
+    resources :extension_sets
+    resources :cards
+  end
 end

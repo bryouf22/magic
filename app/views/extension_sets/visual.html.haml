@@ -1,42 +1,50 @@
+- if @set.set_visual.present?
+  .text-center= image_tag(@set.set_visual.url)
+- else
+  %h1= @set.name
+
 .views-selection
   = link_to 'vue normal', extension_set_path(slug: @set.slug, params: { view: :classic })
   = ' | vue visuel'
-
-
-
+%br
 
 %ul.cards-list.visual
   - @white_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
 %ul.cards-list.visual
   - @blue_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
 %ul.cards-list.visual
   - @black_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
 %ul.cards-list.visual
   - @red_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
 %ul.cards-list.visual
   - @green_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
 %ul.cards-list.visual
   - @gold_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
 %ul.cards-list.visual
-  - @colorless_cards.each do |card|
+  - @colorless_artefact_cards.each do |card|
     %li
       = image_tag(card.visual, class: 'img-responsive')
-      = link_to card.title, '#'
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)
+%ul.cards-list.visual
+  - @land_cards.each do |card|
+    %li
+      = image_tag(card.visual, class: 'img-responsive')
+      = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id)

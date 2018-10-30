@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2018_10_21_153209) do
+ActiveRecord::Schema.define(version: 2018_10_29_122723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +100,14 @@ ActiveRecord::Schema.define(version: 2018_10_21_153209) do
     t.string "rare_logo"
     t.string "mythic_logo"
     t.string "slug"
+    t.integer "set_type"
+  end
+
+  create_table "gatherer_card_urls", force: :cascade do |t|
+    t.string "url"
+    t.integer "extension_set_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "reprints", force: :cascade do |t|

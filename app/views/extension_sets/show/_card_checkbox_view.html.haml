@@ -1,7 +1,7 @@
-- card_name   = card.title
+- card_name   = card.title(show_rarity: true)
 - card_visual = { toggle: :popover, content: image_tag(card.visual) }
 %li
   .list-checkbox.hidden
-    = pretty_checkbox('card_ids[]', value: card.id, checked: false, multiple: true, label: card_name.truncate(32), class: 'js-select-card', pretty_class: 'success')
+    = pretty_checkbox('card_ids[]', value: card.id, checked: false, multiple: true, label: card_name, class: 'js-select-card', pretty_class: 'success')
     %i.fa.fa-eye{ data: card_visual }
   = link_to card_name, extension_set_card_path(slug: @set.slug, id: card.id), class: 'card-link', data: card_visual

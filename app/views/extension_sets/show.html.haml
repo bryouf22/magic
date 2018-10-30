@@ -1,4 +1,7 @@
-= image_tag(@set.set_visual.url) if @set.set_visual.present?
+- if @set.set_visual.present?
+  .text-center= image_tag(@set.set_visual.url)
+- else
+  %h1= @set.name
 
 .views-selection
   = 'vue normal |'
@@ -40,33 +43,37 @@
         =link_to 'cartes déjà présente dans mes listes de souhait', '#'
   %hr
   - if user_signed_in?
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @white_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @blue_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @black_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @red_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @green_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @gold_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/card_checkbox_view', collection: @colorless_cards, as: :card
+    %h3 White
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @white_cards, as: :card
+    %h3 Blue
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @blue_cards, as: :card
+    %h3 Black
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @black_cards, as: :card
+    %h3 Red
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @red_cards, as: :card
+    %h3 Green
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @green_cards, as: :card
+    %h3 Gold
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @gold_cards, as: :card
+    %h3 Artefacts
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @colorless_artefact_cards, as: :card
+    %h3 Lands
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @land_cards, as: :card
   - else
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @white_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @blue_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @black_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @red_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @green_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @gold_cards, as: :card
-    %ul.cards-list.classic
-      = render partial: 'extension_sets/show/simple_view', collection: @colorless_cards, as: :card
+    %h3 White
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @white_cards, as: :card
+    %h3 Blue
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @blue_cards, as: :card
+    %h3 Black
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @black_cards, as: :card
+    %h3 Red
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @red_cards, as: :card
+    %h3 Green
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @green_cards, as: :card
+    %h3 Gold
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @gold_cards, as: :card
+    %h3 Artefacts
+    %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_artefact_cards, as: :card
+    %h3 Lands
+    %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @land_cards, as: :card
 

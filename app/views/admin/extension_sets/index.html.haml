@@ -1,0 +1,194 @@
+%h1 administrer les éditions
+
+%h3 Blocs
+%table.table.js-extension-cards
+  - @block_sets.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Editions de base
+%table.table.js-extension-cards
+  - @basic_editions.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Masterpieces
+%table.table.js-extension-cards
+  - @masterpieces.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 From the Vaults
+%table.table.js-extension-cards
+  - @from_the_vaults.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Duels decks
+%table.table.js-extension-cards
+  - @dual_decks.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Réédition / masters sets
+%table.table.js-extension-cards
+  - @reiditions.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Premium decks
+%table.table.js-extension-cards
+  - @premium_decks.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Houmouristiques
+%table.table.js-extension-cards
+  - @humouristics.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Débuter
+%table.table.js-extension-cards
+  - @starters.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Magic en ligne
+%table.table.js-extension-cards
+  - @onlines.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Autres
+%table.table.js-extension-cards
+  - @others.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
+%h3 Sans catégorie
+%table.table.js-extension-cards
+  - @_sets.each do |set|
+    %tr
+      %td.col-md-4.text-center
+        - if set.set_visual.url
+          = image_tag(set.set_visual.url, class: 'list-set-logo')
+        - else
+          = link_to set.name, extension_set_path(slug: set.slug)
+      %td.col-md-2
+        = I18n.t("enum.extension_set.set_type.#{set.set_type}") if set.set_type
+      %td.col-md-2= set.cards.count
+      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2
+        = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+        = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'

@@ -1,10 +1,14 @@
-= form_for(@set) do |form|
+= form_for(@set, url: admin_extension_set_path(@set)) do |form|
   .form-group
     = label_tag(:extension_set_name, 'Nom :')
     = form.text_field(:name, class: 'form-control')
   .form-group
     = label_tag(:extension_set_release_date, 'Date de sortie :')
     = form.text_field(:release_date, class: 'datepicker form-control')
+  .form-group
+    = label_tag(:extension_set_set_type, 'Type :')
+    - options = options_for_select(ExtensionSet.set_types.collect{ |label, value| [I18n.t("enum.extension_set.set_type.#{label}"), label] }, @set.set_type)
+    = form.select(:set_type, options, { include_blank: true }, { class: 'form-control' })
   .form-group
     .row
       .col-md-6
