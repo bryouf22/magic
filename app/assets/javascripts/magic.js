@@ -43,4 +43,13 @@ $(document).ready(function() {
   $('body').on('click', '.js-unselect-all', function () {
     $('.cards-list .js-select-card:not(.hidden)').prop('checked', false);
   });
+
+  $('.js-filter-btn').on('click', function() {
+    if ($('.filters').attr('class').indexOf('hidden') > -1){
+      $('.filters').removeClass('hidden');
+    } else {
+      $('.filters').addClass('hidden');
+    }
+  });
+
 });

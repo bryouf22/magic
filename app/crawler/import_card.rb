@@ -55,7 +55,7 @@ class ImportCard
           gatherer_url.destroy
         end
       rescue
-        puts "#{card_url} faild"
+        puts "#{card_url} failed"
         if GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).none?
           GathererCardUrl.create(url: card_url, extension_set_id: extension_set_id)
         end

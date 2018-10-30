@@ -58,7 +58,6 @@ class GathererScraper
       puts "retrieving #{set_name}"
       set.id
     else
-      binding.pry
       ExtensionSet.create(name: set_name).id
     end
   end

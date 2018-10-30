@@ -1,1 +1,2 @@
-%li= link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id), class: 'card-link', data: { toggle: :popover, content: image_tag(card.visual) }
+%li{ class: "js-color", 'data-colors' => card.color_ids.join('-') }
+  = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id), class: 'card-link', data: { toggle: :popover, content: image_tag(card.visual) }

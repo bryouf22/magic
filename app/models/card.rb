@@ -139,10 +139,10 @@ class Card < ApplicationRecord
     self[:name_fr_clean] = I18n.transliterate(name_fr || '').downcase
     self[:name_clean]    = I18n.transliterate(name || '').downcase
   end
-
-  Card.all.find_each do |card|
-    card.update_attributes(card_type: :creature_artifact) if card.detailed_type.include?('Artifact Creature')
-    card.update_attributes(card_type: :artifact)          if card.detailed_type.include?('Artifact')
-    card.update_attributes(card_type: :land)              if card.detailed_type.include?('Land')
-  end
+#
+#  Card.all.find_each do |card|
+#    card.update_attributes(card_type: :creature_artifact) if card.detailed_type.include?('Artifact Creature')
+#    card.update_attributes(card_type: :artifact)          if card.detailed_type.include?('Artifact')
+#    card.update_attributes(card_type: :land)              if card.detailed_type.include?('Land')
+#  end
 end

@@ -1,4 +1,4 @@
-class Admin::ExtensionSetsController < Admin::AdminController
+class Admin::ExtensionSetsController < AdminController
 
   def index
     @extensions = ExtensionSet.all.order('set_type ASC, release_date DESC')

@@ -33,5 +33,6 @@ Rails.application.routes.draw do
   namespace 'admin' do
     resources :extension_sets
     resources :cards
+    resources :users
   end
 end
