@@ -25,7 +25,11 @@
   %li
     = image_tag(card.visual, class: 'img-responsive')
     = link_to card.title, '#'
-- @colorless_cards.each do |card|
+- @colorless_artefact_cards.each do |card|
+  %li
+    = image_tag(card.visual, class: 'img-responsive')
+    = link_to card.title, '#'
+- @land_cards.each do |card|
   %li
     = image_tag(card.visual, class: 'img-responsive')
     = link_to card.title, '#'

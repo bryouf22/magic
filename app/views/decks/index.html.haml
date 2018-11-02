@@ -1,4 +1,4 @@
-%h1 Listes des decks
+%h1 Mes decks
 
 = link_to new_deck_path, class: 'btn btn-xs btn-primary' do
   %span.glyphicon.glyphicon-plus
@@ -12,4 +12,4 @@
       %li= link_to deck.name, deck_path(slug: deck.slug)
 
 - else
-  %p Aucun deck trouvé
+  %p Vous n'avez aucun deck

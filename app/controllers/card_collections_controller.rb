@@ -4,7 +4,6 @@ class CardCollectionsController < ApplicationController
 
   def show
     @card_collection = current_user.card_collection
-    @cards = @card_collection.cards
-    list_by_colors
+    list_by_colors(@card_collection.cards)
   end
 end

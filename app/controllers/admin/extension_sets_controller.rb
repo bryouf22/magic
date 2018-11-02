@@ -1,8 +1,7 @@
 class Admin::ExtensionSetsController < AdminController
 
   def index
-    @extensions = ExtensionSet.all.order('set_type ASC, release_date DESC')
-    set_by_type
+    set_by_type(ExtensionSet.all.order('set_type ASC, release_date DESC'))
   end
 
   def show

@@ -3,8 +3,7 @@ class ExtensionSetsController < ApplicationController
   after_action :list_by_colors, only: :show
 
   def index
-    @extensions = ExtensionSet.all
-    set_by_type
+    set_by_type(ExtensionSet.all)
   end
 
   def show
