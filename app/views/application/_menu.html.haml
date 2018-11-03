@@ -6,7 +6,10 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'Magic Project', root_path, class: 'navbar-brand'
+      - if current_user && current_user.is_admin?
+        = link_to 'Admin', admin_root_path, class: 'navbar-brand'
+      - else
+        = link_to 'Magic Project', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li= link_to 'Extensions', extension_sets_path

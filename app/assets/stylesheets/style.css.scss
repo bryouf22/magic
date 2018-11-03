@@ -228,3 +228,18 @@ ul.cards-list {
     }
   }
 }
+.rule-text {
+  margin: 10px 0 0 0;
+  & + .flavor-text {
+    margin: 10px 0;
+  }
+  .text-symbole {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-size: 16px 16px;
+  }
+}
+.flavor-text {
+  font-style: italic;
+}

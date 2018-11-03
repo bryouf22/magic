@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost:3000"
   devise_for :users
 
   root to: 'welcome#index'
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
   get 'ma-liste-:name/:id',       to: 'wishlists/cards#show',      as: :wishlist_card
   post '/ajouter',                to: 'cards#add_to',              as: :add_to
 
-  get '/admin', controller: 'admin/board', action: :index
+  get '/admin', to: 'admin/welcome#index', as: :admin_root
   namespace 'admin' do
     resources :extension_sets
     resources :cards

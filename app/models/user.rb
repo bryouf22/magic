@@ -22,6 +22,10 @@ class User < ApplicationRecord
 
   after_create :create_card_collection
 
+  def is_admin?
+    ['jean@val.jean', 'bryouf@free.fr'].include?(email)
+  end
+
   private
 
   def create_card_collection

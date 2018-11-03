@@ -24,7 +24,13 @@ class CardDecorator < Draper::Decorator
   end
 
   def rule_text
-    text_fr || text || ''
+    result = text_fr || text || ''
+    result.scan(/\{([^\}]+)\}/im).each do |symbole|
+      img = h.image_url("card_symboles/#{symbole.first}.png")
+      result.sub!("{#{symbole.first}}", h.content_tag(:span, '', style: "background-image: url('#{img}')", class: 'text-symbole'))
+    end
+    # result.gsub!(/(\n)[^<]/m, "<br/>")
+    result.html_safe
   end
 
   def flavor

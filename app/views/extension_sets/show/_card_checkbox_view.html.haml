@@ -1,6 +1,6 @@
 - card_name   = card.title(show_rarity: true)
 - card_visual = { toggle: :popover, content: image_tag(card.visual) }
-%li{ class: "js-color", 'data-colors' => card.color_ids.join('-') }
+%li{ class: "js-color", 'data-colors' => (card.color_ids || []).join('-') }
   .list-checkbox.hidden
     = pretty_checkbox('card_ids[]', value: card.id, checked: false, multiple: true, label: card_name, class: 'js-select-card', pretty_class: 'success')
     %i.fa.fa-eye{ data: card_visual }

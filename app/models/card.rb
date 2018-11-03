@@ -55,7 +55,6 @@ class Card < ApplicationRecord
   scope :white,               -> { where("? = ANY(color_ids)", Color.white)}
   scope :colorless_artefact,  -> { where('color_ids is ?', nil).also_artefacts }
   scope :also_artefacts,      -> { where(card_type: [5, 6]) }
-  scope :land,                -> { where(card_type: 2) }
 
   enum card_type: {
     instant:            1,
@@ -83,7 +82,7 @@ class Card < ApplicationRecord
   has_many :reprint_cards, through: :reprints
 
   before_create :set_colors, :clean_names
-  before_save :set_colors
+  before_save   :set_colors, :set_type
 
   mount_uploader :image,            CardImageUploader
   mount_uploader :reverse_image,    CardImageUploader
@@ -139,10 +138,10 @@ class Card < ApplicationRecord
     self[:name_fr_clean] = I18n.transliterate(name_fr || '').downcase
     self[:name_clean]    = I18n.transliterate(name || '').downcase
   end
-#
-#  Card.all.find_each do |card|
-#    card.update_attributes(card_type: :creature_artifact) if card.detailed_type.include?('Artifact Creature')
-#    card.update_attributes(card_type: :artifact)          if card.detailed_type.include?('Artifact')
-#    card.update_attributes(card_type: :land)              if card.detailed_type.include?('Land')
-#  end
+
+  def set_type
+    self.card_type = :creature_artifact if self.detailed_type&.include?('Artifact Creature')
+    self.card_type = :artifact          if self.detailed_type&.include?('Artifact')
+    self.card_type = :land              if self.detailed_type&.include?('Land')
+  end
 end

@@ -1,5 +1,8 @@
 %h1 administrer les éditions
 
+= "Erreur d'importation : #{GathererCardUrl.all.count}"
+= "Cartes importées : #{Card.all.count}"
+
 %h3 Blocs
 %table.table.js-extension-cards
   - @block_sets.each do |set|

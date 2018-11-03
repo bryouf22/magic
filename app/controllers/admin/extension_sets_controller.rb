@@ -6,6 +6,7 @@ class Admin::ExtensionSetsController < AdminController
 
   def show
     @set = ExtensionSet.find(params[:id])
+    list_by_colors(@set.cards.order('name_fr_clean ASC'))
   end
 
   def edit

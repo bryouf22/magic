@@ -81,6 +81,8 @@ class ImportCard
     case rarity_text
     when 'mythic rare'
       :mythic
+    when 'basic land'
+      :common
     else
       rarity_text.to_sym
     end
@@ -102,7 +104,11 @@ class ImportCard
   end
 
   def retrieve_text
-    result = build_text_from(@doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_textRow .value').first, '')
+    if @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_textRow .value').first
+      result = build_text_from(@doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_textRow .value').first, '')
+    else
+      nil
+    end
   end
 
   def cmc
@@ -179,11 +185,11 @@ class ImportCard
   end
 
   def artist_name
-    @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_artistRow .value').first.text.squish
+    @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_artistRow .value').first&.text&.squish
   end
 
   def number_in_set
-    @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_numberRow .value').first.text.squish
+    @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_numberRow .value').first&.text&.squish
   end
 
   def gatherer_id(card_url)

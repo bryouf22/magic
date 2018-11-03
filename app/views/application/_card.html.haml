@@ -3,8 +3,10 @@
     .card-title
       .pull-left= @card.title
       .pull-right= @card.cost
-    .text= card.rule_text
-    .flavor_text= card.flavor
+    - if card.rule_text
+      .rule-text= card.rule_text
+    - if card.flavor
+      .flavor-text= card.flavor
   .col-md-2
     = image_tag @card.image.url if @card.image.present?
   .col-md-4
