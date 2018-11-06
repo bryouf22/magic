@@ -33,8 +33,6 @@
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
-#  reverse_image    :string
-#  reverse_image_fr :string
 #
 
 class Card < ApplicationRecord
@@ -78,16 +76,25 @@ class Card < ApplicationRecord
 
   belongs_to :extension_set
 
+  has_one :alternative
+  has_one :alternative_card, through: :alternative
+
   has_many :reprints, foreign_key: :card_id
   has_many :reprint_cards, through: :reprints
 
   before_create :set_colors, :clean_names
   before_save   :set_colors, :set_type
 
-  mount_uploader :image,            CardImageUploader
-  mount_uploader :reverse_image,    CardImageUploader
-  mount_uploader :image_fr,         CardImageUploader
-  mount_uploader :reverse_image_fr, CardImageUploader
+  mount_uploader :image,    CardImageUploader
+  mount_uploader :image_fr, CardImageUploader
+
+  def has_alternative?
+    alternative.present?
+  end
+
+  def is_alternative?
+    Alternative.where(alternative_card: id).any?
+  end
 
   def icone_url
     case rarity
@@ -117,17 +124,20 @@ class Card < ApplicationRecord
     colors
   end
 
-  # TODO : faire un belongs_to card pour les cartes doubles, les cartes a inversion, et les cartes recto verso (www.magic-ville.com/fr/carte?ref=chk002)
-  # (on ne gère pas recto verso de la meme facon, c'est géré via reverse image)
-
   private
 
   def set_colors
     c_ids = []
-    Color::MANA_COST_MAPPING.each do |mana_c, colors|
-      if mana_cost&.include?(mana_c.to_s)
-        Array.wrap(colors).each do |color|
-          c_ids << Color.__send__(color)
+    if color_indicator.present?
+      color_indicator.downcase.split(',').each do |color|
+        c_ids << Color.__send__(color.gsub(' ', ''))
+      end
+    else
+      Color::MANA_COST_MAPPING.each do |mana_c, colors|
+        if mana_cost&.include?(mana_c.to_s)
+          Array.wrap(colors).each do |color|
+            c_ids << Color.__send__(color)
+          end
         end
       end
     end

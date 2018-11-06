@@ -17,7 +17,6 @@ class ImportCard
         end
       end
     end
-
     if @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent1 div').first.present?
       ImportDoubleCard.new(card_url, extension_set_id)
     else
@@ -47,8 +46,6 @@ class ImportCard
           defense_str:        defense_str,
           color_indicator:    color_indicator,
           loyalty:            loyalty,
-          reverse_image:      reverse_image,
-          reverse_image_fr:   reverse_image_fr,
         })
         puts "#{card.name} imported"
         if (gatherer_url = GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).first)
@@ -228,11 +225,5 @@ class ImportCard
     if (power_thougtness = @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ptRow .value').first&.text&.squish)
       power_thougtness.include?('/') ? nil : power_thougtness
     end
-  end
-
-  def reverse_image
-  end
-
-  def reverse_image_fr
   end
 end

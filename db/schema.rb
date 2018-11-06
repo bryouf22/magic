@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_122723) do
+ActiveRecord::Schema.define(version: 2018_11_04_193214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alternatives", force: :cascade do |t|
+    t.integer "card_id"
+    t.integer "alternative_card_id"
+    t.integer "alternative_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "card_collections", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -70,9 +78,6 @@ ActiveRecord::Schema.define(version: 2018_10_29_122723) do
     t.string "defense_str"
     t.string "color_indicator"
     t.integer "loyalty"
-    t.string "reverse_image"
-    t.string "reverse_image_fr"
-    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end

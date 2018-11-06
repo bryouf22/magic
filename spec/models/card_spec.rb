@@ -33,8 +33,6 @@
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
-#  reverse_image    :string
-#  reverse_image_fr :string
 #
 
 require 'rails_helper'
