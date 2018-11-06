@@ -41,6 +41,13 @@
         =link_to 'cartes déjà présente dans ma collection', '#'
         = '|'
         =link_to 'cartes déjà présente dans mes listes de souhait', '#'
+        = '|'
+        = pretty_checkbox('color_filters', value: Color.white, checked: true, label: 'White', class: 'js-select-color-filter', pretty_class: 'success')
+        = pretty_checkbox('color_filters', value: Color.blue, checked: true, label: 'Blue', class: 'js-select-color-filter', pretty_class: 'success')
+        = pretty_checkbox('color_filters', value: Color.black, checked: true, label: 'Black', class: 'js-select-color-filter', pretty_class: 'success')
+        = pretty_checkbox('color_filters', value: Color.red, checked: true, label: 'Red', class: 'js-select-color-filter', pretty_class: 'success')
+        = pretty_checkbox('color_filters', value: Color.green, checked: true, label: 'Green', class: 'js-select-color-filter', pretty_class: 'success')
+
   %hr
   - if user_signed_in?
     - if @white_cards.any?

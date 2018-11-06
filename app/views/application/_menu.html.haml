@@ -7,7 +7,10 @@
         %span.icon-bar
         %span.icon-bar
       - if current_user && current_user.is_admin?
-        = link_to 'Admin', admin_root_path, class: 'navbar-brand'
+        - if local_assigns[:admin_link].presence
+          = link_to 'Magic Project', root_path, class: 'navbar-brand'
+        - else
+          = link_to 'Admin', admin_root_path, class: 'navbar-brand'
       - else
         = link_to 'Magic Project', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse

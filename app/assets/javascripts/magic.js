@@ -52,4 +52,32 @@ $(document).ready(function() {
     }
   });
 
+  $('.js-select-color-filter').change(function() {
+    filterColor = $(this).val();
+    regex = RegExp("(?:^|\D)("+filterColor+")(?:$|\D)");
+    if (this.checked){
+      $('.js-color').each(function(){
+        if (regex.test( ($(this).data('colors') || ''))){
+          $(this).show();
+          checkbox = $(this).find('input');
+          if (checkbox.attr('data-checked') == 'true') {
+            checkbox.prop('checked', true);
+            checkbox.attr('data-checked', false);
+          }
+        }
+      });
+    } else {
+      $('.js-color').each(function(){
+        if (regex.test(($(this).data('colors') || ''))){
+          $(this).hide();
+          checkbox = $(this).find('input');
+          if (checkbox.prop('checked')) {
+            checkbox.attr('data-checked', true);
+            checkbox.prop('checked', false);
+          }
+        }
+      });
+    }
+  });
+
 });

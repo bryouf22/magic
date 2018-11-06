@@ -26,7 +26,7 @@
     %meta{ name: "msapplication-TileImage", content: "#{asset_path('favicon/ms-icon-144x144.png')}" }
     %meta{ name: "theme-color", content: "#ffffff" }
   %body
-    = render 'application/menu'
+    = render partial: 'application/menu', locals: { admin_link: true }
     = render 'application/admin/menu'
     .container.main-container
       - if notice

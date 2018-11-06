@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_193214) do
     t.string "defense_str"
     t.string "color_indicator"
     t.integer "loyalty"
+    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
