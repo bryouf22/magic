@@ -57,26 +57,18 @@ $(document).ready(function() {
     regex = RegExp("(?:^|\D)("+filterColor+")(?:$|\D)");
     if (this.checked){
       $('.js-color').each(function(){
-        if (regex.test( ($(this).data('colors') || ''))){
-          $(this).show();
-          checkbox = $(this).find('input');
-          if (checkbox.attr('data-checked') == 'true') {
-            checkbox.prop('checked', true);
-            checkbox.attr('data-checked', false);
-          }
+        if (regex.test( ($(this).data('colors') || ''))) {
+          $(this).removeClass('to-hide-color');
         }
       });
+      manageVisibility();
     } else {
       $('.js-color').each(function(){
-        if (regex.test(($(this).data('colors') || ''))){
-          $(this).hide();
-          checkbox = $(this).find('input');
-          if (checkbox.prop('checked')) {
-            checkbox.attr('data-checked', true);
-            checkbox.prop('checked', false);
-          }
+        if (regex.test(($(this).data('colors') || ''))) {
+          $(this).addClass('to-hide-color');
         }
       });
+      manageVisibility();
     }
   });
 
@@ -84,27 +76,38 @@ $(document).ready(function() {
     filterRarity = $(this).val();
     if (this.checked){
       $('.js-rarity').each(function(){
-        if ($(this).find('span').attr('class') == filterRarity){
-          $(this).show();
-          checkbox = $(this).find('input');
-          if (checkbox.attr('data-checked') == 'true') {
-            checkbox.prop('checked', true);
-            checkbox.attr('data-checked', false);
-          }
+        if ($(this).find('span').attr('class') == filterRarity) {
+          $(this).removeClass('to-hide-rarity');
         }
       });
+      manageVisibility();
     } else {
       $('.js-rarity').each(function(){
-        if ($(this).find('span').attr('class') == filterRarity){
-          $(this).hide();
-          checkbox = $(this).find('input');
-          if (checkbox.prop('checked')) {
-            checkbox.attr('data-checked', true);
-            checkbox.prop('checked', false);
-          }
+        if ($(this).find('span').attr('class') == filterRarity) {
+          $(this).addClass('to-hide-rarity');
         }
       });
+      manageVisibility();
     }
   });
 
+  manageVisibility = function () {
+    $('.cards-list li').each(function () {
+      if ($(this).attr('class').indexOf('hide') > -1) {
+        $(this).hide();
+        checkbox = $(this).find('input');
+        if (checkbox.prop('checked')) {
+          checkbox.attr('data-checked', true);
+          checkbox.prop('checked', false);
+        }
+      } else {
+        $(this).show();
+        checkbox = $(this).find('input');
+        if (checkbox.attr('data-checked') == 'true') {
+          checkbox.prop('checked', true);
+          checkbox.attr('data-checked', false);
+        }
+      }
+    })
+  }
 });
