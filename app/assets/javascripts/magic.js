@@ -80,4 +80,31 @@ $(document).ready(function() {
     }
   });
 
+  $('.js-select-rarity-filter').change(function() {
+    filterRarity = $(this).val();
+    if (this.checked){
+      $('.js-rarity').each(function(){
+        if ($(this).find('span').attr('class') == filterRarity){
+          $(this).show();
+          checkbox = $(this).find('input');
+          if (checkbox.attr('data-checked') == 'true') {
+            checkbox.prop('checked', true);
+            checkbox.attr('data-checked', false);
+          }
+        }
+      });
+    } else {
+      $('.js-rarity').each(function(){
+        if ($(this).find('span').attr('class') == filterRarity){
+          $(this).hide();
+          checkbox = $(this).find('input');
+          if (checkbox.prop('checked')) {
+            checkbox.attr('data-checked', true);
+            checkbox.prop('checked', false);
+          }
+        }
+      });
+    }
+  });
+
 });
