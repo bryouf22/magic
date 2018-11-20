@@ -10,6 +10,5 @@
   %ul
     - @decks.each do |deck|
       %li= link_to deck.name, deck_path(slug: deck.slug)
-
 - else
   %p Vous n'avez aucun deck

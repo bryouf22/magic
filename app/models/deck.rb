@@ -28,10 +28,6 @@ class Deck < ApplicationRecord
 
   before_save :update_slug
 
-  def cards
-    Card.where(id: main_deck.card_ids + sideboard.card_ids)
-  end
-
   private
 
   def update_slug

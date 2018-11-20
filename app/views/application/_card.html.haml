@@ -15,14 +15,19 @@
       %li prix mkm
       %li présent dans les deck
       %li ajouter a la wishlist
-      - if user_signed_in? && current_user.decks.any?
+      - if user_signed_in?
         %li.add-to-deck
           ajouter à
           = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
-            - decks = current_user.decks.collect { |d| [d.name, d.id] }
-            = form.hidden_field(:card_id, value: @card.id)
-            = form.select(:deck_id, options_for_select(decks))
-            = form.submit('ok', class: 'btn btn-xs btn-success')
+            - if current_user.decks.any?
+              - decks = current_user.decks.collect { |d| [d.name, d.id] }
+              - decks << ['nouveau deck', nil]
+            - else
+              - decks = [['nouveau deck', nil]]
+            = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
+              = form.hidden_field(:card_id, value: @card.id)
+              = form.select(:deck_id, options_for_select(decks))
+              = form.submit('ok', class: 'btn btn-xs btn-success')
 
       - if @card.reprint_cards.any?
         - if @card.reprint_cards.count < 3

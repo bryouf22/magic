@@ -3,3 +3,11 @@
 %p
   = @deck.cards.count
   carte(s)
+%ul.cards-list.visual
+  - @deck.cards.decorate.each do |card|
+    %li
+      = image_tag(card.visual, class: 'img-responsive')
+      = @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck
+      - occurences_in_sideboard = @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
+      - if occurences_in_sideboard.positive?
+        = "(#{occurences_in_sideboard})"

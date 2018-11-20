@@ -20,9 +20,13 @@ class DecksController < ApplicationController
   end
 
   def add_card
-    deck = current_user.decks.find(add_card_params[:deck_id])
-    deck.main_deck.add_card(add_card_params[:card_id])
-    redirect_to deck_path(deck)
+    deck_id = if add_card_params[:deck_id].blank?
+                Deck::Create.call(user_id: current_user.id).deck_id
+              else
+                add_card_params[:deck_id]
+              end
+    Deck::AddCard.call(deck_id: deck_id, card_id: add_card_params[:card_id])
+    redirect_to deck_path(slug: Deck.find(deck_id).slug)
   end
 
   def show
