@@ -47,6 +47,19 @@ class DecksController < ApplicationController
     end
   end
 
+  def manage_card
+    # fix : check current deck / current user
+    deck_id = params["deck"]["deck_id"]
+    card_id = params["deck"]["card_id"]
+    if params["deck"]['operator'] == "plus"
+      Deck::AddCard.call(deck_id: deck_id, card_id: card_id)
+    else
+      card_deck_id = Deck.find(deck_id).card_decks.where(card_id: card_id).first.id
+      Deck::RemoveCard.call(deck_id: deck_id, card_deck_id: card_deck_id)
+    end
+    redirect_to edit_deck_path(slug: Deck.find(deck_id).slug)
+  end
+
   private
 
   def add_card_params

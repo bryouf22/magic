@@ -1,3 +1,22 @@
 %h1 Editer #{@deck.name}
 
 = render partial: 'deck_form', locals: { deck: @deck, method: :patch, url: update_deck_path(slug: @deck.slug) }
+
+%ul.cards-list.visual
+  - @deck.cards.decorate.each do |card|
+    %li
+      = image_tag(card.visual, class: 'img-responsive')
+      = form_for(:deck, url: manage_card_path) do |form|
+        = form.hidden_field(:card_id, value: card.id)
+        = form.hidden_field(:deck_id, value: @deck.id)
+        = form.hidden_field(:operator, value: 'minus')
+        = form.submit('-', class: '')
+      = @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck
+      - occurences_in_sideboard = @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
+      - if occurences_in_sideboard.positive?
+        = "(#{occurences_in_sideboard})"
+      = form_for(:deck, url: manage_card_path) do |form|
+        = form.hidden_field(:card_id, value: card.id)
+        = form.hidden_field(:deck_id, value: @deck.id)
+        = form.hidden_field(:operator, value: 'plus')
+        = form.submit('+', class: '')
