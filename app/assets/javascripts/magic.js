@@ -1,7 +1,7 @@
 $(document).ready(function() {
   $('[data-toggle="popover"]').popover({
     html: true,
-    trigger: 'click',
+    trigger: 'hover',
     template: '<div class="popover" role="tooltip"><div class="popover-content"></div></div>',
   });
 
