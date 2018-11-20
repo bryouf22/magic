@@ -11,3 +11,5 @@
       - occurences_in_sideboard = @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
       - if occurences_in_sideboard.positive?
         = "(#{occurences_in_sideboard})"
+    %li
+      = link_to 'editer', edit_deck_path(slug: @deck.slug)

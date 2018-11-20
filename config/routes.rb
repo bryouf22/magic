@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get 'extension-set-:slug/:id',  to: 'extension_sets/cards#show', as: :extension_set_card
   get 'mes-decks',                to: 'decks#user_decks',          as: :user_decks
   get 'decks',                    to: 'decks#index',               as: :decks
+  get 'editer-deck-:slug',        to: 'decks#edit',                as: :edit_deck
+  patch 'edit-deck-:slug',        to: 'decks#update',              as: :update_deck
   get 'mes-decks/nouveau',        to: 'decks#new',                 as: :new_deck
   get 'mes-decks/:slug',          to: 'decks#show',                as: :deck
   get 'ma-collection',            to: 'card_collections#show',     as: :card_collection

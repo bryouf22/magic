@@ -9,6 +9,8 @@
 - if @decks.any?
   %ul
     - @decks.each do |deck|
-      %li= link_to deck.name, deck_path(slug: deck.slug)
+      %li
+        = link_to deck.name, deck_path(slug: deck.slug)
+        = link_to 'editer', edit_deck_path(slug: deck.slug)
 - else
   %p Vous n'avez aucun deck

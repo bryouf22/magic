@@ -34,14 +34,14 @@ class DecksController < ApplicationController
   end
 
   def edit
-    @deck = Deck.find(params[:id])
+    @deck = Deck.where(slug: params[:slug]).first
   end
 
   def update
-    @deck = Deck.find(params[:id])
+    @deck = Deck.where(slug: params[:slug]).first
 
     if @deck.update_attributes(update_params)
-      redirect_to deck_path(@deck)
+      redirect_to deck_path(slug: @deck.slug)
     else
       render :edit
     end
