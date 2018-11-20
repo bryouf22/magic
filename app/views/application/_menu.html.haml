@@ -28,4 +28,4 @@
           %li= link_to 'Mon compte', user_account_path
           %li= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'connexion-link'
         - else
-          %li= link_to 'Se connecter', new_user_session_path, class: 'connexion-link'
+          %li= link_to 'Se connecter', connection_path, class: 'connexion-link'

@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   default_url_options :host => "localhost:3000"
+
+  devise_scope :user do
+    get "/connection"     =>    "devise/sessions#new" # custom path to login/sign_in
+    get "/inscription"    =>    "devise/registrations#new", as: "new_user_registration" # custom path to sign_up/registration
+  end
+
   devise_for :users
 
   root to: 'welcome#index'
