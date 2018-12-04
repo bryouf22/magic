@@ -1,12 +1,12 @@
 = render partial: 'deck_form', locals: { deck: @deck, method: :patch, url: update_deck_path(slug: @deck.slug) }
 
 Main :
-%ul.cards-list.visual
+%ul.cards-list.visual.main-deck
   - @main_cards.decorate.each do |card|
     = render partial: 'card_in_maindeck', locals: { card: card, deck: @deck }
 
 
 Sideboard :
-%ul.cards-list.visual
+%ul.cards-list.visual.side-board
   - @sideboards.decorate.each do |card|
     = render partial: 'card_in_sideboard', locals: { card: card, deck: @deck }

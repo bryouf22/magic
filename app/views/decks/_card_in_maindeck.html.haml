@@ -1,18 +1,18 @@
-%li
+%li{ data: { card_id: card.id}}
   = image_tag(card.visual, class: 'img-responsive')
-  %div= "#{card.title(show_rarity: true) } x #{@deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}".html_safe
+  %div= "#{card.title(show_rarity: true) } x <span class=\"occurence\">#{deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}</span>".html_safe
   = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
     = form.hidden_field(:card_id, value: card.id)
-    = form.hidden_field(:deck_id, value: @deck.id)
+    = form.hidden_field(:deck_id, value: deck.id)
     = form.hidden_field(:operator, value: 'minus_maindeck')
     = form.submit('-', class: '')
   = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
     = form.hidden_field(:card_id, value: card.id)
-    = form.hidden_field(:deck_id, value: @deck.id)
+    = form.hidden_field(:deck_id, value: deck.id)
     = form.hidden_field(:operator, value: 'plus_maindeck')
     = form.submit('+', class: '')
   = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
     = form.hidden_field(:card_id, value: card.id)
-    = form.hidden_field(:deck_id, value: @deck.id)
+    = form.hidden_field(:deck_id, value: deck.id)
     = form.hidden_field(:operator, value: 'move_sideboard')
     = form.submit('SB', class: '')

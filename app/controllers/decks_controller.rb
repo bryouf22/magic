@@ -57,17 +57,21 @@ class DecksController < ApplicationController
 
   def manage_card
     # fix : check current deck / current user
-    deck_id = params["deck"]["deck_id"]
-    card_id = params["deck"]["card_id"]
+    @deck_id = params["deck"]["deck_id"]
+    @card_id = params["deck"]["card_id"]
+    @operator_in = (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard)
     if params["deck"]['operator'].include?("plus")
-      Deck::AddCard.call(deck_id: deck_id, card_id: card_id, in: (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard))
+      @operator = "add"
+      Deck::AddCard.call(deck_id: @deck_id, card_id: @card_id, in: @operator_in)
     elsif params["deck"]['operator'].include?("minus")
-      Deck::RemoveCard.call(deck_id: deck_id, card_id: card_id, in: (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard))
+      @operator = "remove"
+      Deck::RemoveCard.call(deck_id: @deck_id, card_id: @card_id, in: @operator_in)
     elsif params["deck"]['operator'].include?('move')
-      Deck::MoveCard.call(deck_id: deck_id, card_id: card_id, move_in: (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard))
+      Deck::MoveCard.call(deck_id: @deck_id, card_id: @card_id, move_in: @operator_in)
+      @operator = "move"
     end
     respond_to do |format|
-      format.html { redirect_to edit_deck_path(slug: Deck.find(deck_id).slug) }
+      format.html { redirect_to edit_deck_path(slug: Deck.find(@deck_id).slug) }
       format.js
     end
   end

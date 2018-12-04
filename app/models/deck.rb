@@ -32,7 +32,7 @@ class Deck < ApplicationRecord
 
   def colors
     colors = []
-    color_ids.each do |id|
+    (color_ids|| []).each do |id|
       colors << Color::COLORS_MAPPING.invert[id].to_s
     end
     colors
