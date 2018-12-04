@@ -1,82 +1,94 @@
 %h3 Blocs
-%table.table.js-extension-cards
-  - @block_sets.each do |set|
+%table.table.bloc-table
+  - @block_sets.each do |bloc|
+    - sets = bloc.extension_sets.order('extension_sets.order ASC')
     %tr
-      %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
-      %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
+      %td
+        %table.table
+          %tr
+            %td{colspan: sets.count}=bloc.name
+          %tr
+            - sets.each do |set|
+              %td.text-center{ class: "col-md-#{12/sets.count}"}
+                = link_to extension_set_path(slug: set.slug) do
+                  - if set.set_visual.url
+                    = image_tag(set.set_visual.url, class: 'list-set-logo')
+                  - else
+                    = set.name
+
 
 %h3 Editions de base
-%table.table.js-extension-cards
+%table.table
   - @basic_editions.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Masterpieces
-%table.table.js-extension-cards
+%table.table
   - @masterpieces.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 From the Vaults
-%table.table.js-extension-cards
+%table.table
   - @from_the_vaults.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Duels decks
-%table.table.js-extension-cards
+%table.table
   - @dual_decks.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Réédition / masters sets
-%table.table.js-extension-cards
+%table.table
   - @reiditions.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Premium decks
-%table.table.js-extension-cards
+%table.table
   - @premium_decks.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Houmouristiques
-%table.table.js-extension-cards
+%table.table
   - @humouristics.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Débuter
-%table.table.js-extension-cards
+%table.table
   - @starters.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Magic en ligne
-%table.table.js-extension-cards
+%table.table
   - @onlines.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Autres
-%table.table.js-extension-cards
+%table.table
   - @others.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url
       %td.col-md-11= link_to set.name, extension_set_path(slug: set.slug)
 
 %h3 Sans catégorie
-%table.table.js-extension-cards
+%table.table
   - @_sets.each do |set|
     %tr
       %td.col-md-1= image_tag(set.set_visual.url, class: 'list-set-logo') if set.set_visual.url

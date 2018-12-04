@@ -5,8 +5,8 @@
 %p= "#{@results.count} résultat(s)"
 
 %table.table
-  - @results.each do |card|
+  - @results.decorate.each do |card|
     %tr
-      %td.col-md-8= card.name_fr
+      %td.col-md-8= card.title(show_rarity: true, show_extension: true)
       %td.col-md-1
         = link_to 'voir', card_path(card.id), class: 'btn btn-primary btn-xs'

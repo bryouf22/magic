@@ -2,10 +2,12 @@
 
 = "Erreur d'importation : #{GathererCardUrl.all.count}"
 = "Cartes importées : #{Card.all.count}"
+%p TODO : ajouter les jetons (et vérifier le total de carte pour chaque édition)
+%p TODO : Ajouter les autres visuels pour les terrains base
 
 %h3 Blocs
-%table.table.js-extension-cards
-  - @block_sets.each do |set|
+%table.table
+  - @sets.each do |set|
     %tr
       %td.col-md-4.text-center
         - if set.set_visual.url
@@ -14,13 +16,36 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
+%table.table
+  %tbody#sortable{ data: { 'update-url' => '/admin/bloc_order' }}
+    - @blocs.each do |bloc|
+      - sets = bloc.extension_sets.order('extension_sets.order ASC')
+      %tr.bloc-row{ id: "bloc-#{bloc.id}", data: { position: bloc.bloc_order } }
+        %td
+          %table.table
+            %tr
+              %td{colspan: sets.count}=bloc.name
+            %tr
+              - sets.each do |set|
+                %td.text-center{ class: "col-md-#{12/sets.count}"}
+                  - if set.set_visual.url
+                    = image_tag(set.set_visual.url, class: 'list-set-logo')
+                  - else
+                    = link_to set.name, extension_set_path(slug: set.slug)
+                  %br
+                  %div
+                    = set.cards.count
+                    = link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
+                    = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
+                    = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+
 %h3 Editions de base
-%table.table.js-extension-cards
+%table.table
   - @basic_editions.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -30,13 +55,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Masterpieces
-%table.table.js-extension-cards
+%table.table
   - @masterpieces.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -46,13 +71,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 From the Vaults
-%table.table.js-extension-cards
+%table.table
   - @from_the_vaults.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -62,13 +87,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Duels decks
-%table.table.js-extension-cards
+%table.table
   - @dual_decks.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -78,13 +103,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Réédition / masters sets
-%table.table.js-extension-cards
+%table.table
   - @reiditions.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -94,13 +119,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Premium decks
-%table.table.js-extension-cards
+%table.table
   - @premium_decks.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -110,13 +135,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Houmouristiques
-%table.table.js-extension-cards
+%table.table
   - @humouristics.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -126,13 +151,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Débuter
-%table.table.js-extension-cards
+%table.table
   - @starters.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -142,13 +167,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Magic en ligne
-%table.table.js-extension-cards
+%table.table
   - @onlines.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -158,13 +183,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Autres
-%table.table.js-extension-cards
+%table.table
   - @others.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -174,13 +199,13 @@
           = link_to set.name, extension_set_path(slug: set.slug)
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
 
 %h3 Sans catégorie
-%table.table.js-extension-cards
+%table.table
   - @_sets.each do |set|
     %tr
       %td.col-md-4.text-center
@@ -191,7 +216,7 @@
       %td.col-md-2
         = I18n.t("enum.extension_set.set_type.#{set.set_type}") if set.set_type
       %td.col-md-2= set.cards.count
-      %td.col-md-2= set.gatherer_card_url.count
+      %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'

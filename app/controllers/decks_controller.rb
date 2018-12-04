@@ -2,7 +2,7 @@ class DecksController < ApplicationController
 
   before_action :authenticate_user!
 
-  def index
+  def user_decks
     @decks = current_user.decks
   end
 
@@ -13,7 +13,7 @@ class DecksController < ApplicationController
   def create
     @deck = current_user.decks.create(update_params)
     if @deck.valid?
-      redirect_to decks_path
+      redirect_to user_decks_path
     else
       render :new
     end
@@ -30,16 +30,19 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck = current_user.decks.where(slug: params[:slug]).first
+    @deck       = Deck.where(slug: params[:slug]).first
+    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
+    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
   end
 
   def edit
-    @deck = Deck.where(slug: params[:slug]).first
+    @deck       = current_user.decks.where(slug: params[:slug]).first
+    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
+    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
   end
 
   def update
     @deck = Deck.where(slug: params[:slug]).first
-
     if @deck.update_attributes(update_params)
       redirect_to deck_path(slug: @deck.slug)
     else
@@ -47,17 +50,34 @@ class DecksController < ApplicationController
     end
   end
 
+  def destroy
+    current_user.decks.where(slug: params[:slug]).first.destroy
+    redirect_to user_decks_path
+  end
+
   def manage_card
     # fix : check current deck / current user
     deck_id = params["deck"]["deck_id"]
     card_id = params["deck"]["card_id"]
-    if params["deck"]['operator'] == "plus"
-      Deck::AddCard.call(deck_id: deck_id, card_id: card_id)
-    else
-      card_deck_id = Deck.find(deck_id).card_decks.where(card_id: card_id).first.id
-      Deck::RemoveCard.call(deck_id: deck_id, card_deck_id: card_deck_id)
+    if params["deck"]['operator'].include?("plus")
+      Deck::AddCard.call(deck_id: deck_id, card_id: card_id, in: (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard))
+    elsif params["deck"]['operator'].include?("minus")
+      Deck::RemoveCard.call(deck_id: deck_id, card_id: card_id, in: (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard))
+    elsif params["deck"]['operator'].include?('move')
+      Deck::MoveCard.call(deck_id: deck_id, card_id: card_id, move_in: (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard))
     end
-    redirect_to edit_deck_path(slug: Deck.find(deck_id).slug)
+    respond_to do |format|
+      format.html { redirect_to edit_deck_path(slug: Deck.find(deck_id).slug) }
+      format.js
+    end
+  end
+
+  def import
+  end
+
+  def import_create
+    Deck::CreateFromList.call(list: params[:import][:list], user_id: current_user.id)
+    redirect_to user_decks_path
   end
 
   private

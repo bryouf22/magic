@@ -6,6 +6,15 @@ class CardsController < ApplicationController
     @card = Card.find(params[:id]).decorate
   end
 
+  def search
+    @term     = search_params[:term]
+    @search   = CardSearch.new(search_params)
+    @results  = @search.results
+    if request.format.to_sym == json
+      render json: {}
+    end
+  end
+
   def add_to
     case action_params
     when 'collection'
@@ -16,6 +25,10 @@ class CardsController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.require('card_search').permit(:term)
+  end
 
   def action_params
     params.require(:add).permit(:to)[:to]

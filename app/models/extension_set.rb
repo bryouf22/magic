@@ -14,12 +14,18 @@
 #  mythic_logo   :string
 #  slug          :string
 #  set_type      :integer
+#  order         :integer
+#  bloc_id       :integer
+#  set_list_id   :integer
 #
 
 class ExtensionSet < ApplicationRecord
 
   has_many :cards
-  has_many :gatherer_card_url
+  has_many :gatherer_card_urls
+
+  belongs_to :bloc, optional: true
+  belongs_to :set_list, optional: true
 
   mount_uploader :set_visual,     CardImageUploader
   mount_uploader :commun_logo,    CardImageUploader

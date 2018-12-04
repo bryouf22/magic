@@ -14,14 +14,16 @@ $(document).ready(function() {
     }
   });
 
-  $('body').on('click', '.js-unactivate-selection-mode', function () {
+  $('body').on('click', '.js-unactivate-selection-mode', function (e) {
+    e.preventDefault();
     $('.list-checkbox').addClass('hidden');
     $('.card-link').removeClass('hidden');
     $('.selection-mode').addClass('hidden');
     $(this).removeClass('js-unactivate-selection-mode').addClass('js-activate-selection-mode').html('mode sélection');
   });
 
-  $('body').on('click', '.js-activate-selection-mode', function () {
+  $('body').on('click', '.js-activate-selection-mode', function (e) {
+    e.preventDefault();
     $('.list-checkbox.hidden').removeClass('hidden');
     $('.card-link').addClass('hidden');
     $('.selection-mode').removeClass('hidden');
@@ -36,15 +38,29 @@ $(document).ready(function() {
     }
   });
 
-  $('body').on('click', '.js-select-all', function () {
-    $('.cards-list .js-select-card:not(.hidden)').prop('checked', 'cheched');
+  $('body').on('click', '.js-select-all', function (e) {
+    e.preventDefault();
+    $('.cards-list li:visible .js-select-card').prop('checked', 'cheched');
   });
 
-  $('body').on('click', '.js-unselect-all', function () {
-    $('.cards-list .js-select-card:not(.hidden)').prop('checked', false);
+  $('body').on('click', '.js-unselect-all', function (e) {
+    e.preventDefault();
+    $('.cards-list li:visible .js-select-card').prop('checked', false);
   });
 
-  $('.js-filter-btn').on('click', function() {
+  $('body').on('click', '.js-inverse-selection', function (e) {
+    e.preventDefault();
+    $('.cards-list li:visible .js-select-card').each(function (index) {
+      if (this.checked) {
+        $(this).prop('checked', false);
+      } else {
+        $(this).prop('checked', 'cheched');
+      }
+    });
+  });
+
+  $('.js-filter-btn').on('click', function(e) {
+    e.preventDefault();
     if ($('.filters').attr('class').indexOf('hidden') > -1){
       $('.filters').removeClass('hidden');
     } else {
@@ -110,4 +126,28 @@ $(document).ready(function() {
       }
     })
   }
+
+  $('#card-search').select2({
+    ajax: {
+    url: '/rechercher',
+    dataType: 'json',
+    data: function (params) {
+      var query = {
+        search: params.term,
+        type: 'public'
+      }
+      // Query parameters will be ?search=[term]&type=public
+      return query;
+    }
+  }
+  });
+
+  $( "#sortable" ).sortable({
+    items: ".bloc-row",
+    cursor: "move",
+    axis: "y",
+    update: function() {
+      $.post($(this).data('update-url'), $(this).sortable('serialize'));
+    }
+  }).disableSelection();
 });

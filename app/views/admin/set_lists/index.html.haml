@@ -1,0 +1,7 @@
+%h1 Set Listes
+
+%p=link_to 'Nouvelle serie', new_admin_set_list_path, class: 'btn btn-xs btn-primary'
+
+%ul
+  - @set_lists.each do |set_list|
+    %li= set_list.name

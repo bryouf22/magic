@@ -11,5 +11,6 @@ class Deck::MoveCard
     else
       card_deck.update_attributes(occurences_in_main_deck: (card_deck.occurences_in_main_deck - 1), occurences_in_sideboard: (card_deck.occurences_in_sideboard + 1))
     end
+    deck.save
   end
 end

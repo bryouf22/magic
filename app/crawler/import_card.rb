@@ -17,7 +17,7 @@ class ImportCard
         end
       end
     end
-    if @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent1 div').first.present?
+    if @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent1 div').first.present? && @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 div').first.present?
       ImportDoubleCard.new(card_url, extension_set_id)
     else
       begin
@@ -77,6 +77,8 @@ class ImportCard
     rarity_text = @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_rarityRow .value').first.text.squish.downcase
     case rarity_text
     when 'mythic rare'
+      :mythic
+    when 'special'
       :mythic
     when 'basic land'
       :common
@@ -162,6 +164,16 @@ class ImportCard
       'q'
     when 'Variable Colorless'
       'x'
+    when 'Phyrexian White'
+      's'
+    when 'Phyrexian Blue'
+      't'
+    when 'Phyrexian Black'
+      'v'
+    when 'Phyrexian Red'
+      'z'
+    when 'Phyrexian Green'
+      'y'
     else
       value
     end

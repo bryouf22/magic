@@ -23,7 +23,16 @@ class Color
     p: [:red],
     q: [:green],
     x: [],
+    s: [:white],
+    t: [:blue],
+    v: [:black],
+    z: [:red],
+    y: [:green]
   }
+
+  def self.mana_symbol(color)
+    MANA_COST_MAPPING.invert[color.to_sym]
+  end
 
   COLORS_MAPPING.each do |name, id|
     define_singleton_method (name) do

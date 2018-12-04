@@ -1,3 +1,5 @@
 %h1 Nouveau deck
 
-= render partial: 'deck_form', locals: { deck: @deck, method: :post, url: decks_path }
+= render partial: 'deck_form', locals: { deck: @deck, method: :post, url: create_deck_path }
+
+= link_to 'importer une liste', import_deck_path, class: 'btn btn-xs btn-success'

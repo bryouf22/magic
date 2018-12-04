@@ -39,20 +39,21 @@ class Card < ApplicationRecord
 
   # TODO : ajouter bitfield pour le format (https://github.com/grosser/bitfields)
 
-  scope :only_green,          -> { where(color_ids: [Color.green]) }
-  scope :only_red,            -> { where(color_ids: [Color.red])   }
-  scope :only_blue,           -> { where(color_ids: [Color.blue])  }
-  scope :only_white,          -> { where(color_ids: [Color.white]) }
-  scope :only_black,          -> { where(color_ids: [Color.black]) }
-  scope :gold,                -> { where("array_length(color_ids, 1) >= 2") }
-  scope :colorless,           -> { where('color_ids is ?', nil) }
-  scope :red,                 -> { where("? = ANY(color_ids)", Color.red)}
-  scope :blue,                -> { where("? = ANY(color_ids)", Color.blue)}
-  scope :black,               -> { where("? = ANY(color_ids)", Color.black)}
-  scope :green,               -> { where("? = ANY(color_ids)", Color.green)}
-  scope :white,               -> { where("? = ANY(color_ids)", Color.white)}
-  scope :colorless_artefact,  -> { where('color_ids is ?', nil).also_artefacts }
-  scope :also_artefacts,      -> { where(card_type: [5, 6]) }
+  scope :only_green,              -> { where(color_ids: [Color.green]) }
+  scope :only_red,                -> { where(color_ids: [Color.red])   }
+  scope :only_blue,               -> { where(color_ids: [Color.blue])  }
+  scope :only_white,              -> { where(color_ids: [Color.white]) }
+  scope :only_black,              -> { where(color_ids: [Color.black]) }
+  scope :gold,                    -> { where("array_length(color_ids, 1) >= 2") }
+  scope :colorless,               -> { where('color_ids is ?', nil) }
+  scope :red,                     -> { where("? = ANY(color_ids)", Color.red)}
+  scope :blue,                    -> { where("? = ANY(color_ids)", Color.blue)}
+  scope :black,                   -> { where("? = ANY(color_ids)", Color.black)}
+  scope :green,                   -> { where("? = ANY(color_ids)", Color.green)}
+  scope :white,                   -> { where("? = ANY(color_ids)", Color.white)}
+  scope :colorless_artefact,      -> { where('color_ids is ?', nil).also_artefacts }
+  scope :also_artefacts,          -> { where(card_type: [5, 6]) }
+  scope :colorless_non_artefacte, -> { colorless.where.not(card_type: [2, 5, 6]) }
 
   enum card_type: {
     instant:            1,
@@ -116,7 +117,7 @@ class Card < ApplicationRecord
   end
 
   def colors
-    return nil unless color_ids.any?
+    return [] unless color_ids.present?
     colors = []
     color_ids.each do |id|
       colors << Color::COLORS_MAPPING.invert[id].to_s

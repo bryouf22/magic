@@ -1,0 +1,20 @@
+%h1 Mes decks
+
+= link_to new_deck_path, class: 'btn btn-xs btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  Nouveau deck
+
+%section.deck-list
+
+- if @decks.any?
+  %ul
+    - @decks.each do |deck|
+      %li.row
+        .col-sm-4= link_to deck.name, deck_path(slug: deck.slug)
+        .col-sm-2
+          - deck.colors.each do |color|
+            = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')
+        .col-sm-1= link_to 'editer', edit_deck_path(slug: deck.slug), class: 'btn btn-xs btn-warning'
+        .col-sm-1= link_to 'supprimer', destroy_deck_path(slug: deck.slug), method: :post, class: 'btn btn-xs btn-danger', data: { confirm: 'Supprimer ?' }
+- else
+  %p Vous n'avez aucun deck

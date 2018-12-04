@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   private
 
   def set_by_type(extensions)
+    @block_sets      ||= Bloc.order('blocs.bloc_order ASC')
     @_sets           ||= extensions.where(set_type: nil)
     @masterpieces    ||= extensions.masterpiece
-    @block_sets      ||= extensions.block_set
+    @sets            ||= extensions.block_set.where(bloc_id: nil)
     @basic_editions  ||= extensions.basic_edition
     @from_the_vaults ||= extensions.from_the_vault
     @dual_decks      ||= extensions.dual_deck
@@ -26,5 +27,6 @@ class ApplicationController < ActionController::Base
     @gold_cards               ||= cards.gold.decorate
     @colorless_artefact_cards ||= cards.colorless_artefact.decorate
     @land_cards               ||= cards.land.decorate
+    @colorless_non_artefacte  ||= cards.colorless_non_artefacte.decorate
   end
 end

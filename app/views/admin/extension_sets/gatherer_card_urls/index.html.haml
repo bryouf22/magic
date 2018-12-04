@@ -1,0 +1,6 @@
+%h1 Gatherer Card Urls
+
+%ul
+  - @gatherer_card_urls.each do |gatherer_card_url|
+    %li= link_to gatherer_card_url.url, gatherer_card_url.url, target: '_blank'
+

@@ -12,13 +12,20 @@ Rails.application.routes.draw do
 
   get 'manifest',                 to: 'welcome#manifest',          as: :manifest
   get 'mon-compte',               to: 'account#index',             as: :user_account
-  get 'rechercher',               to: 'card_search#new',           as: :card_search
+  get 'rechercher',               to: 'cards#search',              as: :card_search
   get 'carte/:id',                to: 'cards#show',                as: :card
   post 'add_card',                to: 'decks#add_card',            as: :add_card_to_deck
+
   get 'extensions',               to: 'extension_sets#index',      as: :extension_sets
   get 'extension-set-:slug',      to: 'extension_sets#show',       as: :extension_set
   get 'extension-set-:slug/:id',  to: 'extension_sets/cards#show', as: :extension_set_card
-  get 'mes-decks',                to: 'decks#user_decks',          as: :user_decks
+
+  get 'mes-decks',                  to: 'decks#user_decks',        as: :user_decks
+  get 'mes-decks/importer',         to: 'decks#import',            as: :import_deck
+  post 'mes-deck/importer',         to: 'decks#import_create',     as: :create_import
+  post 'mes-decks/supprimer-:slug', to: 'decks#destroy',           as: :destroy_deck
+  post 'deck',                      to: 'decks#create',            as: :create_deck
+
   get 'decks',                    to: 'decks#index',               as: :decks
   get 'editer-deck-:slug',        to: 'decks#edit',                as: :edit_deck
   patch 'edit-deck-:slug',        to: 'decks#update',              as: :update_deck
@@ -34,8 +41,15 @@ Rails.application.routes.draw do
 
   get '/admin', to: 'admin/welcome#index', as: :admin_root
   namespace 'admin' do
-    resources :extension_sets
+    resources :extension_sets do
+      resources :gatherer_card_urls, controller: 'extension_sets/gatherer_card_urls'
+    end
     resources :cards
     resources :users
+
+    resources :set_lists
+    resources :blocs, except: [:new, :show, :edit, :update]
+
+    post '/bloc_order', to: 'blocs#bloc_order'
   end
 end

@@ -18,7 +18,7 @@
         %li= link_to 'Extensions', extension_sets_path
         - if user_signed_in?
           %li= link_to 'Liste de souhait', wishlists_path
-          %li= link_to 'Mes decks', decks_path
+          %li= link_to 'Mes decks', user_decks_path
           %li= link_to 'Ma collection', card_collection_path
       = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
         .form-group

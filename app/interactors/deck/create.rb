@@ -3,7 +3,25 @@ class Deck::Create
 
   def call
     user_id = context.user_id
-    deck = Deck.create(user_id: user_id, name: "Nouveau deck #{rand(1000)}") # FIXME
+    name    = context.name || 'Nouveau deck'
+    @user   = User.find(user_id)
+
+    if @user.decks.where(name: name).any?
+      deck = Deck.create(user_id: user_id, name: generate_name(name))
+    else
+      deck = Deck.create(user_id: user_id, name: name)
+    end
     context.deck_id = deck.id
+  end
+
+  private
+
+  def generate_name(name)
+    index = 0
+    loop do
+      index += 1
+      break if @user.decks.where(name: "#{name} #{index}").none?
+    end
+    return "#{name} #{index}"
   end
 end

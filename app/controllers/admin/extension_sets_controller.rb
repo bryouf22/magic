@@ -1,6 +1,7 @@
 class Admin::ExtensionSetsController < AdminController
 
   def index
+    @blocs = Bloc.all.order('blocs.bloc_order ASC')
     set_by_type(ExtensionSet.all.order('set_type ASC, release_date DESC'))
   end
 
@@ -14,7 +15,6 @@ class Admin::ExtensionSetsController < AdminController
   end
 
   def update
-    # FIXME update release_date doesn t work
     @set = ExtensionSet.find(params[:id])
 
     if @set.update_attributes(update_params)
@@ -27,6 +27,6 @@ class Admin::ExtensionSetsController < AdminController
   private
 
   def update_params
-    params.require(:extension_set).permit(:name, :set_type, :release_date, :set_visual, :commun_logo, :uncommun_logo, :rare_logo, :mythic_logo)
+    params.require(:extension_set).permit(:name, :set_type, :release_date, :set_visual, :commun_logo, :uncommun_logo, :rare_logo, :mythic_logo, :bloc_id, :order)
   end
 end

@@ -1,4 +1,5 @@
 class CardDecorator < Draper::Decorator
+  include ApplicationHelper
   decorates_finders
   delegate_all
 
@@ -11,12 +12,13 @@ class CardDecorator < Draper::Decorator
     result.html_safe
   end
 
-  def title(show_rarity: false)
-    if show_rarity
-      "#{h.content_tag(:span, "#{rarity[0].upcase}", class: "rarity-#{rarity}")} #{(card.name_fr || card.name || '')}".html_safe
-    else
-      card.name_fr || card.name || ''
-    end
+  def title(show_rarity: false, show_extension: false)
+    title = if show_rarity
+              "#{h.content_tag(:span, "#{rarity[0].upcase}", class: "rarity-#{rarity}")} #{(card.name_fr || card.name || '')}".html_safe
+            else
+              card.name_fr || card.name || ''
+            end
+    (show_extension ? "#{title}, #{card.extension_set.name}" : title).html_safe # show also extension symbole
   end
 
   def visual
@@ -39,28 +41,5 @@ class CardDecorator < Draper::Decorator
 
   def name_with_set
     "#{name_fr} - #{extension.set.name}"
-  end
-
-  private
-
-  def mana_img_path(c)
-    if c.to_i.to_s == c
-      "mana/#{c}.jpg"
-    else
-      case c
-      when 'u'
-        'mana/blue.jpg'
-      when 'b'
-        'mana/black.jpg'
-      when 'r'
-        'mana/red.jpg'
-      when 'g'
-        'mana/green.gif'
-      when 'w'
-        'mana/white.gif'
-      else
-        "mana/#{c}.png"
-      end
-    end
   end
 end

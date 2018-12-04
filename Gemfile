@@ -69,6 +69,6 @@ gem 'jquery-ui-rails'
 gem 'devise'
 gem 'searchlight'
 gem 'pg'
-# gem "select2-rails"
+gem "select2-rails"
 gem "font-awesome-rails"
 gem "interactor-rails", "~> 2.0"

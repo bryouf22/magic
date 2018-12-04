@@ -31,23 +31,22 @@
           %p
             = link_to 'Tout sélectionner', '#', class: 'js-select-all'
             = '|'
-            = link_to 'Tout désélectionner', '#', class: 'js-unselect-all'
+            = link_to 'Tout déselectionner', '#', class: 'js-unselect-all'
+            = '|'
+            = link_to 'Inverser la sélection', '#', class: 'js-inverse-selection'
 
     .filter.pull-right
       = link_to '#', class: 'btn btn-xs btn-success js-filter-btn' do
         %i.fa.fa-filter
       .filters.hidden
-        Filtrer par
-        =link_to 'cartes déjà présente dans ma collection', '#'
-        = '|'
-        =link_to 'cartes déjà présente dans mes listes de souhait', '#'
-        = '|'
+        Filtrer par :
+        =link_to 'cartes déjà présente dans ma collection', '#', class: 'filter-by-link'
+        =link_to 'cartes déjà présente dans mes listes de souhait', '#', class: 'filter-by-link'
         = pretty_checkbox('color_filters', value: Color.white, checked: true, label: 'White', class: 'js-select-color-filter', pretty_class: 'success')
         = pretty_checkbox('color_filters', value: Color.blue, checked: true, label: 'Blue', class: 'js-select-color-filter', pretty_class: 'success')
         = pretty_checkbox('color_filters', value: Color.black, checked: true, label: 'Black', class: 'js-select-color-filter', pretty_class: 'success')
         = pretty_checkbox('color_filters', value: Color.red, checked: true, label: 'Red', class: 'js-select-color-filter', pretty_class: 'success')
         = pretty_checkbox('color_filters', value: Color.green, checked: true, label: 'Green', class: 'js-select-color-filter', pretty_class: 'success')
-        = '|'
         = pretty_checkbox('rarity_filters', value: 'rarity-common', checked: true, label: 'Common', class: 'js-select-rarity-filter', pretty_class: 'success')
         = pretty_checkbox('rarity_filters', value: 'rarity-uncommon', checked: true, label: 'Uncommon', class: 'js-select-rarity-filter', pretty_class: 'success')
         = pretty_checkbox('rarity_filters', value: 'rarity-rare', checked: true, label: 'Rare', class: 'js-select-rarity-filter', pretty_class: 'success')
@@ -79,6 +78,9 @@
     - if @land_cards.any?
       %h3 Lands
       %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @land_cards, as: :card
+    - if @colorless_non_artefacte.any?
+      %h3 Autre
+      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @colorless_non_artefacte, as: :card
   - else
     - if @white_cards.any?
       %h3 White
@@ -103,5 +105,7 @@
       %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_artefact_cards, as: :card
     - if @land_cards.any?
       %h3 Lands
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @land_cards, as: :card
-
+      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @land_cards, as: :card
+    - if @colorless_non_artefacte.any?
+      %h3 Autre
+      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_non_artefacte, as: :card

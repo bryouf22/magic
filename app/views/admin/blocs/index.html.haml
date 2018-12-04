@@ -1,0 +1,7 @@
+%h1 Blocs
+
+%p=link_to 'Nouveau bloc', admin_blocs_path, method: :post, class: 'btn btn-xs btn-primary'
+
+%ul
+  - @blocs.each do |bloc|
+    %li= bloc.name

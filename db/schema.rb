@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_04_193214) do
+ActiveRecord::Schema.define(version: 2018_12_01_143006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 2018_11_04_193214) do
     t.integer "card_id"
     t.integer "alternative_card_id"
     t.integer "alternative_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blocs", force: :cascade do |t|
+    t.integer "bloc_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -78,7 +84,6 @@ ActiveRecord::Schema.define(version: 2018_11_04_193214) do
     t.string "defense_str"
     t.string "color_indicator"
     t.integer "loyalty"
-    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
@@ -92,6 +97,8 @@ ActiveRecord::Schema.define(version: 2018_11_04_193214) do
     t.integer "user_id"
     t.integer "status", default: 1, null: false
     t.string "slug"
+    t.integer "color_ids", array: true
+    t.integer "card_number"
   end
 
   create_table "extension_sets", force: :cascade do |t|
@@ -106,6 +113,9 @@ ActiveRecord::Schema.define(version: 2018_11_04_193214) do
     t.string "mythic_logo"
     t.string "slug"
     t.integer "set_type"
+    t.integer "order"
+    t.integer "bloc_id"
+    t.integer "set_list_id"
   end
 
   create_table "gatherer_card_urls", force: :cascade do |t|
@@ -120,6 +130,12 @@ ActiveRecord::Schema.define(version: 2018_11_04_193214) do
     t.bigint "reprint_card_id"
     t.index ["card_id"], name: "index_reprints_on_card_id"
     t.index ["reprint_card_id"], name: "index_reprints_on_reprint_card_id"
+  end
+
+  create_table "set_lists", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
