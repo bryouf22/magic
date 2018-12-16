@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_16_123210) do
+ActiveRecord::Schema.define(version: 2018_12_16_163416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2018_12_16_123210) do
     t.string "defense_str"
     t.string "color_indicator"
     t.integer "loyalty"
+    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
@@ -119,6 +120,42 @@ ActiveRecord::Schema.define(version: 2018_12_16_123210) do
     t.integer "bloc_id"
     t.integer "set_list_id"
     t.boolean "bad_visual"
+  end
+
+  create_table "format_cards", force: :cascade do |t|
+    t.bigint "format_id"
+    t.bigint "card_id"
+    t.boolean "forbidden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_format_cards_on_card_id"
+    t.index ["format_id"], name: "index_format_cards_on_format_id"
+  end
+
+  create_table "format_decks", force: :cascade do |t|
+    t.bigint "format_id"
+    t.bigint "deck_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_format_decks_on_deck_id"
+    t.index ["format_id"], name: "index_format_decks_on_format_id"
+  end
+
+  create_table "format_extensions", force: :cascade do |t|
+    t.bigint "format_id"
+    t.bigint "extension_set_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extension_set_id"], name: "index_format_extensions_on_extension_set_id"
+    t.index ["format_id"], name: "index_format_extensions_on_format_id"
+  end
+
+  create_table "formats", force: :cascade do |t|
+    t.string "name"
+    t.integer "card_limit"
+    t.integer "card_occurence_limit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "gatherer_card_urls", force: :cascade do |t|

@@ -26,6 +26,9 @@ class Deck < ApplicationRecord
   has_many :card_decks, dependent: :destroy
   has_many :cards, through: :card_decks
 
+  has_many :format_decks, dependent: :destroy
+  has_many :formats, through: :format_decks
+
   enum status: { personal: 1, published: 2 }
 
   before_save :update_slug, :set_colors, :set_card_numbers
