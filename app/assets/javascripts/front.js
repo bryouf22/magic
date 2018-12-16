@@ -128,17 +128,22 @@ $(document).ready(function() {
   }
 
   $('#card-search').select2({
+    multiple: true,
     ajax: {
     url: '/rechercher',
     dataType: 'json',
     data: function (params) {
       var query = {
-        search: params.term,
+        "card_search[term]" : params.term,
         type: 'public'
       }
-      // Query parameters will be ?search=[term]&type=public
       return query;
-    }
+    },
+    processResults: function (data, params) {
+      return {
+        results: data,
+      };
+    },
   }
   });
 

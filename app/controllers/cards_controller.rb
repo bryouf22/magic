@@ -9,9 +9,17 @@ class CardsController < ApplicationController
   def search
     @term     = search_params[:term]
     @search   = CardSearch.new(search_params)
-    @results  = @search.results
-    if request.format.to_sym == :json
-      render json: {}
+    @results  = @search.results.limit(20)
+    respond_to do |format|
+      format.json do
+        json_result = []
+        @results.each do |card|
+          color = card.colors.join(', ')
+          json_result << { id: card.id, text: "#{card.name} (#{card.extension_set.name}) #{color}" }
+        end
+        render json: json_result.to_json
+      end
+      format.html
     end
   end
 

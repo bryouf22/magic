@@ -25,6 +25,7 @@ class DecksController < ApplicationController
               else
                 add_card_params[:deck_id]
               end
+
     Deck::AddCard.call(deck_id: deck_id, card_id: add_card_params[:card_id])
     redirect_to deck_path(slug: Deck.find(deck_id).slug)
   end
