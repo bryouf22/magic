@@ -27,7 +27,6 @@ Rails.application.routes.draw do
   post 'mes-deck/importer',         to: 'decks#import_create',     as: :create_import
   post 'mes-decks/supprimer-:slug', to: 'decks#destroy',           as: :destroy_deck
   post 'deck',                      to: 'decks#create',            as: :create_deck
-
   get 'decks',                    to: 'decks#index',               as: :decks
   get 'editer-deck-:slug',        to: 'decks#edit',                as: :edit_deck
   patch 'edit-deck-:slug',        to: 'decks#update',              as: :update_deck

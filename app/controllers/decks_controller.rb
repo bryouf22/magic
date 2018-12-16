@@ -80,8 +80,8 @@ class DecksController < ApplicationController
   end
 
   def import_create
-    Deck::CreateFromList.call(list: params[:import][:list], user_id: current_user.id)
-    redirect_to user_decks_path
+    deck = Deck::CreateFromList.call(list: params[:import][:list], user_id: current_user.id).deck
+    redirect_to deck_path(slug: deck.slug)
   end
 
   private
