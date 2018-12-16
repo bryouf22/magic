@@ -27,6 +27,6 @@ class Admin::ExtensionSetsController < AdminController
   private
 
   def update_params
-    params.require(:extension_set).permit(:name, :set_type, :release_date, :set_visual, :commun_logo, :uncommun_logo, :rare_logo, :mythic_logo, :bloc_id, :order)
+    params.require(:extension_set).permit(:name, :set_type, :release_date, :set_visual, :commun_logo, :uncommun_logo, :rare_logo, :mythic_logo, :bloc_id, :order, :bad_visual)
   end
 end

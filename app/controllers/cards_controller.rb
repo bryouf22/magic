@@ -10,7 +10,7 @@ class CardsController < ApplicationController
     @term     = search_params[:term]
     @search   = CardSearch.new(search_params)
     @results  = @search.results
-    if request.format.to_sym == json
+    if request.format.to_sym == :json
       render json: {}
     end
   end
@@ -18,13 +18,21 @@ class CardsController < ApplicationController
   def add_to
     case action_params
     when 'collection'
+      CardCollection::AddCards.call(card_collection_id: current_user.card_collection.id, card_ids: card_ids)
+      redirect_to card_collection_path
     when 'wishlist'
-    when 'deck'
+      create_default_wishlist if current_user.wishlists.none?
+      Wishlist::AddCards.call(wishlist_id: current_user.wishlists.first.id, card_ids: card_ids)
+      redirect_to wishlist_path(name: current_user.wishlists.first.id)
     end
-    redirect_to root_path
+
   end
 
   private
+
+  def create_default_wishlist
+    Wishlist.create(name: 'Ma liste de souhait', user_id: current_user.id)
+  end
 
   def search_params
     params.require('card_search').permit(:term)

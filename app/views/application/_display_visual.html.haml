@@ -1,0 +1,7 @@
+- [@white_cards, @blue_cards, @black_cards, @red_cards, @green_cards, @gold_cards, @colorless_artefact_cards, @land_cards, @colorless_non_artefact].each do |list|
+  - if list.any?
+    %ul.cards-list.visual
+      - list.each do |card|
+        %li
+          = image_tag(card.visual, class: 'img-responsive')
+          = link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)

@@ -9,6 +9,6 @@
 - if @wishlists.any?
   %ul
     - @wishlists.each do |wishlist|
-      %li= wishlist.name
+      %li= link_to wishlist.name, wishlist_path(id: wishlist.id)
 - else
   %p Vous n'avez aucune liste

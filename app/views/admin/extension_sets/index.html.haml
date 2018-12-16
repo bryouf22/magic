@@ -1,10 +1,5 @@
 %h1 administrer les éditions
 
-= "Erreur d'importation : #{GathererCardUrl.all.count}"
-= "Cartes importées : #{Card.all.count}"
-%p TODO : ajouter les jetons (et vérifier le total de carte pour chaque édition)
-%p TODO : Ajouter les autres visuels pour les terrains base
-
 %h3 Blocs
 %table.table
   - @sets.each do |set|

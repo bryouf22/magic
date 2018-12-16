@@ -1,17 +1,12 @@
+%header
+  %h1= "#{@card.name} - #{@card.extension_set.name}"
+
 .row.card-view
-  .col-md-4
-    .card-title
-      .pull-left= @card.title
-      .pull-right= @card.cost
-    - if card.rule_text
-      .rule-text= card.rule_text
-    - if card.flavor
-      .flavor-text= card.flavor
-  .col-md-2
+  .col-md-3
     = image_tag @card.image.url if @card.image.present?
   .col-md-4
     %ul
-      %li lien gatherer
+      %li= link_to 'Voir sur gatherer', @card.gatherer_link, target: '_blank'
       %li prix mkm
       %li présent dans les deck
       %li ajouter a la wishlist

@@ -16,6 +16,10 @@
   .form-group
     = label_tag(:extension_set_order, 'Position :')
     = form.number_field(:order, class: 'form-control')
+  .checkbox
+    %label{ for: 'extension_set_bad_visual' }
+      = form.check_box(:bad_visual)
+      Sans Visuel
   .form-group
     .row
       .col-md-6

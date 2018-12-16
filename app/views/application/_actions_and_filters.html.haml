@@ -1,0 +1,46 @@
+.options
+  - if user_signed_in?
+    .modes.pull-left
+      = link_to 'mode sélection', '#', class: 'btn btn-xs btn-success js-activate-selection-mode'
+      .selection-mode.hidden
+        .text
+          %span.js-select-count 0
+          carte(s) sélectionnée(s)
+        %p Ajouter à :
+        .pretty-radio-wrapper
+          = form.radio_button(:to, :wishlist, checked: true, class: 'pretty-radio')
+          = form.label(:to_wishlist, 'ma liste de souhait')
+        .pretty-radio-wrapper
+          = form.radio_button(:to, :collection, class: 'pretty-radio')
+          = form.label(:to_collection, 'ma collection')
+        .pretty-radio-wrapper
+          = form.radio_button(:to, :deck, class: 'pretty-radio')
+          = form.label(:to_deck, 'Un deck')
+        = form.submit('valider', class: 'btn btn-xs btn-success')
+        %p
+          = link_to 'Tout sélectionner', '#', class: 'js-select-all'
+          = '|'
+          = link_to 'Tout déselectionner', '#', class: 'js-unselect-all'
+          = '|'
+          = link_to 'Inverser la sélection', '#', class: 'js-inverse-selection'
+
+  .filter.pull-right
+
+    = link_to '#', class: 'btn btn-xs btn-success js-filter-btn' do
+      %i.fa.fa-filter
+
+    .filters.hidden
+      Filtrer par :
+
+      =link_to 'cartes déjà présente dans ma collection',         '#', class: 'filter-by-link'
+      =link_to 'cartes déjà présente dans mes listes de souhait', '#', class: 'filter-by-link'
+
+      = pretty_checkbox('color_filters',  value: Color.white,       checked: true, label: 'White',    class: 'js-select-color-filter',  pretty_class: 'success')
+      = pretty_checkbox('color_filters',  value: Color.blue,        checked: true, label: 'Blue',     class: 'js-select-color-filter',  pretty_class: 'success')
+      = pretty_checkbox('color_filters',  value: Color.black,       checked: true, label: 'Black',    class: 'js-select-color-filter',  pretty_class: 'success')
+      = pretty_checkbox('color_filters',  value: Color.red,         checked: true, label: 'Red',      class: 'js-select-color-filter',  pretty_class: 'success')
+      = pretty_checkbox('color_filters',  value: Color.green,       checked: true, label: 'Green',    class: 'js-select-color-filter',  pretty_class: 'success')
+      = pretty_checkbox('rarity_filters', value: 'rarity-common',   checked: true, label: 'Common',   class: 'js-select-rarity-filter', pretty_class: 'success')
+      = pretty_checkbox('rarity_filters', value: 'rarity-uncommon', checked: true, label: 'Uncommon', class: 'js-select-rarity-filter', pretty_class: 'success')
+      = pretty_checkbox('rarity_filters', value: 'rarity-rare',     checked: true, label: 'Rare',     class: 'js-select-rarity-filter', pretty_class: 'success')
+      = pretty_checkbox('rarity_filters', value: 'rarity-mythic',   checked: true, label: 'Mythic',   class: 'js-select-rarity-filter', pretty_class: 'success')

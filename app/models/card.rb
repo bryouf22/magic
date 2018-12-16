@@ -53,7 +53,7 @@ class Card < ApplicationRecord
   scope :white,                   -> { where("? = ANY(color_ids)", Color.white)}
   scope :colorless_artefact,      -> { where('color_ids is ?', nil).also_artefacts }
   scope :also_artefacts,          -> { where(card_type: [5, 6]) }
-  scope :colorless_non_artefacte, -> { colorless.where.not(card_type: [2, 5, 6]) }
+  scope :colorless_non_artefact,  -> { colorless.where("cards.card_type NOT IN (2, 5, 6) OR cards.card_type IS NULL") }
 
   enum card_type: {
     instant:            1,
@@ -80,7 +80,7 @@ class Card < ApplicationRecord
   has_one :alternative
   has_one :alternative_card, through: :alternative
 
-  has_many :reprints, foreign_key: :card_id
+  has_many :reprints, foreign_key: :card_id, dependent: :destroy
   has_many :reprint_cards, through: :reprints
 
   before_create :set_colors, :clean_names

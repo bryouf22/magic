@@ -19,6 +19,42 @@ class GathererScraper
   # }
   # results;
 
+  # GathererScraper.test
+  def self.test
+    urls = [
+      "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=##PAGE##&output=compact&action=advanced&set=[\"Apocalypse\"]",
+      "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=##PAGE##&output=compact&action=advanced&set=[\"Dissension\"]",
+      "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=##PAGE##&output=compact&action=advanced&set=[\"Invasion\"]",
+      "http://gatherer.wizards.com/Pages/Search/Default.aspx?page=##PAGE##&output=compact&action=advanced&set=[\"Planar+Chaos\"]",
+    ]
+    urls.each do |url|
+      page        = -1
+      card_links  = []
+      loop do
+        page    += 1
+        url_paginate = url.sub('##PAGE##', page.to_s)
+        client  = HTTPClient.new(default_header: { "Accept-Language" => "en-US" }).get(url_paginate)
+        doc     = Nokogiri::HTML(client.body)
+        links = doc.css('table tr.cardItem td:first-child a').collect do |card_link|
+          card_link.attribute('href').value.sub('..', ROOT_URL)
+        end
+        puts "#{links.count} cards found !"
+        if page == 0 && links.count == 0
+          File.open(URI.join("#{Rails.root}/#{url.parameterize}.html").to_s, 'w+') do |file|
+            file.write doc.to_html.gsub('../..', 'http://gatherer.wizards.com').gsub('href="/Styles', 'href="http://gatherer.wizards.com/Styles')
+          end
+          break
+        end
+        break if card_links.include?(links.last)
+        puts "continuing..."
+        card_links += links
+      end
+      card_links.each do |card_url|
+        ImportCard.reimport(card_url)
+      end
+    end
+  end
+
   def self.process
     EXTENSION_NAME.each do |set_name|
       page        = -1
@@ -26,7 +62,6 @@ class GathererScraper
       loop do
         page    += 1
         url     = "http://gatherer.wizards.com/Pages/Search/Default.aspx?set=[#{set_name.gsub(' ', '+')}]&page=#{page}&output=compact"
-        puts "going to #{set_name} (#{page}) : #{url}"
         client  = HTTPClient.new(default_header: { "Accept-Language" => "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7" }).get(url)
         doc     = Nokogiri::HTML(client.body)
 
@@ -77,11 +112,20 @@ class GathererScraper
   end
 
   def self.import_failed_urls
-    BLA_4.each do |card_url|
-      # puts card_url
+    FAILED_URLS.each do |card_url|
       ImportCard.new(card_url, nil)
     end
   end
+
+  def self.reimport_visual
+    REIMPORT_URLS.each do |url|
+      ImportCard.reimport(url)
+    end
+  end
+
+  REIMPORT_URLS = [
+    "http://gatherer.wizards.com/Pages/Card/Details.aspx?printed=false&multiverseid=84635"
+  ]
 
   EXTENSION_NAME = [
     "Aether Revolt",
@@ -279,5 +323,42 @@ class GathererScraper
     "Worldwake",
     "Zendikar",
     "Zendikar Expeditions",
+    "Ultimate Masters",
   ]
+
+  FAILED_URLS = ["http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5797",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5789",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5793",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8906",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8908",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5687",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5739",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5657",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5565",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5590",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=10655",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5690",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5635",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5673",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5547",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5679",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8871",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5689",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5833",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5861",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=7247",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8849",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8826",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5566",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=7168",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5850",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8834",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5836",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8907",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8876",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5576",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5696",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5629",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=5825",
+"http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=8787"]
 end

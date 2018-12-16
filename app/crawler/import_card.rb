@@ -1,6 +1,56 @@
 class ImportCard
   require 'open-uri'
 
+  def self.is_double_card?(doc)
+    if doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 #ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl01_componentWrapper').present?
+     return true
+    elsif doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 #ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl02_componentWrapper').present?
+     return true
+    elsif doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 #ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl03_componentWrapper').present?
+     return true
+    end
+    false
+  end
+
+  def self.reimport(url)
+    client  = HTTPClient.new(default_header: { "Accept-Language" => "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7" }).get(url)
+    @doc    = Nokogiri::HTML(client.body)
+    return if self.is_double_card?(@doc)
+    g_id    = self.gatherer_id(url)
+
+    if (card = Card.where(name: self.name_en, gatherer_id: g_id).first)
+      binding.pry
+    else
+      if (card = Card.where(extension_set_id: ExtensionSet.where(name: self.extension_name).first.id, name: self.name_en).first)
+        if card.extension_set.bad_visual
+          card.image = self.image(g_id)
+          if card.gatherer_id != g_id
+            card.gatherer_id = g_id
+            card.gatherer_link = url
+          end
+          card.save
+          puts "updating visual for card id : #{card.id}"
+        end
+      else
+        binding.pry
+      end
+    end
+  end
+
+  def self.image(id)
+    open("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{id}&type=card")
+  end
+
+  def self.name_en
+    @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow .value').first.text.squish
+  end
+
+  def self.extension_name
+    value = @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_setRow .value a').last&.text&.squish
+    value = @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl02_setRow .value a').last&.text&.squish if value.nil?
+    value
+  end
+
   def initialize(card_url, extension_set_id)
     client  = HTTPClient.new(default_header: { "Accept-Language" => "fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7" }).get(card_url)
     @doc    = Nokogiri::HTML(client.body)
@@ -23,7 +73,7 @@ class ImportCard
       begin
         card = Card.create({
           name_fr:            name_fr,
-          name:               name,
+          name:               name_en,
           extension_set_id:   extension_set_id,
           detailed_type:      detailed_type,
           rarity:             rarity,
@@ -47,7 +97,7 @@ class ImportCard
           color_indicator:    color_indicator,
           loyalty:            loyalty,
         })
-        puts "#{card.name} imported"
+        puts "#{card.name_en} imported"
         if (gatherer_url = GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).first)
           gatherer_url.destroy
         end
@@ -65,7 +115,7 @@ class ImportCard
   def name_fr
   end
 
-  def name
+  def name_en
     @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_nameRow .value').first.text.squish
   end
 
@@ -199,6 +249,10 @@ class ImportCard
 
   def number_in_set
     @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_numberRow .value').first&.text&.squish
+  end
+
+  def self.gatherer_id(card_url)
+    card_url.match(/multiverseid=(\d+)/)[1]
   end
 
   def gatherer_id(card_url)

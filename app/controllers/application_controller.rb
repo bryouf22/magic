@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     @gold_cards               ||= cards.gold.decorate
     @colorless_artefact_cards ||= cards.colorless_artefact.decorate
     @land_cards               ||= cards.land.decorate
-    @colorless_non_artefacte  ||= cards.colorless_non_artefacte.decorate
+    @colorless_non_artefact   ||= cards.colorless_non_artefact.decorate
+  end
+
+  def view
+    params[:view].presence || :classic
   end
 end

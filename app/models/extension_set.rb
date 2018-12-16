@@ -17,6 +17,7 @@
 #  order         :integer
 #  bloc_id       :integer
 #  set_list_id   :integer
+#  bad_visual    :boolean
 #
 
 class ExtensionSet < ApplicationRecord
@@ -26,6 +27,8 @@ class ExtensionSet < ApplicationRecord
 
   belongs_to :bloc, optional: true
   belongs_to :set_list, optional: true
+
+  scope :without_visual, -> { where(bad_visual: true) }
 
   mount_uploader :set_visual,     CardImageUploader
   mount_uploader :commun_logo,    CardImageUploader

@@ -7,6 +7,9 @@ class ImportDoubleCard
     elsif @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 #ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl02_componentWrapper').present?
       @card_1_selector = 'ctl02'
       @card_2_selector = 'ctl03'
+    elsif @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 #ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl03_componentWrapper').present?
+      @card_1_selector = 'ctl03'
+      @card_2_selector = 'ctl04'
     end
   end
   def initialize(card_url, extension_set_id)
@@ -57,7 +60,6 @@ class ImportDoubleCard
           loyalty:            alt_loyalty,
         })
         Alternative.create(card_id: @card_1.id, alternative_card_id: @card_2.id)
-
         puts "ALT CARD CREATE : #{@card_1.name} // #{@card_2.name} imported"
       end
       if (gatherer_url = GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).first)
@@ -68,12 +70,18 @@ class ImportDoubleCard
         @card_1.destroy
       end
       puts "#{card_url} failed"
+      File.open(URI.join("#{Rails.root}/#{link_gatherer_id(card_url)}.html").to_s, 'w+') do |file|
+        file.write @doc.to_html.gsub('../..', 'http://gatherer.wizards.com').gsub('href="/Styles', 'href="http://gatherer.wizards.com/Styles')
+      end
       if GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).none?
         GathererCardUrl.create(url: card_url, extension_set_id: extension_set_id)
       end
     end
   end
 
+  def link_gatherer_id(card_url)
+    card_url.match(/multiverseid=(\d+)/)[1]
+  end
 
   def gatherer_id
     @doc.css("#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_#{@card_1_selector}_cardImage").first.attribute('src').value.match(/multiverseid=(\d+)/)[1]
@@ -99,6 +107,8 @@ class ImportDoubleCard
       :mythic
     when 'basic land'
       :common
+    when 'special'
+      :mythic
     else
       rarity_text.to_sym
     end
@@ -173,6 +183,8 @@ class ImportDoubleCard
       :mythic
     when 'basic land'
       :common
+    when 'special'
+      :mythic
     else
       rarity_text.to_sym
     end

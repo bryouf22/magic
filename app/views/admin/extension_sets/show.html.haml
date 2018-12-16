@@ -29,6 +29,6 @@
 - if @land_cards.any?
   %h3 Lands
   %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @land_cards, as: :card
-- if @colorless_non_artefacte.any?
+- if @colorless_non_artefact.any?
   %h3 Autre
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_non_artefacte, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_non_artefact, as: :card

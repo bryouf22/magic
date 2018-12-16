@@ -1,0 +1,6 @@
+%p= "Erreur d'importation : #{GathererCardUrl.all.count}"
+%p= "Cartes importées : #{Card.all.count}"
+%p= "Extensions sans visuels : #{ExtensionSet.without_visual.count}"
+%p= "Reprints : #{Reprint.all.count}"
+%p TODO : ajouter les jetons (et vérifier le total de carte pour chaque édition)
+%p TODO : Ajouter les autres visuels pour les terrains base

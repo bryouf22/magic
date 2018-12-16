@@ -1,0 +1,9 @@
+%h1= @wishlist.name
+
+.views-selection
+  = link_to 'vue normal', wishlist_path(id: @wishlist.id)
+  = ' | vue visuel'
+
+%br
+
+= render partial: 'display_visual'

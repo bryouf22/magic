@@ -9,10 +9,4 @@ class ExtensionSetsController < ApplicationController
     list_by_colors(@set.cards.order('name_fr_clean ASC'))
     render :visual if view == 'visual'
   end
-
-  private
-
-  def view
-    params[:view].presence || :classic
-  end
 end

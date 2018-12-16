@@ -1,0 +1,9 @@
+%h1 Ma collection
+
+.views-selection
+  = link_to 'vue normal', card_collection_path(id: @card_collection.id)
+  = ' | vue visuel'
+
+%br
+
+= render partial: 'display_visual'

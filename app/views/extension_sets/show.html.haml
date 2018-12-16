@@ -1,111 +1,25 @@
-- if @set.set_visual.present?
-  .text-center= image_tag(@set.set_visual.url)
-- else
-  %h1= @set.name
+%h1= @set.name
 
 .views-selection
   = 'vue normal |'
   = link_to 'vue visuel', extension_set_path(slug: @set.slug, params: { view: :visual })
+
 %br
 
 = form_for(:add, url: add_to_path, method: :post) do |form|
-  .options
-    - if user_signed_in?
-      .modes.pull-left
-        = link_to 'mode sélection', '#', class: 'btn btn-xs btn-success js-activate-selection-mode'
-        .selection-mode.hidden
-          .text
-            %span.js-select-count 0
-            carte(s) sélectionnée(s)
-          %p Ajouter à :
-          .pretty-radio-wrapper
-            = form.radio_button(:to, :wishlist, checked: true, class: 'pretty-radio')
-            = form.label(:to_wishlist, 'ma liste de souhait')
-          .pretty-radio-wrapper
-            = form.radio_button(:to, :collection, class: 'pretty-radio')
-            = form.label(:to_collection, 'ma collection')
-          .pretty-radio-wrapper
-            = form.radio_button(:to, :deck, class: 'pretty-radio')
-            = form.label(:to_deck, 'Un deck')
-          = form.submit('valider', class: 'btn btn-xs btn-success')
-          %p
-            = link_to 'Tout sélectionner', '#', class: 'js-select-all'
-            = '|'
-            = link_to 'Tout déselectionner', '#', class: 'js-unselect-all'
-            = '|'
-            = link_to 'Inverser la sélection', '#', class: 'js-inverse-selection'
-
-    .filter.pull-right
-      = link_to '#', class: 'btn btn-xs btn-success js-filter-btn' do
-        %i.fa.fa-filter
-      .filters.hidden
-        Filtrer par :
-        =link_to 'cartes déjà présente dans ma collection', '#', class: 'filter-by-link'
-        =link_to 'cartes déjà présente dans mes listes de souhait', '#', class: 'filter-by-link'
-        = pretty_checkbox('color_filters', value: Color.white, checked: true, label: 'White', class: 'js-select-color-filter', pretty_class: 'success')
-        = pretty_checkbox('color_filters', value: Color.blue, checked: true, label: 'Blue', class: 'js-select-color-filter', pretty_class: 'success')
-        = pretty_checkbox('color_filters', value: Color.black, checked: true, label: 'Black', class: 'js-select-color-filter', pretty_class: 'success')
-        = pretty_checkbox('color_filters', value: Color.red, checked: true, label: 'Red', class: 'js-select-color-filter', pretty_class: 'success')
-        = pretty_checkbox('color_filters', value: Color.green, checked: true, label: 'Green', class: 'js-select-color-filter', pretty_class: 'success')
-        = pretty_checkbox('rarity_filters', value: 'rarity-common', checked: true, label: 'Common', class: 'js-select-rarity-filter', pretty_class: 'success')
-        = pretty_checkbox('rarity_filters', value: 'rarity-uncommon', checked: true, label: 'Uncommon', class: 'js-select-rarity-filter', pretty_class: 'success')
-        = pretty_checkbox('rarity_filters', value: 'rarity-rare', checked: true, label: 'Rare', class: 'js-select-rarity-filter', pretty_class: 'success')
-        = pretty_checkbox('rarity_filters', value: 'rarity-mythic', checked: true, label: 'Mythic', class: 'js-select-rarity-filter', pretty_class: 'success')
+  = render partial: 'actions_and_filters', locals: { form: form }
 
   %hr
+
   - if user_signed_in?
-    - if @white_cards.any?
-      %h3 White
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @white_cards, as: :card
-    - if @blue_cards.any?
-      %h3 Blue
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @blue_cards, as: :card
-    - if @black_cards.any?
-      %h3 Black
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @black_cards, as: :card
-    - if @red_cards.any?
-      %h3 Red
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @red_cards, as: :card
-    - if @green_cards.any?
-      %h3 Green
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @green_cards, as: :card
-    - if @gold_cards.any?
-      %h3 Gold
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @gold_cards, as: :card
-    - if @colorless_artefact_cards.any?
-      %h3 Artefacts
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @colorless_artefact_cards, as: :card
-    - if @land_cards.any?
-      %h3 Lands
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @land_cards, as: :card
-    - if @colorless_non_artefacte.any?
-      %h3 Autre
-      %ul.cards-list.classic= render partial: 'extension_sets/show/card_checkbox_view', collection: @colorless_non_artefacte, as: :card
+    - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefacts: @colorless_artefact_cards }, { lands: @land_cards }, { others: @colorless_non_artefact }].each do |list|
+      - cards = list.values.first
+      - if cards.any?
+        %h3= list.keys.first.to_s.humanize
+        %ul.cards-list.classic= render partial: 'card_checkbox_view', collection: cards, as: :card
   - else
-    - if @white_cards.any?
-      %h3 White
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @white_cards, as: :card
-    - if @blue_cards.any?
-      %h3 Blue
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @blue_cards, as: :card
-    - if @black_cards.any?
-      %h3 Black
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @black_cards, as: :card
-    - if @red_cards.any?
-      %h3 Red
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @red_cards, as: :card
-    - if @green_cards.any?
-      %h3 Green
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @green_cards, as: :card
-    - if @gold_cards.any?
-      %h3 Gold
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @gold_cards, as: :card
-    - if @colorless_artefact_cards.any?
-      %h3 Artefacts
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_artefact_cards, as: :card
-    - if @land_cards.any?
-      %h3 Lands
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @land_cards, as: :card
-    - if @colorless_non_artefacte.any?
-      %h3 Autre
-      %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_non_artefacte, as: :card
+    - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefacts: @colorless_artefact_cards }, { lands: @land_cards }, { others: @colorless_non_artefact }].each do |list|
+      - cards = list.values.first
+      - if cards.any?
+        %h3= list.keys.first.to_s.humanize
+        %ul.cards-list.classic= render partial: 'simple_view', collection: cards, as: :card

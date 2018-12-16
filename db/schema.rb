@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_01_143006) do
+ActiveRecord::Schema.define(version: 2018_12_08_162122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2018_12_01_143006) do
     t.integer "order"
     t.integer "bloc_id"
     t.integer "set_list_id"
+    t.boolean "bad_visual"
   end
 
   create_table "gatherer_card_urls", force: :cascade do |t|

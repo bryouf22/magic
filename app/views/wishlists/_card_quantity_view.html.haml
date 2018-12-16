@@ -1,0 +1,13 @@
+- card_name   = card.title(show_rarity: true)
+- card_visual = { toggle: :popover, content: image_tag(card.visual) }
+- card_list   = CardList.where(card_id: card.id, card_listable_id: @wishlist.id, card_listable_type: 'Wishlist').first
+%li{ class: "js-color js-rarity", 'data-colors' => (card.color_ids || []).join('-') }
+  .list-checkbox
+    %strong= card_list.number
+    = card_name
+    %button.quantity-btn
+      .span.glyphicon.glyphicon-minus
+    = card_list.number
+    %i.fa.fa-eye{ data: card_visual }
+    %button.quantity-btn
+      .span.glyphicon.glyphicon-plus
