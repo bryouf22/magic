@@ -7,28 +7,28 @@
 
 - if @white_cards.any?
   %h3 White
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @white_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @white_cards, as: :card
 - if @blue_cards.any?
   %h3 Blue
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @blue_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @blue_cards, as: :card
 - if @black_cards.any?
   %h3 Black
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @black_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @black_cards, as: :card
 - if @red_cards.any?
   %h3 Red
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @red_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @red_cards, as: :card
 - if @green_cards.any?
   %h3 Green
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @green_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @green_cards, as: :card
 - if @gold_cards.any?
   %h3 Gold
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @gold_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @gold_cards, as: :card
 - if @colorless_artefact_cards.any?
   %h3 Artefacts
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_artefact_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @colorless_artefact_cards, as: :card
 - if @land_cards.any?
   %h3 Lands
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @land_cards, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @land_cards, as: :card
 - if @colorless_non_artefact.any?
   %h3 Autre
-  %ul.cards-list.classic= render partial: 'extension_sets/show/simple_view', collection: @colorless_non_artefact, as: :card
+  %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @colorless_non_artefact, as: :card

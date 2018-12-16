@@ -30,11 +30,11 @@ class ExtensionSet < ApplicationRecord
 
   scope :without_visual, -> { where(bad_visual: true) }
 
-  mount_uploader :set_visual,     CardImageUploader
-  mount_uploader :commun_logo,    CardImageUploader
-  mount_uploader :uncommun_logo,  CardImageUploader
-  mount_uploader :rare_logo,      CardImageUploader
-  mount_uploader :mythic_logo,    CardImageUploader
+  mount_uploader :set_visual,     ExtensionLogoUploader
+  mount_uploader :commun_logo,    ExtensionLogoUploader
+  mount_uploader :uncommun_logo,  ExtensionLogoUploader
+  mount_uploader :rare_logo,      ExtensionLogoUploader
+  mount_uploader :mythic_logo,    ExtensionLogoUploader
 
   before_create :generate_slug
 

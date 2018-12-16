@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_08_162122) do
+ActiveRecord::Schema.define(version: 2018_12_16_123210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_162122) do
     t.bigint "deck_id"
     t.integer "occurences_in_main_deck"
     t.integer "occurences_in_sideboard"
+    t.index ["card_id", "deck_id"], name: "index_card_decks_on_card_id_and_deck_id"
     t.index ["card_id"], name: "index_card_decks_on_card_id"
     t.index ["deck_id"], name: "index_card_decks_on_deck_id"
   end
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_162122) do
     t.string "number"
     t.string "foils_number"
     t.index ["card_id"], name: "index_card_lists_on_card_id"
+    t.index ["card_listable_type", "card_listable_id"], name: "index_card_lists_on_card_listable_type_and_card_listable_id"
   end
 
   create_table "cards", force: :cascade do |t|
