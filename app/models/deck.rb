@@ -31,7 +31,7 @@ class Deck < ApplicationRecord
 
   enum status: { personal: 1, published: 2 }
 
-  before_save :update_slug, :set_colors, :set_card_numbers
+  before_save :update_slug, :set_colors, :set_card_numbers, :validate_formats
 
   def colors
     colors = []
@@ -57,5 +57,9 @@ class Deck < ApplicationRecord
 
   def update_slug
     self[:slug] = name.parameterize
+  end
+
+  def validate_formats
+    Format::Validator.call(deck: self)
   end
 end

@@ -24,6 +24,8 @@ class Deck::CreateFromList
         end
       end
     end
-    context.deck = Deck.find(@deck_id)
+    deck = Deck.find(@deck_id)
+    deck.save
+    context.deck = deck
   end
 end
