@@ -4,13 +4,13 @@
   = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
     = form.hidden_field(:card_id, value: card.id)
     = form.hidden_field(:deck_id, value: deck.id)
-    = form.hidden_field(:operator, value: 'minus_maindeck')
-    = form.submit('-', class: '')
+    = form.hidden_field(:operator, value: 'plus_maindeck')
+    = form.submit('+', class: '')
   = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
     = form.hidden_field(:card_id, value: card.id)
     = form.hidden_field(:deck_id, value: deck.id)
-    = form.hidden_field(:operator, value: 'plus_maindeck')
-    = form.submit('+', class: '')
+    = form.hidden_field(:operator, value: 'minus_maindeck')
+    = form.submit('-', class: '')
   = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
     = form.hidden_field(:card_id, value: card.id)
     = form.hidden_field(:deck_id, value: deck.id)

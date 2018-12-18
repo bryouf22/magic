@@ -13,9 +13,20 @@ class DecksController < ApplicationController
   def create
     @deck = current_user.decks.create(update_params)
     if @deck.valid?
-      redirect_to user_decks_path
+      redirect_to edit_deck_path(slug: @deck.slug)
     else
       render :new
+    end
+  end
+
+  def add_cards
+    deck = current_user.decks.where(slug: params['slug']).first
+    params['deck_card_ids'].each do |card_id|
+      Deck::AddCard.call(deck_id: deck.id, card_id: card_id)
+    end
+    respond_to do |format|
+      format.html { redirect_to edit_deck_path(slug: deck.slug) }
+      format.js
     end
   end
 

@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'decks',                    to: 'decks#index',               as: :decks
   get 'editer-deck-:slug',        to: 'decks#edit',                as: :edit_deck
   patch 'edit-deck-:slug',        to: 'decks#update',              as: :update_deck
+  post 'deck-:slug',              to: 'decks#add_cards',           as: :deck_add_card
   post 'manage-card',             to: 'decks#manage_card',         as: :manage_card
   get 'mes-decks/nouveau',        to: 'decks#new',                 as: :new_deck
   get 'mes-decks/:slug',          to: 'decks#show',                as: :deck
