@@ -2,17 +2,18 @@
 #
 # Table name: decks
 #
-#  id          :bigint(8)        not null, primary key
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  name        :string
-#  colors      :integer          is an Array
-#  format_ids  :integer          is an Array
-#  user_id     :integer
-#  status      :integer          default("personal"), not null
-#  slug        :string
-#  color_ids   :integer          is an Array
-#  card_number :integer
+#  id                :bigint(8)        not null, primary key
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  name              :string
+#  colors            :integer          is an Array
+#  format_ids        :integer          is an Array
+#  user_id           :integer
+#  status            :integer          default("personal"), not null
+#  slug              :string
+#  color_ids         :integer          is an Array
+#  card_number       :integer
+#  card_in_main_deck :integer
 #
 
 class Deck < ApplicationRecord
@@ -31,7 +32,7 @@ class Deck < ApplicationRecord
 
   enum status: { personal: 1, published: 2 }
 
-  before_save :update_slug, :set_colors, :set_card_numbers, :validate_formats
+  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :validate_formats
 
   def colors
     colors = []
@@ -45,6 +46,10 @@ class Deck < ApplicationRecord
 
   def set_card_numbers
     self['card_number'] = card_decks.sum { |card_deck| card_deck.occurences_in_main_deck + card_deck.occurences_in_sideboard }
+  end
+
+  def set_card_in_main_deck
+    self['card_in_main_deck'] = card_decks.sum { |card_deck| card_deck.occurences_in_main_deck }
   end
 
   def set_colors

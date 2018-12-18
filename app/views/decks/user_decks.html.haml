@@ -14,6 +14,7 @@
         .col-sm-2
           - deck.colors.each do |color|
             = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')
+        .col-sm-3= deck.formats.collect(&:name).join(', ')
         .col-sm-1= link_to 'editer', edit_deck_path(slug: deck.slug), class: 'btn btn-xs btn-warning'
         .col-sm-1= link_to 'supprimer', destroy_deck_path(slug: deck.slug), method: :post, class: 'btn btn-xs btn-danger', data: { confirm: 'Supprimer ?' }
 - else

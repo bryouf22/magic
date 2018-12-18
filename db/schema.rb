@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_16_163416) do
+ActiveRecord::Schema.define(version: 2018_12_18_205151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2018_12_16_163416) do
     t.string "defense_str"
     t.string "color_indicator"
     t.integer "loyalty"
+    t.integer "reprint_card_ids", default: [], array: true
     t.index ["name"], name: "index_cards_on_name"
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
@@ -101,6 +102,7 @@ ActiveRecord::Schema.define(version: 2018_12_16_163416) do
     t.string "slug"
     t.integer "color_ids", array: true
     t.integer "card_number"
+    t.integer "card_in_main_deck"
   end
 
   create_table "extension_sets", force: :cascade do |t|
