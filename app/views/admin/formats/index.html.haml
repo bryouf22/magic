@@ -1,0 +1,9 @@
+%h1 Formats
+
+%p=link_to 'Nouveau format', new_admin_format_path, class: 'btn btn-xs btn-primary'
+
+%ul
+  - @formats.each do |format|
+    %li
+      = format.name
+      = link_to 'Modifier', edit_admin_format_path(format), class: 'btn btn-warning btn-xs'

@@ -147,6 +147,26 @@ $(document).ready(function() {
   }
   });
 
+  $('#extension-set-search').select2({
+    multiple: true,
+    ajax: {
+      url: '/rechercher-set',
+      dataType: 'json',
+      data: function (params) {
+        var query = {
+          "extension_set_search[term]" : params.term,
+          type: 'public'
+        }
+        return query;
+      },
+      processResults: function (data, params) {
+        return {
+          results: data,
+        };
+      },
+    }
+  })
+
   $( "#sortable" ).sortable({
     items: ".bloc-row",
     cursor: "move",

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'manifest',                 to: 'welcome#manifest',          as: :manifest
   get 'mon-compte',               to: 'account#index',             as: :user_account
   get 'rechercher',               to: 'cards#search',              as: :card_search
+  get 'rechercher-set',           to: 'extension_sets#search',     as: :extension_set_search
 
   get 'carte/:id',                to: 'cards#show',                as: :card
 
@@ -53,6 +54,8 @@ Rails.application.routes.draw do
 
     resources :set_lists
     resources :blocs, except: [:new, :show, :edit, :update]
+
+    resources :formats
 
     post '/bloc_order', to: 'blocs#bloc_order'
   end

@@ -1,0 +1,17 @@
+= form_for(@format, url: admin_format_path(@format)) do |form|
+  .form-group
+    = label_tag(:format_name, 'Nom :')
+    = form.text_field(:name, class: 'form-control')
+  .form-group
+    = label_tag(:format_card_limit, 'Limite de cartes :')
+    = form.text_field(:card_limit, class: 'form-control')
+  .form-group
+    = label_tag(:format_card_occurence_limit, 'Occurences par carte :')
+    = form.text_field(:card_occurence_limit, class: 'form-control')
+
+  .form-group
+    = select_tag('format_card_ids[]', [], id: 'card-search', class: 'form-control' )
+  .form-group
+    = select_tag('format_extension_set_ids[]', [], id: 'extension-set-search', class: 'form-control' )
+
+  = form.submit('Valider', class: 'btn btn-success')
