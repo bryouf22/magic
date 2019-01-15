@@ -16,7 +16,7 @@ class Format < ApplicationRecord
   has_many :cards, through: :format_cards
 
   has_many :format_extensions, dependent: :destroy
-  has_many :extention_sets, through: :format_extensions
+  has_many :extension_sets, through: :format_extensions
 
   has_many :format_decks, dependent: :destroy
   has_many :decks, through: :format_decks
