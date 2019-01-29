@@ -25,7 +25,7 @@ class Format::Validator
       end
     end
     format.cards.each do |card|
-      if(deck.cards.where(card_id: card.card_id).any?)
+      if(deck.cards.where(id: card.card_ids).any?)
         return false
       end
     end

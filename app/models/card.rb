@@ -126,6 +126,10 @@ class Card < ApplicationRecord
     colors
   end
 
+  def card_ids
+    reprint_cards.collect(&:id) << id
+  end
+
   private
 
   def set_colors
