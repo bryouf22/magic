@@ -24,6 +24,11 @@ class Format::Validator
         return false
       end
     end
+    format.cards.each do |card|
+      if(deck.cards.where(card_id: card.card_id).any?)
+        return false
+      end
+    end
     true
   end
 end

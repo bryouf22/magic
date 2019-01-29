@@ -10,9 +10,11 @@
     = form.text_field(:card_occurence_limit, class: 'form-control')
 
   .form-group
+    = label_tag('card-search', 'Cartes interdites :')
     - select_options = options_for_select(@format.cards.collect { |card| [card.name, card.id] }, @format.cards.ids)
     = form.select(:card_ids, select_options || [], { multiple: true }, { id: 'card-search', class: 'form-control', multiple: true })
   .form-group
+    = label_tag('extension-set-search', 'Extensions interdites :')
     - select_options = options_for_select(@format.extension_sets.collect { |extension| [extension.name, extension.id] }, @format.extension_sets.ids)
     = form.select(:extension_set_ids, select_options || [], { multiple: true }, { id: 'extension-set-search', class: 'form-control', multiple: true })
 
