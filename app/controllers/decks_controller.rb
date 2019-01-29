@@ -21,7 +21,7 @@ class DecksController < ApplicationController
 
   def add_cards
     deck = current_user.decks.where(slug: params['slug']).first
-    params['deck_card_ids'].each do |card_id|
+    params['deck_card_ids']&.each do |card_id|
       Deck::AddCard.call(deck_id: deck.id, card_id: card_id)
     end
     respond_to do |format|

@@ -65,6 +65,6 @@ class Deck < ApplicationRecord
   end
 
   def validate_formats
-    Format::Validator.call(deck: self)
+    Format::Validator.call(deck: self) unless self.new_record?
   end
 end
