@@ -8,7 +8,7 @@ class Admin::BlocsController < AdminController
   end
 
   def index
-    @blocs = Bloc.all
+    @blocs = Bloc.all.order('bloc_order ASC')
   end
 
   def destroy

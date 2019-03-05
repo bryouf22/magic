@@ -31,7 +31,7 @@ class CardsController < ApplicationController
     when 'wishlist'
       create_default_wishlist if current_user.wishlists.none?
       Wishlist::AddCards.call(wishlist_id: current_user.wishlists.first.id, card_ids: card_ids)
-      redirect_to wishlist_path(name: current_user.wishlists.first.id)
+      redirect_to wishlist_path(id: current_user.wishlists.first.id)
     end
 
   end
