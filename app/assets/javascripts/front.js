@@ -167,6 +167,34 @@ $(document).ready(function() {
     }
   })
 
+  openPopover = function (element) {
+          $(element).popover({
+          content: '<div class="popover-collection">\
+                      <input type="number" value="' + $(element).data('occurence') + '">\
+                    </div>',
+          html: true,
+          trigger: 'manual',
+        }).popover('show');
+        $(element).find('span').removeClass('glyphicon-pencil')
+                               .addClass('glyphicon-ok');
+  }
+  closePopover = function (element) {
+    $(element).popover('destroy');
+    $(element).find('span').removeClass('glyphicon-ok')
+                           .addClass('glyphicon-pencil');
+    console.log('validation');
+  }
+
+  $('.js-edit-collection-number').on('click', function () {
+    if ($(this).find('span').hasClass('glyphicon-ok')) {
+      closePopover($(this));
+    }
+    else {
+      openPopover($(this));
+    }
+  });
+
+
   $( "#sortable" ).sortable({
     items: ".bloc-row",
     cursor: "move",
