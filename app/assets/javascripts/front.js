@@ -170,7 +170,7 @@ $(document).ready(function() {
   openPopover = function (element) {
           $(element).popover({
           content: '<div class="popover-collection">\
-                      <input type="number" value="' + $(element).data('occurence') + '">\
+                      <input type="number" value="' + $(element).data('occurrence') + '">\
                     </div>',
           html: true,
           trigger: 'manual',
@@ -179,10 +179,24 @@ $(document).ready(function() {
                                .addClass('glyphicon-ok');
   }
   closePopover = function (element) {
+    occurrence = $(element).next().find('input').val();
     $(element).popover('destroy');
     $(element).find('span').removeClass('glyphicon-ok')
                            .addClass('glyphicon-pencil');
-    console.log('validation');
+    $.ajax({
+      type: "POST",
+      url: "ma-collection/ajout-occurrence/",
+      data: {
+        occurrence: occurrence,
+        card_id: $(element).data('card-id'),
+      },
+      dataType: 'json',
+      success: updateOccurrence(element, occurrence)
+    });
+  }
+
+  updateOccurrence = function (e, occurrence) {
+    $(e).data('occurrence', occurrence);
   }
 
   $('.js-edit-collection-number').on('click', function () {

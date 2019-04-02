@@ -36,7 +36,8 @@ Rails.application.routes.draw do
   get 'mes-decks/nouveau',        to: 'decks#new',                 as: :new_deck
   get 'mes-decks/:slug',          to: 'decks#show',                as: :deck
 
-  get 'ma-collection',            to: 'card_collections#show',     as: :card_collection
+  get   'ma-collection',                  to: 'card_collections#show',              as: :card_collection
+  post  'ma-collection/ajout-occurrence', to: 'card_collections#update_occurrence', as: :update_occurrence_card_collection
 
   get 'mes-listes',               to: 'wishlists#index',           as: :wishlists
   get 'nouvelle-liste',           to: 'wishlists#new',             as: :new_wishlist
