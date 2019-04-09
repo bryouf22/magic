@@ -181,8 +181,6 @@ $(document).ready(function() {
   closePopover = function (element) {
     occurrence = $(element).next().find('input').val();
     $(element).popover('destroy');
-    $(element).find('span').removeClass('glyphicon-ok')
-                           .addClass('glyphicon-pencil');
     $.ajax({
       type: "POST",
       url: "ma-collection/ajout-occurrence/",
@@ -197,6 +195,12 @@ $(document).ready(function() {
 
   updateOccurrence = function (e, occurrence) {
     $(e).data('occurrence', occurrence);
+    $(e).css('background-color', '#5cb85c');
+    setTimeout(function(){
+      $(e).css('background-color', 'white')
+          .find('span').removeClass('glyphicon-ok')
+                       .addClass('glyphicon-pencil');
+      }, 1000);
   }
 
   $('.js-edit-collection-number').on('click', function () {

@@ -16,6 +16,7 @@ Main :
       %td.col-md-4 Manquante(s)
       %td.col-md-1s
   %tbody
+    -
     - @main_cards.decorate.each do |card|
       %tr
         %td= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
