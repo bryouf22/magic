@@ -2,17 +2,18 @@ class CardCollection::RetrieveMissingCardFromDeck
   include Interactor
 
   def call
+    user = User.find(context.user_id)
     deck = Deck.find(context.deck_id)
 
-    resultats = {}
-
+    resultat = {}
     deck.card_ids.each do |card_id|
-      current_user.card_collection.where(id: card_id)
+      if(card_list = user.card_collection.card_lists.where(card_id: card_id).first)
+        resultat[card_id] = card_list.number.to_i + card_list.foils_number.to_i
+      else
+        resultat[card_id] = 0
+      end
     end
-    context.deck_id
-    current_user.card_collection
-    {
-
-    }
+    context.resultat = resultat
   end
 end
+>>>>>>> missing cards in deck calculation

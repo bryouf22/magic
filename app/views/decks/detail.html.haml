@@ -16,19 +16,26 @@ Main :
       %td.col-md-4 Manquante(s)
       %td.col-md-1s
   %tbody
-    -
+    - card_in_collection = CardCollection::RetrieveMissingCardFromDeck.call(deck_id: @deck.id, user_id: current_user.id).resultat
+
     - @main_cards.decorate.each do |card|
+      - occurrence_in_deck = @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck.to_i
       %tr
         %td= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
-        %td= "#{@deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}"
+        %td= @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck
         %td
+          = occurrence_in_deck - card_in_collection[card.id] < 0 ? 0 : occurrence_in_deck - card_in_collection[card.id]
+          - card_in_collection[card.id] -= occurrence_in_deck
         %td
+
+
     - if @sideboards.any?
       - @sideboards.decorate.each do |card|
+        - occurrence_in_deck = @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard.to_i
         %tr
           %td
             = link_to "#{card.title(show_rarity: true)}".html_safe, extension_set_card_path(slug: card.extension_set.slug, id: card.id)
             sideboard
           %td= @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
-          %td
+          %td= occurrence_in_deck - card_in_collection[card.id]
           %td
