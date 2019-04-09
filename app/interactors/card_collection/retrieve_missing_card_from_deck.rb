@@ -16,4 +16,3 @@ class CardCollection::RetrieveMissingCardFromDeck
     context.resultat = resultat
   end
 end
->>>>>>> missing cards in deck calculation
