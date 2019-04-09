@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post 'manage-card',             to: 'decks#manage_card',         as: :manage_card
   get 'mes-decks/nouveau',        to: 'decks#new',                 as: :new_deck
   get 'mes-decks/:slug',          to: 'decks#show',                as: :deck
+  get 'mes-decks/detail/:slug',   to: 'decks#detail',              as: :detail_deck
 
   get   'ma-collection',                  to: 'card_collections#show',              as: :card_collection
   post  'ma-collection/ajout-occurrence', to: 'card_collections#update_occurrence', as: :update_occurrence_card_collection

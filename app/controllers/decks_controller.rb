@@ -41,6 +41,12 @@ class DecksController < ApplicationController
     redirect_to deck_path(slug: Deck.find(deck_id).slug)
   end
 
+  def detail
+    @deck       = Deck.where(slug: params[:slug]).first
+    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
+    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
+  end
+
   def show
     @deck       = Deck.where(slug: params[:slug]).first
     @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))

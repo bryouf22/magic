@@ -4,7 +4,9 @@
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
 
 - if @deck.user_id == current_user.id
-  %p= link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
+  %p
+    = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
+    = link_to 'vue avancée', detail_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
 Main :
 %ul.deck.cards-list.visual
   - @main_cards.decorate.each do |card|
