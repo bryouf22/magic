@@ -1,6 +1,6 @@
 class DecksController < ApplicationController
 
-  before_action :authenticate_user!, except: [:public_decks, :public_deck_show]
+  before_action :authenticate_user!, except: [:public_decks, :public_deck_show, :copy_public_deck]
 
   def user_decks
     @decks = current_user.decks
@@ -107,6 +107,12 @@ class DecksController < ApplicationController
     @deck = Deck.find(params['id'])
     build_deck_for_show
     render :show
+  end
+
+  def copy_public_deck
+    deck = Deck.find(params['id'])
+    new_deck_id = Deck::CopyDeck.call(deck_id: deck.id, user_id: current_user.id).deck_id
+    redirect_to my_deck_path(slug: Deck.find(new_deck_id).slug)
   end
 
   private

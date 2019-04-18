@@ -7,6 +7,10 @@
   %p
     = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
     = link_to 'vue avancée', detail_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
+- elsif current_user&.id
+  %p
+    = link_to 'copier le deck', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
+
 Main :
 %ul.deck.cards-list.visual
   - @main_cards.decorate.each do |card|

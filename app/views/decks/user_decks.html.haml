@@ -10,7 +10,7 @@
   %ul
     - @decks.each do |deck|
       %li.row
-        .col-sm-4= link_to deck.name, deck_path(slug: deck.slug)
+        .col-sm-4= link_to deck.name, my_deck_path(slug: deck.slug)
         .col-sm-2
           - deck.colors.each do |color|
             = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')

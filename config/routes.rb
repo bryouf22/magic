@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'mes-decks/detail/:slug',     to: 'decks#detail',            as: :detail_deck
   get 'public-decks',               to: 'decks#public_decks',      as: :public_decks
   get 'public-decks/:id',           to: 'decks#public_deck_show',  as: :public_deck
+  post 'copy-public-deck',          to: 'decks#copy_public_deck',  as: :copy_public_deck
 
   get   'ma-collection',                  to: 'card_collections#show',              as: :card_collection
   post  'ma-collection/ajout-occurrence', to: 'card_collections#update_occurrence', as: :update_occurrence_card_collection
