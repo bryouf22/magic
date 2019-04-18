@@ -34,9 +34,10 @@ Rails.application.routes.draw do
   post 'deck-:slug',                to: 'decks#add_cards',         as: :deck_add_card
   post 'manage-card',               to: 'decks#manage_card',       as: :manage_card
   get 'mes-decks/nouveau',          to: 'decks#new',               as: :new_deck
-  get 'mes-decks/:slug',            to: 'decks#show',              as: :deck
+  get 'mes-decks/:slug',            to: 'decks#show',              as: :my_deck
   get 'mes-decks/detail/:slug',     to: 'decks#detail',            as: :detail_deck
   get 'public-decks',               to: 'decks#public_decks',      as: :public_decks
+  get 'public-decks/:id',           to: 'decks#public_deck_show',  as: :public_deck
 
   get   'ma-collection',                  to: 'card_collections#show',              as: :card_collection
   post  'ma-collection/ajout-occurrence', to: 'card_collections#update_occurrence', as: :update_occurrence_card_collection

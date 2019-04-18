@@ -1,6 +1,6 @@
 class DecksController < ApplicationController
 
-  before_action :authenticate_user!, except: :public_decks
+  before_action :authenticate_user!, except: [:public_decks, :public_deck_show]
 
   def user_decks
     @decks = current_user.decks
@@ -42,21 +42,18 @@ class DecksController < ApplicationController
   end
 
   def detail
-    @deck       = Deck.where(slug: params[:slug]).first
-    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
-    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
+    @deck = Deck.where(slug: params[:slug]).first
+    build_deck_for_show
   end
 
   def show
     @deck       = Deck.where(slug: params[:slug]).first
-    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
-    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
+    build_deck_for_show
   end
 
   def edit
-    @deck       = current_user.decks.where(slug: params[:slug]).first
-    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
-    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
+    @deck = current_user.decks.where(slug: params[:slug]).first
+    build_deck_for_show
   end
 
   def update
@@ -106,7 +103,18 @@ class DecksController < ApplicationController
     @decks = Deck.is_public
   end
 
+  def public_deck_show
+    @deck = Deck.find(params['id'])
+    build_deck_for_show
+    render :show
+  end
+
   private
+
+  def build_deck_for_show
+    @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
+    @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
+  end
 
   def add_card_params
     params.require(:add_to_deck).permit(:card_id, :deck_id)
