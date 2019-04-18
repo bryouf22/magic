@@ -20,6 +20,7 @@
           %li= link_to 'Liste de souhait', wishlists_path
           %li= link_to 'Mes decks', user_decks_path
           %li= link_to 'Ma collection', card_collection_path
+        %li= link_to 'Decks publics', public_decks_path
       = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
         .form-group
           = form.text_field(:term, class: 'form-control', placeholder: "Rechercher une carte")

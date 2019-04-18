@@ -6,4 +6,7 @@
     - if (errors[:name])
       %span.glyphicon.glyphicon-remove.form-control-feedback
   .form-group
+    Deck public ?
+    = form.check_box :is_public
+  .form-group
     = form.submit('Valider', class: 'btn btn-primary')

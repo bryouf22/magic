@@ -1,6 +1,6 @@
 class DecksController < ApplicationController
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :public_decks
 
   def user_decks
     @decks = current_user.decks
@@ -102,6 +102,10 @@ class DecksController < ApplicationController
     redirect_to deck_path(slug: deck.slug)
   end
 
+  def public_decks
+    @decks = Deck.is_public
+  end
+
   private
 
   def add_card_params
@@ -109,6 +113,6 @@ class DecksController < ApplicationController
   end
 
   def update_params
-    params.require(:deck).permit(:name)
+    params.require(:deck).permit(:name, :is_public)
   end
 end

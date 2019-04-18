@@ -6,8 +6,8 @@
 #  card_id            :bigint(8)
 #  card_listable_id   :integer
 #  card_listable_type :string
-#  number             :string
-#  foils_number       :string
+#  number             :integer
+#  foils_number       :integer
 #
 
 class CardList < ApplicationRecord

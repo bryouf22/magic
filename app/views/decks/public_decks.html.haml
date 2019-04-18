@@ -1,0 +1,15 @@
+%h1 Decks public
+
+%section.deck-list
+
+- if @decks.any?
+  %ul
+    - @decks.each do |deck|
+      %li.row
+        .col-sm-4= link_to deck.name, deck_path(slug: deck.slug)
+        .col-sm-2
+          - deck.colors.each do |color|
+            = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')
+        .col-sm-3= deck.formats.collect(&:name).join(', ')
+- else
+  %p Il n'y a aucun deck public actuellement.

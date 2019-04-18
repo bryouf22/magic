@@ -8,7 +8,7 @@ class CardCollection::RetrieveMissingCardFromDeck
     resultat = {}
     deck.card_ids.each do |card_id|
       if(card_list = user.card_collection.card_lists.where(card_id: card_id).first)
-        resultat[card_id] = card_list.number.to_i + card_list.foils_number.to_i
+        resultat[card_id] = card_list.number + card_list.foils_number
       else
         resultat[card_id] = 0
       end

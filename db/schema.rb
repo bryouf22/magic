@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_03_154406) do
+ActiveRecord::Schema.define(version: 2019_04_18_200958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 2019_02_03_154406) do
     t.bigint "card_id"
     t.integer "card_listable_id"
     t.string "card_listable_type"
-    t.string "number"
-    t.string "foils_number"
+    t.integer "number"
+    t.integer "foils_number"
     t.index ["card_id"], name: "index_card_lists_on_card_id"
     t.index ["card_listable_type", "card_listable_id"], name: "index_card_lists_on_card_listable_type_and_card_listable_id"
   end
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_02_03_154406) do
     t.integer "color_ids", array: true
     t.integer "card_number"
     t.integer "card_in_main_deck"
+    t.boolean "is_public", default: false
   end
 
   create_table "extension_sets", force: :cascade do |t|

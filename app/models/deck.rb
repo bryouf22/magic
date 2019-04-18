@@ -14,6 +14,7 @@
 #  color_ids         :integer          is an Array
 #  card_number       :integer
 #  card_in_main_deck :integer
+#  is_public         :boolean          default(FALSE)
 #
 
 class Deck < ApplicationRecord
@@ -32,6 +33,7 @@ class Deck < ApplicationRecord
 
   enum status: { personal: 1, published: 2 }
 
+  scope :is_public, -> { where(is_public: true) }
   before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :validate_formats
 
   def colors

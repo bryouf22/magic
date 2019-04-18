@@ -33,7 +33,6 @@
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
-#  reprint_card_ids :integer          default([]), is an Array
 #
 
 class Card < ApplicationRecord
