@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get "/inscription"    =>    "devise/registrations#new", as: "new_user_registration" # custom path to sign_up/registration
   end
 
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   root to: 'welcome#index'
 

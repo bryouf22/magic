@@ -1,1 +1,8 @@
-%h1 Mon compte
+%h1 Mon compte (#{ current_user.name})
+
+%h3 Ma description :
+%p #{ current_user.presentation }
+
+= link_to 'Modifier mon compte', edit_user_registration_path, class: 'btn btn-success'
+
+%p Nombre de decks : #{ current_user.decks.count } (dont #{ current_user.decks.is_public.count } deck publics)
