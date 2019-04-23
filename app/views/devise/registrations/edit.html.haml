@@ -1,0 +1,17 @@
+%h2 Editer mon compte
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = devise_error_messages!
+  = #render partial: 'devise_form', locals: { f: f }
+
+
+
+  .actions
+    = f.submit "Mettre à jour", class: 'btn btn-xs btn-primary'
+
+%h3 Fermer mon compte
+
+%p
+  = button_to "Fermer", registration_path(resource_name), data: { confirm: "En êtes vous sûr ?" }, method: :delete, class: 'btn btn-xs btn-danger'
+
+= link_to "Back", :back
