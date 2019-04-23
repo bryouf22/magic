@@ -10,6 +10,9 @@
 #  remember_created_at    :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  nickname               :string
+#  avatar                 :string
+#  presentation           :text
 #
 
 class User < ApplicationRecord
@@ -24,6 +27,10 @@ class User < ApplicationRecord
 
   def is_admin?
     ['jean@val.jean', 'bryouf@free.fr'].include?(email)
+  end
+
+  def name
+    nickname.presence || email.split('@').first
   end
 
   private

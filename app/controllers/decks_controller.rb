@@ -38,7 +38,7 @@ class DecksController < ApplicationController
               end
 
     Deck::AddCard.call(deck_id: deck_id, card_id: add_card_params[:card_id])
-    redirect_to deck_path(slug: Deck.find(deck_id).slug)
+    redirect_to my_deck_path(slug: Deck.find(deck_id).slug)
   end
 
   def detail
@@ -57,9 +57,9 @@ class DecksController < ApplicationController
   end
 
   def update
-    @deck = Deck.where(slug: params[:slug]).first
+    @deck = current_user.decks.where(slug: params[:slug]).first
     if @deck.update_attributes(update_params)
-      redirect_to deck_path(slug: @deck.slug)
+      redirect_to my_deck_path(slug: @deck.slug)
     else
       render :edit
     end

@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   get 'nouvelle-liste',           to: 'wishlists#new',             as: :new_wishlist
   get 'ma-liste-:id',             to: 'wishlists#show',            as: :wishlist
 
+  get 'utilisateurs/:id',         to:'users#show',                 as: :user
+
   post '/ajouter',                to: 'cards#add_to',              as: :add_to
 
   get '/admin', to: 'admin/welcome#index', as: :admin_root
