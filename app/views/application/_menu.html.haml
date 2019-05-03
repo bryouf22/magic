@@ -1,11 +1,6 @@
 %nav.navbar.navbar-default
   .container-fluid
     .navbar-header
-      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
       - if current_user && current_user.is_admin?
         - if local_assigns[:admin_link].presence
           = link_to 'Magic Project', root_path, class: 'navbar-brand'
@@ -17,16 +12,28 @@
       %ul.nav.navbar-nav
         %li= link_to 'Extensions', extension_sets_path
         - if user_signed_in?
-          %li= link_to 'Liste de souhait', wishlists_path
-          %li= link_to 'Mes decks', user_decks_path
-          %li= link_to 'Ma collection', card_collection_path
-        %li= link_to 'Decks publics', public_decks_path
+          %li
+            = link_to wishlists_path do
+              %span.glyphicon.glyphicon-heart
+              Liste de souhait
+          %li
+            = link_to user_decks_path do
+              %span.glyphicon.glyphicon-inbox
+              Mes decks
+          %li
+            = link_to card_collection_path do
+              %span.glyphicon.glyphicon-book
+              Ma collection
+        %li= link_to 'Decks publiques', public_decks_path
       = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
         .form-group
           = form.text_field(:term, class: 'form-control', placeholder: "Rechercher une carte")
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
-          %li= link_to 'Mon compte', user_account_path
+          %li
+            = link_to user_account_path do
+              %span.glyphicon.glyphicon-user
+              Mon compte
           %li= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'connexion-link'
         - else
           %li= link_to 'Se connecter', connection_path, class: 'connexion-link'

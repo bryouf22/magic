@@ -129,6 +129,19 @@ class Card < ApplicationRecord
     reprint_cards.collect(&:id) << id
   end
 
+  def basic_land?
+    ['Snow-Covered Island',
+    'Snow-Covered Swamp',
+    'Snow-Covered Mountain',
+    'Snow-Covered Forest',
+    'Snow-Covered Plains',
+    'Island',
+    'Swamp',
+    'Mountain',
+    'Forest',
+    'Plains'].include?(name)
+  end
+
   private
 
   def set_colors

@@ -1,5 +1,6 @@
 class CardDecorator < Draper::Decorator
   include ApplicationHelper
+
   decorates_finders
   delegate_all
 
@@ -9,6 +10,7 @@ class CardDecorator < Draper::Decorator
             else
               card.name_fr || card.name || ''
             end
+
     (show_extension ? "#{title}, #{card.extension_set.name}" : title).html_safe # show also extension symbole
   end
 

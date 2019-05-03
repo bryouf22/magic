@@ -1,0 +1,7 @@
+%h1 Nouvelle catégorie
+
+= form_for(@category, url: categories_path) do |form|
+  .form-group
+    %label Nom :
+    = form.text_field(:name, class: 'form-control')
+  = form.submit('Valider', class: 'btn btn-xs btn-success')

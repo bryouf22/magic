@@ -3,17 +3,16 @@
 = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
   = devise_error_messages!
   = #render partial: 'devise_form', locals: { f: f }
-  = f.label(:nickname, 'Mon pseudo :')
-  = f.text_field(:nickname, value: current_user.name, class: 'form-control')
-  = f.label(:presentation, 'Ma présentation :')
-  = f.text_area(:presentation, class: 'form-control')
+  .form-group
+    = f.label(:nickname, 'Mon pseudo :')
+    = f.text_field(:nickname, value: current_user.name, class: 'form-control')
+  .form-group
+    = f.label(:presentation, 'Ma présentation :')
+    = f.text_area(:presentation, class: 'form-control')
 
-  .actions
+  .form-group
     = f.submit "Mettre à jour", class: 'btn btn-xs btn-primary'
 
-%h3 Fermer mon compte
+%p= button_to "Fermer mon compte", registration_path(resource_name), data: { confirm: "En êtes vous sûr ?" }, method: :delete, class: 'btn btn-xs btn-danger'
 
-%p
-  = button_to "Fermer", registration_path(resource_name), data: { confirm: "En êtes vous sûr ?" }, method: :delete, class: 'btn btn-xs btn-danger'
-
-= link_to "Back", :back
+= link_to "Retour", :back

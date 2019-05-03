@@ -20,5 +20,4 @@ class Format < ApplicationRecord
 
   has_many :format_decks, dependent: :destroy
   has_many :decks, through: :format_decks
-
 end

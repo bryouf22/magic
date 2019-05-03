@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_192907) do
+ActiveRecord::Schema.define(version: 2019_05_03_010321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,13 @@ ActiveRecord::Schema.define(version: 2019_04_23_192907) do
     t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "decks", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -103,6 +110,8 @@ ActiveRecord::Schema.define(version: 2019_04_23_192907) do
     t.integer "card_number"
     t.integer "card_in_main_deck"
     t.boolean "is_public", default: false
+    t.text "description"
+    t.integer "category_id"
   end
 
   create_table "extension_sets", force: :cascade do |t|

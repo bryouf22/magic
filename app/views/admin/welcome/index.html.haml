@@ -1,9 +1,22 @@
-%h1 exporter la base
-%p symfony
-%p= "Erreur d'importation : #{GathererCardUrl.all.count}"
-%p= "Cartes importées : #{Card.all.count}"
-%p= "Extensions sans visuels : #{ExtensionSet.without_visual.count}"
-%p= "Reprints : #{Reprint.all.count}"
-%p TODO : ajouter les jetons (et vérifier le total de carte pour chaque édition)
-%p TODO : Ajouter les autres visuels pour les terrains base
-%p https://edgeguides.rubyonrails.org/active_job_basics.html
+
+%p
+  = "Erreur d'importation : #{GathererCardUrl.all.count}"
+  %br
+  = "Cartes importées : #{Card.all.count}"
+  %br
+  = "Extensions sans visuels : #{ExtensionSet.without_visual.count}"
+  %br
+  = "Reprints : #{Reprint.all.count}"
+
+%h2 TODO :
+%ul
+  %li ajouter les jetons (et vérifier le total de carte pour chaque édition)
+  %li Ajouter les autres visuels pour les terrains base
+  %li Sidekiq pour la validitié des decks
+  %li elasticsearch pour la recherche des decks
+  %li
+    %u changer les visuels dans les decks
+  %li importer war of the spark
+
+%h2 actions
+%p= link_to 'Checker la validité des decks', admin_deck_validity_path, class: 'btn btn-xs btn-danger', method: :post

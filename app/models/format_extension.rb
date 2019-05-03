@@ -13,5 +13,4 @@ class FormatExtension < ApplicationRecord
 
   belongs_to :format
   belongs_to :extension_set
-
 end

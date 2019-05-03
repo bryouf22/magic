@@ -13,5 +13,4 @@ class FormatDeck < ApplicationRecord
 
   belongs_to :format
   belongs_to :deck
-
 end

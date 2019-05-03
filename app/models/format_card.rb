@@ -16,5 +16,5 @@ class FormatCard < ApplicationRecord
   belongs_to :card
 
   # retrouver si une carte est interdite ou limitée à une occurence
-
+  # pour depend du format (ex : en legacy ainsi qu'en modern, le format possède des cartes interdites, aucune carte n'est limitée à 1 exemplaire)
 end

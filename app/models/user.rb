@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :decks, dependent: :destroy
   has_many :wishlists, dependent: :destroy
 
+  has_many :categories
+
   after_create :create_card_collection
 
   def is_admin?

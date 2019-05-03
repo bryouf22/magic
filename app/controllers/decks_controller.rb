@@ -24,6 +24,7 @@ class DecksController < ApplicationController
     params['deck_card_ids']&.each do |card_id|
       Deck::AddCard.call(deck_id: deck.id, card_id: card_id)
     end
+    deck.update(update_params)
     respond_to do |format|
       format.html { redirect_to edit_deck_path(slug: deck.slug) }
       format.js
@@ -36,9 +37,10 @@ class DecksController < ApplicationController
               else
                 add_card_params[:deck_id]
               end
-
     Deck::AddCard.call(deck_id: deck_id, card_id: add_card_params[:card_id])
-    redirect_to my_deck_path(slug: Deck.find(deck_id).slug)
+    deck = Deck.find(deck_id)
+    Format::Validator.call(deck: deck)
+    redirect_to my_deck_path(slug: deck.slug)
   end
 
   def detail
@@ -59,6 +61,7 @@ class DecksController < ApplicationController
   def update
     @deck = current_user.decks.where(slug: params[:slug]).first
     if @deck.update_attributes(update_params)
+      Format::Validator.call(deck: @deck)
       redirect_to my_deck_path(slug: @deck.slug)
     else
       render :edit
@@ -71,7 +74,7 @@ class DecksController < ApplicationController
   end
 
   def manage_card
-    # fix : check current deck / current user
+    # TODO : check current deck / current user
     @deck_id = params["deck"]["deck_id"]
     @card_id = params["deck"]["card_id"]
     @operator_in = (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard)
@@ -85,8 +88,10 @@ class DecksController < ApplicationController
       Deck::MoveCard.call(deck_id: @deck_id, card_id: @card_id, move_in: @operator_in)
       @operator = "move"
     end
+    deck = Deck.find(@deck_id)
+    Format::Validator.call(deck: deck)
     respond_to do |format|
-      format.html { redirect_to edit_deck_path(slug: Deck.find(@deck_id).slug) }
+      format.html { redirect_to edit_deck_path(slug: deck.slug) }
       format.js
     end
   end
@@ -96,7 +101,8 @@ class DecksController < ApplicationController
 
   def import_create
     deck = Deck::CreateFromList.call(list: params[:import][:list], user_id: current_user.id).deck
-    redirect_to deck_path(slug: deck.slug)
+    Format::Validator.call(deck: deck)
+    redirect_to my_deck_path(slug: deck.slug)
   end
 
   def public_decks
@@ -127,6 +133,6 @@ class DecksController < ApplicationController
   end
 
   def update_params
-    params.require(:deck).permit(:name, :is_public)
+    params.require(:deck).permit(:name, :is_public, :description, :category_id)
   end
 end

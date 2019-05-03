@@ -1,0 +1,15 @@
+%h1 Nouveau format
+
+= form_for(@format, url: admin_formats_path, method: :post) do |form|
+  .form-group
+    %label Nom :
+    = form.text_field(:name, class: 'form-control')
+  .form-group
+    %label Limite minimum de carte :
+    = form.number_field(:card_limit, class: 'form-control')
+  .form-group
+    %label Nombre d'occurences maximum par carte :
+    = form.number_field(:card_occurence_limit, class: 'form-control')
+
+  .form-group
+    = form.submit("Valider", class: 'btn btn-xs btn-primary')

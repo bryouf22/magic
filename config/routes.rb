@@ -51,6 +51,8 @@ Rails.application.routes.draw do
 
   post '/ajouter',                to: 'cards#add_to',              as: :add_to
 
+  resources :categories
+
   get '/admin', to: 'admin/welcome#index', as: :admin_root
   namespace 'admin' do
     resources :extension_sets do
@@ -64,6 +66,7 @@ Rails.application.routes.draw do
 
     resources :formats
 
+    post 'deck-validity', to: 'welcome#deck_validity', as: :deck_validity
     post '/bloc_order', to: 'blocs#bloc_order'
   end
 end

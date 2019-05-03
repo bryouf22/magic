@@ -1,0 +1,20 @@
+= link_to '< retour', user_decks_path
+
+%h1 Gérer les catégories
+
+= link_to new_category_path, class: 'btn btn-xs btn-primary' do
+  %span.glyphicon.glyphicon-plus
+  Nouvelle catégorie
+
+%br
+
+- if current_user.categories.none?
+  %p Aucune catégorie de deck.
+
+- else
+  %ul
+    - current_user.categories.each do |category|
+      %li
+        = category.name
+        = ':'
+        = category.decks.count

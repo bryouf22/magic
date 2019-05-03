@@ -1,8 +1,17 @@
-%h1 Mon compte (#{ current_user.name})
+%h1= "Mon compte (#{current_user.name})"
 
-%h3 Ma description :
-%p #{ current_user.presentation }
+- if current_user.presentation.present?
+  %h3 Ma description :
+  %p= "#{current_user.presentation}"
+- else
+  %p Je n'ai pas renseigné ma présentation.
 
-= link_to 'Modifier mon compte', edit_user_registration_path, class: 'btn btn-success'
+  %p= link_to 'Modifier mon compte', edit_user_registration_path, class: 'btn btn-xs btn-success'
 
-%p Nombre de decks : #{ current_user.decks.count } (dont #{ current_user.decks.is_public.count } deck publics)
+%br
+
+%p
+  - if current_user.decks.count.positive?
+    = "Nombre de decks : #{current_user.decks.count}"
+  - if current_user.decks.publics.count.positive?
+    = "Nombre de decks publiques : #{current_user.decks.publics.count}"

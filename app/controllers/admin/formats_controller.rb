@@ -7,25 +7,41 @@ class Admin::FormatsController < AdminController
   def show
   end
 
+  def new
+    @extension_sets = ExtensionSet.all
+    @format = Format.new
+  end
+
   def edit
     @format = Format.find(params[:id])
   end
 
   def update
     @format = Format.find(params[:id])
-    update_card_list update_params[:card_ids]
-    update_extension_set_list update_params[:extension_set_ids]
+    update_card_list(update_params[:card_ids])
+    update_extension_set_list(update_params[:extension_set_ids])
+
     if @format.update_attributes(update_params)
       redirect_to admin_formats_path
     else
       render :edit
     end
   end
-  def update_params
-    params.require(:format).permit(:name, :card_limit, :card_occurence_limit, extension_set_ids: [], card_ids: [])
+
+  def create
+    @format = Format.create(update_params)
+    if @format.valid?
+      redirect_to admin_formats_path
+    else
+      render :new
+    end
   end
 
   private
+
+  def update_params
+    params.require(:format).permit(:name, :card_limit, :card_occurence_limit, extension_set_ids: [], card_ids: [])
+  end
 
   def update_card_list(format_card_ids)
     (@format.cards.ids - format_card_ids.reject { |id| id.blank? }.collect(&:to_i)).each do |id|

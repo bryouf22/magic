@@ -17,5 +17,9 @@
     = label_tag('extension-set-search', 'Extensions interdites :')
     - select_options = options_for_select(@format.extension_sets.collect { |extension| [extension.name, extension.id] }, @format.extension_sets.ids)
     = form.select(:extension_set_ids, select_options || [], { multiple: true }, { id: 'extension-set-search', class: 'form-control', multiple: true })
-
+  .form-group
+    %label Extensions autorisées :
+    %ul
+    - ExtensionSet.all.where.not(id: @format.extension_sets.ids).each do |set|
+      %li= set.name
   = form.submit('Valider', class: 'btn btn-success')

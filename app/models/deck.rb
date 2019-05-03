@@ -15,6 +15,8 @@
 #  card_number       :integer
 #  card_in_main_deck :integer
 #  is_public         :boolean          default(FALSE)
+#  description       :text
+#  category_id       :integer
 #
 
 class Deck < ApplicationRecord
@@ -24,6 +26,7 @@ class Deck < ApplicationRecord
   validates :user_id, presence: true
 
   belongs_to :user
+  belongs_to :category, optional: true
 
   has_many :card_decks, dependent: :destroy
   has_many :cards, through: :card_decks
@@ -33,7 +36,7 @@ class Deck < ApplicationRecord
 
   enum status: { personal: 1, published: 2 }
 
-  scope :is_public, -> { where(is_public: true) }
+  scope :publics, -> { where(is_public: true) }
   before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :validate_formats
 
   def colors

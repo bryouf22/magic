@@ -1,7 +1,7 @@
 %h1 Decks de #{ @user.name }
 %p
   %ul
-    - @user.decks.is_public.each do |deck|
+    - @user.decks.publics.each do |deck|
       %li.row
         .col-sm-4= link_to deck.name, public_deck_path(deck.id)
         .col-sm-2

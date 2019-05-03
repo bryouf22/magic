@@ -18,7 +18,7 @@ class Admin::BlocsController < AdminController
     params['bloc'].each_with_index do |bloc_id, index|
       Bloc.find(bloc_id).update_attributes(bloc_order: index + 1)
     end
-    render body: nil
+    render body: nil, status: 200
   end
 end
 

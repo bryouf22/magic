@@ -12,10 +12,10 @@ class Deck::CreateFromList
       end
       next if entry.include?('//')
       @deck_id = Deck::Create.call(name: nil, user_id: user_id).deck_id if @deck_id == nil
-      if card_match = entry.match(/(SB:\s)?(\d+)\s(.+)/)
+      if card_match = entry.match(/(SB:\s)?(\d+)\s?x?\s(.+)/)
         add_in     = card_match[1].present? ? :sideboard : :main_deck
         occurences = card_match[2].to_i
-        if card = Card.where(name: card_match[3]).first
+        if card = Card.where(name: card_match[3].gsub('’', "'")).first
           (0..occurences - 1).each do |n|
             Deck::AddCard.call(deck_id: @deck_id, card_id: card.id, in: add_in)
           end

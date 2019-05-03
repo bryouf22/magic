@@ -6,7 +6,6 @@ class Format::Validator
     format = context.format
 
     (deck.nil? ? Deck.all : Deck.where(id: deck.id)).find_each do |_deck|
-      puts "#{_deck.name}"
       (format.nil? ? Format.all : Format.where(id: format.id)).find_each do |_format|
         validaty  = validate_format(_format, _deck)
         if validaty
@@ -18,6 +17,8 @@ class Format::Validator
     end
   end
 
+  private
+
   def validate_format(format, deck)
     unless deck.card_in_main_deck
       puts "#{format.name} - #{deck.name} : deck sans carte"
@@ -28,6 +29,7 @@ class Format::Validator
       return false
     end
     deck.card_decks.find_each do |card_deck|
+      next if card_deck.card.basic_land?
       card_number = card_deck.occurences_in_main_deck + card_deck.occurences_in_sideboard
       if(card_number > format.card_occurence_limit)
         puts "#{format.name} - #{deck.name} : nombre d'occurence #{card_deck.card.name}"
@@ -36,14 +38,23 @@ class Format::Validator
     end
     format.cards.find_each do |card|
       if(deck.cards.where(id: card.card_ids).any?)
-        puts "#{format.name} - #{deck.name} : carte interdide"
+        puts "#{format.name} - #{deck.name} : carte interdide #{card.name}"
         return false
       end
     end
     format.extension_sets.find_each do |extension_set|
       if(deck.cards.where(extension_set_id: extension_set.id).any?)
-        puts "#{format.name} - #{deck.name} : extension interdite"
-        return false
+        deck.cards.where(extension_set_id: extension_set.id).each do |card|
+
+          forbiden_card = true
+          (card.reprints.collect { |reprint| reprint.reprint_card.extension_set_id } + [card.extension_set_id]).each do |reprint_set_id|
+            unless format.extension_sets.ids.include?(reprint_set_id)
+              forbiden_card = false
+            end
+          end
+          puts "#{format.name} - #{deck.name} : extension interdite #{card.name}" if forbiden_card
+          return false if forbiden_card
+        end
       end
     end
     true
