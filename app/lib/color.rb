@@ -1,5 +1,6 @@
 class Color
   COLORS_MAPPING = { red: 1, green: 2, black: 3, white: 4, blue: 5 }
+  COLORS_MAPPING_FOR_SEARCH = { red: 1, green: 2, black: 3, white: 4, blue: 5, colorless: 6 }
 
   MANA_COST_MAPPING = {
     w: :white,

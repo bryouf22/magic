@@ -259,4 +259,6 @@ $(document).ready(function() {
   $('#edit-visual').on('hidden.bs.modal', function () {
     $('#edit-visual ul').html('');
   });
+
+  $('.new_card_search select').select2();
 });
