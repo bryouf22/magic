@@ -23,14 +23,15 @@ class CardSearch < Searchlight::Search
   end
 
   def search_extension_set_ids
-    0/0
+    query.where('extension_set_id in (?)', extension_set_ids)
   end
 
   def search_color_ids
-    0/0
+    # https://www.postgresql.org/docs/current/functions-array.html
+    query.where('color_ids && ARRAY[?]', color_ids.collect(&:to_i))
   end
 
   def search_rarity_ids
-    0/0
+    query.where(rarity: rarity_ids)
   end
 end
