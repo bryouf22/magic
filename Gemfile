@@ -73,3 +73,4 @@ gem 'pg'
 gem "select2-rails"
 gem "font-awesome-rails"
 gem "interactor-rails", "~> 2.0"
+gem "bitfields"

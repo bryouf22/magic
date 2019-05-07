@@ -1,21 +1,16 @@
-%h2 Créer un compte
+.text-center.login-pannel
+  %h2 Créer un compte
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'devise-form' }) do |f|
-  = devise_error_messages!
-  .form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
-  .form-group
-    = f.label :password, 'Mot de passe'
-    - if @minimum_password_length
-      %em
-        = @minimum_password_length
-        caractères minimum
-    = f.password_field :password, autocomplete: "new-password", class: 'form-control'
-  .form-group
-    = f.label :password_confirmation, 'Confirmation du mot de passe'
-    = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
-  .form-group
-    = f.submit "Créer un compte", class: 'btn btn-success'
-
-= render "devise/shared/links"
+  .block
+    %small ou
+    = link_to 'Se connecter', root_path, class: 'underline'
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'devise-form' }) do |f|
+    = devise_error_messages!
+    .form-group
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'email@exemple.com'
+    .form-group
+      = f.password_field :password, autocomplete: "new-password", class: 'form-control', placeholder: 'Mot de passe'
+    .form-group
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', placeholder: 'Confirmation du mot de passe'
+    .form-group
+      = f.submit "Créer un compte", class: 'btn btn-sm btn-primary'

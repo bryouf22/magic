@@ -1,0 +1,15 @@
+.text-center.login-pannel
+  %h2 Connectez-vous
+
+  .block
+    %small ou
+    = link_to 'Créer un compte gratuitement', new_user_registration_path, class: 'underline'
+
+  = form_for(:user, url: user_session_path, method: :post) do |form|
+    .form-group
+      = form.email_field(:email, class: 'form-control', placeholder: 'email@exemple.com')
+    .form-group
+      = form.password_field(:password, class: 'form-control', placeholder: 'mot de passe')
+    .form-group
+      = form.submit('Se connecter', class: 'btn btn-sm btn-primary')
+  = link_to 'Mot de passe oublié ?', new_user_password_path

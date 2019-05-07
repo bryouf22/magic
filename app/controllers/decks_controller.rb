@@ -19,6 +19,17 @@ class DecksController < ApplicationController
     end
   end
 
+  def change_visual
+    @initial_card = Card.find(params['change_visual']['initial_card_id'])
+    @reprint_card = Card.find(params['change_visual']['reprint_card_id'])
+    deck = current_user.decks.where(id: params['change_visual']['deck_id']).first
+    deck.card_decks.where(card_id: @initial_card.id).first.update(card_id: @reprint_card.id)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def add_cards
     deck = current_user.decks.where(slug: params['slug']).first
     params['deck_card_ids']&.each do |card_id|
@@ -49,7 +60,7 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck       = Deck.where(slug: params[:slug]).first
+    @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
   end
 
@@ -106,7 +117,7 @@ class DecksController < ApplicationController
   end
 
   def public_decks
-    @decks = Deck.is_public
+    @decks = Deck.publics
   end
 
   def public_deck_show

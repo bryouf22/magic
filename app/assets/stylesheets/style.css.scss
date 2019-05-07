@@ -115,12 +115,6 @@ section {
   margin: 20px 0;
 }
 
-.devise-form {
-  input.form-control {
-    max-width: 400px;
-  }
-}
-
 form {
   &.add-to-deck {
     display: inline;
@@ -197,6 +191,7 @@ ul {
         margin: 5px;
         max-width: 150px;
         position: relative;
+        min-height: 260px;
         .card-link, .card-link span {
           font-size: 10px;
           height: 10px;
@@ -214,7 +209,6 @@ ul {
           line-height: 20px;
           border-radius: 4px;
         }
-        min-height: 240px;
       }
     }
     &:after {
@@ -346,5 +340,55 @@ button.quantity-btn {
         // color: #282828;
       }
     }
+  }
+}
+
+.login-pannel {
+  max-width: 500px;
+  margin: 0 auto;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  padding: 25px;
+  h2 {
+    padding-bottom: 20px;
+  }
+  .block {
+    margin-bottom: 15px;
+    small {
+      display: block;
+    }
+    .underline {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+// MODALS
+#edit-visual.modal {
+  .modal-content {
+    max-width: 627px;
+    width: fit-content;
+  }
+  .modal-body {
+    max-height: 311px;
+    overflow-x: scroll;
+    padding-bottom: 0;
+    ul {
+      display: block;
+      width: 10000px;
+      li {
+        width: 200px;
+        display: block;
+        float: left;
+        img {
+          width: 200px;
+        }
+      }
+    }
+  }
+  .modal-footer {
+    border-top: none;
+    padding: 5px;
   }
 }

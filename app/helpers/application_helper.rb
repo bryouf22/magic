@@ -28,4 +28,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def sort_deck_cards(cards)
+    { 'Créatures' => cards.creatures.decorate, 'Autres' => cards.others.decorate, 'Terrains' => cards.land.decorate }.reject { |k, v| v.none? }
+  end
 end

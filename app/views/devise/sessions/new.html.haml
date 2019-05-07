@@ -1,18 +1,1 @@
-%h2 Se connecter
-
-= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'devise-form' }) do |f|
-  .form-group
-    = f.label :email
-    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
-  .form-group
-    = f.label :password, 'Mot de passe'
-    = f.password_field :password, autocomplete: "current-password", class: 'form-control'
-  - if devise_mapping.rememberable?
-    .checkbox
-      = f.label(:remember_me) do
-        = f.check_box :remember_me
-        Se souvenir de moi
-  .form-group
-    = f.submit "Se connecter", class: 'btn btn-success'
-
-= render "devise/shared/links"
+= render 'login_form'

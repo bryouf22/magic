@@ -33,6 +33,7 @@
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
+#  format           :integer          default(0), not null
 #
 
 require 'rails_helper'

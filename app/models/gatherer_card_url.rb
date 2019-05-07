@@ -12,4 +12,6 @@
 class GathererCardUrl < ApplicationRecord
 
   belongs_to :extension_set
+
+  validates :url, uniqueness: true
 end

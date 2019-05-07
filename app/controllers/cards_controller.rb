@@ -33,7 +33,15 @@ class CardsController < ApplicationController
       Wishlist::AddCards.call(wishlist_id: current_user.wishlists.first.id, card_ids: card_ids)
       redirect_to wishlist_path(id: current_user.wishlists.first.id)
     end
+  end
 
+  def reprints_from_card
+    @card = Card.find(params['id'])
+    respond_to do |format|
+      format.json do
+        render json: @card.reprint_cards.decorate.collect { |reprint| { reprint.id => reprint.visual } }.to_json
+      end
+    end
   end
 
   private

@@ -1,6 +1,8 @@
 class ImportCard
   require 'open-uri'
 
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
   def self.is_double_card?(doc)
     if doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_cardComponent0 #ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl01_componentWrapper').present?
      return true
@@ -60,7 +62,7 @@ class ImportCard
       puts card_url
       value = @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_setRow .value a').last&.text&.squish
       value = @doc.css('#ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_ctl02_setRow .value a').last&.text&.squish if value.nil?
-      GathererScraper::EXTENSION_NAME.each do |fail_set|
+      ExtensionSet.all.collect(&:name).each do |fail_set|
         if value.parameterize == fail_set.parameterize
           extension_set_id = GathererScraper.find_or_create(fail_set)
           break
@@ -98,10 +100,13 @@ class ImportCard
           loyalty:            loyalty,
         })
         puts "#{card.name_en} imported"
-        if (gatherer_url = GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).first)
+        if (gatherer_url = GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id)&.first)
           gatherer_url.destroy
         end
       rescue
+        puts "#{card_url} failed"
+        puts "#{card_url} failed"
+        puts "#{card_url} failed"
         puts "#{card_url} failed"
         if GathererCardUrl.where(url: card_url, extension_set_id: extension_set_id).none?
           GathererCardUrl.create(url: card_url, extension_set_id: extension_set_id)
@@ -234,7 +239,7 @@ class ImportCard
   end
 
   def image(id)
-    open("http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{id}&type=card")
+    open("https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=#{id}&type=card")
   end
 
   def power

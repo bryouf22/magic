@@ -19,11 +19,13 @@
 
 Main :
 %ul.deck.cards-list.visual
-  - @main_cards.decorate.each do |card|
-    %li
-      = image_tag(card.visual, class: 'img-responsive')
-      %span.card-link= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
-      %span.occur-number= "x #{@deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}"
+  - sort_deck_cards(@main_cards).each do |label, cards|
+    - cards.each_with_index do |card, index|
+      %li
+        %span= index == 0 ? "#{label} (#{cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum})" : '&nbsp;'.html_safe
+        = image_tag(card.visual, class: 'img-responsive')
+        %span.card-link= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
+        %span.occur-number= "x #{@deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}"
 - if @sideboards.any?
   Sideboard :
   %ul.deck.cards-list.visual

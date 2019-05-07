@@ -10,13 +10,21 @@
 
 %h2 TODO :
 %ul
+  %li
+    %u EXPORT pour COCKATRIX
   %li ajouter les jetons (et vérifier le total de carte pour chaque édition)
   %li Ajouter les autres visuels pour les terrains base
   %li Sidekiq pour la validitié des decks
   %li elasticsearch pour la recherche des decks
   %li
     %u changer les visuels dans les decks
+
+%h2 EN COURS :
+%ul
   %li importer war of the spark
+  %li bitfields sur deck et format, puis module de recherche
+  %li module de recherche deck par format, couleurs, incluant tel cartes, ratio creature, etc, equilibrage couleurs
+  %li module de recherche carte par criteres : type couleur format cout mana attaque/defense editions, mot clef, texte d'ambiance, dessinateur
 
 %h2 actions
 %p= link_to 'Checker la validité des decks', admin_deck_validity_path, class: 'btn btn-xs btn-danger', method: :post

@@ -17,9 +17,11 @@
 #  is_public         :boolean          default(FALSE)
 #  description       :text
 #  category_id       :integer
+#  format            :integer          default(0), not null
 #
 
 class Deck < ApplicationRecord
+  include Bitfields
 
   validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
   validates :name,    uniqueness: { scope: :user_id, message: "Vous possèdez déjà un deck avec ce nom !" }
@@ -35,6 +37,9 @@ class Deck < ApplicationRecord
   has_many :formats, through: :format_decks
 
   enum status: { personal: 1, published: 2 }
+
+  bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander
+  bitfield :color, 1 => :black, 2 => :red, 4 => :blue, 8 => :green, 16 => :white
 
   scope :publics, -> { where(is_public: true) }
   before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :validate_formats

@@ -33,11 +33,14 @@
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
+#  format           :integer          default(0), not null
 #
 
 class Card < ApplicationRecord
+  include Bitfields
 
   # TODO : ajouter bitfield pour le format (https://github.com/grosser/bitfields)
+  bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander
 
   scope :only_green,              -> { where(color_ids: [Color.green]) }
   scope :only_red,                -> { where(color_ids: [Color.red])   }
@@ -54,6 +57,9 @@ class Card < ApplicationRecord
   scope :colorless_artefact,      -> { where('color_ids is ?', nil).also_artefacts }
   scope :also_artefacts,          -> { where(card_type: [5, 6]) }
   scope :colorless_non_artefact,  -> { colorless.where("cards.card_type NOT IN (2, 5, 6) OR cards.card_type IS NULL") }
+  scope :basic_lands,             -> { where('name in (?)', BASIC_LANDS_NAMES) }
+  scope :creatures,               -> { where('card_type in (?)', [4, 6]) }
+  scope :others,                  -> { where('card_type in (?)', [1, 3, 5, 6, 7, 8, 9, 10, nil]) }
 
   enum card_type: {
     instant:            1,
@@ -88,6 +94,21 @@ class Card < ApplicationRecord
 
   mount_uploader :image,    CardImageUploader
   mount_uploader :image_fr, CardImageUploader
+
+  validates_uniqueness_of :gatherer_id, unless: Proc.new { |c| c.has_alternative? || c.is_alternative? }
+
+  BASIC_LANDS_NAMES = [
+    'Snow-Covered Island',
+    'Snow-Covered Swamp',
+    'Snow-Covered Mountain',
+    'Snow-Covered Forest',
+    'Snow-Covered Plains',
+    'Island',
+    'Swamp',
+    'Mountain',
+    'Forest',
+    'Plains'
+  ]
 
   def has_alternative?
     alternative.present?
@@ -130,16 +151,7 @@ class Card < ApplicationRecord
   end
 
   def basic_land?
-    ['Snow-Covered Island',
-    'Snow-Covered Swamp',
-    'Snow-Covered Mountain',
-    'Snow-Covered Forest',
-    'Snow-Covered Plains',
-    'Island',
-    'Swamp',
-    'Mountain',
-    'Forest',
-    'Plains'].include?(name)
+    BASIC_LANDS_NAMES.include?(name)
   end
 
   private
@@ -168,8 +180,10 @@ class Card < ApplicationRecord
   end
 
   def set_type
+    self.card_type = :other
     self.card_type = :creature_artifact if self.detailed_type&.include?('Artifact Creature')
     self.card_type = :artifact          if self.detailed_type&.include?('Artifact')
-    self.card_type = :land              if self.detailed_type&.include?('Land')
+    self.card_type = :land              if self.detailed_type&.include?('Land') || basic_land?
+    self.card_type = :creature          if self.detailed_type&.include?('Creature')
   end
 end

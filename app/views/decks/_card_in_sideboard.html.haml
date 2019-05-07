@@ -16,3 +16,6 @@
     = form.hidden_field(:deck_id, value: deck.id)
     = form.hidden_field(:operator, value: 'move_maindeck')
     = form.submit('MD', class: '')
+  - if card.reprints.any?
+    = link_to '#', class: 'js-change-visual', data: { 'card-id' => card.id } do
+      %span.glyphicon.glyphicon-picture{ style: 'color: #282828' }

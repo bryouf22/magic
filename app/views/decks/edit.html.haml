@@ -25,3 +25,19 @@ Sideboard :
   - @sideboards.decorate.each do |card|
     = render partial: 'card_in_sideboard', locals: { card: card, deck: @deck }
 
+#edit-visual.modal.fade{ role: :dialog, tabindex: "-1" }
+  .modal-dialog{ role: :document }
+    .modal-content
+      .modal-body
+        %ul
+      .modal-footer
+        %button.btn.btn-success.btn-xs.js-submit-form{ disabled: true, type: :button }
+          %span.glyphicon.glyphicon-ok
+
+/ http://manos.malihu.gr/code-example/horizontal-custom-scrollbar-tutorial/
+
+.hidden
+  = form_for(:change_visual, url: deck_change_visual_path(format: :js), remote: true, html: { class: 'js-form-change-visual' }) do |form|
+    = form.hidden_field(:deck_id, value: @deck.id)
+    = form.hidden_field(:initial_card_id)
+    = form.hidden_field(:reprint_card_id)

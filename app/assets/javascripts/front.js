@@ -178,6 +178,7 @@ $(document).ready(function() {
         $(element).find('span').removeClass('glyphicon-pencil')
                                .addClass('glyphicon-ok');
   }
+
   closePopover = function (element) {
     occurrence = $(element).next().find('input').val();
     $(element).popover('destroy');
@@ -212,7 +213,6 @@ $(document).ready(function() {
     }
   });
 
-
   $( "#sortable" ).sortable({
     items: ".bloc-row",
     cursor: "move",
@@ -221,4 +221,42 @@ $(document).ready(function() {
       $.post($(this).data('update-url'), $(this).sortable('serialize'));
     }
   }).disableSelection();
+
+  $('.js-change-visual').on('click', function (e) {
+    e.preventDefault();
+    _this = $(this);
+    $.ajax({
+      type: "GET",
+      url: "reprint-from-" + _this.data('cardId'),
+      dataType: 'json',
+      success: function (data, textStatus, jqXHR) {
+        $.each(data, function (index) {
+          cardId = parseInt(Object.keys(data[index])[0]);
+          url = data[index][Object.keys(data[index])[0]];
+          $('#edit-visual .modal-body ul').append('<li class="js-select-visual" data-card-id="' + cardId + '"><image class="inline" src="' + url + '"></li>');
+        });
+        newVisualSelectorListener();
+      }
+    });
+    $('#edit-visual').attr('data-card-id', _this.data('cardId'));
+    $('.js-submit-form').attr('disabled', true);
+    $('#edit-visual').modal();
+  });
+
+  newVisualSelectorListener = function () {
+    $('#edit-visual .js-select-visual').unbind();
+    $('#edit-visual .js-select-visual').on('click', function () {
+      $('#change_visual_initial_card_id').val($('#edit-visual').attr('data-card-id'));
+      $('#change_visual_reprint_card_id').val($(this).data('cardId'));
+      $('.js-submit-form').attr('disabled', false);
+    });
+  }
+
+  $(document).on('click', '.js-submit-form', function () {
+    Rails.fire(document.getElementsByClassName('js-form-change-visual')[0], 'submit');
+  });
+
+  $('#edit-visual').on('hidden.bs.modal', function () {
+    $('#edit-visual ul').html('');
+  });
 });

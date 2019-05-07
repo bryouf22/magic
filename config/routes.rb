@@ -51,6 +51,9 @@ Rails.application.routes.draw do
 
   post '/ajouter',                to: 'cards#add_to',              as: :add_to
 
+  get '/reprint-from-:id',        to: 'cards#reprints_from_card'
+  post '/change-deck-card-visual',  to: 'decks#change_visual', as: :deck_change_visual
+
   resources :categories
 
   get '/admin', to: 'admin/welcome#index', as: :admin_root
