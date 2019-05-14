@@ -13,7 +13,7 @@ class CardSearch < Searchlight::Search
   end
 
   def search_color_restrict
-    if color_ids.nil?
+    if color_ids.nil? && color_restrict == '1'
       query.colorless
     else
       query

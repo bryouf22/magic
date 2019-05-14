@@ -12,10 +12,10 @@
   - select_options = options_for_select(ExtensionSet.all.collect { |extension_set| [extension_set.name, extension_set.id] }, @search.extension_set_ids)
   = form.select(:extension_set_ids, select_options || [], { include_blank: true }, { placeholder: 'Extensions', class: '', multiple: true })
 
-  - select_options = options_for_select(Color::COLORS_MAPPING_FOR_SEARCH.collect {|key, value| [key.to_s.humanize, value] }, @search.color_ids&.collect(&:to_i))
+  - select_options = options_for_select(Color::COLORS_MAPPING.collect {|key, value| [key.to_s.humanize, value] }, @search.color_ids&.collect(&:to_i))
   = form.select(:color_ids, select_options || [], { include_blank: true }, { placeholder: 'Couleurs', class: '', multiple: true })
 
-  - exclude_select_options = options_for_select(Color::COLORS_MAPPING_FOR_SEARCH.collect {|key, value| [key.to_s.humanize, value] }, @search.exclude_color_ids&.collect(&:to_i))
+  - exclude_select_options = options_for_select(Color::COLORS_MAPPING.collect {|key, value| [key.to_s.humanize, value] }, @search.exclude_color_ids&.collect(&:to_i))
   = form.select(:exclude_color_ids, exclude_select_options || [], { include_blank: true }, { placeholder: 'Couleurs', class: '', multiple: true })
 
   %label
