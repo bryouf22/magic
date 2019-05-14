@@ -20,6 +20,14 @@ class CardSearch < Searchlight::Search
     end
   end
 
+  def search_exclude_color_ids
+    bla = query
+    exclude_color_ids.each do |id|
+      bla = bla.where.not(":color_id = ANY(color_ids)", color_id: id.to_i)
+    end
+    bla
+  end
+
   def search_term
     t = I18n.transliterate(term).downcase
     query.where("cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?", "%#{t.strip}%", "%#{t.strip}%")

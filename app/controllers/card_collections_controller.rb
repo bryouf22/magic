@@ -31,6 +31,6 @@ class CardCollectionsController < ApplicationController
   private
 
   def search_params
-     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [])
+     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])
   end
 end
