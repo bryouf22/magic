@@ -264,4 +264,30 @@ $(document).ready(function() {
   $('.new_card_search select').select2({
     placeholder: $(this).attr('placeholder')
   });
+
+  $('#card_search_color_ids').on('change', function () {
+    colors = [];
+    _this = $(this);
+
+    $.each($('#card_search_color_ids').val(), function (e, i) {
+      colors.push(_this.find("option[value='" + $('#card_search_color_ids').val()[e] + "']").text());
+    });
+    if (colors.length > 0) {
+      result = "";
+      $.each(colors, function(index, value) {
+        if (index == 0) {
+          result = value;
+        } else {
+          if (index == colors.length - 1) {
+            result += ' et ' + value;
+          } else {
+            result += ', ' + value;
+          }
+        }
+      })
+      $('.js-restric-label').html(result + ' uniquement');
+    } else {
+      $('.js-restric-label').html('Incolore uniquement');
+    }
+  })
 });
