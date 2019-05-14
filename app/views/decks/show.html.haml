@@ -13,11 +13,13 @@
   %p
     = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
     = link_to 'vue avancée', detail_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
+    = link_to 'Exporter', export_deck_path(@deck.id), class: 'btn btn-xs btn-primary'
 - elsif current_user&.id
   %p
     = link_to 'copier le deck', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
 
-Main :
+- main_cards_count = @main_cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum
+= "Main (#{main_cards_count}) :"
 %ul.deck.cards-list.visual
   - sort_deck_cards(@main_cards).each do |label, cards|
     - cards.each_with_index do |card, index|
@@ -27,7 +29,8 @@ Main :
         %span.card-link= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
         %span.occur-number= "x #{@deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}"
 - if @sideboards.any?
-  Sideboard :
+  - sideboard_cards_count = @sideboards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_sideboard }.sum
+  = "Sideboard (#{sideboard_cards_count}) :"
   %ul.deck.cards-list.visual
     - @sideboards.decorate.each do |card|
       %li

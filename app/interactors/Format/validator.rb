@@ -1,6 +1,7 @@
 class Format::Validator
   include Interactor
 
+  # Format::Validator.call(deck: Deck.find(X), format: Format.where(name: 'Modern').first)
   def call
     deck = context.deck
     format = context.format

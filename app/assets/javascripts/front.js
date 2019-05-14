@@ -1,6 +1,7 @@
 $(document).ready(function() {
   $('[data-toggle="popover"]').popover({
     html: true,
+    placement: 'left',
     trigger: 'hover',
     template: '<div class="popover" role="tooltip"><div class="popover-content"></div></div>',
   });
@@ -260,5 +261,7 @@ $(document).ready(function() {
     $('#edit-visual ul').html('');
   });
 
-  $('.new_card_search select').select2();
+  $('.new_card_search select').select2({
+    placeholder: $(this).attr('placeholder')
+  });
 });

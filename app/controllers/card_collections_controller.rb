@@ -11,7 +11,7 @@ class CardCollectionsController < ApplicationController
       list_by_colors(@search.results)
     else
       @search = CardSearch.new
-      list_by_colors(@card_collection.cards)
+      list_by_colors(Card.none)
     end
 
     render :visual if view == 'visual'
@@ -31,6 +31,6 @@ class CardCollectionsController < ApplicationController
   private
 
   def search_params
-     params.require('card_search').permit(extension_set_ids: [], color_ids: [], rarity_ids: [])
+     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [])
   end
 end

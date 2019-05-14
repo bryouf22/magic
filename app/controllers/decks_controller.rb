@@ -19,6 +19,11 @@ class DecksController < ApplicationController
     end
   end
 
+  def export
+    @deck = Deck.find(params['id'])
+  end
+
+
   def change_visual
     @initial_card = Card.find(params['change_visual']['initial_card_id'])
     @reprint_card = Card.find(params['change_visual']['reprint_card_id'])
@@ -94,7 +99,7 @@ class DecksController < ApplicationController
       Deck::AddCard.call(deck_id: @deck_id, card_id: @card_id, in: @operator_in)
     elsif params["deck"]['operator'].include?("minus")
       @operator = "remove"
-      Deck::RemoveCard.call(deck_id: @deck_id, card_id: @card_id, in: @operator_in)
+      Deck::RemoveCard.call(deck_id: @deck_id, card_id: @card_id, from: @operator_in)
     elsif params["deck"]['operator'].include?('move')
       Deck::MoveCard.call(deck_id: @deck_id, card_id: @card_id, move_in: @operator_in)
       @operator = "move"

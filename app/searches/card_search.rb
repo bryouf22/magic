@@ -4,22 +4,25 @@ class CardSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
   def initialize(raw_options = {}) #TODO REFACTOR THIS
-    string_keys, non_string_keys = raw_options.keys.partition {|k| k.is_a?(String) }
-    intersection = string_keys & non_string_keys.map(&:to_s)
-    if intersection.any?
-      fail ArgumentError, "more than one key converts to these string values: #{intersection}"
-    end
+    super
     @user_cards = User.find(raw_options.delete('current_user_id')).card_collection.cards if raw_options['current_user_id']
-    @raw_options = raw_options
   end
 
   def base_query
     @user_cards || Card.all
   end
 
+  def search_color_restrict
+    if color_ids.nil?
+      query.colorless
+    else
+      query
+    end
+  end
+
   def search_term
     t = I18n.transliterate(term).downcase
-    query.where("cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?", "%#{t}%", "%#{t}%")
+    query.where("cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?", "%#{t.strip}%", "%#{t.strip}%")
   end
 
   def search_extension_set_ids
@@ -27,8 +30,12 @@ class CardSearch < Searchlight::Search
   end
 
   def search_color_ids
-    # https://www.postgresql.org/docs/current/functions-array.html
-    query.where('color_ids && ARRAY[?]', color_ids.collect(&:to_i))
+    if color_restrict == '1'
+      query.where('color_ids = ARRAY[?]', color_ids.collect(&:to_i))
+    else
+      # https://www.postgresql.org/docs/current/functions-array.html
+      query.where('color_ids && ARRAY[?]', color_ids.collect(&:to_i))
+    end
   end
 
   def search_rarity_ids

@@ -171,7 +171,7 @@ class Card < ApplicationRecord
         end
       end
     end
-    self['color_ids'] = c_ids.any? ? c_ids.uniq : nil
+    self['color_ids'] = c_ids.any? ? c_ids.uniq.sort : nil
   end
 
   def clean_names

@@ -14,7 +14,15 @@ if ("<%= @operator_in %>" == "main_deck") {
       occurence = parseInt($("ul.main-deck li[data-card-id=<%= @card_id %>] .occurence").html());
       $("ul.main-deck li[data-card-id=<%= @card_id %>] .occurence").html(occurence + 1);
     } else {
-      $("ul.main-deck").append("<%= escape_javascript render(:partial => 'card_in_maindeck', :locals => { card: Card.find(@card_id).decorate, deck: Deck.find(@deck_id) }) %>")
+      if ("<%= CardDeck.where(card_id: @card_id, deck_id: @deck_id).none? %>" == "true") {
+        console.log('remove');
+      } else {
+        if ("<%= CardDeck.where(card_id: @card_id, deck_id: @deck_id).first&.occurences_in_main_deck %>" == '0') {
+          console.log('remove');
+        } else {
+          $("ul.main-deck").append("<%= escape_javascript render(:partial => 'card_in_maindeck', :locals => { card: Card.find(@card_id).decorate, deck: Deck.find(@deck_id) }) %>")
+        }
+      }
     }
     occurence = parseInt($("ul.side-board li[data-card-id=<%= @card_id %>] .occurence").html());
     if(occurence == 1) {
@@ -39,7 +47,15 @@ if ("<%= @operator_in %>" == "main_deck") {
       occurence = parseInt($("ul.side-board li[data-card-id=<%= @card_id %>] .occurence").html());
       $("ul.side-board li[data-card-id=<%= @card_id %>] .occurence").html(occurence + 1);
     } else {
-      $("ul.side-board").append("<%= escape_javascript render(:partial => 'card_in_sideboard', :locals => { card: Card.find(@card_id).decorate, deck: Deck.find(@deck_id) }) %>")
+      if ("<%= CardDeck.where(card_id: @card_id, deck_id: @deck_id).none? %>" == "true") {
+        console.log('remove');
+      } else {
+        if ("<%= CardDeck.where(card_id: @card_id, deck_id: @deck_id).first&.occurences_in_sideboard %>" == '0') {
+          console.log('remove');
+        } else {
+          $("ul.side-board").append("<%= escape_javascript render(:partial => 'card_in_sideboard', :locals => { card: Card.find(@card_id).decorate, deck: Deck.find(@deck_id) }) %>")
+        }
+      }
     }
     occurence = parseInt($("ul.main-deck li[data-card-id=<%= @card_id %>] .occurence").html());
     if(occurence == 1) {
