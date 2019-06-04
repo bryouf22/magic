@@ -188,6 +188,7 @@ GEM
     nokogiri (1.8.4-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     orm_adapter (0.5.0)
+    pagy (3.2.1)
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
@@ -340,6 +341,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
+  pagy
   pg
   pry-byebug
   pry-rails

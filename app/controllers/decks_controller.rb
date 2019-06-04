@@ -1,9 +1,12 @@
+require 'pagy'
+
 class DecksController < ApplicationController
+  include Pagy::Backend
 
   before_action :authenticate_user!, except: [:public_decks, :public_deck_show, :copy_public_deck]
 
   def user_decks
-    @decks = current_user.decks.order('category_id ASC')
+    @pagy, @decks = pagy(current_user.decks.order('category_id ASC'), items: 10)
   end
 
   def new
@@ -80,6 +83,7 @@ class DecksController < ApplicationController
       Format::Validator.call(deck: @deck)
       redirect_to my_deck_path(slug: @deck.slug)
     else
+      build_deck_for_show
       render :edit
     end
   end

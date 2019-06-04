@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def pretty_checkbox(name, options = {})
     # TODO : recup args dans un hash
     # puis faire un delete de pretty class/label et passer le reste au helper checkbox

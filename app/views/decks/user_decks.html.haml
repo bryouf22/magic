@@ -26,5 +26,6 @@
               %span.glyphicon.glyphicon-eye-open
           .col-sm-1= link_to 'editer', edit_deck_path(slug: deck.slug), class: 'btn btn-xs btn-warning'
           .col-sm-1= link_to 'supprimer', destroy_deck_path(slug: deck.slug), method: :post, class: 'btn btn-xs btn-danger', data: { confirm: "Supprimer le deck #{deck.name} ?" }
+    = render partial: 'pagy/nav', locals: { pagy: @pagy }
   - else
     %p Vous n'avez aucun deck
