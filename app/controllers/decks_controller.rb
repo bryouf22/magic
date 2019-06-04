@@ -3,7 +3,7 @@ class DecksController < ApplicationController
   before_action :authenticate_user!, except: [:public_decks, :public_deck_show, :copy_public_deck]
 
   def user_decks
-    @decks = current_user.decks
+    @decks = current_user.decks.order('category_id ASC')
   end
 
   def new

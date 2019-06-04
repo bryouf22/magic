@@ -44,9 +44,13 @@ Rails.application.routes.draw do
   get   'ma-collection',                  to: 'card_collections#show',              as: :card_collection
   post  'ma-collection/ajout-occurrence', to: 'card_collections#update_occurrence', as: :update_occurrence_card_collection
 
-  get 'mes-listes',               to: 'wishlists#index',           as: :wishlists
-  get 'nouvelle-liste',           to: 'wishlists#new',             as: :new_wishlist
-  get 'ma-liste-:id',             to: 'wishlists#show',            as: :wishlist
+  get 'mes-listes',              to: 'wishlists#index',   as: :wishlists
+  get 'nouvelle-liste',          to: 'wishlists#new',     as: :new_wishlist
+  get 'ma-liste-:id/editer',     to: 'wishlists#edit',    as: :edit_wishlist
+  put 'nouvelle-liste',          to: 'wishlists#create',  as: :create_wishlist
+  delete 'me-list-id/supprimer', to: 'wishlists#destroy', as: :destroy_wishlist
+  post 'ma-liste:id/mettre-a-jour', to: 'wishlists#update',  as: :update_wishlist
+  get 'ma-liste-:id',            to: 'wishlists#show',    as: :wishlist
 
   get 'utilisateurs/:id',         to:'users#show',                 as: :user
 

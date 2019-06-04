@@ -7,8 +7,12 @@
 %section.deck-list
 
 - if @wishlists.any?
-  %ul
-    - @wishlists.each do |wishlist|
-      %li= link_to wishlist.name, wishlist_path(id: wishlist.id)
+  .table-responsive
+    %table.table.table-hover
+      - @wishlists.each do |wishlist|
+        %tr
+          %td.col-sm-4= link_to wishlist.name, wishlist_path(id: wishlist.id)
+          %td.col-sm-4= link_to 'editer', edit_wishlist_path(id: wishlist.id)
+          %td.col-sm-4= link_to 'supprimer', destroy_wishlist_path(id: wishlist.id), method: 'delete'
 - else
   %p Vous n'avez aucune liste

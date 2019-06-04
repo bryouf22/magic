@@ -1,0 +1,10 @@
+%h2= "Editer #{@wishlist.name}"
+
+= form_for(@wishlist, url: update_wishlist_path(@wishlist.id), method: :post, class: 'form') do |form|
+  .form-group
+    = form.text_field(:name, required: true, class: 'form-control')
+  .form-group
+    %label Ajouter des cartes :
+    = select_tag('card_lists[]', [], id: 'card-search', class: 'form-control')
+  .form-group
+    = form.submit('Valider', class: 'btn btn-sm btn-success')

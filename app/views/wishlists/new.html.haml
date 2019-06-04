@@ -1,2 +1,9 @@
 %h1 Nouvelle liste
 
+= form_for(@wishlist, url: create_wishlist_path, method: :put, class: 'form') do |f|
+  .form-group
+    %label
+      Nom :
+      = f.text_field(:name, class: 'form-control')
+  .form-group
+    = f.submit('Valider', class: 'btn btn-sm btn-primary')

@@ -27,5 +27,9 @@
   %li module de recherche deck par format, couleurs, incluant tel cartes, ratio creature, etc, equilibrage couleurs
   %li module de recherche carte par criteres : type couleur format cout mana attaque/defense editions, mot clef, texte d'ambiance, dessinateur
 
+%h2 SUCCESS
+%ul
+  %li # Card.find_each { |c| names.include?(c.name) ? nil : names.push(c.name) };names.count
+
 %h2 actions
 %p= link_to 'Checker la validité des decks', admin_deck_validity_path, class: 'btn btn-xs btn-danger', method: :post
