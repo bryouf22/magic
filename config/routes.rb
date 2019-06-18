@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   get 'public-decks',               to: 'decks#public_decks',      as: :public_decks
   get 'public-decks/:id',           to: 'decks#public_deck_show',  as: :public_deck
   get 'exporter-deck/:id',          to: 'decks#export',            as: :export_deck
-  get 'generer-draft/:id',          to: 'deck#generate_draft',     as: :generate_draft
+  get 'generer-draft/:id',          to: 'decks#generate_draft',    as: :generate_draft
   post 'copy-public-deck',          to: 'decks#copy_public_deck',  as: :copy_public_deck
 
   get   'ma-collection',                  to: 'card_collections#show',              as: :card_collection

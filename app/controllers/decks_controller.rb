@@ -141,6 +141,10 @@ class DecksController < ApplicationController
     redirect_to my_deck_path(slug: Deck.find(new_deck_id).slug)
   end
 
+  def generate_draft
+    @draft = Draft::DraftFromCubeGenerator.call(deck_id: params['id']).tirages
+  end
+
   private
 
   def build_deck_for_show

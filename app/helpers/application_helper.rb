@@ -16,9 +16,17 @@ module ApplicationHelper
     else
       "card_symboles/#{Color::SYMBOL_FILE_MAPPING[c.to_sym]}.jfif"
     end
-  end
+end
 
   def sort_deck_cards(cards)
     { 'Créatures' => cards.creatures.decorate, 'Autres' => cards.others.decorate, 'Terrains' => cards.land.decorate }.reject { |k, v| v.none? }
+  end
+
+  def fr_ordinalize(number)
+    if number == 1
+      "#{number}#{I18n.t('ordinalizer')[0]}"
+    else
+      "#{number}#{I18n.t('ordinalizer')[1]}"
+    end
   end
 end

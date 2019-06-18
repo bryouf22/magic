@@ -3,7 +3,7 @@
 
   .block
     %small ou
-    = link_to 'Créer un compte gratuitement', new_user_registration_path, class: 'underline'
+    = link_to 'Créer un compte', new_user_registration_path, class: 'underline'
 
   = form_for(:user, url: user_session_path, method: :post) do |form|
     .form-group
