@@ -30,6 +30,35 @@ class Color
     y: [:green]
   }
 
+  SYMBOL_FILE_MAPPING = {
+    w: :w,
+    u: :u,
+    b: :b,
+    r: :r,
+    g: :g,
+    a: :wu,
+    c: :ub,
+    d: :br,
+    e: :rg,
+    f: :gw,
+    h: :wb,
+    i: :ur,
+    j: :bg,
+    k: :rw,
+    l: :gu,
+    m: :'2w',
+    n: :'2u',
+    o: :'2b',
+    p: :'2r',
+    q: :'2g',
+    x: :x,
+    s: :WP,
+    t: :UP,
+    v: :BP,
+    z: :RP,
+    y: :GP,
+  }
+
   def self.mana_symbol(color)
     MANA_COST_MAPPING.invert[color.to_sym]
   end

@@ -7,6 +7,9 @@
 %table.table
   - @results.decorate.each do |card|
     %tr
-      %td.col-md-8= card.title(show_rarity: true, show_extension: true)
+      %td.col-md-6= card.title(show_rarity: true, show_extension: true)
+      %td.col-md-2
+        - card.mana_cost.each_char do |mana_cost|
+          = image_tag(mana_img_path(mana_cost), class: 'mana-xs')
       %td.col-md-1
         = link_to 'voir', card_path(card.id), class: 'btn btn-primary btn-xs'

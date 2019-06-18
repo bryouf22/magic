@@ -52,6 +52,10 @@ class Deck < ApplicationRecord
     colors
   end
 
+  def generate_draft
+    @draft = Draft::DraftFromCubeGenerator.call(deck_id: params['id']).tirages
+  end
+
   private
 
   def set_card_numbers

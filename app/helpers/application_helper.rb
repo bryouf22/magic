@@ -12,22 +12,9 @@ module ApplicationHelper
 
   def mana_img_path(c)
     if c.to_s.to_i.to_s == c
-      "card_symboles/#{c}.png"
+      "card_symboles/#{c}.jfif"
     else
-      case c.to_s
-      when 'u'
-        'card_symboles/u.png'
-      when 'b'
-        'card_symboles/b.png'
-      when 'r'
-        'card_symboles/r.png'
-      when 'g'
-        'card_symboles/g.png'
-      when 'w'
-        'card_symboles/w.png'
-      else
-        "card_symboles/#{c}.png"
-      end
+      "card_symboles/#{Color::SYMBOL_FILE_MAPPING[c.to_sym]}.jfif"
     end
   end
 
