@@ -91,6 +91,7 @@ class Card < ApplicationRecord
 
   before_create :set_colors, :clean_names
   before_save   :set_colors, :set_type
+  before_save   :rename, if: Proc.new { |card| card.has_alternative? && !card.name.include?('/') }
 
   mount_uploader :image,    CardImageUploader
   mount_uploader :image_fr, CardImageUploader
@@ -154,6 +155,11 @@ class Card < ApplicationRecord
     BASIC_LANDS_NAMES.include?(name)
   end
 
+  def clean_names
+    self[:name_fr_clean] = I18n.transliterate(name_fr || '').downcase.parameterize
+    self[:name_clean]    = I18n.transliterate(name || '').downcase.parameterize
+  end
+
   private
 
   def set_colors
@@ -174,10 +180,6 @@ class Card < ApplicationRecord
     self['color_ids'] = c_ids.any? ? c_ids.uniq.sort : nil
   end
 
-  def clean_names
-    self[:name_fr_clean] = I18n.transliterate(name_fr || '').downcase
-    self[:name_clean]    = I18n.transliterate(name || '').downcase
-  end
 
   def set_type
     self.card_type = :other
@@ -185,5 +187,10 @@ class Card < ApplicationRecord
     self.card_type = :artifact          if self.detailed_type&.include?('Artifact')
     self.card_type = :land              if self.detailed_type&.include?('Land') || basic_land?
     self.card_type = :creature          if self.detailed_type&.include?('Creature')
+  end
+
+  def rename
+    self[:name] = "#{name} / #{alternative.alternative_card.name}"
+    self[:name_clean] = name.parameterize
   end
 end

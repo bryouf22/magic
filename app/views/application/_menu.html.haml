@@ -27,7 +27,7 @@
         %li= link_to 'Decks publiques', public_decks_path
       = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
         .form-group
-          = form.text_field(:term, class: 'form-control', placeholder: "Rechercher une carte")
+          = form.text_field(:term, value: @term.presence, class: 'form-control', placeholder: "Rechercher une carte")
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
           %li

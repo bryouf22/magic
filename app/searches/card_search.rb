@@ -29,7 +29,7 @@ class CardSearch < Searchlight::Search
   end
 
   def search_term
-    t = I18n.transliterate(term).downcase
+    t = I18n.transliterate(term).downcase.parameterize
     query.where("cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?", "%#{t.strip}%", "%#{t.strip}%")
   end
 
