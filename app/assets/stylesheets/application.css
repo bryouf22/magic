@@ -18,3 +18,12 @@
  *= require_tree .
  *= require_self
  */
+
+/* REPRINT DECK EDITOR MODAL */
+
+#edit-visual .modal-body {overflow-x: auto !important; overflow-y: auto;}
+#edit-visual ul {width: auto !important; text-align: center;}
+#edit-visual .print-selection {float: none !important; display: inline-block !important; width: 33.33333% !important}
+#edit-visual .print-selection img.inline {opacity: .5; transition: 300ms; width: 100% !important; box-sizing: border-box; padding: 5%;}
+#edit-visual .print-selection img.inline:hover, .print-selection .print-selected {opacity: 1 !important; cursor: pointer;}
+

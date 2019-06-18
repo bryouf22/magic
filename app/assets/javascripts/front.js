@@ -234,7 +234,7 @@ $(document).ready(function() {
         $.each(data, function (index) {
           cardId = parseInt(Object.keys(data[index])[0]);
           url = data[index][Object.keys(data[index])[0]];
-          $('#edit-visual .modal-body ul').append('<li class="js-select-visual" data-card-id="' + cardId + '"><image class="inline" src="' + url + '"></li>');
+          $('#edit-visual .modal-body ul').append('<li class="js-select-visual print-selection" data-card-id="' + cardId + '"><image class="inline" src="' + url + '"></li>');
         });
         newVisualSelectorListener();
       }
@@ -247,14 +247,17 @@ $(document).ready(function() {
   newVisualSelectorListener = function () {
     $('#edit-visual .js-select-visual').unbind();
     $('#edit-visual .js-select-visual').on('click', function () {
+      $('.js-select-visual img').removeClass('print-selected');
+      $(this).find('img').addClass('print-selected');
       $('#change_visual_initial_card_id').val($('#edit-visual').attr('data-card-id'));
       $('#change_visual_reprint_card_id').val($(this).data('cardId'));
-      $('.js-submit-form').attr('disabled', false);
     });
   }
 
-  $(document).on('click', '.js-submit-form', function () {
-    Rails.fire(document.getElementsByClassName('js-form-change-visual')[0], 'submit');
+  $(document).on('hidden.bs.modal', '#edit-visual', function () {
+    if ($('#change_visual_initial_card_id').val() != "") {
+      Rails.fire(document.getElementsByClassName('js-form-change-visual')[0], 'submit');
+    }
   });
 
   $('#edit-visual').on('hidden.bs.modal', function () {
