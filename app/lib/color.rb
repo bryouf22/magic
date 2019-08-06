@@ -1,6 +1,10 @@
 class Color
   COLORS_MAPPING = { red: 1, green: 2, black: 3, white: 4, blue: 5 }
 
+  DECK_COLOR_MAPPING = {
+    red: :r, green: :g, black: :b, white: :w, blue: :u
+  }
+
   MANA_COST_MAPPING = {
     w: :white,
     u: :blue,

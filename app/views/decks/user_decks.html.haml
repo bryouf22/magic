@@ -18,8 +18,7 @@
           .col-sm-3= link_to deck.name, my_deck_path(slug: deck.slug)
           .col-sm-2= deck.category&.name
           .col-sm-2
-            - deck.colors.each do |color|
-              = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')
+            = show_mana_cost(deck)
           .col-sm-2= deck.formats.collect(&:name).join(', ')
           .col-sm-1
             - if deck.is_public?

@@ -11,8 +11,7 @@
           par
           = link_to deck.user.name, user_path(id: deck.user.id)
         .col-sm-2
-          - deck.colors.each do |color|
-            = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')
+          = show_mana_cost(deck)
         .col-sm-3= deck.formats.collect(&:name).join(', ')
 - else
   %p Il n'y a aucun deck public actuellement.
