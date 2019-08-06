@@ -26,7 +26,6 @@ class DecksController < ApplicationController
     @deck = Deck.find(params['id'])
   end
 
-
   def change_visual
     @initial_card = Card.find(params['change_visual']['initial_card_id'])
     @reprint_card = Card.find(params['change_visual']['reprint_card_id'])
@@ -68,6 +67,11 @@ class DecksController < ApplicationController
   end
 
   def show
+    @deck = Deck.where(slug: params[:slug]).first
+    build_deck_for_show
+  end
+
+  def show_by_color
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
   end

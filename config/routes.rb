@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   post 'manage-card',               to: 'decks#manage_card',       as: :manage_card
   get 'mes-decks/nouveau',          to: 'decks#new',               as: :new_deck
   get 'mes-decks/:slug',            to: 'decks#show',              as: :my_deck
+  get 'mes-decks/:slug/color',      to: 'decks#show_by_color',     as: :my_deck_by_color
   get 'mes-decks/detail/:slug',     to: 'decks#detail',            as: :detail_deck
   get 'public-decks',               to: 'decks#public_decks',      as: :public_decks
   get 'public-decks/:id',           to: 'decks#public_deck_show',  as: :public_deck
@@ -49,7 +50,7 @@ Rails.application.routes.draw do
   get 'nouvelle-liste',          to: 'wishlists#new',     as: :new_wishlist
   get 'ma-liste-:id/editer',     to: 'wishlists#edit',    as: :edit_wishlist
   put 'nouvelle-liste',          to: 'wishlists#create',  as: :create_wishlist
-  delete 'me-list-id/supprimer', to: 'wishlists#destroy', as: :destroy_wishlist
+  delete 'ma-list-id/supprimer', to: 'wishlists#destroy', as: :destroy_wishlist
   post 'ma-liste:id/mettre-a-jour', to: 'wishlists#update',  as: :update_wishlist
   get 'ma-liste-:id',            to: 'wishlists#show',    as: :wishlist
 
