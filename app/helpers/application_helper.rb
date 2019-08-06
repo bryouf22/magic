@@ -14,6 +14,8 @@ module ApplicationHelper
     case object.class.name
     when 'Deck'
       show_deck_color(object)
+    when 'CardDecorator'
+      show_card_mana_cost(object)
     when 'Card'
       show_card_mana_cost(object)
     end
@@ -46,9 +48,20 @@ module ApplicationHelper
     deck.colors.each do |color|
       result << content_tag(:i, '', class: "ms ms-#{Color::DECK_COLOR_MAPPING[color.to_sym]} ms-cost")
     end
+    return content_tag(:i, '', class: "ms ms-c ms-cost").html_safe if result.blank?
     result.html_safe
   end
 
+  # todo : gérer les demis mana (voir little girl)
   def show_card_mana_cost(card)
+    result = ''
+    card.mana_cost.split(/(Snow|\d+|\D)/).reject { |c| c.blank? }.each do |mana_cost|
+      if mana_cost == mana_cost.to_i.to_s
+        result << content_tag(:i, '', class: "ms ms-#{mana_cost} ms-cost")
+      else
+        result << content_tag(:i, '', class: "ms ms-#{Color::SYMBOL_FILE_MAPPING[mana_cost.to_sym]} ms-cost")
+      end
+    end
+    result.html_safe
   end
 end

@@ -56,11 +56,12 @@ class Color
     p: :'2r',
     q: :'2g',
     x: :x,
-    s: :WP,
-    t: :UP,
-    v: :BP,
-    z: :RP,
-    y: :GP,
+    s: :wp,
+    t: :up,
+    v: :bp,
+    z: :rp,
+    y: :gp,
+    Snow: 's'
   }
 
   def self.mana_symbol(color)
