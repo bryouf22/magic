@@ -35,3 +35,6 @@
 
 # Ignore public folder
 /public/
+
+# Ignore Gemfile.lock
+/Gemfile.lock
