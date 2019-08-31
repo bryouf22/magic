@@ -5,10 +5,7 @@
   - @sets.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -41,10 +38,7 @@
   - @basic_editions.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -57,10 +51,7 @@
   - @masterpieces.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -73,10 +64,7 @@
   - @from_the_vaults.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -89,10 +77,7 @@
   - @dual_decks.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -105,10 +90,7 @@
   - @reiditions.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -121,10 +103,7 @@
   - @premium_decks.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -137,10 +116,7 @@
   - @humouristics.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -153,10 +129,7 @@
   - @starters.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -169,10 +142,7 @@
   - @onlines.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -185,10 +155,7 @@
   - @others.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
@@ -201,10 +168,7 @@
   - @_sets.each do |set|
     %tr
       %td.col-md-4.text-center
-        - if set.set_visual.url
-          = image_tag(set.set_visual.url, class: 'list-set-logo')
-        - else
-          = link_to set.name, extension_set_path(slug: set.slug)
+        %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2
         = I18n.t("enum.extension_set.set_type.#{set.set_type}") if set.set_type
       %td.col-md-2= set.cards.count

@@ -122,15 +122,10 @@ class Card < ApplicationRecord
   def icone_url
     case rarity
     when 'commun'
-      extension_set.commun_logo&.url
     when 'uncommun'
-      extension_set.uncommun_logo&.url
     when 'rare'
-      extension_set.rare_logo&.url
     when 'mythic'
-      extension_set.mythic_logo&.url
     else
-      extension_set.commun_logo&.url
     end
   end
 

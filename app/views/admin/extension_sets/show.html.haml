@@ -1,8 +1,6 @@
-- if @set.set_visual.present?
-  .text-center= image_tag(@set.set_visual.url)
-- else
-  %h1= @set.name
-
+%h1
+  %i{ class: "ss ss-common ss-3x ss-#{@set.code&.downcase}" }
+  = @set.name
 %hr
 
 - if @white_cards.any?

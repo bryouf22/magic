@@ -2,23 +2,18 @@
 #
 # Table name: extension_sets
 #
-#  id            :bigint           not null, primary key
-#  name          :string
-#  release_date  :datetime
-#  set_visual    :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  commun_logo   :string
-#  uncommun_logo :string
-#  rare_logo     :string
-#  mythic_logo   :string
-#  slug          :string
-#  set_type      :integer
-#  order         :integer
-#  bloc_id       :integer
-#  set_list_id   :integer
-#  bad_visual    :boolean
-#  code          :string
+#  id           :bigint           not null, primary key
+#  name         :string
+#  release_date :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  slug         :string
+#  set_type     :integer
+#  order        :integer
+#  bloc_id      :integer
+#  set_list_id  :integer
+#  bad_visual   :boolean
+#  code         :string
 #
 
 class ExtensionSet < ApplicationRecord
@@ -30,12 +25,6 @@ class ExtensionSet < ApplicationRecord
   belongs_to :set_list, optional: true
 
   scope :without_visual, -> { where(bad_visual: true) }
-
-  mount_uploader :set_visual,     ExtensionLogoUploader
-  mount_uploader :commun_logo,    ExtensionLogoUploader
-  mount_uploader :uncommun_logo,  ExtensionLogoUploader
-  mount_uploader :rare_logo,      ExtensionLogoUploader
-  mount_uploader :mythic_logo,    ExtensionLogoUploader
 
   before_create :generate_slug
 
