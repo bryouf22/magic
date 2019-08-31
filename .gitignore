@@ -33,7 +33,4 @@
 # Ignore public folder
 /public/
 
-# Ignore Gemfile.lock
-/Gemfile.lock
-
 /config/deploy/production.rb
