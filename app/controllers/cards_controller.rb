@@ -39,7 +39,7 @@ class CardsController < ApplicationController
     @card = Card.find(params['id'])
     respond_to do |format|
       format.json do
-        render json: @card.reprint_cards.decorate.collect { |reprint| { reprint.id => reprint.visual } }.push({ Reprint.where(card_id: @card.id).first.id => @card.image_url }).to_json
+        render json: @card.reprint_cards.decorate.collect { |reprint| { reprint.id => reprint.visual } }.push({ @card.id => @card.image_url }).to_json
       end
     end
   end
