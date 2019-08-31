@@ -58,7 +58,7 @@ class DecksController < ApplicationController
     Deck::AddCard.call(deck_id: deck_id, card_id: add_card_params[:card_id])
     deck = Deck.find(deck_id)
     Format::Validator.call(deck: deck)
-    redirect_to my_deck_path(slug: deck.slug)
+    redirect_to my_deck_path(id: deck.id)
   end
 
   def detail
@@ -67,7 +67,7 @@ class DecksController < ApplicationController
   end
 
   def show
-    @deck = Deck.where(slug: params[:slug]).first
+    @deck = current_user.decks.where(id: params[:id]).first
     build_deck_for_show
   end
 
@@ -85,7 +85,7 @@ class DecksController < ApplicationController
     @deck = current_user.decks.where(slug: params[:slug]).first
     if @deck.update_attributes(update_params)
       Format::Validator.call(deck: @deck)
-      redirect_to my_deck_path(slug: @deck.slug)
+      redirect_to my_deck_path(id: @deck.id)
     else
       build_deck_for_show
       render :edit
@@ -126,7 +126,7 @@ class DecksController < ApplicationController
   def import_create
     deck = Deck::CreateFromList.call(list: params[:import][:list], user_id: current_user.id).deck
     Format::Validator.call(deck: deck)
-    redirect_to my_deck_path(slug: deck.slug)
+    redirect_to my_deck_path(id: deck.id)
   end
 
   def public_decks
@@ -142,7 +142,7 @@ class DecksController < ApplicationController
   def copy_public_deck
     deck = Deck.find(params['id'])
     new_deck_id = Deck::CopyDeck.call(deck_id: deck.id, user_id: current_user.id).deck_id
-    redirect_to my_deck_path(slug: Deck.find(new_deck_id).slug)
+    redirect_to my_deck_path(id: Deck.id(new_deck_id).slug)
   end
 
   def generate_draft

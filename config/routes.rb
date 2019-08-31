@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   post 'deck-:slug',                to: 'decks#add_cards',         as: :deck_add_card
   post 'manage-card',               to: 'decks#manage_card',       as: :manage_card
   get 'mes-decks/nouveau',          to: 'decks#new',               as: :new_deck
-  get 'mes-decks/:slug',            to: 'decks#show',              as: :my_deck
+  get 'mes-decks/:id',              to: 'decks#show',              as: :my_deck
   get 'mes-decks/:slug/color',      to: 'decks#show_by_color',     as: :my_deck_by_color
   get 'mes-decks/detail/:slug',     to: 'decks#detail',            as: :detail_deck
   get 'public-decks',               to: 'decks#public_decks',      as: :public_decks
