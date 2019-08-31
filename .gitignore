@@ -27,9 +27,6 @@
 /public/assets
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
-/config/master.key
-
 # Ignore database configuration
 /config/database.yml
 
@@ -38,3 +35,5 @@
 
 # Ignore Gemfile.lock
 /Gemfile.lock
+
+/config/deploy/production.rb
