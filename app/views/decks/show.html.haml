@@ -3,7 +3,7 @@
 %h1
   #{@deck.name}
   - if current_user.is_admin?
-    %small= @deck.id
+    %small= "(#{@deck.id})"
 %p
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
   - if @deck.formats.any?
