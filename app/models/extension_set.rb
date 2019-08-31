@@ -2,7 +2,7 @@
 #
 # Table name: extension_sets
 #
-#  id            :bigint(8)        not null, primary key
+#  id            :bigint           not null, primary key
 #  name          :string
 #  release_date  :datetime
 #  set_visual    :string
@@ -18,6 +18,7 @@
 #  bloc_id       :integer
 #  set_list_id   :integer
 #  bad_visual    :boolean
+#  code          :string
 #
 
 class ExtensionSet < ApplicationRecord

@@ -28,10 +28,7 @@
             %tr
               - sets.each do |set|
                 %td.text-center{ class: "col-md-#{12/sets.count}"}
-                  - if set.set_visual.url
-                    = image_tag(set.set_visual.url, class: 'list-set-logo')
-                  - else
-                    = link_to set.name, extension_set_path(slug: set.slug)
+                  %i{ class: "ss ss-6x ss-#{set.code&.downcase}" }
                   %br
                   %div
                     = set.cards.count

@@ -2,8 +2,8 @@
 #
 # Table name: card_lists
 #
-#  id                 :bigint(8)        not null, primary key
-#  card_id            :bigint(8)
+#  id                 :bigint           not null, primary key
+#  card_id            :bigint
 #  card_listable_id   :integer
 #  card_listable_type :string
 #  number             :integer

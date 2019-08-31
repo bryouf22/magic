@@ -2,7 +2,7 @@
 #
 # Table name: gatherer_card_urls
 #
-#  id               :bigint(8)        not null, primary key
+#  id               :bigint           not null, primary key
 #  url              :string
 #  extension_set_id :integer
 #  created_at       :datetime         not null

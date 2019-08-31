@@ -2,9 +2,9 @@
 #
 # Table name: format_cards
 #
-#  id         :bigint(8)        not null, primary key
-#  format_id  :bigint(8)
-#  card_id    :bigint(8)
+#  id         :bigint           not null, primary key
+#  format_id  :bigint
+#  card_id    :bigint
 #  forbidden  :boolean
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

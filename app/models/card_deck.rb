@@ -2,9 +2,9 @@
 #
 # Table name: card_decks
 #
-#  id                      :bigint(8)        not null, primary key
-#  card_id                 :bigint(8)
-#  deck_id                 :bigint(8)
+#  id                      :bigint           not null, primary key
+#  card_id                 :bigint
+#  deck_id                 :bigint
 #  occurences_in_main_deck :integer
 #  occurences_in_sideboard :integer
 #

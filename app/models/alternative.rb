@@ -2,7 +2,7 @@
 #
 # Table name: alternatives
 #
-#  id                  :bigint(8)        not null, primary key
+#  id                  :bigint           not null, primary key
 #  card_id             :integer
 #  alternative_card_id :integer
 #  alternative_type    :integer

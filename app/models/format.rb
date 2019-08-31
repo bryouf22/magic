@@ -2,7 +2,7 @@
 #
 # Table name: formats
 #
-#  id                   :bigint(8)        not null, primary key
+#  id                   :bigint           not null, primary key
 #  name                 :string
 #  card_limit           :integer
 #  card_occurence_limit :integer

@@ -2,9 +2,9 @@
 #
 # Table name: format_extensions
 #
-#  id               :bigint(8)        not null, primary key
-#  format_id        :bigint(8)
-#  extension_set_id :bigint(8)
+#  id               :bigint           not null, primary key
+#  format_id        :bigint
+#  extension_set_id :bigint
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

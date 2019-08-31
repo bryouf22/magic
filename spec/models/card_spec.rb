@@ -2,7 +2,7 @@
 #
 # Table name: cards
 #
-#  id               :bigint(8)        not null, primary key
+#  id               :bigint           not null, primary key
 #  name_fr          :string
 #  name             :string
 #  extension_set_id :integer

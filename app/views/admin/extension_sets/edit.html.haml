@@ -16,56 +16,10 @@
   .form-group
     = label_tag(:extension_set_order, 'Position :')
     = form.number_field(:order, class: 'form-control')
-  .checkbox
-    %label{ for: 'extension_set_bad_visual' }
-      = form.check_box(:bad_visual)
-      Sans Visuel
+
   .form-group
-    .row
-      .col-md-6
-        = label_tag(:extension_set_set_visual, 'Visuel :')
-        = form.file_field(:set_visual)
-      .col-md-6
-        - if @set.set_visual.present?
-          = image_tag(@set.set_visual.url, class: 'img-responsive')
-        - else
-          Aucun apperçu
-    .row
-      .col-md-6
-        = label_tag(:extension_set_commun_logo, 'Icone commune :')
-        = form.file_field(:commun_logo)
-      .col-md-6
-        - if @set.commun_logo.present?
-          = image_tag(@set.commun_logo.url, class: 'img-responsive')
-        - else
-          Aucun apperçu
-    .row
-      .col-md-6
-        = label_tag(:extension_set_uncommun_logo, 'Icone peu commune:')
-        = form.file_field(:uncommun_logo)
-      .col-md-6
-        - if @set.uncommun_logo.present?
-          = image_tag(@set.uncommun_logo.url, class: 'img-responsive')
-        - else
-          Aucun apperçu
-    .row
-      .col-md-6
-        = label_tag(:extension_set_rare_logo, 'Icone rare :')
-        = form.file_field(:rare_logo)
-      .col-md-6
-        - if @set.rare_logo.present?
-          = image_tag(@set.rare_logo.url, class: 'img-responsive')
-        - else
-          Aucun apperçu
-    .row
-      .col-md-6
-        = label_tag(:extension_set_mythic_logo, 'Icone mythic :')
-        = form.file_field(:mythic_logo)
-      .col-md-6
-        - if @set.mythic_logo.present?
-          = image_tag(@set.mythic_logo.url, class: 'img-responsive')
-        - else
-          Aucun apperçu
+    = label_tag(:extension_set_code, 'Code')
+    = form.text_field(:code, class: 'form-control')
 
   .form-group
     = form.submit('Valider', class: 'btn btn-success')
