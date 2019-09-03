@@ -6,7 +6,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -39,7 +41,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -52,7 +56,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -65,7 +71,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -78,7 +86,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -91,7 +101,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -104,7 +116,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -117,7 +131,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -130,7 +146,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -143,7 +161,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -156,7 +176,9 @@
     %tr
       %td.col-md-4.text-center
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-      %td.col-md-2= I18n.t("enum.extension_set.set_type.#{set.set_type}")
+      %td.col-md-2
+        - type = I18n.t("enum.extension_set.set_type.#{set.set_type}")
+        = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
@@ -171,6 +193,7 @@
         %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
       %td.col-md-2
         = I18n.t("enum.extension_set.set_type.#{set.set_type}") if set.set_type
+        = set.name
       %td.col-md-2= set.cards.count
       %td.col-md-2= link_to set.gatherer_card_urls.count, admin_extension_set_gatherer_card_urls_path(set.id)
       %td.col-md-2
