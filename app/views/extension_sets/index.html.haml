@@ -15,7 +15,7 @@
 
 %h3 Editions de base
 %table.table
-  - @basic_editions.reorder('position ASC').each do |set|
+  - @basic_editions.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -24,7 +24,7 @@
 
 %h3 Masterpieces
 %table.table
-  - @masterpieces.reorder('position ASC').each do |set|
+  - @masterpieces.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -33,7 +33,7 @@
 
 %h3 From the Vaults
 %table.table
-  - @from_the_vaults.reorder('position ASC').each do |set|
+  - @from_the_vaults.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -42,7 +42,7 @@
 
 %h3 Duels decks
 %table.table
-  - @dual_decks.reorder('position ASC').each do |set|
+  - @dual_decks.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -51,7 +51,7 @@
 
 %h3 Réédition / masters sets
 %table.table
-  - @reiditions.reorder('position ASC').each do |set|
+  - @reiditions.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -60,7 +60,7 @@
 
 %h3 Premium decks
 %table.table
-  - @premium_decks.reorder('position ASC').each do |set|
+  - @premium_decks.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -69,7 +69,7 @@
 
 %h3 Houmouristiques
 %table.table
-  - @humouristics.reorder('position ASC').each do |set|
+  - @humouristics.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -78,7 +78,7 @@
 
 %h3 Débuter
 %table.table
-  - @starters.reorder('position ASC').each do |set|
+  - @starters.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -87,7 +87,7 @@
 
 %h3 Magic en ligne
 %table.table
-  - @onlines.reorder('position ASC').each do |set|
+  - @onlines.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -96,7 +96,7 @@
 
 %h3 Autres
 %table.table
-  - @others.reorder('position ASC').each do |set|
+  - @others.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
@@ -105,7 +105,7 @@
 
 %h3 Sans catégorie
 %table.table
-  - @_sets.reorder('position ASC').each do |set|
+  - @_sets.reorder('extension_sets.order ASC').each do |set|
     %tr
       %td.text-center
         = link_to extension_set_path(slug: set.slug) do
