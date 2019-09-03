@@ -7,7 +7,7 @@ class CardDecorator < Draper::Decorator
   def title(show_rarity: false, show_extension: false)
     card_name = card.name_fr || card.name || ''
     title = if show_rarity
-              "#{h.content_tag(:i, "", class: "ss ss-#{extension_set.code&.downcase} ss-#{card.rarity}")} #{card_name}".html_safe
+              "#{h.content_tag(:i, "", class: "ss ss-#{extension_set.code&.downcase} ss-#{card.rarity} ss-grad")} #{card_name}".html_safe
             else
               card_name
             end
