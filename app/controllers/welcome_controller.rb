@@ -3,6 +3,9 @@ class WelcomeController < ApplicationController
   def index
   end
 
+  def legals
+  end
+
   def manifest
     render json: {
      "name": "App",

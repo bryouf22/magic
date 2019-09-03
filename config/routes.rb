@@ -63,6 +63,8 @@ Rails.application.routes.draw do
 
   resources :categories
 
+  get 'mentions-legals', to: 'welcome#legals', as: :legals
+
   get '/admin', to: 'admin/welcome#index', as: :admin_root
   namespace 'admin' do
     resources :extension_sets do

@@ -40,6 +40,7 @@ class ExtensionSet < ApplicationRecord
     other:          9,
     online:         10,
     masterpiece:    11,
+    commander:      12,
   }
 
   private

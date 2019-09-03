@@ -78,7 +78,8 @@ class Card < ApplicationRecord
     common:   1,
     uncommon: 2,
     rare:     3,
-    mythic:   4
+    mythic:   4,
+    timeshifted: 5
   }
 
   belongs_to :extension_set
