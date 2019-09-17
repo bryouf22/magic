@@ -38,8 +38,6 @@ gem 'bootsnap', '<= 1.1.0'
 gem 'actionpack-action_caching'
 
 group :development, :test do
-  gem 'pry-byebug', require: true
-  gem 'pry-rails', require: true
   gem 'rspec-rails', '~> 3.8'
 end
 
