@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get    'manifest',                         to: 'welcome#manifest',                   as: :manifest
   get    'mon-compte',                       to: 'account#index',                      as: :user_account
   get    'rechercher',                       to: 'cards#search',                       as: :card_search
+  get    'recherche-avancee',                to: 'cards#adv_search',                   as: :adv_card_search
   get    'rechercher-set',                   to: 'extension_sets#search',              as: :extension_set_search
 
   get    'carte/:id',                        to: 'cards#show',                         as: :card

@@ -26,6 +26,16 @@ class CardsController < ApplicationController
     end
   end
 
+  def adv_search
+    if params['card_search'].present?
+      @search = CardSearch.new(adv_search_params)
+      list_by_colors(@search.results)
+    else
+      @search = CardSearch.new
+      list_by_colors(Card.none)
+    end
+  end
+
   def add_to
     case action_params
     when 'collection'
@@ -63,5 +73,9 @@ class CardsController < ApplicationController
 
   def card_ids
     params.require(:card_ids)
+  end
+
+  def adv_search_params
+     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])
   end
 end
