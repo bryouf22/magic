@@ -1,4 +1,7 @@
+require 'pagy'
+
 class CardsController < ApplicationController
+  include Pagy::Backend
 
   before_action :authenticate_user!, only: :add_to
 
@@ -9,7 +12,7 @@ class CardsController < ApplicationController
   def search
     @term     = search_params[:term]
     @search   = CardSearch.new(search_params)
-    @results  = @search.results.limit(20)
+    @pagy, @results  = pagy(@search.results.order('name ASC'), items: 20)
     respond_to do |format|
       format.json do
         json_result = []
