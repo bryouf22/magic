@@ -1,113 +1,15 @@
-%h3 Blocs
-%table.table.bloc-table
-  - @block_sets.each do |bloc|
-    - sets = bloc.extension_sets.order('extension_sets.order ASC')
-    %tr
-      %td
-        %table.table
-          %tr
-            - sets.each do |set|
-              %td.text-center{ class: "col-md-#{12/sets.count}"}
-                = link_to extension_set_path(slug: set.slug) do
-                  %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-                  %p= set.name
-
-
-%h3 Editions de base
-%table.table
-  - @basic_editions.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
+- @block_sets.each do |sets_by_type|
+  .ext-type
+    - if sets_by_type.class == Array
+      - sets_by_type.each do |sets_by_block|
+        .ext-bloc
+          - sets_by_block.each do |set|
+            = link_to extension_set_path(slug: set.slug), { class: "ext-set" } do
+              %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
+              %p= set.name
+    - else
+      - sets_by_type.each do |set|
+        = link_to extension_set_path(slug: set.slug), { class: "ext-set" } do
+          %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
           %p= set.name
-
-%h3 Masterpieces
-%table.table
-  - @masterpieces.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 From the Vaults
-%table.table
-  - @from_the_vaults.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Duels decks
-%table.table
-  - @dual_decks.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Réédition / masters sets
-%table.table
-  - @reiditions.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Premium decks
-%table.table
-  - @premium_decks.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Houmouristiques
-%table.table
-  - @humouristics.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Débuter
-%table.table
-  - @starters.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Magic en ligne
-%table.table
-  - @onlines.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Autres
-%table.table
-  - @others.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
-
-%h3 Sans catégorie
-%table.table
-  - @_sets.reorder('extension_sets.order ASC').each do |set|
-    %tr
-      %td.text-center
-        = link_to extension_set_path(slug: set.slug) do
-          %i{ class: "ss ss-common ss-6x ss-#{set.code&.downcase}" }
-          %p= set.name
+    %hr

@@ -392,3 +392,40 @@ button.quantity-btn {
     padding: 5px;
   }
 }
+
+
+// Extension sets
+
+.ext-type {
+  text-align: center;
+}
+.ext-bloc {
+
+}
+.ext-set {
+  display: inline-block;
+  width:20%;
+  transition: 300ms;
+  padding: 10px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  i.ss {
+    font-size: 4em;
+    opacity: .5;
+    transition: 300ms;
+  }
+
+  &:hover i.ss {
+    opacity: 1;
+  }
+}
+

@@ -1,7 +1,15 @@
 class ExtensionSetsController < ApplicationController
 
   def index
-    set_by_type(ExtensionSet.all)
+    @block_sets = []
+    ExtensionSet.set_types.to_a.collect { |type| type.last }.each do |type|
+      next if ExtensionSet.where(set_type: type).none?
+      if (bloc_ids = ExtensionSet.where(set_type: type).collect(&:bloc_id)).any?
+        @block_sets << Bloc.where(id: bloc_ids).reorder('bloc_order ASC').collect { |bloc_id| ExtensionSet.where(set_type: type).where(bloc_id: bloc_id).reorder('extension_sets.order ASC') }
+      else
+        @block_sets << ExtensionSet.where(set_type: type).reorder('extension_sets.order ASC')
+      end
+    end
   end
 
   def search
