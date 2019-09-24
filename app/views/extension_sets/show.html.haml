@@ -1,4 +1,7 @@
-%h1= @set.name
+%h1
+  %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
+  = @set.name
+
 
 .views-selection
   = 'vue normal |'
