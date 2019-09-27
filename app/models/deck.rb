@@ -42,7 +42,7 @@ class Deck < ApplicationRecord
   bitfield :color, 1 => :black, 2 => :red, 4 => :blue, 8 => :green, 16 => :white
 
   scope :publics, -> { where(is_public: true) }
-  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :validate_formats
+  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck#, :validate_formats
 
   def colors
     colors = []
@@ -54,6 +54,10 @@ class Deck < ApplicationRecord
 
   def generate_draft
     @draft = Draft::DraftFromCubeGenerator.call(deck_id: params['id']).tirages
+  end
+
+  def validate_formats
+    Format::Validator.call(deck: self)
   end
 
   private
@@ -76,9 +80,5 @@ class Deck < ApplicationRecord
 
   def update_slug
     self[:slug] = name.parameterize
-  end
-
-  def validate_formats
-    # Format::Validator.call(deck: self) unless self.new_record?
   end
 end

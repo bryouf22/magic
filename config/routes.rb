@@ -67,10 +67,15 @@ Rails.application.routes.draw do
   get    'mentions-legals',                  to: 'welcome#legals',                     as: :legals
 
   get    '/admin',                           to: 'admin/welcome#index',                as: :admin_root
+  post   'remove-card-card_id',              to: 'cards#destroy',                      as: :remove_card
+
   namespace 'admin' do
     resources :extension_sets do
       resources :gatherer_card_urls, controller: 'extension_sets/gatherer_card_urls'
     end
+
+    post '/admin/export', to: 'welcome#export', as: :export
+
     resources :cards
     resources :users
 

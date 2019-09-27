@@ -22,24 +22,20 @@ class Format::Validator
 
   def validate_format(format, deck)
     unless deck.card_in_main_deck
-      puts "#{format.name} - #{deck.name} : deck sans carte"
       return false
     end
     if(deck.card_in_main_deck < format.card_limit)
-      puts "#{format.name} - #{deck.name} : limite de carte"
       return false
     end
     deck.card_decks.find_each do |card_deck|
       next if card_deck.card.basic_land?
       card_number = card_deck.occurences_in_main_deck + card_deck.occurences_in_sideboard
       if(card_number > format.card_occurence_limit)
-        puts "#{format.name} - #{deck.name} : nombre d'occurence #{card_deck.card.name}"
         return false
       end
     end
     format.cards.find_each do |card|
       if(deck.cards.where(id: card.card_ids).any?)
-        puts "#{format.name} - #{deck.name} : carte interdide #{card.name}"
         return false
       end
     end
@@ -53,7 +49,6 @@ class Format::Validator
               forbiden_card = false
             end
           end
-          puts "#{format.name} - #{deck.name} : extension interdite #{card.name}" if forbiden_card
           return false if forbiden_card
         end
       end

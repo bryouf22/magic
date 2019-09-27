@@ -21,11 +21,11 @@ class CardSearch < Searchlight::Search
   end
 
   def search_exclude_color_ids
-    bla = query
+    records = query
     exclude_color_ids.each do |id|
-      bla = bla.where.not(":color_id = ANY(color_ids)", color_id: id.to_i)
+      records = records.where.not(":color_id = ANY(color_ids)", color_id: id.to_i)
     end
-    bla
+    records
   end
 
   def search_term

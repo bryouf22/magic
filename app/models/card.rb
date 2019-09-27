@@ -112,14 +112,6 @@ class Card < ApplicationRecord
     'Plains'
   ]
 
-  def has_alternative?
-    alternative.present?
-  end
-
-  def is_alternative?
-    Alternative.where(alternative_card: id).any?
-  end
-
   def icone_url
     case rarity
     when 'commun'

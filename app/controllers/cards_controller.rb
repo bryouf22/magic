@@ -57,6 +57,16 @@ class CardsController < ApplicationController
     end
   end
 
+  def destroy
+    @card = Card.find(params['card_id'])
+    if CardDeck.where(card_id: @card).present? || CardList.where(card_id: @card.id).present? || FormatCard.where(card_id: @card.id).present?
+      redirect_to card_path(@card)
+    else
+      @card.destroy
+      redirect_to root_path
+    end
+  end
+
   private
 
   def create_default_wishlist

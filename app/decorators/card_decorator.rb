@@ -20,6 +20,6 @@ class CardDecorator < Draper::Decorator
   end
 
   def name_with_set
-    "#{name_fr} - #{extension.set.name}"
+    "#{name} - #{extension_set.name}"
   end
 end
