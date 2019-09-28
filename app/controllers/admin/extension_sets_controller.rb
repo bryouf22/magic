@@ -1,5 +1,4 @@
 class Admin::ExtensionSetsController < AdminController
-
   before_action :find_set, only: [:show, :edit, :update]
 
   def index

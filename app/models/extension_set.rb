@@ -17,7 +17,6 @@
 #
 
 class ExtensionSet < ApplicationRecord
-
   has_many :cards
   has_many :gatherer_card_urls
 
@@ -40,7 +39,7 @@ class ExtensionSet < ApplicationRecord
     other:          9,
     online:         10,
     masterpiece:    11,
-    commander:      12,
+    commander:      12
   }
 
   private

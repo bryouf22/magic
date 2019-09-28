@@ -11,7 +11,6 @@
 #
 
 class Format < ApplicationRecord
-
   has_many :format_cards, dependent: :destroy
   has_many :cards, through: :format_cards
 

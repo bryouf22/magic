@@ -11,9 +11,8 @@
 #
 
 class CardList < ApplicationRecord
-
   belongs_to :card_listable, polymorphic: true
   belongs_to :card
 
-  validates :card_id, uniqueness: { scope: :card_listable_id, message: "already in list (update number / foils_number" }
+  validates :card_id, uniqueness: { scope: :card_listable_id, message: 'already in list (update number / foils_number)' }
 end

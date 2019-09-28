@@ -11,7 +11,7 @@ class WishlistsController < ApplicationController
   end
 
   def create
-    @wishlist = Wishlist.create(wishlist_params.merge({ 'user_id' => current_user.id }))
+    @wishlist = Wishlist.create(wishlist_params.merge('user_id' => current_user.id))
     if @wishlist.valid?
       redirect_to wishlist_path(id: @wishlist)
     else
@@ -45,6 +45,7 @@ class WishlistsController < ApplicationController
   def show
     @wishlist = Wishlist.find(params['id'])
     return redirect_to wishlists_path if current_user.id != @wishlist.user_id
+
     list_by_colors(@wishlist.cards)
     render :visual if view == 'visual'
   end

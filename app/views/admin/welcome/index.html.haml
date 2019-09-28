@@ -3,32 +3,21 @@
   %br
   = "Cartes importées : #{Card.all.count}"
   %br
-  = "Extensions sans visuels : #{ExtensionSet.without_visual.count}"
-  %br
   = "Reprints : #{Reprint.all.count}"
 
 %h2 TODO :
 %ul
-  %li
-    %u IMPORT D'UN DECK A PARTIR D'UNE URL MTGTOP8
-  %li generateur de booster
+  %li IMPORT D'UN DECK A PARTIR D'UNE URL MTGTOP8
   %li ajouter les jetons (et vérifier le total de carte pour chaque édition)
   %li Ajouter les autres visuels pour les terrains base
   %li Sidekiq pour la validitié des decks
   %li elasticsearch pour la recherche des decks
-  %li
-    %u changer les visuels dans les decks
 
 %h2 EN COURS :
 %ul
-  %li importer war of the spark
   %li bitfields sur deck et format, puis module de recherche
   %li module de recherche deck par format, couleurs, incluant tel cartes, ratio creature, etc, equilibrage couleurs
   %li module de recherche carte par criteres : type couleur format cout mana attaque/defense editions, mot clef, texte d'ambiance, dessinateur
-
-%h2 SUCCESS
-%ul
-  %li # Card.find_each { |c| names.include?(c.name) ? nil : names.push(c.name) };names.count
 
 %h2 actions
 %p= link_to 'Checker la validité des decks', admin_deck_validity_path, class: 'btn btn-xs btn-danger', method: :post

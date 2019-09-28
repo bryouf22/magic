@@ -9,7 +9,6 @@
 #
 
 class Bloc < ApplicationRecord
-
   has_many :extension_sets
 
   def name

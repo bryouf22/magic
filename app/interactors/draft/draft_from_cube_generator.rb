@@ -1,7 +1,7 @@
 class Draft::DraftFromCubeGenerator
   include Interactor
 
-  # prendre en compte plusieurs exemplaire de chaque carte (et donc en compte le probabilité de tirage)
+  # prendre en compte plusieurs exemplaire de chaque carte (et donc en compte le probabilite de tirage)
   # si le nombre de cartes dans le deck (cube) n'est pas multiple de 15, on affiche les cartes restants
 
   # 8 players - 3 packs of 15 cards
@@ -9,7 +9,6 @@ class Draft::DraftFromCubeGenerator
   # 6 players - 5 packs of 9, or 4 packs of 11/12 cards
   # 5 players - 5 packs of 9
   # 4 players - 6 packs of 7/8
-
 
   # appel : Draft::DraftFromCubeGenerator.call(deck_id: 88).tirages
   def call
@@ -24,9 +23,9 @@ class Draft::DraftFromCubeGenerator
     end
 
     tirages = []
-    reste   = []
+    # reste   = []
 
-    while cube.length > 14 do
+    while cube.length > 14
       tirage = cube.sample(15)
       tirage.each do |card_id|
         cube.delete_at(cube.find_index(card_id))
@@ -34,6 +33,6 @@ class Draft::DraftFromCubeGenerator
       tirages.push(tirage)
     end
     context.tirages = tirages
-    #reste = cube
+    # reste = cube
   end
 end

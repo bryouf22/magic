@@ -12,7 +12,7 @@ class CardsController < ApplicationController
   def search
     @term     = search_params[:term]
     @search   = CardSearch.new(search_params)
-    @pagy, @results  = pagy(@search.results.order('name ASC'), items: 20)
+    @pagy, @results = pagy(@search.results.order('name ASC'), items: 20)
     respond_to do |format|
       format.json do
         json_result = []
@@ -52,7 +52,7 @@ class CardsController < ApplicationController
     @card = Card.find(params['id'])
     respond_to do |format|
       format.json do
-        render json: @card.reprint_cards.decorate.collect { |reprint| { reprint.id => reprint.visual } }.push({ @card.id => @card.image_url }).to_json
+        render json: @card.reprint_cards.decorate.collect { |reprint| { reprint.id => reprint.visual } }.push(@card.id => @card.image_url).to_json
       end
     end
   end
@@ -86,6 +86,6 @@ class CardsController < ApplicationController
   end
 
   def adv_search_params
-     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])
+    params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])
   end
 end

@@ -10,10 +10,9 @@
 #
 
 class Wishlist < ApplicationRecord
-
   validates :user, presence: true
   validates :name, presence: true
-  validates :name, uniqueness: { scope: :user_id, message: "User have already a wishlist with this name" }
+  validates :name, uniqueness: { scope: :user_id, message: 'User have already a wishlist with this name' }
 
   belongs_to :user
 

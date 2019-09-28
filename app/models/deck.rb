@@ -24,7 +24,7 @@ class Deck < ApplicationRecord
   include Bitfields
 
   validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
-  validates :name,    uniqueness: { scope: :user_id, message: "Vous possèdez déjà un deck avec ce nom !" }
+  validates :name,    uniqueness: { scope: :user_id, message: 'Vous possèdez déjà un deck avec ce nom !' }
   validates :user_id, presence: true
 
   belongs_to :user
@@ -42,11 +42,11 @@ class Deck < ApplicationRecord
   bitfield :color, 1 => :black, 2 => :red, 4 => :blue, 8 => :green, 16 => :white
 
   scope :publics, -> { where(is_public: true) }
-  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck#, :validate_formats
+  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck #, :validate_formats
 
   def colors
     colors = []
-    (color_ids|| []).each do |id|
+    (color_ids || []).each do |id|
       colors << Color::COLORS_MAPPING.invert[id].to_s
     end
     colors

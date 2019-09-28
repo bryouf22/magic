@@ -13,12 +13,10 @@ class Deck::AddCard
       else
         CardDeck.create(deck_id: deck.id, card_id: card_id, occurences_in_main_deck: 1, occurences_in_sideboard: 0)
       end
+    elsif (card_deck = deck.card_decks.where(card_id: card_ids).first)
+      card_deck.update_attributes(occurences_in_sideboard: (card_deck.occurences_in_sideboard + 1))
     else
-      if (card_deck = deck.card_decks.where(card_id: card_ids).first)
-        card_deck.update_attributes(occurences_in_sideboard: (card_deck.occurences_in_sideboard + 1))
-      else
-        CardDeck.create(deck_id: deck.id, card_id: card_id, occurences_in_main_deck: 0, occurences_in_sideboard: 1)
-      end
+      CardDeck.create(deck_id: deck.id, card_id: card_id, occurences_in_main_deck: 0, occurences_in_sideboard: 1)
     end
     deck.save
   end

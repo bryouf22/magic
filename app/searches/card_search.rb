@@ -3,7 +3,7 @@ require "searchlight/adapters/action_view"
 class CardSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
-  def initialize(raw_options = {}) #TODO REFACTOR THIS
+  def initialize(raw_options = {}) # TODO REFACTOR THIS
     super
     @user_cards = User.find(raw_options.delete('current_user_id')).card_collection.cards if raw_options['current_user_id']
   end
@@ -23,14 +23,14 @@ class CardSearch < Searchlight::Search
   def search_exclude_color_ids
     records = query
     exclude_color_ids.each do |id|
-      records = records.where.not(":color_id = ANY(color_ids)", color_id: id.to_i)
+      records = records.where.not(':color_id = ANY(color_ids)', color_id: id.to_i)
     end
     records
   end
 
   def search_term
     t = I18n.transliterate(term).downcase.parameterize
-    query.where("cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?", "%#{t.strip}%", "%#{t.strip}%")
+    query.where('cards.name_clean ILIKE ? OR cards.name_fr_clean ILIKE ?', "%#{t.strip}%", "%#{t.strip}%")
   end
 
   def search_extension_set_ids

@@ -7,7 +7,7 @@ class CardCollectionsController < ApplicationController
   def show
     @card_collection = current_user.card_collection
     if params['card_search'].present?
-      @search = CardSearch.new(search_params.merge(current_user_id: current_user.id)) # CardSearch.new({ extension_set_ids, [12, 24], current_user_id: 15 }
+      @search = CardSearch.new(search_params.merge(current_user_id: current_user.id))
       list_by_colors(@search.results)
     else
       @search = CardSearch.new
@@ -31,6 +31,6 @@ class CardCollectionsController < ApplicationController
   private
 
   def search_params
-     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])
+    params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])
   end
 end

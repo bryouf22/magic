@@ -10,17 +10,15 @@ class Deck::RemoveCard
 
     if remove_from == :main_deck
       occurences_in_main_deck = card_deck.occurences_in_main_deck
-      if occurences_in_main_deck == 1 && occurences_in_sideboard == 0
+      if occurences_in_main_deck == 1 && occurences_in_sideboard.zero?
         card_deck.destroy
       else
         card_deck.update_attributes(occurences_in_main_deck: (occurences_in_main_deck - 1))
       end
+    elsif occurences_in_sideboard == 1 && occurences_in_main_deck.zero?
+      card_deck.destroy
     else
-      if occurences_in_sideboard == 1 && occurences_in_main_deck == 0
-        card_deck.destroy
-      else
-        card_deck.update_attributes(occurences_in_sideboard: (occurences_in_sideboard - 1))
-      end
+      card_deck.update_attributes(occurences_in_sideboard: (occurences_in_sideboard - 1))
     end
     deck.save
   end

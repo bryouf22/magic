@@ -7,11 +7,12 @@ class Deck::CreateFromList
     @deck_id  = nil
 
     list.each do |entry|
-      if name_match = entry.match(/\/\/ NAME \: (.+)/)
+      if (name_match = entry.match(%r{\/\/ NAME \: (.+)}))
         @deck_id = Deck::Create.call(name: name_match[1], user_id: user_id).deck_id
       end
       next if entry.include?('//')
-      @deck_id = Deck::Create.call(name: nil, user_id: user_id).deck_id if @deck_id == nil
+
+      @deck_id = Deck::Create.call(name: nil, user_id: user_id).deck_id if @deck_id.nil?
       if card_match = entry.match(/(SB:\s)?(\d+)\s?x?\s(.+)/)
         add_in     = card_match[1].present? ? :sideboard : :main_deck
         occurences = card_match[2].to_i

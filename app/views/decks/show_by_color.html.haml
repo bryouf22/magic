@@ -28,7 +28,7 @@
       - cards.each_with_index do |card, index|
         %li
           %span= index == 0 ? "#{label} (#{cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum})" : '&nbsp;'.html_safe
-          = image_tag(card.visual, class: 'img-responsive')
+          = image_tag(card.image_url, class: 'img-responsive')
           %span.card-link= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
           %span.occur-number= "x #{@deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}"
 
@@ -38,7 +38,7 @@
   %ul.deck.cards-list.visual
     - @sideboards.decorate.each do |card|
       %li
-        = image_tag(card.visual, class: 'img-responsive')
+        = image_tag(card.image_url, class: 'img-responsive')
         %span.card-link= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
         %span.occur-number= @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
 

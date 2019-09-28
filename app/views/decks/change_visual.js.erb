@@ -1,5 +1,5 @@
 $('#edit-visual').modal('hide');
 $('li[data-card-id="<%= @initial_card.id %>"] input[value="<%= @initial_card.id %>"]').val("<%= @reprint_card.id %>");
-$('li[data-card-id="<%= @initial_card.id %>"] img').attr('src', "<%= @reprint_card.decorate.visual %>");
+$('li[data-card-id="<%= @initial_card.id %>"] img').attr('src', "<%= @reprint_card.image_url %>");
 $('li[data-card-id="<%= @initial_card.id %>"]').attr('data-card-id', "<%= @reprint_card.id %>");
 $('li[data-card-id="<%= @reprint_card.id %>"] .js-change-visual').data('cardId', "<%= @reprint_card.id %>");

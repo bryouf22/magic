@@ -1,5 +1,4 @@
 class Admin::BlocsController < AdminController
-
   skip_before_action :verify_authenticity_token, only: :bloc_order
 
   def create
@@ -21,4 +20,3 @@ class Admin::BlocsController < AdminController
     render body: nil, status: 200
   end
 end
-

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.3.3'
@@ -22,6 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'rubocop', require: false
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -34,48 +34,47 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '<= 1.1.0'
 gem 'actionpack-action_caching'
+gem 'bootsnap', '<= 1.1.0'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.8'
 end
 
 group :development do
-  gem 'binding_of_caller'
   gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
   gem 'chromedriver-helper'
+  gem 'selenium-webdriver'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'bootstrap-sass'
-gem 'jquery-rails'
 gem 'annotate'
-gem 'haml-rails'
-gem 'kaminari'
-gem 'draper'
-gem 'rubocop'
-gem 'httpclient'
+gem 'bitfields'
+gem 'bootstrap-sass'
 gem 'carrierwave', '~> 1.0'
-gem 'jquery-ui-rails'
 gem 'devise'
-gem 'searchlight'
-gem 'pg'
-gem "select2-rails"
-gem "font-awesome-rails"
-gem "interactor-rails", "~> 2.0"
-gem "bitfields"
+gem 'draper'
+gem 'font-awesome-rails'
+gem 'haml-rails'
+gem 'httpclient'
+gem 'interactor-rails', '~> 2.0'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'kaminari'
 gem 'pagy'
+gem 'pg'
+gem 'searchlight'
+gem 'select2-rails'
 
 # Capistrano
 gem 'capistrano', '~> 3.11'
-gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
+gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'

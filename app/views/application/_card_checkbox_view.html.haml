@@ -1,5 +1,5 @@
 - card_name   = card.title(show_rarity: true)
-- card_visual = { toggle: :popover, content: image_tag(card.visual) }
+- card_visual = { toggle: :popover, content: image_tag(card.image_url) }
 
 %li{ class: "js-color js-rarity", 'data-colors' => (card.color_ids || []).join('-') }
   .list-checkbox.hidden

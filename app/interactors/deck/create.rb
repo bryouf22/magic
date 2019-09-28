@@ -6,11 +6,11 @@ class Deck::Create
     name    = context.name || 'Nouveau deck'
     @user   = User.find(user_id)
 
-    if @user.decks.where(name: name).any?
-      deck = Deck.create(user_id: user_id, name: generate_name(name))
-    else
-      deck = Deck.create(user_id: user_id, name: name)
-    end
+    deck = if @user.decks.where(name: name).any?
+             Deck.create(user_id: user_id, name: generate_name(name))
+           else
+             Deck.create(user_id: user_id, name: name)
+           end
     context.deck_id = deck.id
   end
 
@@ -22,6 +22,6 @@ class Deck::Create
       index += 1
       break if @user.decks.where(name: "#{name} #{index}").none?
     end
-    return "#{name} #{index}"
+    "#{name} #{index}"
   end
 end

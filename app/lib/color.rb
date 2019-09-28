@@ -1,9 +1,9 @@
 class Color
-  COLORS_MAPPING = { red: 1, green: 2, black: 3, white: 4, blue: 5 }
+  COLORS_MAPPING = { red: 1, green: 2, black: 3, white: 4, blue: 5 }.freeze
 
   DECK_COLOR_MAPPING = {
     red: :r, green: :g, black: :b, white: :w, blue: :u
-  }
+  }.freeze
 
   MANA_COST_MAPPING = {
     w: :white,
@@ -11,16 +11,16 @@ class Color
     b: :black,
     r: :red,
     g: :green,
-    a: [:white, :blue],
-    c: [:blue, :black],
-    d: [:black, :red],
-    e: [:red, :green],
-    f: [:green, :white],
-    h: [:white, :black],
-    i: [:blue, :red],
-    j: [:black, :green],
-    k: [:red, :white],
-    l: [:green, :blue],
+    a: %i[white blue],
+    c: %i[blue black],
+    d: %i[black red],
+    e: %i[red green],
+    f: %i[green white],
+    h: %i[white black],
+    i: %i[blue red],
+    j: %i[black green],
+    k: %i[red white],
+    l: %i[green blue],
     m: [:white],
     n: [:blue],
     o: [:black],
@@ -32,7 +32,7 @@ class Color
     v: [:black],
     z: [:red],
     y: [:green]
-  }
+  }.freeze
 
   SYMBOL_FILE_MAPPING = {
     w: :w,
@@ -62,14 +62,14 @@ class Color
     z: :rp,
     y: :gp,
     Snow: 's'
-  }
+  }.freeze
 
   def self.mana_symbol(color)
     MANA_COST_MAPPING.invert[color.to_sym]
   end
 
   COLORS_MAPPING.each do |name, id|
-    define_singleton_method (name) do
+    define_singleton_method(name) do
       id
     end
   end

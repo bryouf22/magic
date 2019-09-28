@@ -11,7 +11,6 @@
 #
 
 class Alternative < ApplicationRecord
-
   belongs_to :card
   belongs_to :alternative_card, class_name: 'Card'
 

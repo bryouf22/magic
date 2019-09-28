@@ -47,16 +47,16 @@ class Card < ApplicationRecord
   scope :only_blue,               -> { where(color_ids: [Color.blue])  }
   scope :only_white,              -> { where(color_ids: [Color.white]) }
   scope :only_black,              -> { where(color_ids: [Color.black]) }
-  scope :gold,                    -> { where("array_length(color_ids, 1) >= 2") }
+  scope :gold,                    -> { where('array_length(color_ids, 1) >= 2') }
   scope :colorless,               -> { where('color_ids is ?', nil) }
-  scope :red,                     -> { where("? = ANY(color_ids)", Color.red)}
-  scope :blue,                    -> { where("? = ANY(color_ids)", Color.blue)}
-  scope :black,                   -> { where("? = ANY(color_ids)", Color.black)}
-  scope :green,                   -> { where("? = ANY(color_ids)", Color.green)}
-  scope :white,                   -> { where("? = ANY(color_ids)", Color.white)}
+  scope :red,                     -> { where('? = ANY(color_ids)', Color.red)}
+  scope :blue,                    -> { where('? = ANY(color_ids)', Color.blue)}
+  scope :black,                   -> { where('? = ANY(color_ids)', Color.black)}
+  scope :green,                   -> { where('? = ANY(color_ids)', Color.green)}
+  scope :white,                   -> { where('? = ANY(color_ids)', Color.white)}
   scope :colorless_artefact,      -> { where('color_ids is ?', nil).also_artefacts }
   scope :also_artefacts,          -> { where(card_type: [5, 6]) }
-  scope :colorless_non_artefact,  -> { colorless.where("cards.card_type NOT IN (2, 5, 6) OR cards.card_type IS NULL") }
+  scope :colorless_non_artefact,  -> { colorless.where('cards.card_type NOT IN (2, 5, 6) OR cards.card_type IS NULL') }
   scope :basic_lands,             -> { where('name in (?)', BASIC_LANDS_NAMES) }
   scope :creatures,               -> { where('card_type in (?)', [4, 6]) }
   scope :others,                  -> { where('card_type in (?)', [1, 3, 5, 6, 7, 8, 9, 10, nil]) }
@@ -71,14 +71,14 @@ class Card < ApplicationRecord
     enchantement:       7,
     planeswalker:       8,
     tribal:             9,
-    other:              10,
+    other:              10
   }
 
   enum rarity: {
-    common:   1,
-    uncommon: 2,
-    rare:     3,
-    mythic:   4,
+    common:      1,
+    uncommon:    2,
+    rare:        3,
+    mythic:      4,
     timeshifted: 5
   }
 
@@ -92,12 +92,12 @@ class Card < ApplicationRecord
 
   before_create :set_colors, :clean_names
   before_save   :set_colors, :set_type
-  before_save   :rename, if: Proc.new { |card| card.has_alternative? && !card.name.include?('/') }
+  before_save   :rename, if: proc { |card| card.has_alternative? && !card.name.include?('/') }
 
   mount_uploader :image,    CardImageUploader
   mount_uploader :image_fr, CardImageUploader
 
-  validates_uniqueness_of :gatherer_id, unless: Proc.new { |c| c.has_alternative? || c.is_alternative? }
+  validates_uniqueness_of :gatherer_id, unless: proc { |c| c.has_alternative? || c.is_alternative? }
 
   BASIC_LANDS_NAMES = [
     'Snow-Covered Island',
@@ -110,17 +110,7 @@ class Card < ApplicationRecord
     'Mountain',
     'Forest',
     'Plains'
-  ]
-
-  def icone_url
-    case rarity
-    when 'commun'
-    when 'uncommun'
-    when 'rare'
-    when 'mythic'
-    else
-    end
-  end
+  ].freeze
 
   def colorless?
     !color_ids.present?
@@ -128,6 +118,7 @@ class Card < ApplicationRecord
 
   def colors
     return [] unless color_ids.present?
+
     colors = []
     color_ids.each do |id|
       colors << Color::COLORS_MAPPING.invert[id].to_s
@@ -158,27 +149,26 @@ class Card < ApplicationRecord
       end
     else
       Color::MANA_COST_MAPPING.each do |mana_c, colors|
-        if mana_cost&.include?(mana_c.to_s)
-          Array.wrap(colors).each do |color|
-            c_ids << Color.__send__(color)
-          end
+        next unless mana_cost&.include?(mana_c.to_s)
+
+        Array.wrap(colors).each do |color|
+          c_ids << Color.__send__(color)
         end
       end
     end
     self['color_ids'] = c_ids.any? ? c_ids.uniq.sort : nil
   end
 
-
   def set_type
     self.card_type = :other
-    self.card_type = :creature_artifact if self.detailed_type&.include?('Artifact Creature')
-    self.card_type = :artifact          if self.detailed_type&.include?('Artifact')
-    self.card_type = :land              if self.detailed_type&.include?('Land') || basic_land?
-    self.card_type = :creature          if self.detailed_type&.include?('Creature')
+    self.card_type = :creature_artifact if detailed_type&.include?('Artifact Creature')
+    self.card_type = :artifact          if detailed_type&.include?('Artifact')
+    self.card_type = :land              if detailed_type&.include?('Land') || basic_land?
+    self.card_type = :creature          if detailed_type&.include?('Creature')
   end
 
   def rename
-    self[:name] = "#{name} / #{alternative.alternative_card.name}"
+    self[:name]       = "#{name} / #{alternative.alternative_card.name}"
     self[:name_clean] = name.parameterize
   end
 end

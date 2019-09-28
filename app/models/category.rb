@@ -10,10 +10,9 @@
 #
 
 class Category < ApplicationRecord
-
   belongs_to :user
 
   has_many :decks
 
-  validates :name, uniqueness: { scope: :user_id, message: "Vous possèdez déjà une catégorie avec ce nom !" }
+  validates :name, uniqueness: { scope: :user_id, message: 'Vous possédez déjà une catégorie avec ce nom !' }
 end
