@@ -2,6 +2,7 @@ class Exporter::ExportUsers
   include Interactor
 
   def call
+    export_path = context.export_path.presence || "#{Rails.root}/export.xml"
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.root {
         User.find_each do |user|
@@ -32,7 +33,7 @@ class Exporter::ExportUsers
         end
       }
     end
-    File.open("#{Rails.root}/export.xml", 'w+') do |file|
+    File.open(export_path, 'w+') do |file|
       file.write builder.to_xml
     end
   end
