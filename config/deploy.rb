@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "magic"
-set :repo_url, "git@github.com:bryouf-22/magic.git"
+set :repo_url, "git@github.com:bryouf22/magic.git"
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
