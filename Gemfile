@@ -59,7 +59,7 @@ gem 'annotate'
 gem 'bitfields'
 gem 'bootstrap-sass'
 gem 'carrierwave', '~> 1.0'
-gem 'devise'
+gem "devise", ">= 4.7.1"
 gem 'draper'
 gem 'font-awesome-rails'
 gem 'haml-rails'
