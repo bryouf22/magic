@@ -2,7 +2,8 @@
 lock "~> 3.11.0"
 
 set :application, "magic"
-set :repo_url, "git@github.com:bryouf22/magic.git"
+set :repo_url, "https://github.com/bryouf22/magic.git"
+
 # Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
@@ -47,4 +48,4 @@ set :keep_releases, 5
 # set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
-set :ssh_options, verify_host_key: :always
+# set :ssh_options, verify_host_key: :secure
