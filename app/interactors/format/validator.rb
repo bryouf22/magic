@@ -8,12 +8,8 @@ class Format::Validator
 
     (deck.nil? ? Deck.all : Deck.where(id: deck.id)).find_each do |d|
       (format.nil? ? Format.all : Format.where(id: format.id)).find_each do |f|
-        validaty = validate_format(f, d)
-        if validaty
-          FormatDeck.create(format_id: f.id, deck_id: d.id) if d.format_decks.where(format_id: f.id).none?
-        else
-          d.format_decks.where(format_id: f.id).destroy_all
-        end
+        d.__send__("#{f.name.downcase}=", validate_format(f, d))
+        d.save
       end
     end
   end

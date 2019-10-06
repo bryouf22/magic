@@ -6,9 +6,9 @@
     %small= @deck.id
 %p
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
-  - if @deck.formats.any?
+  - if @deck.format.positive?
     , Format(s):
-    = @deck.formats.collect(&:name).join(', ')
+    = @deck.formats
 - if @deck.user_id == current_user&.id
   %p
     = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'

@@ -12,6 +12,6 @@
           = link_to deck.user.name, user_path(id: deck.user.id)
         .col-sm-2
           = show_mana_cost(deck)
-        .col-sm-3= deck.formats.collect(&:name).join(', ')
+        .col-sm-3= deck.formats
 - else
   %p Il n'y a aucun deck public actuellement.

@@ -24,7 +24,7 @@
           .col-sm-2= deck.category&.name
           .col-sm-2
             = show_mana_cost(deck)
-          .col-sm-2= deck.formats.collect(&:name).join(', ')
+          .col-sm-2= deck.formats
           .col-sm-1
             - if deck.is_public?
               %span.glyphicon.glyphicon-eye-open

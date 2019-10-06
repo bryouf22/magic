@@ -6,9 +6,9 @@
     %small= @deck.id
 %p
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
-  - if @deck.formats.any?
+  - if @deck.format.positive?
     , Format(s):
-    = @deck.formats.collect(&:name).join(', ')
+    = @deck.formats
 - if params['export_format'] == 'apprentice'
   = link_to 'Format MV', export_deck_path(@deck.id), class: 'btn btn-xs btn-primary'
 - else

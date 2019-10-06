@@ -33,9 +33,6 @@ class Deck < ApplicationRecord
   has_many :card_decks, dependent: :destroy
   has_many :cards, through: :card_decks
 
-  has_many :format_decks, dependent: :destroy
-  has_many :formats, through: :format_decks
-
   enum status: { personal: 1, published: 2 }
 
   bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander
@@ -58,6 +55,10 @@ class Deck < ApplicationRecord
 
   def validate_formats
     Format::Validator.call(deck: self)
+  end
+
+  def formats
+    bitfield_values(:format).collect { |n, v| n if v }.compact.join(', ').humanize
   end
 
   private
