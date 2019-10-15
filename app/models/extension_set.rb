@@ -2,18 +2,21 @@
 #
 # Table name: extension_sets
 #
-#  id           :bigint           not null, primary key
-#  name         :string
-#  release_date :datetime
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  slug         :string
-#  set_type     :integer
-#  order        :integer
-#  bloc_id      :integer
-#  set_list_id  :integer
-#  bad_visual   :boolean
-#  code         :string
+#  id             :bigint           not null, primary key
+#  name           :string
+#  release_date   :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  slug           :string
+#  set_type       :integer
+#  order          :integer
+#  bloc_id        :integer
+#  set_list_id    :integer
+#  bad_visual     :boolean
+#  code           :string
+#  card_count     :integer
+#  new_card_count :integer
+#  reprint_count  :integer
 #
 
 class ExtensionSet < ApplicationRecord

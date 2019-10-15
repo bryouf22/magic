@@ -34,6 +34,7 @@
 #  color_indicator  :string
 #  loyalty          :integer
 #  format           :integer          default(0), not null
+#  first_edition    :boolean
 #
 
 require 'rails_helper'

@@ -2,6 +2,11 @@
   %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
   = @set.name
 
+%p
+  = @set.card_count
+  = @set.new_card_count
+  = @set.reprint_count
+
 
 .views-selection
   = 'vue normal |'
