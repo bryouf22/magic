@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   post   'ma-liste:id/mettre-a-jour',        to: 'wishlists#update',                   as: :update_wishlist
   get    'ma-liste-:id',                     to: 'wishlists#show',                     as: :wishlist
 
-  get    'utilisateurs/:id',                 to:'users#show',                          as: :user
+  get    'utilisateurs/:id',                 to: 'users#show',                         as: :user
 
   post   '/ajouter',                         to: 'cards#add_to',                       as: :add_to
 

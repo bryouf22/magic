@@ -6,7 +6,7 @@ class DecksController < ApplicationController
   before_action :authenticate_user!, except: [:public_decks, :public_deck_show, :copy_public_deck]
 
   def user_decks
-    @pagy, @decks = pagy(current_user.decks.order('category_id ASC'), items: 20)
+    @pagy, @decks = pagy(current_user.decks.order('name ASC'), items: 20)
   end
 
   def new

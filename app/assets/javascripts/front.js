@@ -6,7 +6,7 @@ $(document).ready(function() {
     template: '<div class="popover" role="tooltip"><div class="popover-content"></div></div>',
   });
 
-  $('.datepicker').datepicker();
+  $('.datepicker').datetimepicker({ format: 'L' } );
 
   $('#menu-card-search input').on('keypress', function (e) {
     if (e.which == 13) {
@@ -20,7 +20,7 @@ $(document).ready(function() {
     $('.list-checkbox').addClass('hidden');
     $('.card-link').removeClass('hidden');
     $('.selection-mode').addClass('hidden');
-    $(this).removeClass('js-unactivate-selection-mode').addClass('js-activate-selection-mode').html('mode sélection');
+    $(this).removeClass('js-unactivate-selection-mode').addClass('js-activate-selection-mode').html('mode s¨¦lection');
   });
 
   $('body').on('click', '.js-activate-selection-mode', function (e) {
@@ -213,15 +213,6 @@ $(document).ready(function() {
       openPopover($(this));
     }
   });
-
-  $( "#sortable" ).sortable({
-    items: ".bloc-row",
-    cursor: "move",
-    axis: "y",
-    update: function() {
-      $.post($(this).data('update-url'), $(this).sortable('serialize'));
-    }
-  }).disableSelection();
 
   $('.js-change-visual').on('click', function (e) {
     e.preventDefault();

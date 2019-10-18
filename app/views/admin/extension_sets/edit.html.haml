@@ -4,7 +4,10 @@
     = form.text_field(:name, class: 'form-control')
   .form-group
     = label_tag(:extension_set_release_date, 'Date de sortie :')
-    = form.text_field(:release_date, class: 'datepicker form-control')
+    .input-group.date.datepicker
+      = form.text_field(:release_date, class: 'form-control')
+      %span.input-group-addon
+        %span.glyphicon.glyphicon-calendar
   .form-group
     = label_tag(:extension_set_set_type, 'Type :')
     - options = options_for_select(ExtensionSet.set_types.collect { |label, value| [I18n.t("enum.extension_set.set_type.#{label}"), label] }, @set.set_type)

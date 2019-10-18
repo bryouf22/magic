@@ -1,4 +1,4 @@
-= link_to '< retour', user_decks_path
+= link_to 'retour', user_my_deck_path(@deck)
 
 = render partial: 'deck_form', locals: { deck: @deck, method: :patch, url: update_deck_path(slug: @deck.slug) }
 
@@ -30,8 +30,6 @@ Sideboard :
     .modal-content
       .modal-body
         %ul
-
-/ http://manos.malihu.gr/code-example/horizontal-custom-scrollbar-tutorial/
 
 .hidden
   = form_for(:change_visual, url: deck_change_visual_path(format: :js), remote: true, html: { class: 'js-form-change-visual' }) do |form|

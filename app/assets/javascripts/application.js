@@ -13,9 +13,10 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery
-//= require jquery-ui/widgets/datepicker
-//= require jquery-ui
 //= require bootstrap
 //= require select2
 //= require select2_locale_fr
+//= require moment
+//= require moment/fr
+//= require bootstrap-datetimepicker
 //= require_tree .
