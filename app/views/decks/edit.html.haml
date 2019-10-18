@@ -1,4 +1,4 @@
-= link_to 'retour', user_my_deck_path(@deck)
+= link_to 'retour', my_deck_path(@deck)
 
 = render partial: 'deck_form', locals: { deck: @deck, method: :patch, url: update_deck_path(slug: @deck.slug) }
 
