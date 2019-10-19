@@ -1,26 +1,25 @@
 = link_to '< retour', user_decks_path
 
-%h1
-  #{@deck.name}
-  - if current_user.is_admin?
-    %small= @deck.id
+%h3= @deck.name
+
 %p
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
   - if @deck.format.positive?
     , Format(s):
     = @deck.formats
-- if @deck.user_id == current_user&.id
-  %p
+
+%p
+  - if @deck.user_id == current_user&.id
     = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
     = link_to 'vue avancée', detail_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
     = link_to 'Exporter', export_deck_path(@deck.id), class: 'btn btn-xs btn-primary'
-    = link_to 'Générer des boosters', generate_draft_path(@deck.id), class: 'btn btn-xs btn-primary'
-    = link_to 'Tri par couleur', my_deck_by_color_path(@deck.slug), class: 'btn btn-xs btn-primary'
-- elsif current_user&.id
-  %p
+    = #link_to 'Générer des boosters', generate_draft_path(@deck.id), class: 'btn btn-xs btn-primary'
+    = link_to 'Affichage classique', my_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary'
+  - elsif current_user&.id
     = link_to 'copier le deck', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
 
 - main_cards_count = @main_cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum
+
 = "Main (#{main_cards_count}) :"
 %ul.deck.cards-list.visual
   - [:only_green, :only_red, :only_blue, :only_white, :only_black, :gold, :colorless].each do |color|

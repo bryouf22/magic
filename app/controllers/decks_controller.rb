@@ -3,7 +3,7 @@ require 'pagy'
 class DecksController < ApplicationController
   include Pagy::Backend
 
-  before_action :authenticate_user!, except: [:public_decks, :public_deck_show, :copy_public_deck]
+  before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
   def user_decks
     @pagy, @decks = pagy(current_user.decks.order('name ASC'), items: 20)
@@ -98,22 +98,27 @@ class DecksController < ApplicationController
   end
 
   def manage_card
-    # TODO : check current deck / current user
-    @deck_id = params["deck"]["deck_id"]
-    @card_id = params["deck"]["card_id"]
-    @operator_in = (params["deck"]['operator'].include?('maindeck') ? :main_deck : :sideboard)
-    if params["deck"]['operator'].include?("plus")
-      @operator = "add"
+    @deck_id = params['deck']['deck_id']
+    @card_id = params['deck']['card_id']
+    deck     = Deck.find(@deck_id)
+
+    return render js: nil if current_ser&.id != deck.user_id
+
+    @operator_in = (params['deck']['operator'].include?('maindeck') ? :main_deck : :sideboard)
+
+    if params['deck']['operator'].include?('plus')
+      @operator = 'add'
       Deck::AddCard.call(deck_id: @deck_id, card_id: @card_id, in: @operator_in)
-    elsif params["deck"]['operator'].include?("minus")
-      @operator = "remove"
+    elsif params['deck']['operator'].include?('minus')
+      @operator = 'remove'
       Deck::RemoveCard.call(deck_id: @deck_id, card_id: @card_id, from: @operator_in)
-    elsif params["deck"]['operator'].include?('move')
+    elsif params['deck']['operator'].include?('move')
       Deck::MoveCard.call(deck_id: @deck_id, card_id: @card_id, move_in: @operator_in)
-      @operator = "move"
+      @operator = 'move'
     end
-    deck = Deck.find(@deck_id)
+
     Format::Validator.call(deck: deck)
+
     respond_to do |format|
       format.html { redirect_to edit_deck_path(slug: deck.slug) }
       format.js

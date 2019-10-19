@@ -3,13 +3,11 @@
 = link_to new_deck_path, class: 'btn btn-xs btn-primary' do
   %span.glyphicon.glyphicon-plus
   Créer un deck
-%br
-%br
+= ''
 = link_to import_deck_path, class: 'btn btn-xs btn-success' do
   %span.glyphicon.glyphicon-arrow-down
   Importer un deck
-%br
-%br
+= ''
 = link_to categories_path, class: 'btn btn-xs btn-primary' do
   %span.glyphicon.glyphicon-plus
   Organiser les catégories
@@ -20,7 +18,7 @@
     %ul
       - @decks.each do |deck|
         %li.row
-          .col-sm-3= link_to deck.name, my_deck_path(id: deck.id)
+          .col-sm-3= link_to deck.name.truncate(35), my_deck_path(id: deck.id)
           .col-sm-2= deck.category&.name
           .col-sm-2
             = show_mana_cost(deck)

@@ -1,14 +1,13 @@
-= link_to '< retour', user_decks_path
+= link_to 'retour', user_decks_path
 
-%h1
-  #{@deck.name}
-  - if current_user.is_admin?
-    %small= @deck.id
+%h3= @deck.name
+
 %p
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
   - if @deck.format.positive?
     , Format(s):
     = @deck.formats
+
 - if params['export_format'] == 'apprentice'
   = link_to 'Format MV', export_deck_path(@deck.id), class: 'btn btn-xs btn-primary'
 - else

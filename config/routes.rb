@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  default_url_options :host => "localhost:3000"
+  default_url_options :host => 'localhost:3000'
 
   devise_scope :user do
-    get    "/connection"                       => "devise/sessions#new" # custom path to login/sign_in
-    get    "/inscription"                      => "devise/registrations#new",            as: "new_user_registration" # custom path to sign_up/registration
+    get    '/connection'                       => 'devise/sessions#new' # custom path to login/sign_in
+    get    '/inscription'                      => 'devise/registrations#new',         as: :new_user_registration # custom path to sign_up/registration
   end
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
@@ -80,11 +80,11 @@ Rails.application.routes.draw do
     resources :users
 
     resources :set_lists
-    resources :blocs, except: [:new, :show, :edit, :update]
+    resources :blocs, except: %i[new show edit update]
 
     resources :formats
 
-    post   'deck-validity',                    to: 'welcome#deck_validity',              as: :deck_validity
-    post   '/bloc_order',                      to: 'blocs#bloc_order'
+    post   'deck-validity', to: 'welcome#deck_validity', as: :deck_validity
+    post   '/bloc_order',   to: 'blocs#bloc_order'
   end
 end

@@ -19,11 +19,11 @@
 Main :
 %ul.cards-list.visual.main-deck.edition
   - @main_cards.decorate.each do |card|
-    = render partial: 'card_in_maindeck', locals: { card: card, deck: @deck }
+    = render partial: 'decks/edit/card_in_maindeck', locals: { card: card, deck: @deck }
 Sideboard :
 %ul.cards-list.visual.side-board.edition
   - @sideboards.decorate.each do |card|
-    = render partial: 'card_in_sideboard', locals: { card: card, deck: @deck }
+    = render partial: 'decks/edit/card_in_sideboard', locals: { card: card, deck: @deck }
 
 #edit-visual.modal.fade{ role: :dialog, tabindex: "-1" }
   .modal-dialog{ role: :document }

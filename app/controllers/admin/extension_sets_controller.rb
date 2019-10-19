@@ -1,9 +1,8 @@
 class Admin::ExtensionSetsController < AdminController
-  before_action :find_set, only: [:show, :edit, :update]
+  before_action :find_set, only: %i[show edit update]
 
   def index
-    @blocs = Bloc.all.order('blocs.bloc_order ASC')
-    set_by_type(ExtensionSet.all.order('set_type ASC, release_date DESC'))
+    @sets = ExtensionSet.all.order('release_date DESC')
   end
 
   def show
