@@ -6,11 +6,11 @@ class CardCollection::RetrieveMissingCardFromDeck
     deck = Deck.find(context.deck_id)
 
     resultat = {}
-    deck.card_ids.each do |card_id|
-      if(card_list = user.card_collection.card_lists.where(card_id: card_id).first)
-        resultat[card_id] = card_list.number + card_list.foils_number
+    deck.cards.each do |card|
+      if user.card_collection.card_lists.where(card_id: [card.id, card.reprint_cards.ids].flatten).any?
+        resultat[card.id] = user.card_collection.card_lists.where(card_id: [card.id, card.reprint_cards.ids].flatten).sum { |c| c.number.to_i + c.foils_number.to_i }
       else
-        resultat[card_id] = 0
+        resultat[card.id] = 0
       end
     end
     context.resultat = resultat
