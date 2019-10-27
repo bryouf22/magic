@@ -102,7 +102,7 @@ class DecksController < ApplicationController
     @card_id = params['deck']['card_id']
     deck     = Deck.find(@deck_id)
 
-    return render js: nil if current_ser&.id != deck.user_id
+    return render js: nil if current_user&.id != deck.user_id
 
     @operator_in = (params['deck']['operator'].include?('maindeck') ? :main_deck : :sideboard)
 

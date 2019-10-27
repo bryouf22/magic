@@ -4,7 +4,5 @@
     - @user.decks.publics.each do |deck|
       %li.row
         .col-sm-4= link_to deck.name, public_deck_path(deck.id)
-        .col-sm-2
-          - deck.colors.each do |color|
-            = image_tag(mana_img_path(Color.mana_symbol(color)), class: 'mana-xs')
+        .col-sm-2= show_mana_cost(deck)
         .col-sm-3= deck.formats

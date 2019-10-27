@@ -14,4 +14,8 @@ class CardDecorator < Draper::Decorator
 
     (show_extension ? "#{title}, #{card.extension_set.name}" : title).html_safe
   end
+
+  def name_with_extension
+    "#{name} - #{extension_set.name}"
+  end
 end

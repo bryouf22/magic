@@ -71,6 +71,7 @@ gem 'pagy'
 gem 'pg'
 gem 'searchlight'
 gem 'select2-rails'
+gem 'chartkick', '~> 3.2', '>= 3.2.1'
 
 # Capistrano
 gem 'capistrano', '~> 3.11'

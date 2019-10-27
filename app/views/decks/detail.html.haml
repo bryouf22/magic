@@ -12,28 +12,32 @@ Main :
   %thead
     %tr
       %td.col-md-3 Nom
-      %td.col-md-4 Occurances
-      %td.col-md-4 Manquante(s)
-      %td.col-md-1s
+      %td.col-md-3
+      %td.col-md-2 Manquante(s)
   %tbody
     - card_in_collection = CardCollection::RetrieveMissingCardFromDeck.call(deck_id: @deck.id, user_id: current_user.id).resultat
 
-    - @main_cards.decorate.each do |card|
+    - sort_cards_by_type(@main_cards.decorate).each do |card|
       - occurrence_in_deck = @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck.to_i
       %tr
-        %td= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id)
-        %td= @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck
         %td
-          = occurrence_in_deck - card_in_collection[card.id] < 0 ? 0 : occurrence_in_deck - card_in_collection[card.id]
+          = link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
+          = "x #{occurrence_in_deck - card_in_collection[card.id] < 0 ? 0 : occurrence_in_deck - card_in_collection[card.id]}"
           - card_in_collection[card.id] -= occurrence_in_deck
-
+        %td= show_mana_cost(card)
+        %td= @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck
 
     - if @sideboards.any?
-      - @sideboards.decorate.each do |card|
+      %tr
+        %td{ colspan: 3 } Sideboard
+      - sort_cards_by_type(@sideboards.decorate).each do |card|
         - occurrence_in_deck = @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard.to_i
         %tr
           %td
-            = link_to "#{card.title(show_rarity: true)}".html_safe, extension_set_card_path(slug: card.extension_set.slug, id: card.id)
-            sideboard
+            = link_to "#{card.title(show_rarity: true)}".html_safe, extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
+            = "x #{occurrence_in_deck - card_in_collection[card.id]}"
+          %td= show_mana_cost(card)
           %td= @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
-          %td= occurrence_in_deck - card_in_collection[card.id]
+
+= color_graph(@deck)
+= converted_mana_cost_graph(@deck)

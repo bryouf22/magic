@@ -161,6 +161,8 @@ class Card < ApplicationRecord
   end
 
   def set_type
+    # TODO
+    # TODO
     self.card_type = :other
     self.card_type = :creature_artifact if detailed_type&.include?('Artifact Creature')
     self.card_type = :artifact          if detailed_type&.include?('Artifact')

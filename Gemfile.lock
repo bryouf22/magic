@@ -104,6 +104,7 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chartkick (3.2.1)
     childprocess (1.0.1)
       rake (< 13.0)
     chromedriver-helper (2.1.1)
@@ -358,6 +359,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.1, >= 2.1.4)
   capybara (>= 2.15)
   carrierwave (~> 1.0)
+  chartkick (~> 3.2, >= 3.2.1)
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise (>= 4.7.1)

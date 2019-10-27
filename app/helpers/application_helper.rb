@@ -1,6 +1,19 @@
 module ApplicationHelper
   include Pagy::Frontend
 
+  TYPE_ORDER = {
+    creature:           1,
+    creature_artifact:  2,
+    planeswalker:       3,
+    instant:            4,
+    sorcery:            5,
+    enchantement:       6,
+    tribal:             7,
+    artifact:           8,
+    land:               9,
+    other:              10
+  }
+
   def pretty_checkbox(name, options = {})
     # TODO : recup args dans un hash
     # puis faire un delete de pretty class/label et passer le reste au helper checkbox
@@ -21,14 +34,6 @@ module ApplicationHelper
     end
   end
 
-  def mana_img_path(c)
-    if c.to_s.to_i.to_s == c
-      "card_symboles/#{c}.jfif"
-    else
-      "card_symboles/#{Color::SYMBOL_FILE_MAPPING[c.to_sym]}.jfif"
-    end
-  end
-
   def sort_deck_cards(cards)
     { 'Créatures' => cards.creatures.decorate, 'Autres' => cards.others.decorate, 'Terrains' => cards.land.decorate }.reject { |k, v| v.none? }
   end
@@ -38,6 +43,19 @@ module ApplicationHelper
       "#{number}#{I18n.t('ordinalizer')[0]}"
     else
       "#{number}#{I18n.t('ordinalizer')[1]}"
+    end
+  end
+
+  def sort_cards_by_type(cards)
+    cards.sort do |card, another|
+      case
+      when TYPE_ORDER[card.card_type.to_sym] < TYPE_ORDER[another.card_type.to_sym]
+        -1
+      when TYPE_ORDER[card.card_type.to_sym] > TYPE_ORDER[another.card_type.to_sym]
+        1
+      else
+        card.name <=> another.name
+      end
     end
   end
 
