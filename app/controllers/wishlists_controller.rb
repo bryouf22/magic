@@ -57,11 +57,6 @@ class WishlistsController < ApplicationController
 
     list_by_colors(@wishlist.cards)
     add_breadcrumb @wishlist.name, wishlist_path(slug: @wishlist.slug)
-    if view == 'visual'
-      render :visual
-    end
-    @wishlist = current_user.wishlists.where(name: params['name']).first
-    list_by_colors(@wishlist.cards)
     render :visual if view == 'visual'
     set_meta_tags title: @wishlist.name
   end

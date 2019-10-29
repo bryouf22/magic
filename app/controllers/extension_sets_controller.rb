@@ -4,6 +4,7 @@ class ExtensionSetsController < ApplicationController
   add_breadcrumb "Extensions", :extension_sets_path
 
   def index
+    set_meta_tags title: "Extensions"
     @block_sets = []
     ExtensionSet.set_types.to_a.collect { |type| type.last }.each do |type|
       next if ExtensionSet.where(set_type: type).none?
@@ -36,6 +37,7 @@ class ExtensionSetsController < ApplicationController
     list_by_colors(@set.cards.order('name_fr_clean ASC'))
     render :visual if view == 'visual'
     add_breadcrumb @set.name, extension_set_path(slug: @set.slug)
+    set_meta_tags title: @set.name
   end
 
   def search_params
