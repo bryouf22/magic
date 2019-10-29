@@ -49,11 +49,11 @@ Rails.application.routes.draw do
 
   get    'mes-listes',                       to: 'wishlists#index',                    as: :wishlists
   get    'nouvelle-liste',                   to: 'wishlists#new',                      as: :new_wishlist
-  get    'ma-liste-:id/editer',              to: 'wishlists#edit',                     as: :edit_wishlist
+  get    'ma-liste/:slug/editer',            to: 'wishlists#edit',                     as: :edit_wishlist
   put    'nouvelle-liste',                   to: 'wishlists#create',                   as: :create_wishlist
-  delete 'ma-list-id/supprimer',             to: 'wishlists#destroy',                  as: :destroy_wishlist
-  post   'ma-liste:id/mettre-a-jour',        to: 'wishlists#update',                   as: :update_wishlist
-  get    'ma-liste-:id',                     to: 'wishlists#show',                     as: :wishlist
+  delete 'ma-liste/:slug/supprimer',         to: 'wishlists#destroy',                  as: :destroy_wishlist
+  post   'ma-liste/:slug/mettre-a-jour',     to: 'wishlists#update',                   as: :update_wishlist
+  get    'ma-liste/:slug',                   to: 'wishlists#show',                     as: :wishlist
 
   get    'utilisateurs/:id',                 to: 'users#show',                         as: :user
 

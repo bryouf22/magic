@@ -7,6 +7,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     redirect_to user_account_path
   end
 
+  def edit
+    add_breadcrumb "home", :root_path
+    add_breadcrumb "Mon compte", :user_account_path
+    add_breadcrumb "Édition"
+  end
+
   protected
 
   def user_params

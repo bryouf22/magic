@@ -2,25 +2,29 @@ class WishlistsController < ApplicationController
 
   before_action :authenticate_user!
 
+  add_breadcrumb "home", :root_path
+  add_breadcrumb "Listes de souhaits", :wishlists_path
+
   def index
     @wishlists = current_user.wishlists
   end
 
   def new
     @wishlist = Wishlist.new(user_id: current_user.id)
+    add_breadcrumb "Nouvelle liste"
   end
 
   def create
     @wishlist = Wishlist.create(wishlist_params.merge('user_id' => current_user.id))
     if @wishlist.valid?
-      redirect_to wishlist_path(id: @wishlist)
+      redirect_to wishlist_path(slug: @wishlist.slug)
     else
       render :new
     end
   end
 
   def update
-    wishlist = current_user.wishlists.where(id: params['id']).first
+    wishlist = current_user.wishlists.where(slug: params['slug']).first
     params['card_lists']&.each do |card_id|
       Wishlist::AddCards.call(wishlist_id: wishlist.id, card_id: card_id)
     end
@@ -32,22 +36,26 @@ class WishlistsController < ApplicationController
   end
 
   def edit
-    @wishlist = current_user.wishlists.where(id: params['id']).first
+    @wishlist = current_user.wishlists.where(slug: params['slug']).first
+    add_breadcrumb @wishlist.name, wishlist_path(slug: @wishlist.slug)
+    add_breadcrumb "Édition"
   end
 
   def destroy
-    if (wishlist = current_user.wishlists.where(id: params['id']).first)
+    if (wishlist = current_user.wishlists.where(slug: params['slug']).first)
       wishlist.destroy
       redirect_to wishlists_path
     end
   end
 
   def show
-    @wishlist = Wishlist.find(params['id'])
-    return redirect_to wishlists_path if current_user.id != @wishlist.user_id
+    @wishlist = current_user.wishlists.where(slug: params['slug']).first
 
     list_by_colors(@wishlist.cards)
-    render :visual if view == 'visual'
+    add_breadcrumb @wishlist.name, wishlist_path(slug: @wishlist.slug)
+    if view == 'visual'
+      render :visual
+    end
   end
 
   private

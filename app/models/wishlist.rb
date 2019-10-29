@@ -7,6 +7,7 @@
 #  updated_at :datetime         not null
 #  user_id    :integer
 #  name       :string
+#  slug       :string           not null
 #
 
 class Wishlist < ApplicationRecord
@@ -18,4 +19,13 @@ class Wishlist < ApplicationRecord
 
   has_many :card_lists, as: :card_listable
   has_many :cards, through: :card_lists
+
+  before_save :update_slug
+
+  private
+
+  def update_slug
+    self[:slug] = name.parameterize
+  end
+
 end

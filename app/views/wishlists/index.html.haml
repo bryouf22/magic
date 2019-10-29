@@ -11,8 +11,8 @@
     %table.table.table-hover
       - @wishlists.each do |wishlist|
         %tr
-          %td.col-sm-4= link_to wishlist.name, wishlist_path(id: wishlist.id)
-          %td.col-sm-4= link_to 'editer', edit_wishlist_path(id: wishlist.id)
-          %td.col-sm-4= link_to 'supprimer', destroy_wishlist_path(id: wishlist.id), method: 'delete'
+          %td.col-sm-4= link_to wishlist.name, wishlist_path(slug: wishlist.slug)
+          %td.col-sm-4= link_to 'editer', edit_wishlist_path(slug: wishlist.slug)
+          %td.col-sm-4= link_to 'supprimer', destroy_wishlist_path(slug: wishlist.slug), method: 'delete'
 - else
   %p Vous n'avez aucune liste

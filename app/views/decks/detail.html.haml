@@ -5,7 +5,6 @@
 - if @deck.user_id == current_user.id
   %p
     = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
-    = link_to 'vue classique', my_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary'
 
 Main :
 %table.table

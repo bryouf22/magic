@@ -1,6 +1,6 @@
 %h2= "Editer #{@wishlist.name}"
 
-= form_for(@wishlist, url: update_wishlist_path(@wishlist.id), method: :post, class: 'form') do |form|
+= form_for(@wishlist, url: update_wishlist_path(slug: @wishlist.slug), method: :post, class: 'form') do |form|
   .form-group
     = form.text_field(:name, required: true, class: 'form-control')
   .form-group

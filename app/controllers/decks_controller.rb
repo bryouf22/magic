@@ -3,6 +3,9 @@ require 'pagy'
 class DecksController < ApplicationController
   include Pagy::Backend
 
+  add_breadcrumb "home", :root_path
+  add_breadcrumb "Mes decks", :user_decks_path
+
   before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
   def user_decks
@@ -11,6 +14,7 @@ class DecksController < ApplicationController
 
   def new
     @deck = current_user.decks.new
+    add_breadcrumb "Nouveau deck"
   end
 
   def create
@@ -24,6 +28,8 @@ class DecksController < ApplicationController
 
   def export
     @deck = Deck.find(params['id'])
+    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    add_breadcrumb "Export"
   end
 
   def change_visual
@@ -64,11 +70,14 @@ class DecksController < ApplicationController
   def detail
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
+    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    add_breadcrumb "Vue avancée"
   end
 
   def show
     @deck = current_user.decks.where(id: params[:id]).first
     build_deck_for_show
+    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
   end
 
   def show_by_color
@@ -79,6 +88,8 @@ class DecksController < ApplicationController
   def edit
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
+    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    add_breadcrumb "Édition"
   end
 
   def update
@@ -126,6 +137,7 @@ class DecksController < ApplicationController
   end
 
   def import
+    add_breadcrumb "Import"
   end
 
   def import_create

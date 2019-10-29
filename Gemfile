@@ -81,3 +81,6 @@ gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
+
+# Breadcrumb
+gem "breadcrumbs_on_rails"

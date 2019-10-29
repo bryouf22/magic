@@ -35,6 +35,7 @@
   %body
     = render 'application/menu'
     .container.main-container
+      = render_breadcrumbs
       - if notice
         %p.notice= notice
       - if alert

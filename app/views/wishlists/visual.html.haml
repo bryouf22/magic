@@ -1,7 +1,7 @@
 %h1= @wishlist.name
 
 .views-selection
-  = link_to 'vue normal', wishlist_path(id: @wishlist.id)
+  = link_to 'vue normal', wishlist_path(slug: @wishlist.slug)
   = ' | vue visuel'
 
 %br

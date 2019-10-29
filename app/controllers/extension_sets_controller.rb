@@ -1,5 +1,8 @@
 class ExtensionSetsController < ApplicationController
 
+  add_breadcrumb "home", :root_path
+  add_breadcrumb "Extensions", :extension_sets_path
+
   def index
     @block_sets = []
     ExtensionSet.set_types.to_a.collect { |type| type.last }.each do |type|
@@ -32,6 +35,7 @@ class ExtensionSetsController < ApplicationController
     @set = ExtensionSet.where(slug: params[:slug]).first!
     list_by_colors(@set.cards.order('name_fr_clean ASC'))
     render :visual if view == 'visual'
+    add_breadcrumb @set.name, extension_set_path(slug: @set.slug)
   end
 
   def search_params

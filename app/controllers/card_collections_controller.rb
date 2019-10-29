@@ -4,6 +4,9 @@ class CardCollectionsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: :update_occurrence
 
+  add_breadcrumb "home", :root_path
+  add_breadcrumb "Ma collection", :card_collection_path
+
   def show
     @card_collection = current_user.card_collection
     if params['card_search'].present?
