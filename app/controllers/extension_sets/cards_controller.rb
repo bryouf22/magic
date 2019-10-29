@@ -8,5 +8,6 @@ class ExtensionSets::CardsController < ApplicationController
     @card = @set.cards.where(id: params[:id]).first.decorate
     add_breadcrumb @set.name, extension_set_path(slug: @set.slug)
     add_breadcrumb @card.name, extension_set_card_path(slug: @set.slug, id: @card.id)
+    set_meta_tags title: @card.name
   end
 end

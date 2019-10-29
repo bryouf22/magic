@@ -7,9 +7,11 @@ class WishlistsController < ApplicationController
 
   def index
     @wishlists = current_user.wishlists
+    set_meta_tags title: "Mes listes de souhait"
   end
 
   def new
+    set_meta_tags title: "Nouvelle liste de souhait"
     @wishlist = Wishlist.new(user_id: current_user.id)
     add_breadcrumb "Nouvelle liste"
   end
@@ -39,6 +41,8 @@ class WishlistsController < ApplicationController
     @wishlist = current_user.wishlists.where(slug: params['slug']).first
     add_breadcrumb @wishlist.name, wishlist_path(slug: @wishlist.slug)
     add_breadcrumb "Édition"
+    @wishlist = current_user.wishlists.where(id: params['id']).first
+    set_meta_tags title: "Editer : #{@wishlist.name}"
   end
 
   def destroy
@@ -56,6 +60,10 @@ class WishlistsController < ApplicationController
     if view == 'visual'
       render :visual
     end
+    @wishlist = current_user.wishlists.where(name: params['name']).first
+    list_by_colors(@wishlist.cards)
+    render :visual if view == 'visual'
+    set_meta_tags title: @wishlist.name
   end
 
   private

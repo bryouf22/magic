@@ -10,11 +10,13 @@ class DecksController < ApplicationController
 
   def user_decks
     @pagy, @decks = pagy(current_user.decks.order('name ASC'), items: 20)
+    set_meta_tags title: 'Mes decks'
   end
 
   def new
     @deck = current_user.decks.new
     add_breadcrumb "Nouveau deck"
+    set_meta_tags title: 'Nouveau deck'
   end
 
   def create
@@ -30,6 +32,7 @@ class DecksController < ApplicationController
     @deck = Deck.find(params['id'])
     add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
     add_breadcrumb "Export"
+    set_meta_tags title: "Exporter #{@deck.name}"
   end
 
   def change_visual
@@ -72,17 +75,20 @@ class DecksController < ApplicationController
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
     add_breadcrumb "Vue avancée"
+    set_meta_tags title: @deck.name
   end
 
   def show
     @deck = current_user.decks.where(id: params[:id]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    set_meta_tags title: @deck.name
   end
 
   def show_by_color
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
+    set_meta_tags title: @deck.name
   end
 
   def edit
@@ -90,6 +96,7 @@ class DecksController < ApplicationController
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
     add_breadcrumb "Édition"
+    set_meta_tags title: "Éditer #{@deck.name}"
   end
 
   def update
@@ -138,6 +145,7 @@ class DecksController < ApplicationController
 
   def import
     add_breadcrumb "Import"
+    set_meta_tags title: "Importer un deck"
   end
 
   def import_create
@@ -148,10 +156,12 @@ class DecksController < ApplicationController
 
   def public_decks
     @decks = Deck.publics
+    set_meta_tags title: 'Decks'
   end
 
   def public_deck_show
     @deck = Deck.find(params['id'])
+    set_meta_tags title: @deck.name
     build_deck_for_show
     render :show
   end

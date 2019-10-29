@@ -16,7 +16,7 @@ class CardCollectionsController < ApplicationController
       @search = CardSearch.new
       list_by_colors(Card.none)
     end
-
+    set_meta_tags title: "Ma collection"
     render :visual if view == 'visual'
   end
 
