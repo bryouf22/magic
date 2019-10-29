@@ -1,6 +1,7 @@
 class ExtensionSets::CardsController < ApplicationController
 
   add_breadcrumb "home", :root_path
+  add_breadcrumb "Extensions", :extension_sets_path
 
   def show
     @set  = ExtensionSet.where(slug: params[:slug]).first!
