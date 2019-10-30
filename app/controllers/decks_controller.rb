@@ -29,8 +29,8 @@ class DecksController < ApplicationController
   end
 
   def export
-    @deck = Deck.find(params['id'])
-    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    @deck = current_user.decks.where(slug: params[:slug]).first
+    add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
     add_breadcrumb "Export"
     set_meta_tags title: "Exporter #{@deck.name}"
   end
@@ -73,28 +73,29 @@ class DecksController < ApplicationController
   def detail
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
-    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
     add_breadcrumb "Vue avancée"
     set_meta_tags title: @deck.name
   end
 
   def show
-    @deck = current_user.decks.where(id: params[:id]).first
+    @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
-    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
     set_meta_tags title: @deck.name
   end
 
   def show_by_color
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
+    add_breadcrumb @deck.name
     set_meta_tags title: @deck.name
   end
 
   def edit
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
-    add_breadcrumb @deck.name, my_deck_path(id: @deck.id)
+    add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
     add_breadcrumb "Édition"
     set_meta_tags title: "Éditer #{@deck.name}"
   end
@@ -103,7 +104,7 @@ class DecksController < ApplicationController
     @deck = current_user.decks.where(slug: params[:slug]).first
     if @deck.update_attributes(update_params)
       Format::Validator.call(deck: @deck)
-      redirect_to my_deck_path(id: @deck.id)
+      redirect_to my_deck_path(slug: @deck.slug)
     else
       build_deck_for_show
       render :edit
@@ -151,7 +152,7 @@ class DecksController < ApplicationController
   def import_create
     deck = Deck::CreateFromList.call(list: params[:import][:list], user_id: current_user.id).deck
     Format::Validator.call(deck: deck)
-    redirect_to my_deck_path(id: deck.id)
+    redirect_to my_deck_path(slug: deck.slug)
   end
 
   def public_decks
@@ -160,7 +161,7 @@ class DecksController < ApplicationController
   end
 
   def public_deck_show
-    @deck = Deck.find(params['id'])
+    @deck = Deck.find(params['slug'])
     set_meta_tags title: @deck.name
     build_deck_for_show
     render :show

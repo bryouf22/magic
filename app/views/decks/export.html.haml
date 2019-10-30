@@ -7,9 +7,9 @@
     = @deck.formats
 
 - if params['export_format'] == 'apprentice'
-  = link_to 'Format MV', export_deck_path(@deck.id), class: 'btn btn-xs btn-primary'
+  = link_to 'Format MV', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
 - else
-  = link_to 'Format Apprentice', export_deck_path(@deck.id, export_format: 'apprentice'), class: 'btn btn-xs btn-primary'
+  = link_to 'Format Apprentice', export_deck_path(@deck.slug, export_format: 'apprentice'), class: 'btn btn-xs btn-primary'
 %br
 %br
 - sb_prerix = (params['export_format'] == 'apprentice' ? 'SB:' : 'SB')

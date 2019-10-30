@@ -30,17 +30,17 @@ Rails.application.routes.draw do
   post   'mes-decks/supprimer-:slug',        to: 'decks#destroy',                      as: :destroy_deck
   post   'deck',                             to: 'decks#create',                       as: :create_deck
   get    'decks',                            to: 'decks#index',                        as: :decks
-  get    'editer-deck-:slug',                to: 'decks#edit',                         as: :edit_deck
+  get    'mes-decks/:slug/edit',             to: 'decks#edit',                         as: :edit_deck
   patch  'edit-deck-:slug',                  to: 'decks#update',                       as: :update_deck
   post   'deck-:slug',                       to: 'decks#add_cards',                    as: :deck_add_card
   post   'manage-card',                      to: 'decks#manage_card',                  as: :manage_card
   get    'mes-decks/nouveau',                to: 'decks#new',                          as: :new_deck
-  get    'mes-decks/:id',                    to: 'decks#show',                         as: :my_deck
+  get    'mes-decks/:slug',                  to: 'decks#show',                         as: :my_deck
   get    'mes-decks/:slug/color',            to: 'decks#show_by_color',                as: :my_deck_by_color
-  get    'mes-decks/detail/:slug',           to: 'decks#detail',                       as: :detail_deck
+  get    'mes-decks/:slug/detail',           to: 'decks#detail',                       as: :detail_deck
   get    'public-decks',                     to: 'decks#public_decks',                 as: :public_decks
   get    'public-decks/:id',                 to: 'decks#public_deck_show',             as: :public_deck
-  get    'exporter-deck/:id',                to: 'decks#export',                       as: :export_deck
+  get    'mes-decks/:slug/export',           to: 'decks#export',                       as: :export_deck
   get    'generer-draft/:id',                to: 'decks#generate_draft',               as: :generate_draft
   post   'copy-public-deck',                 to: 'decks#copy_public_deck',             as: :copy_public_deck
 
