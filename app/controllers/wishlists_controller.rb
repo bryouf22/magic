@@ -41,8 +41,7 @@ class WishlistsController < ApplicationController
     @wishlist = current_user.wishlists.where(slug: params['slug']).first
     add_breadcrumb @wishlist.name, wishlist_path(slug: @wishlist.slug)
     add_breadcrumb "Édition"
-    @wishlist = current_user.wishlists.where(id: params['id']).first
-    set_meta_tags title: "Editer : #{@wishlist.name}"
+    set_meta_tags title: "Éditer #{@wishlist.name}"
   end
 
   def destroy
