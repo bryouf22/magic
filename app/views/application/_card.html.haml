@@ -6,7 +6,7 @@
     = image_tag @card.image.url if @card.image.present?
   .col-md-4
     %ul
-      %li= link_to 'Voir sur gatherer', @card.gatherer_link, target: '_blank'
+      %li= link_to 'see on gatherer', @card.gatherer_link, target: '_blank'
       - if accessible? && user_signed_in?
         %li ajouter a la wishlist
         %li.add-to-deck
@@ -22,15 +22,8 @@
               = form.select(:deck_id, options_for_select(decks))
               = form.submit('ok', class: 'btn btn-xs btn-success')
 
-      - if @card.reprint_cards.any?
-        - if @card.reprint_cards.count < 3
-          - @card.reprint_cards.each do |reprint|
-            %li= link_to "Version #{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
-        - else
-          .dropdown
-            %button#dropdownMenu1.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
-              Réimpression
-              %span.caret
-            %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
-              - @card.reprint_cards.each do |reprint|
-                %li= link_to "Version #{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
+    - if @card.reprint_cards.any?
+      Editions :
+      %ul
+        - @card.reprint_cards.each do |reprint|
+          %li= link_to "Version #{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
