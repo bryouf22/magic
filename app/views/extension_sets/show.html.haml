@@ -31,5 +31,5 @@
   - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefact: @colorless_artefact_cards }, { land: @land_cards }, { other: @colorless_non_artefact }].each do |list|
     - cards = list.values.first
     - if cards.any?
-      %h3= list.keys.first.humanize
+      %h3= list.keys.first.to_s.humanize
       %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card
