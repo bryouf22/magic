@@ -1,8 +1,10 @@
-%h1= @set.name
+%h1
+  %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
+  = @set.name
 
 .views-selection
-  = link_to 'vue normal', extension_set_path(slug: @set.slug, params: { view: :classic })
-  = ' | vue visuel'
+  = link_to 'list', extension_set_path(slug: @set.slug, params: { view: :classic })
+  = ' | images'
 
 %br
 

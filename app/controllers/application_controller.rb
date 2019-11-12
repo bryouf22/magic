@@ -1,5 +1,11 @@
 class ApplicationController < ActionController::Base
 
+  helper_method :accessible?
+
+  def accessible?
+    false
+  end
+
   private
 
   def set_by_type(extensions)
@@ -31,7 +37,7 @@ class ApplicationController < ActionController::Base
     @colorless_non_artefact   ||= cards.colorless_non_artefact.decorate
   end
 
-  def view
-    params[:view].presence || :classic
+  def view_mode
+    params[:view].presence || :list
   end
 end

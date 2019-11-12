@@ -7,10 +7,8 @@
   .col-md-4
     %ul
       %li= link_to 'Voir sur gatherer', @card.gatherer_link, target: '_blank'
-      %li prix mkm
-      %li présent dans les deck
-      %li ajouter a la wishlist
-      - if user_signed_in?
+      - if accessible? && user_signed_in?
+        %li ajouter a la wishlist
         %li.add-to-deck
           ajouter à
           = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|

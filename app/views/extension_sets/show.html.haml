@@ -2,32 +2,34 @@
   %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
   = @set.name
 
-%p
-  = @set.card_count
-  = @set.new_card_count
-  = @set.reprint_count
+- if accessible?
+  %p
+    = @set.card_count
+    = @set.new_card_count
+    = @set.reprint_count
 
 
 .views-selection
-  = 'vue normal |'
-  = link_to 'vue visuel', extension_set_path(slug: @set.slug, params: { view: :visual })
+  = 'list |'
+  = link_to 'images', extension_set_path(slug: @set.slug, params: { view: :images })
 
 %br
 
-= form_for(:add, url: add_to_path, method: :post) do |form|
-  = render partial: 'actions_and_filters', locals: { form: form }
+- if accessible?
+  = form_for(:add, url: add_to_path, method: :post) do |form|
+    = render partial: 'actions_and_filters', locals: { form: form }
 
-  %hr
+%hr
 
-  - if user_signed_in?
-    - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefacts: @colorless_artefact_cards }, { lands: @land_cards }, { others: @colorless_non_artefact }].each do |list|
-      - cards = list.values.first
-      - if cards.any?
-        %h3= list.keys.first.to_s.humanize
-        %ul.cards-list.classic= render partial: 'card_checkbox_view', collection: cards.order('name ASC'), as: :card
-  - else
-    - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefacts: @colorless_artefact_cards }, { lands: @land_cards }, { others: @colorless_non_artefact }].each do |list|
-      - cards = list.values.first
-      - if cards.any?
-        %h3= list.keys.first.to_s.humanize
-        %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card
+- if accessible? && user_signed_in?
+  - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefacts: @colorless_artefact_cards }, { lands: @land_cards }, { others: @colorless_non_artefact }].each do |list|
+    - cards = list.values.first
+    - if cards.any?
+      %h3= list.keys.first.to_s.humanize
+      %ul.cards-list.classic= render partial: 'card_checkbox_view', collection: cards.order('name ASC'), as: :card
+- else
+  - [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefacts: @colorless_artefact_cards }, { lands: @land_cards }, { others: @colorless_non_artefact }].each do |list|
+    - cards = list.values.first
+    - if cards.any?
+      %h3= list.keys.first.to_s.humanize
+      %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card

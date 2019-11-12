@@ -1,9 +1,11 @@
-
-- if current_user.present?
-  %h1 Magic Project
-  %ul
-    %li Voir mes decks
-    %li Ma collection
-    %li Mes listes de souhait
+- if accessible?
+  - if current_user.present?
+    %h1 Magic Project
+    %ul
+      %li Voir mes decks
+      %li Ma collection
+      %li Mes listes de souhait
+  - else
+    = render 'login_form'
 - else
-  = render 'login_form'
+  = ''

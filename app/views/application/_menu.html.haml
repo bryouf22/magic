@@ -3,37 +3,38 @@
     .navbar-header
       - if current_user && current_user.is_admin?
         - if local_assigns[:admin_link].presence
-          = link_to 'Magic Project', root_path, class: 'navbar-brand'
+          = link_to 'Lordyawgmoth.com', root_path, class: 'navbar-brand'
         - else
-          = link_to 'Admin', admin_root_path, class: 'navbar-brand'
+          = #link_to 'ADMIN', admin_root_path, class: 'navbar-brand'
       - else
-        = link_to 'Magic Project', root_path, class: 'navbar-brand'
+        = link_to 'Lordyawgmoth.com', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li= link_to 'Extensions', extension_sets_path
-        - if user_signed_in?
+        %li= link_to 'SETS', extension_sets_path
+        - if accessible?
+          %li
+            = link_to 'DECK', public_decks_path
+        - if accessible? && user_signed_in?
           %li
             = link_to wishlists_path do
-              %span.glyphicon.glyphicon-heart
-              Liste de souhait
-          %li
-            = link_to user_decks_path do
-              %span.glyphicon.glyphicon-inbox
-              Mes decks
+              WISHLIST
+          - if accessible?
+            %li
+              = link_to user_decks_path do
+                MY DECKS
           %li
             = link_to card_collection_path do
-              %span.glyphicon.glyphicon-book
-              Ma collection
-        %li= link_to 'Decks publiques', public_decks_path
-      = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
-        .form-group
-          = form.text_field(:term, value: @term.presence, class: 'form-control', placeholder: "Rechercher une carte")
+              COLLECTION
+      - if accessible?
+        = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
+          .form-group
+            = form.text_field(:term, value: @term.presence, class: 'form-control', placeholder: "Rechercher une carte")
       %ul.nav.navbar-nav.navbar-right
         - if user_signed_in?
-          %li
-            = link_to user_account_path do
-              %span.glyphicon.glyphicon-user
-              Mon compte
-          %li= link_to 'Se déconnecter', destroy_user_session_path, method: :delete, class: 'connexion-link'
+          - if accessible?
+            %li
+              = link_to user_account_path do
+                ACCOUNT
+          %li= link_to 'LOGOUT', destroy_user_session_path, method: :delete, class: 'connexion-link'
         - else
-          %li= link_to 'Se connecter', connection_path, class: 'connexion-link'
+          %li= link_to 'LOGIN', connexion_path, class: 'connexion-link'

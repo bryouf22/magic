@@ -1,0 +1,113 @@
+@media (min-width: 992px) {
+  ul.cards-list.classic li {
+    width: 33%;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 668px) {
+  ul.cards-list.classic li {
+    width: 50%;
+  }
+}
+
+@media (max-width: 667px) {
+  ul.cards-list.classic li {
+    width: 100%;
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  &.cards-list {
+    padding: 0;
+    &.classic  {
+      display: block;
+    }
+    li {
+      float: left;
+      .list-checkbox i {
+        float: right;
+        margin-right: 15px;
+      }
+    }
+    &.visual {
+      li {
+        text-align: center;
+        width: 200px;
+        padding: 10px 10px 10px 0;
+        min-height: 340px;
+      }
+      &.edition {
+        li {
+          min-height: 355px;
+        }
+      }
+    }
+    &.deck {
+      li {
+        padding: 0;
+        margin: 5px;
+        max-width: 150px;
+        position: relative;
+        min-height: 260px;
+        .card-link, .card-link span {
+          font-size: 10px;
+          height: 10px;
+          display: inline-block;
+        }
+        span.occur-number {
+          position: absolute;
+          font-size: 20px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: rgba(0, 0, 0, 0.7);
+          color: white;
+          padding: 3px 5px;
+          line-height: 20px;
+          border-radius: 4px;
+        }
+      }
+    }
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+}
+
+
+.ext-type {
+  text-align: center;
+}
+.ext-bloc {
+
+}
+.ext-set {
+  display: inline-block;
+  width:20%;
+  transition: 300ms;
+  padding: 10px;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  i.ss {
+    font-size: 4em;
+    opacity: .5;
+    transition: 300ms;
+  }
+
+  &:hover i.ss {
+    opacity: 1;
+  }
+}

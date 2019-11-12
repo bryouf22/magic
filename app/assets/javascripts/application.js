@@ -10,15 +10,15 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require rails-ujs
-//= require activestorage
-//= require jquery
-//= require bootstrap
-//= require select2
-//= require select2_locale_fr
-//= require moment
-//= require moment/fr
-//= require bootstrap-datetimepicker
-//= require chartkick
-//= require Chart.bundle
-//= require_tree .
+// require rails-ujs
+// require activestorage
+// require jquery
+// require bootstrap
+// require select2
+// require select2_locale_fr
+// require moment
+// require moment/fr
+// require bootstrap-datetimepicker
+// require chartkick
+// require Chart.bundle
+//= require_tree ./production/

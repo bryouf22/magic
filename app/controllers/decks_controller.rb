@@ -161,7 +161,7 @@ class DecksController < ApplicationController
   end
 
   def public_deck_show
-    @deck = Deck.find(params['slug'])
+    @deck = Deck.find(params['id'])
     set_meta_tags title: @deck.name
     build_deck_for_show
     render :show

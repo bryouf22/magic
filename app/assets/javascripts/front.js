@@ -3,7 +3,6 @@ $(document).ready(function() {
     html: true,
     placement: 'left',
     trigger: 'hover',
-    template: '<div class="popover" role="tooltip"><div class="popover-content"></div></div>',
   });
 
   $('.datepicker').datetimepicker({ format: 'L' } );

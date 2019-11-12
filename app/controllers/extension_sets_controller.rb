@@ -35,9 +35,9 @@ class ExtensionSetsController < ApplicationController
   def show
     @set = ExtensionSet.where(slug: params[:slug]).first!
     list_by_colors(@set.cards.order('name_fr_clean ASC'))
-    render :visual if view == 'visual'
     add_breadcrumb @set.name, extension_set_path(slug: @set.slug)
     set_meta_tags title: @set.name
+    render :visual if view_mode == 'images'
   end
 
   def search_params
