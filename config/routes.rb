@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   default_url_options :host => 'localhost:3000'
 
   devise_scope :user do
-    get '/connexion'    => 'devise/sessions#new'
-    get '/inscription'  => 'devise/registrations#new', as: :new_user_registration
+    get '/connexion' => 'devise/sessions#new'
+    get '/registration' => 'devise/registrations#new', as: :new_user_registration
   end
 
   devise_for :users, controllers: { registrations: 'users/registrations' }

@@ -1,4 +1,4 @@
-%h2 Mot de passe oublié ?
+%h2 Forgot password ?
 
 = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
   = devise_error_messages!
@@ -6,6 +6,6 @@
     = f.label :email
     = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
   .form-group
-    = f.submit "Valider", class: 'btn btn-success'
+    = f.submit "Submit", class: 'btn btn-success'
 
 = render "devise/shared/links"

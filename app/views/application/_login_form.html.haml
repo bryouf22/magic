@@ -1,15 +1,15 @@
 .text-center.login-pannel
-  %h2 Connectez-vous
+  %h2 Login
 
   .block
-    %small ou
-    = link_to 'Créer un compte', new_user_registration_path, class: 'underline'
+    %small or
+    = link_to 'Create an account', new_user_registration_path, class: 'underline'
 
   = form_for(:user, url: user_session_path, method: :post) do |form|
     .form-group
-      = form.email_field(:email, class: 'form-control', placeholder: 'email@exemple.com')
+      = form.email_field(:email, class: 'form-control', placeholder: 'email@domain.com')
     .form-group
-      = form.password_field(:password, class: 'form-control', placeholder: 'mot de passe')
+      = form.password_field(:password, class: 'form-control', placeholder: 'password')
     .form-group
-      = form.submit('Se connecter', class: 'btn btn-sm btn-primary')
-  = link_to 'Mot de passe oublié ?', new_user_password_path
+      = form.submit('Connexion', class: 'btn btn-sm btn-primary')
+  = link_to 'Forgot password ?', new_user_password_path

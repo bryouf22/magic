@@ -19,7 +19,7 @@ module Magic
     config.autoload_paths << Rails.root.join('crawler')
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.yml').to_s]
-    config.i18n.default_locale = :fr
+    config.i18n.default_locale = :en
 
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
