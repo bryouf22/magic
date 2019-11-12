@@ -16,7 +16,7 @@ set :keep_releases, 5
 # This is useful if you don't want to use ENV variables
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 
-branch :production
+set :branch, "production"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
