@@ -85,6 +85,11 @@ h3 {
     margin-top: 3px;
     margin-bottom: 2px;
   }
+  &.admin-navbar {
+    .navbar-nav li:first-of-type a {
+      padding-left: 0;
+    }
+  }
 }
 
 .main-container {

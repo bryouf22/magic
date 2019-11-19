@@ -2,15 +2,23 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Magic
+    = display_meta_tags site: 'lordyawgmoth.com', separator: '-'
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
+    %link{ href: "https://fonts.googleapis.com/css?family=Roboto&amp;display=swap", rel: "stylesheet" }
     = javascript_include_tag 'application'
+    %script{:async => "", :src => "https://www.googletagmanager.com/gtag/js?id=UA-148146929-1"}
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-148146929-1');
   %body
-    = render partial: 'application/menu', locals: { admin_link: true }
+    = render 'application/menu'
     = render 'application/admin/menu'
     .container.main-container
+      = render_breadcrumbs(separator: ' / ')
       - if notice
         %p.notice= notice
       - if alert

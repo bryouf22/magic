@@ -1,16 +1,13 @@
 %nav.navbar.navbar-default
   .container-fluid
     .navbar-header
-      - if current_user && current_user.is_admin?
-        - if local_assigns[:admin_link].presence
-          = link_to 'Lordyawgmoth.com', root_path, class: 'navbar-brand'
-        - else
-          = #link_to 'ADMIN', admin_root_path, class: 'navbar-brand'
-      - else
-        = link_to 'Lordyawgmoth.com', root_path, class: 'navbar-brand'
+      = link_to 'Lordyawgmoth.com', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li= link_to 'SETS', extension_sets_path
+        - if current_user.present? && current_user.is_admin?
+          %li
+            = link_to 'ADMIN', admin_root_path
         - if accessible?
           %li
             = link_to 'DECK', public_decks_path
