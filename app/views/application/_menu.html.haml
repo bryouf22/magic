@@ -38,4 +38,4 @@
           %li= link_to 'LOGOUT', destroy_user_session_path, method: :delete, class: 'connexion-link'
         - else
           - if accessible?
-            %li= link_to 'LOGIN', connexion_path, class: 'connexion-link'
+            %li= link_to 'LOGIN', login_path, class: 'connexion-link'

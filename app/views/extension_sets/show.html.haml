@@ -2,18 +2,20 @@
   %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
   = @set.name
 
-- if accessible?
-  %p
+%ul.set-infos
+  %li
+    Total cards:
     = @set.card_count
+  %li
+    New cards :
     = @set.new_card_count
+  %li
+    Reprints :
     = @set.reprint_count
-
 
 .views-selection
   = 'list |'
   = link_to 'images', extension_set_path(slug: @set.slug, params: { view: :images })
-
-%br
 
 - if accessible?
   = form_for(:add, url: add_to_path, method: :post) do |form|

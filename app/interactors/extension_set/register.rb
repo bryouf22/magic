@@ -9,7 +9,7 @@ class ExtensionSet::Register
         if card.reprint_cards.count.positive?
           is_first_edition = true
           card.reprint_cards.each do |reprint|
-            if reprint.extension_set.release_date < card.set.release_date
+            if reprint.extension_set.release_date < card.extension_set.release_date
               is_first_edition = false
               break
             end

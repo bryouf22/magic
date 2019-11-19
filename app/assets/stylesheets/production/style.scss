@@ -31,6 +31,9 @@ i.ss {
   display: inline-block;
   margin-bottom: 4px;
 }
+// hr {
+//   border: 1px solid #d8d8d8;
+// }
 // END CURRENT WORK
 form.deck-quantity-form {
   display: inline;
@@ -49,6 +52,13 @@ h3 {
 }
 .navbar {
   min-height: unset;
+  // max-width: 1300px;
+  // margin-left: auto;
+  // margin-right: auto;
+  // background: #fffaf5;
+  // border-radius: 0;
+  // border: 1px solid #d8d8d8;
+  // border-top: none;
   margin-bottom: 0;
   .container-fluid {
     max-width: 1300px;
@@ -80,8 +90,13 @@ h3 {
 .main-container {
   max-width: 1300px;
   margin: auto;
-  width: unset;
-  padding: 30px 0;
+  width: 100%;
+  // height: 100%;
+  // min-height: 1000px;
+  padding: 30px;
+  // background-color: #fffaf5;
+  // border-left: 1px solid #d8d8d8;
+  // border-right: 1px solid #d8d8d8;
   p.notice {
     border: 2px solid #055400;
     background-color: #5ec981;
