@@ -113,6 +113,14 @@ class Card < ApplicationRecord
     'Plains'
   ].freeze
 
+    def has_alternative?
+      alternative.present?
+    end
+
+    def is_alternative?
+      Alternative.where(alternative_card: id).any?
+    end
+
   def colorless?
     !color_ids.present?
   end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   default_url_options :host => 'localhost:3000'
 
   devise_scope :user do
-    get '/connexion' => 'devise/sessions#new'
+    get '/login' => 'devise/sessions#new'
     get '/registration' => 'devise/registrations#new', as: :new_user_registration
   end
 
@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 
   # resources :categories
 
-  get    'mentions-legals',                  to: 'welcome#legals',                     as: :legals
+  get    'legals',                  to: 'welcome#legals',                     as: :legals
 
   get    '/admin',                           to: 'admin/welcome#index',                as: :admin_root
   post   'remove-card-card_id',              to: 'cards#destroy',                      as: :remove_card
