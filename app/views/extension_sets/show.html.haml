@@ -4,7 +4,10 @@
 
 %ul.set-infos
   %li
-    Total cards:
+    Release date :
+    = @set.release_date.strftime("%m/%d/%Y")
+  %li
+    Total cards :
     = @set.card_count
   %li
     New cards :
