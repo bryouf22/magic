@@ -36,10 +36,10 @@ gem 'rubocop', require: false
 # Reduces boot times through caching; required in config/boot.rb
 gem 'actionpack-action_caching'
 gem 'bootsnap', '<= 1.1.0'
+gem 'pry-byebug', require: true
+gem 'pry-rails', require: true
 
 group :development, :test do
-  gem 'pry-byebug', require: true
-  gem 'pry-rails', require: true
   gem 'rspec-rails', '~> 3.8'
 end
 
