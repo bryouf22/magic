@@ -1,4 +1,4 @@
-class ExtensionSetsImporter
+class Exporter::ExtensionSetsImporter
   include Interactor
 
   def call
@@ -6,7 +6,14 @@ class ExtensionSetsImporter
     # Date.new(2017,1,20) == ExtensionSet.first.release_date.to_date
     doc = File.open("#{Rails.root}/export_sets.xml") { |f| Nokogiri::XML(f) }
 
-    # doc.xpath('//user').each do |user|
+    doc.xpath('//set').each do |set_node|
+      set = ExtensionSet.where(name: set_node.attribute('name').value).first
+      date = set_node.attribute('release_date').value
+      year = set_node.attribute('release_date').value.match(/(\d{4})-(\d{2})-(\d{2})/)[1]
+      month = set_node.attribute('release_date').value.match(/(\d{4})-(\d{2})-(\d{2})/)[2]
+      day = set_node.attribute('release_date').value.match(/(\d{4})-(\d{2})-(\d{2})/)[3]
+      set.update(release_date: Date.new(year.to_i,month.to_i,day.to_i), code: set_node.attribute('code').value)
+    end
     #   user_id = create_user(
     #     email:        user.xpath('@email').to_s,
     #     password:     user.xpath('@email').to_s,

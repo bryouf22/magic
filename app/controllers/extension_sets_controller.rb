@@ -1,7 +1,6 @@
 class ExtensionSetsController < ApplicationController
-
-  add_breadcrumb "home", :root_path
-  add_breadcrumb "Extensions", :extension_sets_path
+  add_breadcrumb 'home', :root_path
+  add_breadcrumb 'Extensions', :extension_sets_path
 
   def index
     set_meta_tags title: "Extensions"
@@ -9,9 +8,9 @@ class ExtensionSetsController < ApplicationController
     ExtensionSet.set_types.to_a.collect { |type| type.last }.each do |type|
       next if ExtensionSet.where(set_type: type).none?
       if (bloc_ids = ExtensionSet.where(set_type: type).collect(&:bloc_id)).any?
-        @block_sets << Bloc.where(id: bloc_ids).reorder('release_date ASC').collect { |bloc_id| ExtensionSet.where(set_type: type).where(bloc_id: bloc_id).reorder('extension_sets.release_date ASC') }
+        @block_sets << Bloc.where(id: bloc_ids).reorder('release_date DESC').collect { |bloc_id| ExtensionSet.where(set_type: type).where(bloc_id: bloc_id).reorder('extension_sets.release_date ASC') }
       else
-        @block_sets << ExtensionSet.where(set_type: type).reorder('extension_sets.release_date ASC')
+        @block_sets << ExtensionSet.where(set_type: type).reorder('extension_sets.release_date DESC')
       end
     end
   end
