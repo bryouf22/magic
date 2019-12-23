@@ -3,7 +3,6 @@
 # Table name: cards
 #
 #  id               :bigint           not null, primary key
-#  name_fr          :string
 #  name             :string
 #  extension_set_id :integer
 #  card_type        :integer
@@ -14,8 +13,6 @@
 #  mana_cost        :string
 #  color_ids        :integer          is an Array
 #  image            :string
-#  power            :integer
-#  defense          :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  artist_name      :string
@@ -23,18 +20,17 @@
 #  gatherer_link    :string
 #  gatherer_id      :integer
 #  name_clean       :string
-#  name_fr_clean    :string
-#  image_fr         :string
-#  type_fr          :string
-#  text_fr          :text
 #  flavor_text      :text
-#  flavor_text_fr   :text
 #  power_str        :string
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
 #  format           :integer          default(0), not null
 #  first_edition    :boolean
+#  is_double_card   :boolean
+#  is_double_part   :boolean
+#  hybrid           :boolean
+#  alternative_type :integer          default("recto_verso")
 #
 
 class Card < ApplicationRecord
@@ -43,12 +39,12 @@ class Card < ApplicationRecord
   # TODO : ajouter bitfield pour le format (https://github.com/grosser/bitfields)
   bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander
 
-  scope :only_green,              -> { where(color_ids: [Color.green]) }
-  scope :only_red,                -> { where(color_ids: [Color.red])   }
-  scope :only_blue,               -> { where(color_ids: [Color.blue])  }
-  scope :only_white,              -> { where(color_ids: [Color.white]) }
-  scope :only_black,              -> { where(color_ids: [Color.black]) }
-  scope :gold,                    -> { where('array_length(color_ids, 1) >= 2') }
+  scope :only_green,              -> { where(color_ids: [Color.green]).where.not(alternative_type: :double_card).where.not(is_double_part: true) }
+  scope :only_red,                -> { where(color_ids: [Color.red]).where.not(alternative_type: :double_card).where.not(is_double_part: true)   }
+  scope :only_blue,               -> { where(color_ids: [Color.blue]).where.not(alternative_type: :double_card).where.not(is_double_part: true)  }
+  scope :only_white,              -> { where(color_ids: [Color.white]).where.not(alternative_type: :double_card).where.not(is_double_part: true) }
+  scope :only_black,              -> { where(color_ids: [Color.black]).where.not(alternative_type: :double_card).where.not(is_double_part: true) }
+  scope :gold,                    -> { where('array_length(color_ids, 1) >= 2').where(hybrid: false) }
   scope :colorless,               -> { where('color_ids is ?', nil) }
   scope :red,                     -> { where('? = ANY(color_ids)', Color.red)}
   scope :blue,                    -> { where('? = ANY(color_ids)', Color.blue)}
@@ -61,6 +57,8 @@ class Card < ApplicationRecord
   scope :basic_lands,             -> { where('name in (?)', BASIC_LANDS_NAMES) }
   scope :creatures,               -> { where('card_type in (?)', [4, 6]) }
   scope :others,                  -> { where('card_type in (?)', [1, 3, 5, 6, 7, 8, 9, 10, nil]) }
+  scope :hybrids,                 -> { where(hybrid: true) }
+  scope :doubles,                 -> { where(alternative_type: :double_card) }
 
   enum card_type: {
     instant:            1,
@@ -83,6 +81,16 @@ class Card < ApplicationRecord
     timeshifted: 5
   }
 
+  enum alternative_type: {
+    no_double:   0,
+    recto_verso: 1,
+    double_card: 2,
+    flip_card:   3,
+    adventure:   4,
+    two_part:    5, # ex Big furry monster
+    partenair:   6 # ex Battlebond edition
+  }
+
   belongs_to :extension_set
 
   has_one :alternative
@@ -95,8 +103,7 @@ class Card < ApplicationRecord
   before_save   :set_colors, :set_type
   before_save   :rename, if: proc { |card| card.has_alternative? && !card.name.include?('/') }
 
-  mount_uploader :image,    CardImageUploader
-  mount_uploader :image_fr, CardImageUploader
+  mount_uploader :image, CardImageUploader
 
   validates_uniqueness_of :gatherer_id, unless: proc { |c| c.has_alternative? || c.is_alternative? }
 
@@ -113,13 +120,13 @@ class Card < ApplicationRecord
     'Plains'
   ].freeze
 
-    def has_alternative?
-      alternative.present?
-    end
+  def has_alternative?
+    alternative.present?
+  end
 
-    def is_alternative?
-      Alternative.where(alternative_card: id).any?
-    end
+  def is_alternative?
+    Alternative.where(alternative_card: id).any?
+  end
 
   def colorless?
     !color_ids.present?
@@ -144,8 +151,7 @@ class Card < ApplicationRecord
   end
 
   def clean_names
-    self[:name_fr_clean] = I18n.transliterate(name_fr || '').downcase.parameterize
-    self[:name_clean]    = I18n.transliterate(name || '').downcase.parameterize
+    self[:name_clean] = I18n.transliterate(name || '').downcase.parameterize
   end
 
   private

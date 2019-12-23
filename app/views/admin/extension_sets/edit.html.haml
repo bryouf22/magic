@@ -19,12 +19,7 @@
         - options = options_for_select(Bloc.all.collect { |bloc| [bloc.name, bloc.id] }, @set.bloc_id)
         = form.select(:bloc_id, options, { include_blank: true }, { class: 'form-control' })
       .form-group
-        = label_tag(:extension_set_order, 'Position :')
-        = form.number_field(:order, class: 'form-control')
-
-      .form-group
         = label_tag(:extension_set_code, 'Code')
         = form.text_field(:code, class: 'form-control')
-
       .form-group
         = form.submit('Valider', class: 'btn btn-success')

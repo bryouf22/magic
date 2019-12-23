@@ -3,7 +3,6 @@
 # Table name: cards
 #
 #  id               :bigint           not null, primary key
-#  name_fr          :string
 #  name             :string
 #  extension_set_id :integer
 #  card_type        :integer
@@ -14,8 +13,6 @@
 #  mana_cost        :string
 #  color_ids        :integer          is an Array
 #  image            :string
-#  power            :integer
-#  defense          :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  artist_name      :string
@@ -23,18 +20,17 @@
 #  gatherer_link    :string
 #  gatherer_id      :integer
 #  name_clean       :string
-#  name_fr_clean    :string
-#  image_fr         :string
-#  type_fr          :string
-#  text_fr          :text
 #  flavor_text      :text
-#  flavor_text_fr   :text
 #  power_str        :string
 #  defense_str      :string
 #  color_indicator  :string
 #  loyalty          :integer
 #  format           :integer          default(0), not null
 #  first_edition    :boolean
+#  is_double_card   :boolean
+#  is_double_part   :boolean
+#  hybrid           :boolean
+#  alternative_type :integer          default("recto_verso")
 #
 
 require 'rails_helper'

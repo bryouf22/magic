@@ -38,6 +38,8 @@ gem 'actionpack-action_caching'
 gem 'bootsnap', '<= 1.1.0'
 
 group :development, :test do
+  gem 'pry-byebug', require: true
+  gem 'pry-rails', require: true
   gem 'rspec-rails', '~> 3.8'
 end
 
@@ -58,7 +60,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'annotate'
 gem 'bitfields'
 gem 'bootstrap-sass'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 2.0'
 gem 'devise', '>= 4.7.1'
 gem 'draper'
 gem 'font-awesome-rails'

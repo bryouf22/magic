@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<root>
+  <bloc name="Return to Ravnica / Dragon's Maze / Gatecrash"/>
+  <bloc name="Avacyn Restored / Innistrad / Dark Ascension"/>
+  <bloc name="Kaladesh / Aether Revolt"/>
+  <bloc name="Shadows over Innistrad / Eldritch Moon"/>
+  <bloc name="Rivals of Ixalan / Ixalan"/>
+  <bloc name="Amonkhet / Hour of Devastation"/>
+  <bloc name="Visions / Mirage / Weatherlight"/>
+  <bloc name="Ice Age / Coldsnap / Alliances"/>
+  <bloc name="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities"/>
+  <bloc name="Champions of Kamigawa / Saviors of Kamigawa / Betrayers of Kamigawa"/>
+  <bloc name="Guildpact / Dissension / Ravnica: City of Guilds"/>
+  <bloc name="Urza's Legacy / Urza's Saga / Urza's Destiny"/>
+  <bloc name="Lorwyn / Morningtide"/>
+  <bloc name="Time Spiral / Planar Chaos / Future Sight"/>
+  <bloc name="Conflux / Alara Reborn / Shards of Alara"/>
+  <bloc name="Eventide / Shadowmoor"/>
+  <bloc name="Prophecy / Mercadian Masques / Nemesis"/>
+  <bloc name="Guilds of Ravnica / Ravnica Allegiance / War of the Spark"/>
+  <bloc name="Zendikar / Worldwake / Rise of the Eldrazi"/>
+  <bloc name="Planeshift / Invasion / Apocalypse"/>
+  <bloc name="Fifth Dawn / Mirrodin / Darksteel"/>
+  <bloc name="Scourge / Onslaught / Legions"/>
+  <bloc name="New Phyrexia / Scars of Mirrodin / Mirrodin Besieged"/>
+  <bloc name="Fate Reforged / Khans of Tarkir / Dragons of Tarkir"/>
+  <bloc name="Dominaria"/>
+  <bloc name="Oath of the Gatewatch / Battle for Zendikar"/>
+  <bloc name="Born of the Gods / Theros / Journey into Nyx"/>
+  <bloc name="Tempest / Exodus / Stronghold"/>
+  <bloc name="Nouveau bloc"/>
+  <bloc name="Odyssey / Judgment / Torment"/>
+  <set name="Aether Revolt" release_date="2007-04-12" set_type="block_set" bloc="Kaladesh / Aether Revolt" set_list="" code="aer" card_count="194" new_card_count="179" reprint_count="15"/>
+  <set name="Alara Reborn" release_date="2014-01-06" set_type="block_set" bloc="Conflux / Alara Reborn / Shards of Alara" set_list="" code="arb" card_count="145" new_card_count="95" reprint_count="50"/>
+  <set name="Alliances" release_date="2008-08-06" set_type="block_set" bloc="Ice Age / Coldsnap / Alliances" set_list="" code="all" card_count="144" new_card_count="130" reprint_count="14"/>
+  <set name="Amonkhet" release_date="2007-05-26" set_type="block_set" bloc="Amonkhet / Hour of Devastation" set_list="" code="akh" card_count="302" new_card_count="240" reprint_count="62"/>
+  <set name="Antiquities" release_date="2020-03-11" set_type="block_set" bloc="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities" set_list="" code="atq" card_count="85" new_card_count="30" reprint_count="55"/>
+  <set name="Apocalypse" release_date="2011-02-15" set_type="block_set" bloc="Planeshift / Invasion / Apocalypse" set_list="" code="apc" card_count="148" new_card_count="105" reprint_count="43"/>
+  <set name="Arabian Nights" release_date="2011-09-06" set_type="block_set" bloc="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities" set_list="" code="arn" card_count="78" new_card_count="55" reprint_count="23"/>
+  <set name="Archenemy" release_date="1999-09-26" set_type="other" bloc="" set_list="" code="arc" card_count="142" new_card_count="55" reprint_count="87"/>
+  <set name="Archenemy: Nicol Bolas" release_date="2018-02-17" set_type="other" bloc="" set_list="" code="e01" card_count="101" new_card_count="2" reprint_count="99"/>
+  <set name="Avacyn Restored" release_date="2004-06-10" set_type="block_set" bloc="Avacyn Restored / Innistrad / Dark Ascension" set_list="" code="avr" card_count="244" new_card_count="164" reprint_count="80"/>
+  <set name="Battle for Zendikar" release_date="2013-06-07" set_type="block_set" bloc="Oath of the Gatewatch / Battle for Zendikar" set_list="" code="bfz" card_count="254" new_card_count="211" reprint_count="43"/>
+  <set name="Battle Royale Box Set" release_date="2010-06-20" set_type="reedition" bloc="" set_list="" code="brb" card_count="105" new_card_count="17" reprint_count="88"/>
+  <set name="Battlebond" release_date="1997-07-13" set_type="other" bloc="" set_list="" code="bbd" card_count="254" new_card_count="201" reprint_count="53"/>
+  <set name="Beatdown Box Set" release_date="2020-04-14" set_type="reedition" bloc="" set_list="" code="btd" card_count="82" new_card_count="0" reprint_count="82"/>
+  <set name="Betrayers of Kamigawa" release_date="2012-11-09" set_type="block_set" bloc="Champions of Kamigawa / Saviors of Kamigawa / Betrayers of Kamigawa" set_list="" code="bok" card_count="170" new_card_count="131" reprint_count="39"/>
+  <set name="Born of the Gods" release_date="2001-03-27" set_type="block_set" bloc="Born of the Gods / Theros / Journey into Nyx" set_list="" code="bng" card_count="165" new_card_count="147" reprint_count="18"/>
+  <set name="Champions of Kamigawa" release_date="1993-03-20" set_type="block_set" bloc="Champions of Kamigawa / Saviors of Kamigawa / Betrayers of Kamigawa" set_list="" code="chk" card_count="301" new_card_count="301" reprint_count="0"/>
+  <set name="Chronicles" release_date="2016-04-19" set_type="reedition" bloc="" set_list="" code="chr" card_count="116" new_card_count="3" reprint_count="113"/>
+  <set name="Classic Sixth Edition" release_date="2014-09-21" set_type="basic_edition" bloc="" set_list="" code="6ed" card_count="335" new_card_count="10" reprint_count="325"/>
+  <set name="Coldsnap" release_date="2003-11-12" set_type="block_set" bloc="Ice Age / Coldsnap / Alliances" set_list="" code="csp" card_count="155" new_card_count="132" reprint_count="23"/>
+  <set name="Commander 2013 Edition" release_date="2008-09-07" set_type="other" bloc="" set_list="" code="c13" card_count="342" new_card_count="69" reprint_count="273"/>
+  <set name="Commander 2014" release_date="1997-08-22" set_type="other" bloc="" set_list="" code="c14" card_count="337" new_card_count="198" reprint_count="139"/>
+  <set name="Commander 2015" release_date="2009-11-03" set_type="other" bloc="" set_list="" code="c15" card_count="342" new_card_count="54" reprint_count="288"/>
+  <set name="Commander 2016" release_date="1996-01-05" set_type="other" bloc="" set_list="" code="c16" card_count="353" new_card_count="269" reprint_count="84"/>
+  <set name="Commander 2017" release_date="2003-04-05" set_type="other" bloc="" set_list="" code="c17" card_count="309" new_card_count="108" reprint_count="201"/>
+  <set name="Commander 2018" release_date="1996-05-15" set_type="other" bloc="" set_list="" code="c18" card_count="308" new_card_count="193" reprint_count="115"/>
+  <set name="Commander Anthology" release_date="1998-05-19" set_type="other" bloc="" set_list="" code="cma" card_count="289" new_card_count="70" reprint_count="219"/>
+  <set name="Commander Anthology 2018" release_date="2019-02-18" set_type="other" bloc="" set_list="" code="c18" card_count="280" new_card_count="0" reprint_count="280"/>
+  <set name="Commander's Arsenal" release_date="2020-06-27" set_type="other" bloc="" set_list="" code="cm1" card_count="18" new_card_count="0" reprint_count="18"/>
+  <set name="Conflux" release_date="1996-05-25" set_type="block_set" bloc="Conflux / Alara Reborn / Shards of Alara" set_list="" code="con" card_count="145" new_card_count="113" reprint_count="32"/>
+  <set name="Conspiracy: Take the Crown" release_date="2001-07-02" set_type="other" bloc="" set_list="" code="cn2" card_count="209" new_card_count="127" reprint_count="82"/>
+  <set name="Core Set 2019" release_date="1995-06-08" set_type="basic_edition" bloc="" set_list="" code="m19" card_count="300" new_card_count="281" reprint_count="19"/>
+  <set name="Dark Ascension" release_date="2016-02-05" set_type="block_set" bloc="Avacyn Restored / Innistrad / Dark Ascension" set_list="" code="dka" card_count="171" new_card_count="125" reprint_count="46"/>
+  <set name="Darksteel" release_date="2016-04-24" set_type="block_set" bloc="Fifth Dawn / Mirrodin / Darksteel" set_list="" code="dst" card_count="165" new_card_count="115" reprint_count="50"/>
+  <set name="Dissension" release_date="1994-08-14" set_type="block_set" bloc="Guildpact / Dissension / Ravnica: City of Guilds" set_list="" code="dis" card_count="190" new_card_count="187" reprint_count="3"/>
+  <set name="Dominaria" release_date="2020-03-17" set_type="block_set" bloc="Dominaria" set_list="" code="dom" card_count="280" new_card_count="223" reprint_count="57"/>
+  <set name="Dragon's Maze" release_date="1999-03-06" set_type="block_set" bloc="Return to Ravnica / Dragon's Maze / Gatecrash" set_list="" code="dgm" card_count="171" new_card_count="146" reprint_count="25"/>
+  <set name="Dragons of Tarkir" release_date="2016-06-08" set_type="block_set" bloc="Fate Reforged / Khans of Tarkir / Dragons of Tarkir" set_list="" code="dtk" card_count="255" new_card_count="207" reprint_count="48"/>
+  <set name="Duel Decks Anthology, Divine vs. Demonic" release_date="1995-07-27" set_type="dual_deck" bloc="" set_list="" code="ddc" card_count="56" new_card_count="43" reprint_count="13"/>
+  <set name="Duel Decks Anthology, Elves vs. Goblins" release_date="2005-08-01" set_type="dual_deck" bloc="" set_list="" code="evg" card_count="56" new_card_count="0" reprint_count="56"/>
+  <set name="Duel Decks Anthology, Garruk vs. Liliana" release_date="2008-03-23" set_type="dual_deck" bloc="" set_list="" code="ddd" card_count="57" new_card_count="0" reprint_count="57"/>
+  <set name="Duel Decks Anthology, Jace vs. Chandra" release_date="2018-08-07" set_type="dual_deck" bloc="" set_list="" code="dd2" card_count="56" new_card_count="0" reprint_count="56"/>
+  <set name="Duel Decks: Ajani vs. Nicol Bolas" release_date="1995-07-02" set_type="dual_deck" bloc="" set_list="" code="ddh" card_count="80" new_card_count="60" reprint_count="20"/>
+  <set name="Duel Decks: Blessed vs. Cursed" release_date="1999-09-14" set_type="dual_deck" bloc="" set_list="" code="ddq" card_count="68" new_card_count="50" reprint_count="18"/>
+  <set name="Duel Decks: Divine vs. Demonic" release_date="2012-06-08" set_type="dual_deck" bloc="" set_list="" code="ddc" card_count="59" new_card_count="2" reprint_count="57"/>
+  <set name="Duel Decks: Elspeth vs. Kiora" release_date="2001-09-05" set_type="dual_deck" bloc="" set_list="" code="ddo" card_count="58" new_card_count="22" reprint_count="36"/>
+  <set name="Duel Decks: Elspeth vs. Tezzeret" release_date="2008-10-17" set_type="dual_deck" bloc="" set_list="" code="ddf" card_count="73" new_card_count="19" reprint_count="54"/>
+  <set name="Duel Decks: Elves vs. Goblins" release_date="1995-04-19" set_type="dual_deck" bloc="" set_list="" code="evg" card_count="59" new_card_count="38" reprint_count="21"/>
+  <set name="Duel Decks: Elves vs. Inventors" release_date="2013-01-22" set_type="dual_deck" bloc="" set_list="" code="ddu" card_count="71" new_card_count="3" reprint_count="68"/>
+  <set name="Duel Decks: Garruk vs. Liliana" release_date="2003-11-08" set_type="dual_deck" bloc="" set_list="" code="ddd" card_count="59" new_card_count="17" reprint_count="42"/>
+  <set name="Duel Decks: Heroes vs. Monsters" release_date="2018-08-14" set_type="dual_deck" bloc="" set_list="" code="ddl" card_count="68" new_card_count="1" reprint_count="67"/>
+  <set name="Duel Decks: Izzet vs. Golgari" release_date="2006-01-01" set_type="dual_deck" bloc="" set_list="" code="ddj" card_count="80" new_card_count="19" reprint_count="61"/>
+  <set name="Duel Decks: Jace vs. Chandra" release_date="2009-08-02" set_type="dual_deck" bloc="" set_list="" code="dd2" card_count="57" new_card_count="13" reprint_count="44"/>
+  <set name="Duel Decks: Jace vs. Vraska" release_date="2005-10-10" set_type="dual_deck" bloc="" set_list="" code="ddm" card_count="76" new_card_count="16" reprint_count="60"/>
+  <set name="Duel Decks: Knights vs. Dragons" release_date="2017-09-05" set_type="dual_deck" bloc="" set_list="" code="ddg" card_count="72" new_card_count="5" reprint_count="67"/>
+  <set name="Duel Decks: Merfolk vs. Goblins" release_date="1999-03-08" set_type="dual_deck" bloc="" set_list="" code="ddt" card_count="57" new_card_count="31" reprint_count="26"/>
+  <set name="Duel Decks: Mind vs. Might" release_date="1994-08-17" set_type="dual_deck" bloc="" set_list="" code="dds" card_count="56" new_card_count="41" reprint_count="15"/>
+  <set name="Duel Decks: Nissa vs. Ob Nixilis" release_date="2018-03-23" set_type="dual_deck" bloc="" set_list="" code="ddr" card_count="64" new_card_count="0" reprint_count="64"/>
+  <set name="Duel Decks: Phyrexia vs. the Coalition" release_date="2018-08-23" set_type="dual_deck" bloc="" set_list="" code="dde" card_count="70" new_card_count="3" reprint_count="67"/>
+  <set name="Duel Decks: Sorin vs. Tibalt" release_date="2020-04-15" set_type="dual_deck" bloc="" set_list="" code="ddk" card_count="71" new_card_count="0" reprint_count="71"/>
+  <set name="Duel Decks: Speed vs. Cunning" release_date="1995-08-05" set_type="dual_deck" bloc="" set_list="" code="ddn" card_count="72" new_card_count="50" reprint_count="22"/>
+  <set name="Duel Decks: Venser vs. Koth" release_date="2012-06-19" set_type="dual_deck" bloc="" set_list="" code="ddi" card_count="70" new_card_count="9" reprint_count="61"/>
+  <set name="Duel Decks: Zendikar vs. Eldrazi" release_date="2013-08-18" set_type="dual_deck" bloc="" set_list="" code="ddp" card_count="67" new_card_count="0" reprint_count="67"/>
+  <set name="Eighth Edition" release_date="2004-11-01" set_type="basic_edition" bloc="" set_list="" code="8ed" card_count="342" new_card_count="85" reprint_count="257"/>
+  <set name="Eldritch Moon" release_date="2019-07-18" set_type="block_set" bloc="Shadows over Innistrad / Eldritch Moon" set_list="" code="emn" card_count="220" new_card_count="200" reprint_count="20"/>
+  <set name="Eternal Masters" release_date="2002-01-09" set_type="reedition" bloc="" set_list="" code="ema" card_count="249" new_card_count="93" reprint_count="156"/>
+  <set name="Eventide" release_date="2007-02-05" set_type="block_set" bloc="Eventide / Shadowmoor" set_list="" code="eve" card_count="180" new_card_count="129" reprint_count="51"/>
+  <set name="Exodus" release_date="2015-09-21" set_type="block_set" bloc="Tempest / Exodus / Stronghold" set_list="" code="exo" card_count="143" new_card_count="99" reprint_count="44"/>
+  <set name="Explorers of Ixalan" release_date="1994-08-16" set_type="other" bloc="" set_list="" code="e02" card_count="47" new_card_count="44" reprint_count="3"/>
+  <set name="Fallen Empires" release_date="2003-10-17" set_type="block_set" bloc="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities" set_list="" code="fem" card_count="102" new_card_count="94" reprint_count="8"/>
+  <set name="Fate Reforged" release_date="2000-02-02" set_type="block_set" bloc="Fate Reforged / Khans of Tarkir / Dragons of Tarkir" set_list="" code="frf" card_count="185" new_card_count="148" reprint_count="37"/>
+  <set name="Fifth Dawn" release_date="1994-11-27" set_type="block_set" bloc="Fifth Dawn / Mirrodin / Darksteel" set_list="" code="5dn" card_count="165" new_card_count="153" reprint_count="12"/>
+  <set name="Fifth Edition" release_date="2006-08-17" set_type="basic_edition" bloc="" set_list="" code="5ed" card_count="434" new_card_count="64" reprint_count="370"/>
+  <set name="Fourth Edition" release_date="2016-06-27" set_type="basic_edition" bloc="" set_list="" code="4ed" card_count="368" new_card_count="6" reprint_count="362"/>
+  <set name="From the Vault: Angels" release_date="2009-11-02" set_type="from_the_vault" bloc="" set_list="" code="v15" card_count="15" new_card_count="2" reprint_count="13"/>
+  <set name="From the Vault: Annihilation (2014)" release_date="2009-07-14" set_type="from_the_vault" bloc="" set_list="" code="v14" card_count="15" new_card_count="3" reprint_count="12"/>
+  <set name="From the Vault: Dragons" release_date="1998-03-02" set_type="from_the_vault" bloc="" set_list="" code="drb" card_count="15" new_card_count="7" reprint_count="8"/>
+  <set name="From the Vault: Exiled" release_date="1993-09-19" set_type="from_the_vault" bloc="" set_list="" code="v09" card_count="15" new_card_count="13" reprint_count="2"/>
+  <set name="From the Vault: Legends" release_date="2018-01-20" set_type="from_the_vault" bloc="" set_list="" code="v11" card_count="15" new_card_count="2" reprint_count="13"/>
+  <set name="From the Vault: Lore" release_date="2006-05-02" set_type="from_the_vault" bloc="" set_list="" code="v16" card_count="15" new_card_count="8" reprint_count="7"/>
+  <set name="From the Vault: Realms" release_date="2007-06-08" set_type="from_the_vault" bloc="" set_list="" code="v12" card_count="15" new_card_count="4" reprint_count="11"/>
+  <set name="From the Vault: Relics" release_date="2020-07-09" set_type="from_the_vault" bloc="" set_list="" code="v10" card_count="15" new_card_count="0" reprint_count="15"/>
+  <set name="From the Vault: Transform" release_date="2019-03-21" set_type="from_the_vault" bloc="" set_list="" code="v17" card_count="28" new_card_count="4" reprint_count="24"/>
+  <set name="From the Vault: Twenty" release_date="2016-10-23" set_type="from_the_vault" bloc="" set_list="" code="v13" card_count="20" new_card_count="1" reprint_count="19"/>
+  <set name="Future Sight" release_date="2014-11-10" set_type="block_set" bloc="Time Spiral / Planar Chaos / Future Sight" set_list="" code="fut" card_count="180" new_card_count="118" reprint_count="62"/>
+  <set name="Gatecrash" release_date="2004-04-23" set_type="block_set" bloc="Return to Ravnica / Dragon's Maze / Gatecrash" set_list="" code="gtc" card_count="249" new_card_count="194" reprint_count="55"/>
+  <set name="Global Series: Jiang Yanggu and Mu Yanling" release_date="2014-08-15" set_type="" bloc="" set_list="" code="gs1" card_count="40" new_card_count="30" reprint_count="10"/>
+  <set name="Guild Kit: Boros" release_date="2001-01-25" set_type="" bloc="" set_list="" code="boros" card_count="25" new_card_count="15" reprint_count="10"/>
+  <set name="Guild Kit: Dimir" release_date="2007-04-19" set_type="" bloc="" set_list="" code="dimir" card_count="25" new_card_count="6" reprint_count="19"/>
+  <set name="Guild Kit: Golgari" release_date="2018-02-11" set_type="commander" bloc="" set_list="" code="golgari" card_count="27" new_card_count="0" reprint_count="27"/>
+  <set name="Guild Kit: Izzet" release_date="1996-07-19" set_type="" bloc="" set_list="" code="izzet" card_count="25" new_card_count="3" reprint_count="22"/>
+  <set name="Guild Kit: Selesnya" release_date="2006-06-26" set_type="" bloc="" set_list="" code="selesnya" card_count="26" new_card_count="4" reprint_count="22"/>
+  <set name="Guildpact" release_date="1993-01-22" set_type="block_set" bloc="Guildpact / Dissension / Ravnica: City of Guilds" set_list="" code="gpt" card_count="165" new_card_count="165" reprint_count="0"/>
+  <set name="Guilds of Ravnica" release_date="2010-10-24" set_type="block_set" bloc="Guilds of Ravnica / Ravnica Allegiance / War of the Spark" set_list="" code="GRN" card_count="278" new_card_count="244" reprint_count="34"/>
+  <set name="Homelands" release_date="1999-11-23" set_type="block_set" bloc="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities" set_list="" code="hml" card_count="115" new_card_count="111" reprint_count="4"/>
+  <set name="Hour of Devastation" release_date="2008-08-17" set_type="block_set" bloc="Amonkhet / Hour of Devastation" set_list="" code="hou" card_count="209" new_card_count="192" reprint_count="17"/>
+  <set name="Ice Age" release_date="2002-01-10" set_type="block_set" bloc="Ice Age / Coldsnap / Alliances" set_list="" code="ice" card_count="373" new_card_count="314" reprint_count="59"/>
+  <set name="Iconic Masters" release_date="2020-01-20" set_type="reedition" bloc="" set_list="" code="ima" card_count="249" new_card_count="2" reprint_count="247"/>
+  <set name="Innistrad" release_date="2012-10-10" set_type="block_set" bloc="Avacyn Restored / Innistrad / Dark Ascension" set_list="" code="isd" card_count="284" new_card_count="170" reprint_count="114"/>
+  <set name="Invasion" release_date="2009-08-06" set_type="block_set" bloc="Planeshift / Invasion / Apocalypse" set_list="" code="inv" card_count="340" new_card_count="261" reprint_count="79"/>
+  <set name="Ixalan" release_date="2020-06-25" set_type="block_set" bloc="Rivals of Ixalan / Ixalan" set_list="" code="xln" card_count="299" new_card_count="246" reprint_count="53"/>
+  <set name="Journey into Nyx" release_date="2012-05-02" set_type="block_set" bloc="Born of the Gods / Theros / Journey into Nyx" set_list="" code="jou" card_count="165" new_card_count="136" reprint_count="29"/>
+  <set name="Judgment" release_date="2013-07-01" set_type="block_set" bloc="Odyssey / Judgment / Torment" set_list="" code="jud" card_count="143" new_card_count="104" reprint_count="39"/>
+  <set name="Kaladesh" release_date="1998-08-22" set_type="block_set" bloc="Kaladesh / Aether Revolt" set_list="" code="kld" card_count="274" new_card_count="240" reprint_count="34"/>
+  <set name="Khans of Tarkir" release_date="2013-02-22" set_type="block_set" bloc="Fate Reforged / Khans of Tarkir / Dragons of Tarkir" set_list="" code="ktk" card_count="254" new_card_count="175" reprint_count="79"/>
+  <set name="Legends" release_date="2007-06-19" set_type="block_set" bloc="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities" set_list="" code="leg" card_count="310" new_card_count="239" reprint_count="71"/>
+  <set name="Legions" release_date="2010-07-12" set_type="block_set" bloc="Scourge / Onslaught / Legions" set_list="" code="lgn" card_count="145" new_card_count="112" reprint_count="33"/>
+  <set name="Limited Edition Alpha" release_date="2004-01-06" set_type="basic_edition" bloc="" set_list="" code="lea" card_count="290" new_card_count="0" reprint_count="290"/>
+  <set name="Limited Edition Beta" release_date="2001-01-14" set_type="basic_edition" bloc="" set_list="" code="leb" card_count="292" new_card_count="179" reprint_count="113"/>
+  <set name="Lorwyn" release_date="1994-10-24" set_type="block_set" bloc="Lorwyn / Morningtide" set_list="" code="lrw" card_count="301" new_card_count="250" reprint_count="51"/>
+  <set name="Magic 2010" release_date="2015-09-08" set_type="basic_edition" bloc="" set_list="" code="m10" card_count="249" new_card_count="38" reprint_count="211"/>
+  <set name="Magic 2011" release_date="2000-10-14" set_type="basic_edition" bloc="" set_list="" code="m11" card_count="249" new_card_count="118" reprint_count="131"/>
+  <set name="Magic 2012" release_date="2008-01-11" set_type="basic_edition" bloc="" set_list="" code="m12" card_count="249" new_card_count="81" reprint_count="168"/>
+  <set name="Magic 2013" release_date="2020-09-26" set_type="basic_edition" bloc="" set_list="" code="m13" card_count="249" new_card_count="52" reprint_count="197"/>
+  <set name="Magic 2014 Core Set" release_date="2010-05-01" set_type="basic_edition" bloc="" set_list="" code="m14" card_count="234" new_card_count="109" reprint_count="125"/>
+  <set name="Magic 2015 Core Set" release_date="2017-01-20" set_type="basic_edition" bloc="" set_list="" code="m15" card_count="269" new_card_count="124" reprint_count="145"/>
+  <set name="Magic Origins" release_date="2000-09-17" set_type="basic_edition" bloc="" set_list="" code="ori" card_count="293" new_card_count="210" reprint_count="83"/>
+  <set name="Magic: The Gathering-Commander" release_date="1998-01-22" set_type="other" bloc="" set_list="" code="cmd" card_count="305" new_card_count="143" reprint_count="162"/>
+  <set name="Magic: The Gathering&#x2014;Conspiracy" release_date="2019-01-24" set_type="other" bloc="" set_list="" code="cns" card_count="197" new_card_count="45" reprint_count="152"/>
+  <set name="Masterpiece Series: Amonkhet Invocations" release_date="1996-03-12" set_type="masterpiece" bloc="" set_list="" code="mp2" card_count="54" new_card_count="34" reprint_count="20"/>
+  <set name="Masterpiece Series: Kaladesh Inventions" release_date="2005-06-24" set_type="masterpiece" bloc="" set_list="" code="mp1" card_count="54" new_card_count="11" reprint_count="43"/>
+  <set name="Masters 25" release_date="1998-05-22" set_type="reedition" bloc="" set_list="" code="a25" card_count="249" new_card_count="152" reprint_count="97"/>
+  <set name="Masters Edition" release_date="2014-01-13" set_type="online" bloc="" set_list="" code="me1" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Masters Edition II" release_date="2006-09-14" set_type="online" bloc="" set_list="" code="me2" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Masters Edition III" release_date="2015-04-19" set_type="online" bloc="" set_list="" code="me3" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Masters Edition IV" release_date="1996-09-19" set_type="online" bloc="" set_list="" code="me4" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Mercadian Masques" release_date="2010-03-27" set_type="block_set" bloc="Prophecy / Mercadian Masques / Nemesis" set_list="" code="mmq" card_count="335" new_card_count="250" reprint_count="85"/>
+  <set name="Mirage" release_date="2006-09-07" set_type="block_set" bloc="Visions / Mirage / Weatherlight" set_list="" code="mir" card_count="335" new_card_count="268" reprint_count="67"/>
+  <set name="Mirrodin" release_date="2010-06-17" set_type="block_set" bloc="Fifth Dawn / Mirrodin / Darksteel" set_list="" code="mrd" card_count="291" new_card_count="194" reprint_count="97"/>
+  <set name="Mirrodin Besieged" release_date="2020-04-21" set_type="block_set" bloc="New Phyrexia / Scars of Mirrodin / Mirrodin Besieged" set_list="" code="mbs" card_count="155" new_card_count="101" reprint_count="54"/>
+  <set name="Modern Event Deck 2014" release_date="1995-03-02" set_type="" bloc="" set_list="" code="md1" card_count="26" new_card_count="14" reprint_count="12"/>
+  <set name="Modern Masters" release_date="1994-06-11" set_type="reedition" bloc="" set_list="" code="mma" card_count="229" new_card_count="209" reprint_count="20"/>
+  <set name="Modern Masters 2015 Edition" release_date="1999-06-02" set_type="reedition" bloc="" set_list="" code="mm2" card_count="249" new_card_count="104" reprint_count="145"/>
+  <set name="Modern Masters 2017 Edition" release_date="2014-07-23" set_type="reedition" bloc="" set_list="" code="mm3" card_count="249" new_card_count="20" reprint_count="229"/>
+  <set name="Morningtide" release_date="2013-03-13" set_type="block_set" bloc="Lorwyn / Morningtide" set_list="" code="mor" card_count="150" new_card_count="108" reprint_count="42"/>
+  <set name="Nemesis" release_date="2017-02-02" set_type="block_set" bloc="Prophecy / Mercadian Masques / Nemesis" set_list="" code="nem" card_count="143" new_card_count="108" reprint_count="35"/>
+  <set name="New Phyrexia" release_date="1998-11-26" set_type="block_set" bloc="New Phyrexia / Scars of Mirrodin / Mirrodin Besieged" set_list="" code="nph" card_count="175" new_card_count="146" reprint_count="29"/>
+  <set name="Ninth Edition" release_date="2012-07-22" set_type="basic_edition" bloc="" set_list="" code="9ed" card_count="344" new_card_count="13" reprint_count="331"/>
+  <set name="Oath of the Gatewatch" release_date="2000-05-03" set_type="block_set" bloc="Oath of the Gatewatch / Battle for Zendikar" set_list="" code="ogw" card_count="183" new_card_count="162" reprint_count="21"/>
+  <set name="Odyssey" release_date="2010-07-26" set_type="block_set" bloc="Odyssey / Judgment / Torment" set_list="" code="ody" card_count="335" new_card_count="260" reprint_count="75"/>
+  <set name="Onslaught" release_date="2004-02-09" set_type="block_set" bloc="Scourge / Onslaught / Legions" set_list="" code="ons" card_count="335" new_card_count="252" reprint_count="83"/>
+  <set name="Planar Chaos" release_date="2013-08-11" set_type="block_set" bloc="Time Spiral / Planar Chaos / Future Sight" set_list="" code="plc" card_count="168" new_card_count="107" reprint_count="61"/>
+  <set name="Planechase" release_date="2016-03-16" set_type="" bloc="" set_list="" code="hop" card_count="148" new_card_count="6" reprint_count="142"/>
+  <set name="Planechase 2012 Edition" release_date="2000-10-03" set_type="other" bloc="" set_list="" code="pc2" card_count="136" new_card_count="63" reprint_count="73"/>
+  <set name="Planechase Anthology" release_date="2012-03-15" set_type="other" bloc="" set_list="" code="pca" card_count="136" new_card_count="0" reprint_count="136"/>
+  <set name="Planeshift" release_date="2000-10-01" set_type="block_set" bloc="Planeshift / Invasion / Apocalypse" set_list="" code="pls" card_count="143" new_card_count="130" reprint_count="13"/>
+  <set name="Portal" release_date="1994-06-15" set_type="starter" bloc="" set_list="" code="por" card_count="200" new_card_count="185" reprint_count="15"/>
+  <set name="Portal Second Age" release_date="2017-10-10" set_type="starter" bloc="" set_list="" code="p02" card_count="155" new_card_count="58" reprint_count="97"/>
+  <set name="Portal Three Kingdoms" release_date="2001-07-26" set_type="starter" bloc="" set_list="" code="ptk" card_count="170" new_card_count="149" reprint_count="21"/>
+  <set name="Premium Deck Series: Fire and Lightning" release_date="2005-08-21" set_type="premium_deck" bloc="" set_list="" code="pd2" card_count="31" new_card_count="6" reprint_count="25"/>
+  <set name="Premium Deck Series: Graveborn" release_date="2013-04-24" set_type="premium_deck" bloc="" set_list="" code="pd3" card_count="27" new_card_count="2" reprint_count="25"/>
+  <set name="Premium Deck Series: Slivers" release_date="2016-05-01" set_type="premium_deck" bloc="" set_list="" code="h09" card_count="41" new_card_count="5" reprint_count="36"/>
+  <set name="Promo set for Gatherer" release_date="2012-08-12" set_type="other" bloc="" set_list="" code="" card_count="27" new_card_count="7" reprint_count="20"/>
+  <set name="Prophecy" release_date="2006-11-07" set_type="block_set" bloc="Prophecy / Mercadian Masques / Nemesis" set_list="" code="pcy" card_count="143" new_card_count="126" reprint_count="17"/>
+  <set name="Ravnica: City of Guilds" release_date="2009-02-08" set_type="block_set" bloc="Guildpact / Dissension / Ravnica: City of Guilds" set_list="" code="rav" card_count="291" new_card_count="163" reprint_count="128"/>
+  <set name="Return to Ravnica" release_date="1994-10-01" set_type="block_set" bloc="Return to Ravnica / Dragon's Maze / Gatecrash" set_list="" code="rtr" card_count="254" new_card_count="239" reprint_count="15"/>
+  <set name="Revised Edition" release_date="2013-03-22" set_type="basic_edition" bloc="" set_list="" code="3ed" card_count="296" new_card_count="8" reprint_count="288"/>
+  <set name="Rise of the Eldrazi" release_date="2008-06-14" set_type="block_set" bloc="Zendikar / Worldwake / Rise of the Eldrazi" set_list="" code="roe" card_count="233" new_card_count="140" reprint_count="93"/>
+  <set name="Rivals of Ixalan" release_date="2005-02-16" set_type="block_set" bloc="Rivals of Ixalan / Ixalan" set_list="" code="rix" card_count="212" new_card_count="182" reprint_count="30"/>
+  <set name="Saviors of Kamigawa" release_date="2007-04-10" set_type="block_set" bloc="Champions of Kamigawa / Saviors of Kamigawa / Betrayers of Kamigawa" set_list="" code="sok" card_count="170" new_card_count="155" reprint_count="15"/>
+  <set name="Scars of Mirrodin" release_date="2010-08-27" set_type="block_set" bloc="New Phyrexia / Scars of Mirrodin / Mirrodin Besieged" set_list="" code="som" card_count="234" new_card_count="159" reprint_count="75"/>
+  <set name="Scourge" release_date="2002-03-12" set_type="block_set" bloc="Scourge / Onslaught / Legions" set_list="" code="scg" card_count="143" new_card_count="110" reprint_count="33"/>
+  <set name="Seventh Edition" release_date="1995-09-22" set_type="basic_edition" bloc="" set_list="" code="7ed" card_count="335" new_card_count="226" reprint_count="109"/>
+  <set name="Shadowmoor" release_date="2020-03-04" set_type="block_set" bloc="Eventide / Shadowmoor" set_list="" code="shm" card_count="301" new_card_count="197" reprint_count="104"/>
+  <set name="Shadows over Innistrad" release_date="1999-03-07" set_type="block_set" bloc="Shadows over Innistrad / Eldritch Moon" set_list="" code="soi" card_count="320" new_card_count="293" reprint_count="27"/>
+  <set name="Shards of Alara" release_date="2019-07-03" set_type="block_set" bloc="Conflux / Alara Reborn / Shards of Alara" set_list="" code="ala" card_count="234" new_card_count="122" reprint_count="112"/>
+  <set name="Signature Spellbook: Jace" release_date="2003-11-07" set_type="" bloc="" set_list="" code="ss1" card_count="8" new_card_count="0" reprint_count="8"/>
+  <set name="Starter 1999" release_date="2015-09-06" set_type="starter" bloc="" set_list="" code="s99" card_count="158" new_card_count="28" reprint_count="130"/>
+  <set name="Starter 2000" release_date="2004-07-10" set_type="starter" bloc="" set_list="" code="s00" card_count="52" new_card_count="6" reprint_count="46"/>
+  <set name="Stronghold" release_date="2017-11-27" set_type="block_set" bloc="Tempest / Exodus / Stronghold" set_list="" code="sth" card_count="143" new_card_count="91" reprint_count="52"/>
+  <set name="Tempest" release_date="2011-07-14" set_type="block_set" bloc="Tempest / Exodus / Stronghold" set_list="" code="tmp" card_count="335" new_card_count="208" reprint_count="127"/>
+  <set name="Tempest Remastered" release_date="2008-05-25" set_type="online" bloc="" set_list="" code="tpr" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Tenth Edition" release_date="2010-01-25" set_type="basic_edition" bloc="" set_list="" code="10e" card_count="383" new_card_count="72" reprint_count="311"/>
+  <set name="The Dark" release_date="1999-09-07" set_type="block_set" bloc="The Dark / Homelands / Fallen Empires / Legends / Arabian Nights / Antiquities" set_list="" code="drk" card_count="119" new_card_count="108" reprint_count="11"/>
+  <set name="Theros" release_date="2006-06-01" set_type="block_set" bloc="Born of the Gods / Theros / Journey into Nyx" set_list="" code="ths" card_count="249" new_card_count="165" reprint_count="84"/>
+  <set name="Time Spiral" release_date="2005-11-09" set_type="block_set" bloc="Time Spiral / Planar Chaos / Future Sight" set_list="" code="tsp" card_count="286" new_card_count="203" reprint_count="83"/>
+  <set name="Time Spiral &quot;Timeshifted&quot;" release_date="2011-10-12" set_type="" bloc="" set_list="" code="tsp" card_count="122" new_card_count="9" reprint_count="113"/>
+  <set name="Torment" release_date="2017-11-01" set_type="block_set" bloc="Odyssey / Judgment / Torment" set_list="" code="tor" card_count="143" new_card_count="109" reprint_count="34"/>
+  <set name="Ugin's Fate promos" release_date="2010-10-20" set_type="" bloc="" set_list="" code="" card_count="26" new_card_count="10" reprint_count="16"/>
+  <set name="Unglued" release_date="1994-04-13" set_type="humouristic" bloc="" set_list="" code="ugl" card_count="94" new_card_count="89" reprint_count="5"/>
+  <set name="Unhinged" release_date="2004-02-27" set_type="humouristic" bloc="" set_list="" code="unh" card_count="142" new_card_count="137" reprint_count="5"/>
+  <set name="Unlimited Edition" release_date="2009-11-04" set_type="basic_edition" bloc="" set_list="" code="2ed" card_count="292" new_card_count="0" reprint_count="292"/>
+  <set name="Unstable" release_date="2004-01-10" set_type="humouristic" bloc="" set_list="" code="ust" card_count="249" new_card_count="244" reprint_count="5"/>
+  <set name="Urza's Destiny" release_date="2000-09-13" set_type="block_set" bloc="Urza's Legacy / Urza's Saga / Urza's Destiny" set_list="" code="uds" card_count="143" new_card_count="117" reprint_count="26"/>
+  <set name="Urza's Legacy" release_date="1994-11-24" set_type="block_set" bloc="Urza's Legacy / Urza's Saga / Urza's Destiny" set_list="" code="ulg" card_count="143" new_card_count="137" reprint_count="6"/>
+  <set name="Urza's Saga" release_date="1999-03-24" set_type="block_set" bloc="Urza's Legacy / Urza's Saga / Urza's Destiny" set_list="" code="usg" card_count="335" new_card_count="243" reprint_count="92"/>
+  <set name="Vanguard" release_date="1996-08-26" set_type="other" bloc="" set_list="" code="van" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Vintage Masters" release_date="2018-07-14" set_type="online" bloc="" set_list="" code="vma" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Visions" release_date="1993-04-01" set_type="block_set" bloc="Visions / Mirage / Weatherlight" set_list="" code="vis" card_count="167" new_card_count="167" reprint_count="0"/>
+  <set name="Weatherlight" release_date="2016-10-26" set_type="block_set" bloc="Visions / Mirage / Weatherlight" set_list="" code="wth" card_count="167" new_card_count="109" reprint_count="58"/>
+  <set name="Welcome Deck 2016" release_date="2008-01-20" set_type="reedition" bloc="" set_list="" code="w16" card_count="16" new_card_count="2" reprint_count="14"/>
+  <set name="Welcome Deck 2017" release_date="2013-06-09" set_type="reedition" bloc="" set_list="" code="w17" card_count="30" new_card_count="4" reprint_count="26"/>
+  <set name="Worldwake" release_date="2001-01-26" set_type="block_set" bloc="Zendikar / Worldwake / Rise of the Eldrazi" set_list="" code="wwk" card_count="145" new_card_count="108" reprint_count="37"/>
+  <set name="Zendikar" release_date="1995-10-27" set_type="block_set" bloc="Zendikar / Worldwake / Rise of the Eldrazi" set_list="" code="zen" card_count="269" new_card_count="216" reprint_count="53"/>
+  <set name="Zendikar Expeditions" release_date="2010-05-21" set_type="masterpiece" bloc="" set_list="" code="exp" card_count="45" new_card_count="13" reprint_count="32"/>
+  <set name="Ultimate Masters" release_date="2002-08-20" set_type="reedition" bloc="" set_list="" code="uma" card_count="255" new_card_count="114" reprint_count="141"/>
+  <set name="Ravnica Allegiance" release_date="2011-10-06" set_type="block_set" bloc="Guilds of Ravnica / Ravnica Allegiance / War of the Spark" set_list="" code="rna" card_count="278" new_card_count="258" reprint_count="20"/>
+  <set name="Guilds of Ravnica Mythic Edition" release_date="2017-06-18" set_type="" bloc="" set_list="" code="med" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Gift Pack" release_date="2010-10-27" set_type="" bloc="" set_list="" code="" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="Game Night" release_date="1999-11-09" set_type="" bloc="" set_list="" code="gnt" card_count="0" new_card_count="0" reprint_count="0"/>
+  <set name="War of the Spark" release_date="2018-04-01" set_type="block_set" bloc="Guilds of Ravnica / Ravnica Allegiance / War of the Spark" set_list="" code="war" card_count="275" new_card_count="249" reprint_count="26"/>
+  <set name="Modern Horizons" release_date="1998-05-01" set_type="" bloc="" set_list="" code="mh1" card_count="255" new_card_count="235" reprint_count="20"/>
+  <set name="Throne of Eldraine" release_date="2033-04-10" set_type="block_set" bloc="" set_list="" code="eld" card_count="" new_card_count="" reprint_count=""/>
+  <set name="Core Set 2020" release_date="2019-07-12" set_type="" bloc="" set_list="" code="m20" card_count="" new_card_count="" reprint_count=""/>
+</root>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_220025) do
+ActiveRecord::Schema.define(version: 2019_12_22_234028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,9 +24,9 @@ ActiveRecord::Schema.define(version: 2019_10_29_220025) do
   end
 
   create_table "blocs", force: :cascade do |t|
-    t.integer "bloc_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "release_date"
   end
 
   create_table "card_collections", force: :cascade do |t|
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 2019_10_29_220025) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.string "name_fr"
     t.string "name"
     t.integer "extension_set_id"
     t.integer "card_type"
@@ -67,8 +66,6 @@ ActiveRecord::Schema.define(version: 2019_10_29_220025) do
     t.string "mana_cost"
     t.integer "color_ids", array: true
     t.string "image"
-    t.integer "power"
-    t.integer "defense"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "artist_name"
@@ -76,20 +73,18 @@ ActiveRecord::Schema.define(version: 2019_10_29_220025) do
     t.string "gatherer_link"
     t.integer "gatherer_id"
     t.string "name_clean"
-    t.string "name_fr_clean"
-    t.string "image_fr"
-    t.string "type_fr"
-    t.text "text_fr"
     t.text "flavor_text"
-    t.text "flavor_text_fr"
     t.string "power_str"
     t.string "defense_str"
     t.string "color_indicator"
     t.integer "loyalty"
     t.integer "format", default: 0, null: false
     t.boolean "first_edition"
+    t.boolean "is_double_card"
+    t.boolean "is_double_part"
+    t.boolean "hybrid"
+    t.integer "alternative_type", default: 1
     t.index ["name"], name: "index_cards_on_name"
-    t.index ["name_fr"], name: "index_cards_on_name_fr"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -124,10 +119,8 @@ ActiveRecord::Schema.define(version: 2019_10_29_220025) do
     t.datetime "updated_at", null: false
     t.string "slug"
     t.integer "set_type"
-    t.integer "order"
     t.integer "bloc_id"
     t.integer "set_list_id"
-    t.boolean "bad_visual"
     t.string "code"
     t.integer "card_count"
     t.integer "new_card_count"

@@ -9,10 +9,8 @@
 #  updated_at     :datetime         not null
 #  slug           :string
 #  set_type       :integer
-#  order          :integer
 #  bloc_id        :integer
 #  set_list_id    :integer
-#  bad_visual     :boolean
 #  code           :string
 #  card_count     :integer
 #  new_card_count :integer
@@ -25,8 +23,6 @@ class ExtensionSet < ApplicationRecord
 
   belongs_to :bloc, optional: true
   belongs_to :set_list, optional: true
-
-  scope :without_visual, -> { where(bad_visual: true) }
 
   before_create :generate_slug
 
@@ -44,6 +40,14 @@ class ExtensionSet < ApplicationRecord
     masterpiece:    11,
     commander:      12
   }
+
+  def cards_for_list
+    # TODO
+    # > recto_verso : ne pas afficher le verso, sur la page vue, afficher le verso au clic
+    # > double_card : afficher dans une section "cartes doubles" dans la liste, sur la fiche afficher avec un rotate 90
+    # > flip_card : ne pas afficher le double, sur la vue, permettre un rotate (idem magic ville)
+    # > adventure : ne pas afficher l'aventure
+  end
 
   private
 

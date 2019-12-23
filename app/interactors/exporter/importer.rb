@@ -3,7 +3,7 @@ class Exporter::Importer
 
   def call
     User.all.destroy_all
-    doc = File.open("#{Rails.root}/export.xml") { |f| Nokogiri::XML(f) }
+    doc = File.open("#{Rails.root}/export_users.xml") { |f| Nokogiri::XML(f) }
 
     doc.xpath('//user').each do |user|
       user_id = create_user(

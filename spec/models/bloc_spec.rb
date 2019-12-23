@@ -2,10 +2,10 @@
 #
 # Table name: blocs
 #
-#  id         :bigint           not null, primary key
-#  bloc_order :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id           :bigint           not null, primary key
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  release_date :datetime
 #
 
 require 'rails_helper'

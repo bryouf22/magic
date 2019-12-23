@@ -9,9 +9,9 @@ class ExtensionSetsController < ApplicationController
     ExtensionSet.set_types.to_a.collect { |type| type.last }.each do |type|
       next if ExtensionSet.where(set_type: type).none?
       if (bloc_ids = ExtensionSet.where(set_type: type).collect(&:bloc_id)).any?
-        @block_sets << Bloc.where(id: bloc_ids).reorder('bloc_order ASC').collect { |bloc_id| ExtensionSet.where(set_type: type).where(bloc_id: bloc_id).reorder('extension_sets.order ASC') }
+        @block_sets << Bloc.where(id: bloc_ids).reorder('release_date ASC').collect { |bloc_id| ExtensionSet.where(set_type: type).where(bloc_id: bloc_id).reorder('extension_sets.release_date ASC') }
       else
-        @block_sets << ExtensionSet.where(set_type: type).reorder('extension_sets.order ASC')
+        @block_sets << ExtensionSet.where(set_type: type).reorder('extension_sets.release_date ASC')
       end
     end
   end
@@ -34,7 +34,7 @@ class ExtensionSetsController < ApplicationController
 
   def show
     @set = ExtensionSet.where(slug: params[:slug]).first!
-    list_by_colors(@set.cards.order('name_fr_clean ASC'))
+    list_by_colors(@set.cards.order('name_clean ASC'))
     add_breadcrumb @set.name, extension_set_path(slug: @set.slug)
     set_meta_tags title: @set.name
     render :visual if view_mode == 'images'

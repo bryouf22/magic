@@ -1,0 +1,21 @@
+.row
+  .col-md-6
+    = form_for(@card, url: admin_cards_path, method: :post, :html => {:multipart => true}) do |form|
+      = form.hidden_field(:from_card_id, value: @from)
+      .form-group
+        = label_tag(:name, 'Nom :')
+        = form.text_field(:name, class: 'form-control')
+      .form-group
+        = label_tag(:extension_set_id, 'Extension :')
+        - options = options_for_select(ExtensionSet.all.collect { |set| [set.name, set.id] }, @card.extension_set_id)
+        = form.select(:extension_set_id, options, { include_blank: false }, { class: 'form-control' })
+      .form-group
+        = label_tag(:gatherer_id, 'Gatherer ID:')
+        = form.text_field(:gatherer_id, class: 'form-control', value: '', required: true)
+      .form-group
+        = label_tag(:number_in_set, 'Number :')
+        = form.text_field(:number_in_set, class: 'form-control', value: '', required: true)
+      .form-group
+        = form.file_field :image
+      .form-group
+        = form.submit('Valider', class: 'btn btn-success')

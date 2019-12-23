@@ -6,7 +6,7 @@ class Admin::ExtensionSetsController < AdminController
   end
 
   def show
-    list_by_colors(@set.cards.order('name_fr_clean ASC'))
+    list_by_colors(@set.cards.order('name_clean ASC'))
   end
 
   def edit
@@ -27,6 +27,6 @@ class Admin::ExtensionSetsController < AdminController
   end
 
   def update_params
-    params.require(:extension_set).permit(:name, :set_type, :release_date, :bloc_id, :order, :code)
+    params.require(:extension_set).permit(:name, :set_type, :release_date, :bloc_id, :code)
   end
 end

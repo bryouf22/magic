@@ -73,17 +73,13 @@ Rails.application.routes.draw do
       resources :gatherer_card_urls, controller: 'extension_sets/gatherer_card_urls'
     end
 
-    post '/admin/export', to: 'welcome#export', as: :export
+    post '/admin/export', to: 'welcome#export',        as: :export
+    post 'deck-validity', to: 'welcome#deck_validity', as: :deck_validity
 
-    resources :cards
+    resources :cards, only: [:new, :edit, :update, :destroy, :create]
     resources :users
-
     resources :set_lists
     resources :blocs, except: %i[new show edit update]
-
     resources :formats
-
-    post   'deck-validity', to: 'welcome#deck_validity', as: :deck_validity
-    post   '/bloc_order',   to: 'blocs#bloc_order'
   end
 end

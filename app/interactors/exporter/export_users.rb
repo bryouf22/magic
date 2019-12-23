@@ -2,7 +2,7 @@ class Exporter::ExportUsers
   include Interactor
 
   def call
-    export_path = context.export_path.presence || "#{Rails.root}/export.xml"
+    export_path = context.export_path.presence || "#{Rails.root}/export_users.xml"
 
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.root do

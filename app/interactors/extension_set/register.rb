@@ -20,6 +20,7 @@ class ExtensionSet::Register
         end
       end
 
+      # TODO, dont count double cards in totals
       ExtensionSet.all.each do |set|
         set.update(
           reprint_count:  set.cards.where(first_edition: false).count,

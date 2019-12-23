@@ -3,7 +3,12 @@
 
 .row.card-view
   .col-md-3
-    = image_tag @card.image.url if @card.image.present?
+    = image_show(@card) if @card.image.present?
+    - if current_user.present? && current_user.is_admin?
+      %br
+      %br
+      %ul
+        %li= link_to 'Create from ...', new_admin_card_path(from: @card.id), class: 'btn btn-xs btn-primary'
   .col-md-4
     %ul
       %li= link_to 'see on gatherer', @card.gatherer_link, target: '_blank'

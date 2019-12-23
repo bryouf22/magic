@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_by_type(extensions)
-    @block_sets      ||= Bloc.order('blocs.bloc_order ASC')
+    @block_sets      ||= Bloc.order('blocs.release_date ASC')
     @_sets           ||= extensions.where(set_type: nil)
     @masterpieces    ||= extensions.masterpiece
     @sets            ||= extensions.block_set.where(bloc_id: nil)
@@ -35,6 +35,8 @@ class ApplicationController < ActionController::Base
     @colorless_artefact_cards ||= cards.colorless_artefact.decorate
     @land_cards               ||= cards.land.decorate
     @colorless_non_artefact   ||= cards.colorless_non_artefact.decorate
+    @double_cards             ||= cards.doubles.decorate
+    @hybrid_cards             ||= cards.hybrids.decorate
   end
 
   def view_mode

@@ -9,6 +9,7 @@ class CardImageUploader < CarrierWave::Uploader::Base
   def filename
     if original_filename.present?
       if model.number_in_set.present?
+        model.basic_land?
         "#{model.number_in_set}-#{model.name.parameterize}.jpg"
       else
         "gid-#{model.gatherer_id}-#{model.name.parameterize}.jpg"
