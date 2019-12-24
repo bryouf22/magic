@@ -44,7 +44,7 @@ class Card < ApplicationRecord
   scope :only_blue,               -> { where(color_ids: [Color.blue]).where.not(alternative_type: :double_card).where.not(is_double_part: true)  }
   scope :only_white,              -> { where(color_ids: [Color.white]).where.not(alternative_type: :double_card).where.not(is_double_part: true) }
   scope :only_black,              -> { where(color_ids: [Color.black]).where.not(alternative_type: :double_card).where.not(is_double_part: true) }
-  scope :gold,                    -> { where('array_length(color_ids, 1) >= 2').where(hybrid: false) }
+  scope :gold,                    -> { where('array_length(color_ids, 1) >= 2').where(hybrid: false).where(is_double_part: false) }
   scope :colorless,               -> { where('color_ids is ?', nil) }
   scope :red,                     -> { where('? = ANY(color_ids)', Color.red)}
   scope :blue,                    -> { where('? = ANY(color_ids)', Color.blue)}

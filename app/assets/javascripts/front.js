@@ -282,5 +282,21 @@ $(document).ready(function() {
     } else {
       $('.js-restric-label').html('Incolore uniquement');
     }
-  })
+  });
+
+  $('.verso').on('click', function () {
+    $('.verso').hide();
+    $('.recto').show();
+  });
+  $('.recto').on('click', function () {
+    $('.recto').hide();
+    $('.verso').show();
+  });
+  $('.flip').on('click', function () {
+    if ($(this).css('transform') == 'none') {
+      $('.flip').css('transform', 'rotate(180deg)');
+    } else {
+      $('.flip').css('transform', 'none');
+    }
+  });
 });

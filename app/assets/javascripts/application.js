@@ -13,15 +13,17 @@
 //
 // this is NOT include :
 //
-// require activestorage
-// require jquery
-// require bootstrap
-// require select2
-// require moment
-// require moment/fr
-// require bootstrap-datetimepicker
-// require chartkick
-// require Chart.bundle
+//= require activestorage
+//= require jquery
+//= require bootstrap
+//= require select2
+//= require moment
+//= require moment/fr
+//= require bootstrap-datetimepicker
+//= require chartkick
+//= require Chart.bundle
+//
+//= require front.js
 //
 // this is include :
 //= require_tree ./production/

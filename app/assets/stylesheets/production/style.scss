@@ -128,3 +128,8 @@ h3 {
 img.rotate {
   transform: rotate(90deg);
 }
+
+img.verso {
+  display: none;
+  transform: rotate(180deg);
+}

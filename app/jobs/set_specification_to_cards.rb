@@ -11,8 +11,9 @@ class SetSpecificationToCards < ApplicationJob
       end
       card.update(hybrid: true) if is_hybrid?(card.mana_cost)
     end
-
-    # TODO card.alternative_type
+    Alternative.all.find_each do |alt|
+      alt.set_type_to_card
+    end
   end
 
   def is_hybrid?(mana_cost = '')
