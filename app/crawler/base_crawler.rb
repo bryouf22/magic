@@ -34,7 +34,7 @@ class BaseCrawler
     loop do
       html = html_from_url("#{GATHERER_BASE_URL}/Search/Default.aspx?action=advanced&set=[%22#{extension_set_name_for_url(set_name)}%22]&page=#{page}")
       card_urls = html.css('span.cardTitle a').collect { |a| a.attribute('href').value.sub('..', GATHERER_BASE_URL) }
-      break if hrefs.include?(card_urls.first)
+      break if hrefs.include?(card_urls.first) || card_urls.empty?
       hrefs += card_urls
       page += 1
     end
@@ -60,22 +60,21 @@ class BaseCrawler
   private
 
   def retrieve_or_create_set(set_name)
-    if (set = ExtensionSet.where(name: set_name).first)
+    name = set_name.gsub("+", ' ').gsub("%3a", ': ')
+    if (set = ExtensionSet.where(name: name).first)
       set.id
     else
-      ExtensionSet.create(name: set_name).id
+      ExtensionSet.create(name: name).id
     end
   end
 
   def import_set_names
     [
-      'Throne of Eldraine',
-      'Core Set 2020',
-      'Guild Kit: Azorius',
-      'Guild Kit: Gruul',
-      'Guild Kit: Orzhov',
-      'Guild Kit: Rakdos',
-      'Guild Kit: Simic'
+      'Guild+Kit%3a+Azorius',
+      'Guild+Kit%3a+Gruul',
+      'Guild+Kit%3a+Orzhov',
+      'Guild+Kit%3a+Rakdos',
+      'Guild+Kit%3a+Simic'
     ]
   end
 

@@ -133,3 +133,42 @@ img.verso {
   display: none;
   transform: rotate(180deg);
 }
+
+hr {
+  border-top: 1px solid #702828;
+}
+
+.set-list-name {
+  width: -moz-fit-content;
+  padding: 4px 40px 4px 40px;
+  text-align: left;
+  border: #fff solid 1px;
+  border-radius: 3px;
+  color: #a82010;
+  font-size: 19px;
+}
+
+.ext-bloc {
+  border-bottom: 1px solid #702828;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.ext-date {
+  visibility: hidden;
+}
+
+.ext-set:hover {
+  color: #7c0d00;
+  a {
+    text-decoration: underline;
+  }
+  .ext-date {
+     visibility: visible;
+  }
+}
+
+.admin-set-list td {
+  vertical-align: middle !important;
+}
