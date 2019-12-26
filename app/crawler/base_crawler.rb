@@ -68,7 +68,15 @@ class BaseCrawler
   end
 
   def import_set_names
-    ['Throne of Eldraine', 'Core Set 2020']
+    [
+      'Throne of Eldraine',
+      'Core Set 2020',
+      'Guild Kit: Azorius',
+      'Guild Kit: Gruul',
+      'Guild Kit: Orzhov',
+      'Guild Kit: Rakdos',
+      'Guild Kit: Simic'
+    ]
   end
 
   def default_header
