@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     @others          ||= extensions.other
     @onlines         ||= extensions.online
     @commander       ||= extensions.commander
+    @guild_kit       ||= extensions.guild_kit
   end
 
   def list_by_colors(cards)

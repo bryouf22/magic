@@ -6,14 +6,16 @@
         .ext-bloc
           - sets_by_block.each do |set|
             = link_to extension_set_path(slug: set.slug), { class: "ext-set" } do
-              .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
+              - if set.release_date
+                .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
               %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
               %p= set.name
     - else
       %h4.set-list-name= I18n.t("enum.extension_set.set_type.#{sets_by_type.first.set_type}")
       - sets_by_type.each do |set|
         = link_to extension_set_path(slug: set.slug), { class: "ext-set" } do
-          .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
+          - if set.release_date
+            .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
           %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
           %p= set.name
     %hr

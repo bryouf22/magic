@@ -38,7 +38,8 @@ class ExtensionSet < ApplicationRecord
     other:          9,
     online:         10,
     masterpiece:    11,
-    commander:      12
+    commander:      12,
+    guild_kit:      13,
   }
 
   def cards_for_list
