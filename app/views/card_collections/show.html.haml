@@ -1,8 +1,8 @@
-%h1 Ma collection
+%h1 My collection
 
 .views-selection
-  = 'vue normal |'
-  = link_to 'vue visuel', card_collection_path(params: { view: :visual })
+  = 'list | '
+  = link_to 'images', card_collection_path(params: { view: :visual })
 
 %br
 = form_for(@search, url: card_collection_path, method: :get, class: 'form-inline') do |form|
@@ -21,8 +21,8 @@
 
   %label
     = form.check_box(:color_restrict)
-    %span.js-restric-label Incolore uniquement
-  = form.submit('rechercher', class: 'btn btn-sm btn-success')
+    %span.js-restric-label Colorless only
+  = form.submit('Search', class: 'btn btn-sm btn-success')
 
 %hr
 

@@ -1,9 +1,29 @@
-%h1 Ma collection
+%h1 My collection
 
 .views-selection
-  = link_to 'vue normal', card_collection_path(id: @card_collection.id)
-  = ' | vue visuel'
+  = link_to 'list', card_collection_path(id: @card_collection.id)
+  = ' | images'
 
 %br
+= form_for(@search, url: card_collection_path, method: :get, class: 'form-inline') do |form|
+  = hidden_field(:view, :mode, value: 'visual')
+  - select_options = options_for_select(Card.rarities.collect {|key, value| [key.to_s.humanize, value] }, @search.rarity_ids&.collect(&:to_i))
+  = form.select(:rarity_ids, select_options || [], { include_blank: true }, { placeholder: 'Rareté', class: '', multiple: true })
 
+  - extension_set_ids = @card_collection.cards.collect(&:extension_set_id).uniq
+  - select_options = options_for_select(ExtensionSet.where(id: extension_set_ids).collect { |extension_set| [extension_set.name, extension_set.id] }, @search.extension_set_ids)
+  = form.select(:extension_set_ids, select_options || [], { include_blank: true }, { placeholder: 'Extensions', class: '', multiple: true })
+
+  - select_options = options_for_select(Color::COLORS_MAPPING.collect {|key, value| [key.to_s.humanize, value] }, @search.color_ids&.collect(&:to_i))
+  = form.select(:color_ids, select_options || [], { include_blank: true }, { placeholder: 'Couleurs', class: '', multiple: true })
+
+  - exclude_select_options = options_for_select(Color::COLORS_MAPPING.collect {|key, value| [key.to_s.humanize, value] }, @search.exclude_color_ids&.collect(&:to_i))
+  = form.select(:exclude_color_ids, exclude_select_options || [], { include_blank: true }, { placeholder: 'Couleurs', class: '', multiple: true })
+
+  %label
+    = form.check_box(:color_restrict)
+    %span.js-restric-label Colorless only
+  = form.submit('Search', class: 'btn btn-sm btn-success')
+
+%hr
 = render partial: 'display_visual'

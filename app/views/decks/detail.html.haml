@@ -6,15 +6,7 @@
     , Format(s):
     = @deck.formats
 
-%p
-  - if @deck.user_id == current_user&.id
-    = link_to 'Edit', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
-    = link_to 'Classic view', my_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
-    = link_to 'Export', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
-    = #link_to 'Generate boosters', generate_draft_path(@deck.id), class: 'btn btn-xs btn-primary'
-    = link_to 'Sort by colors', my_deck_by_color_path(@deck.slug), class: 'btn btn-xs btn-primary'
-  - elsif current_user&.id
-    = link_to 'Copy', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
+%p= render 'deck_menu', locals: { view: 'advanced' }
 
 - main_cards_count = @main_cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum
 

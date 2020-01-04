@@ -37,6 +37,9 @@ Rails.application.routes.draw do
   post   'deck-:slug',            to: 'decks#add_cards',     as: :deck_add_card
   post   'manage-card',           to: 'decks#manage_card',   as: :manage_card
 
+  get 'add-to-wishlist/(:id)',   to: 'decks#add_wishlist',   as: :add_to_wishlist_deck
+  get 'add-to-collection/(:id)', to: 'decks#add_collection', as: :add_to_collection_deck
+
   get    'generer-draft/:id', to: 'decks#generate_draft', as: :generate_draft
 
   get    'public-decks',     to: 'decks#public_decks',     as: :public_decks

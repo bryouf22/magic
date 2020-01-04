@@ -5,7 +5,7 @@ class CardCollectionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :update_occurrence
 
   add_breadcrumb "home", :root_path
-  add_breadcrumb "Ma collection", :card_collection_path
+  add_breadcrumb "My collection", :card_collection_path
 
   def show
     @card_collection = current_user.card_collection
@@ -16,7 +16,7 @@ class CardCollectionsController < ApplicationController
       @search = CardSearch.new
       list_by_colors(Card.none)
     end
-    set_meta_tags title: "Ma collection"
+    set_meta_tags title: "My collection"
     render :visual if view == 'visual'
   end
 
@@ -32,6 +32,10 @@ class CardCollectionsController < ApplicationController
   end
 
   private
+
+  def view
+    return 'visual' if params['view'].present?
+  end
 
   def search_params
     params.require('card_search').permit(:color_restrict, extension_set_ids: [], color_ids: [], rarity_ids: [], exclude_color_ids: [])

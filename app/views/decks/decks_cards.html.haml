@@ -1,0 +1,17 @@
+- deck_names = @cards.collect { |_c, d| d[:decks] }.flatten.uniq.join(', ')
+%p= deck_names
+
+%table.table
+  %tr
+    %th.col-md-2 Name
+    %th.col-md-2 Number of copies
+    %th.col-md-2 Number of decks
+    %th.col-md-6
+  - @cards.each do |card_name, card_data|
+    - card = Card.find(card_data[:id]).decorate
+    %tr
+      %td= link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
+      %td= card_data[:count]
+      %td= card_data[:decks].uniq.count
+      %td= card_data[:decks].uniq.join(', ')
+

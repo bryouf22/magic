@@ -11,14 +11,13 @@
         - if accessible?
           %li
             = link_to 'DECK', public_decks_path
-        - if accessible? && user_signed_in?
+        - if user_signed_in?
           %li
             = link_to wishlists_path do
               WISHLIST
-          - if accessible?
-            %li
-              = link_to user_decks_path do
-                MY DECKS
+          %li
+            = link_to user_decks_path do
+              MY DECKS
           %li
             = link_to card_collection_path do
               COLLECTION

@@ -1,0 +1,30 @@
+%h3= @deck.name
+
+%p
+  = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
+  - if @deck.format.positive?
+    , Format(s):
+    = @deck.formats
+
+%p= render 'deck_menu', locals: { view: 'collection' }
+
+%table.table
+  %thead
+    %tr
+      %td.col-md-2 Name
+      %td.col-md-2
+      %td.col-md-2 In collection
+      %td.col-md-2 Add
+  %tbody
+    - @cards.each do |card_id, card_count|
+      - card = Card.find(card_id).decorate
+      - card_collection = current_user.card_collection.card_lists.find { |c| c.card.name == card.name }
+      %tr
+        %td
+          = link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
+          = "x #{card_count}"
+        %td= show_mana_cost(card)
+        %td
+          = card_collection&.number || 0
+        %td
+          = number_field(:add_collection, card.id, value: card_count)

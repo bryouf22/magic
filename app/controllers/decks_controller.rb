@@ -177,7 +177,69 @@ class DecksController < ApplicationController
     @draft = Draft::DraftFromCubeGenerator.call(deck_id: params['id']).tirages
   end
 
+  def add_wishlist
+    if (@deck = current_user.decks.where(id: params['id']).first)
+      @cards = cards_sorted(@deck)
+      add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
+      add_breadcrumb "Add cards to wishlist"
+    else
+      @cards = card_list
+      render :decks_cards
+    end
+  end
+
+  def add_collection
+    if (@deck = current_user.decks.where(id: params['id']).first)
+      @cards = cards_sorted(@deck)
+      add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
+      add_breadcrumb "Add cards to collection"
+    else
+      @cards = card_list
+      render :decks_cards
+    end
+  end
+
+  def card_list
+    results = {}
+    current_user.decks.each do |deck|
+      next if deck.name.match(/cube/i).present?
+      deck.card_decks.each do |card|
+        next if card.card.basic_land?
+        count = card.occurences_in_main_deck.to_i + card.occurences_in_sideboard.to_i
+        card_name = card.card.name
+        if results[card_name].present?
+          unless results[card_name][:decks].include?(deck.name)
+            results[card_name][:decks] << deck.name
+          end
+          if results[card_name][:count] < count
+            results[card_name][:count] = count
+          end
+        else
+          results[card_name] = { count: count, id: card.card.id, decks: [deck.name] }
+        end
+      end
+    end;nil
+    results
+  end
+
   private
+
+  def cards_sorted(deck)
+    result = {}
+    deck.card_decks.each do |card|
+      next if card.card.basic_land?
+      count = card.occurences_in_main_deck.to_i + card.occurences_in_sideboard.to_i
+      card_id = card.card.id
+      if result[card_id].present?
+        if result[card_id] < count
+          result[card_id] = count
+        end
+      else
+        result[card_id] = count
+      end
+    end
+    result
+  end
 
   def build_deck_for_show
     @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
