@@ -63,7 +63,7 @@ module ApplicationHelper
 
   def show_deck_color(deck)
     result = ""
-    deck.colors.each do |color|
+    deck.colors.sort.each do |color|
       result << content_tag(:i, '', class: "ms ms-#{Color::DECK_COLOR_MAPPING[color.to_sym]} ms-cost")
     end
     return content_tag(:i, '', class: "ms ms-c ms-cost").html_safe if result.blank?

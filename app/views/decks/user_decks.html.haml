@@ -30,7 +30,7 @@
           %td.col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
           %td.col-sm-2= deck.category&.name
           %td.col-sm-2
-            .hidden= deck.colors.join(' ')
+            .hidden= deck.colors.sort.join(' ')
             = show_mana_cost(deck)
           %td.col-sm-2= deck.formats
           %td.col-sm-1
