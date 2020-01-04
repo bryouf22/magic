@@ -1,12 +1,12 @@
 = form_for(@deck, url: url, method: method, html: { class: 'deck-form' }) do |form|
   - errors = @deck.errors&.messages || {}
   .form-group{ class: errors[:name].present? ? 'has-error has-feedback' : ''}
-    = form.label(:name, errors[:name]&.first || 'Nom')
+    = form.label(:name, errors[:name]&.first || 'Name')
     = form.text_field(:name, class: 'form-control')
     - if (errors[:name])
       %span.glyphicon.glyphicon-remove.form-control-feedback
   .form-group
-    Deck public ?
+    Public ?
     = form.check_box :is_public
   .form-group
-    = form.submit('Valider', class: 'btn btn-primary')
+    = form.submit('Validate', class: 'btn btn-primary')

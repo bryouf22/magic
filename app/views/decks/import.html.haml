@@ -1,4 +1,4 @@
-%h1 Importer d'une liste au format Apprentice
+%h1 Import from a Apprentice list
 
 = form_for(:import, url: create_import_path, method: :post) do |f|
   = f.text_area(:list, class: 'form-control', rows: "3", placeholder: 'Coller ici la liste apprentice')

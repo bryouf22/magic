@@ -3,16 +3,16 @@
 = form_for(:deck, url: deck_add_card_path(slug: @deck.slug), html: { class: 'deck-quantity-form' }, remote: !true) do |form|
   - if current_user.categories.any?
     .form-group
-      %label Catégorie :
+      %label Category :
       - select_options = options_for_select(current_user.categories.collect { |category| [category.name, category.id] }, @deck.category_id)
       = form.select(:category_id, select_options || [], { include_blank: true }, { class: 'form-control' })
   .form-group
-    %label Ajouter des cartes :
+    %label add cards :
     = select_tag('deck_card_ids[]', [], id: 'card-search', class: 'form-control' )
   .form-group
     %label Description :
     = form.text_area(:description, class: 'form-control')
-  = form.submit('Ajouter', class: 'btn btn-success')
+  = form.submit('Add', class: 'btn btn-success')
 %br
 Main :
 %ul.cards-list.visual.main-deck.edition

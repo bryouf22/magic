@@ -7,13 +7,13 @@
     = @deck.formats
 
 - if params['export_format'] == 'apprentice'
-  = link_to 'Format MV', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
+  = link_to 'Magic Ville', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
 - else
-  = link_to 'Format Apprentice', export_deck_path(@deck.slug, export_format: 'apprentice'), class: 'btn btn-xs btn-primary'
+  = link_to 'Apprentice', export_deck_path(@deck.slug, export_format: 'apprentice'), class: 'btn btn-xs btn-primary'
 %br
 %br
 - sb_prerix = (params['export_format'] == 'apprentice' ? 'SB:' : 'SB')
-%textarea{ rows: @deck.card_decks.main_deck.count + @deck.card_decks.sideboard.count + 1 }
+%textarea.deck-list-export{ rows: @deck.card_decks.main_deck.count + @deck.card_decks.sideboard.count - 1 }
   - @deck.card_decks.main_deck.each do |card|
     = "#{card.occurences_in_main_deck} #{card.card.name}&#13;&#10;".html_safe
   - @deck.card_decks.sideboard.each do |card|

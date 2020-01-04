@@ -4,19 +4,19 @@ class DecksController < ApplicationController
   include Pagy::Backend
 
   add_breadcrumb "home", :root_path
-  add_breadcrumb "Mes decks", :user_decks_path
+  add_breadcrumb "My decks", :user_decks_path
 
   before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
   def user_decks
     @pagy, @decks = pagy(current_user.decks.order('name ASC'), items: 50)
-    set_meta_tags title: 'Mes decks'
+    set_meta_tags title: 'My decks'
   end
 
   def new
     @deck = current_user.decks.new
-    add_breadcrumb "Nouveau deck"
-    set_meta_tags title: 'Nouveau deck'
+    add_breadcrumb "new deck"
+    set_meta_tags title: 'New deck'
   end
 
   def create
@@ -32,7 +32,7 @@ class DecksController < ApplicationController
     @deck = current_user.decks.where(slug: params[:slug]).first
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
     add_breadcrumb "Export"
-    set_meta_tags title: "Exporter #{@deck.name}"
+    set_meta_tags title: "Export #{@deck.name}"
   end
 
   def change_visual
@@ -74,7 +74,7 @@ class DecksController < ApplicationController
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-    add_breadcrumb "Vue avancée"
+    add_breadcrumb "Advanced view"
     set_meta_tags title: @deck.name
   end
 
@@ -96,8 +96,8 @@ class DecksController < ApplicationController
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-    add_breadcrumb "Édition"
-    set_meta_tags title: "Éditer #{@deck.name}"
+    add_breadcrumb "Edition"
+    set_meta_tags title: "Edit #{@deck.name}"
   end
 
   def update
@@ -146,7 +146,7 @@ class DecksController < ApplicationController
 
   def import
     add_breadcrumb "Import"
-    set_meta_tags title: "Importer un deck"
+    set_meta_tags title: "Import a deck"
   end
 
   def import_create

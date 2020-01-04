@@ -8,13 +8,13 @@
 
 %p
   - if @deck.user_id == current_user&.id
-    = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
-    = link_to 'vue avancée', detail_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
-    = link_to 'Exporter', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
-    = #link_to 'Générer des boosters', generate_draft_path(@deck.id), class: 'btn btn-xs btn-primary'
-    = link_to 'Tri par couleur', my_deck_by_color_path(@deck.slug), class: 'btn btn-xs btn-primary'
+    = link_to 'Edit', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
+    = link_to 'Advanced view', detail_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
+    = link_to 'Export', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
+    = #link_to 'Generate boosters', generate_draft_path(@deck.id), class: 'btn btn-xs btn-primary'
+    = link_to 'Sort by colors', my_deck_by_color_path(@deck.slug), class: 'btn btn-xs btn-primary'
   - elsif current_user&.id
-    = link_to 'copier le deck', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
+    = link_to 'Copy', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
 
 - main_cards_count = @main_cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum
 

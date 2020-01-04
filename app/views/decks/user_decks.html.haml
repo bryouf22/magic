@@ -2,34 +2,45 @@
 
 = link_to new_deck_path, class: 'btn btn-xs btn-primary' do
   %span.glyphicon.glyphicon-plus
-  Créer un deck
+  Create a deck
 = ''
 = link_to import_deck_path, class: 'btn btn-xs btn-success' do
   %span.glyphicon.glyphicon-arrow-down
-  Importer un deck
+  Import from a list
 = ''
 = link_to categories_path, class: 'btn btn-xs btn-primary' do
   %span.glyphicon.glyphicon-plus
-  Organiser les catégories
+  Organize categories
 
 %br
 %br
 
 %section.deck-list
   - if @decks.any?
-    %ul
+    %table
+      %tr
+        %th Name
+        %th Category
+        %th Colors
+        %th Format
+        %th Public ?
+        %th
       - @decks.each do |deck|
-        %li.row
-          .col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
-          .col-sm-2= deck.category&.name
-          .col-sm-2
+        %tr
+          %td.col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
+          %td.col-sm-2= deck.category&.name
+          %td.col-sm-2
+            .hidden= deck.colors.join(' ')
             = show_mana_cost(deck)
-          .col-sm-2= deck.formats
-          .col-sm-1
+          %td.col-sm-2= deck.formats
+          %td.col-sm-1
             - if deck.is_public?
               %span.glyphicon.glyphicon-eye-open
-          .col-sm-1= link_to 'editer', edit_deck_path(slug: deck.slug), class: 'btn btn-xs btn-warning'
-          .col-sm-1= link_to 'supprimer', destroy_deck_path(slug: deck.slug), method: :post, class: 'btn btn-xs btn-danger', data: { confirm: "Supprimer le deck #{deck.name} ?" }
+          %td.col-sm-2
+            = link_to 'Edit', edit_deck_path(slug: deck.slug), class: 'warning'
+            = link_to 'Destroy', destroy_deck_path(slug: deck.slug), method: :post, class: 'danger', data: { confirm: "Supprimer le deck #{deck.name} ?" }
     = render partial: 'pagy/nav', locals: { pagy: @pagy }
   - else
-    %p Vous n'avez aucun deck
+    %p
+      You have no deck !
+      = link_to 'Create a new one !', new_deck_path

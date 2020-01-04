@@ -3,21 +3,21 @@
 %br
 = form_for(@search, url: adv_card_search_path, method: :get, class: 'form-inline') do |form|
   - select_options = options_for_select(Card.rarities.collect {|key, value| [key.to_s.humanize, value] }, @search.rarity_ids&.collect(&:to_i))
-  = form.select(:rarity_ids, select_options || [], { include_blank: true }, { placeholder: 'Rareté', class: '', multiple: true })
+  = form.select(:rarity_ids, select_options || [], { include_blank: true }, { placeholder: 'Rarity', class: '', multiple: true })
 
   - select_options = options_for_select(ExtensionSet.all.collect { |extension_set| [extension_set.name, extension_set.id] }, @search.extension_set_ids)
-  = form.select(:extension_set_ids, select_options || [], { include_blank: true }, { placeholder: 'Extensions', class: '', multiple: true })
+  = form.select(:extension_set_ids, select_options || [], { include_blank: true }, { placeholder: 'Sets', class: '', multiple: true })
 
   - select_options = options_for_select(Color::COLORS_MAPPING.collect {|key, value| [key.to_s.humanize, value] }, @search.color_ids&.collect(&:to_i))
-  = form.select(:color_ids, select_options || [], { include_blank: true }, { placeholder: 'Couleurs', class: '', multiple: true })
+  = form.select(:color_ids, select_options || [], { include_blank: true }, { placeholder: 'Colors', class: '', multiple: true })
 
   - exclude_select_options = options_for_select(Color::COLORS_MAPPING.collect {|key, value| [key.to_s.humanize, value] }, @search.exclude_color_ids&.collect(&:to_i))
-  = form.select(:exclude_color_ids, exclude_select_options || [], { include_blank: true }, { placeholder: 'Couleurs', class: '', multiple: true })
+  = form.select(:exclude_color_ids, exclude_select_options || [], { include_blank: true }, { placeholder: 'Colors', class: '', multiple: true })
 
   %label
     = form.check_box(:color_restrict)
-    %span.js-restric-label Incolore uniquement
-  = form.submit('rechercher', class: 'btn btn-sm btn-success')
+    %span.js-restric-label Colorless Only
+  = form.submit('search', class: 'btn btn-sm btn-success')
 
 %hr
 

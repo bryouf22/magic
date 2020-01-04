@@ -1,8 +1,8 @@
 %h1
-  Rechercher :
+  Search :
   = "'#{@term}'"
 
-%p= "#{@pagy.count} résultat(s)"
+%p= "#{@pagy.count} result(s)"
 
 = render partial: 'pagy/nav', locals: { pagy: @pagy }
 %table.table
@@ -12,5 +12,6 @@
       %td.col-md-2
         = show_mana_cost(card)
       %td.col-md-1
-        = link_to 'voir', card_path(card.id), class: 'btn btn-primary btn-xs'
+        = link_to 'Show', card_path(card.id), class: 'btn btn-primary btn-xs'
+
 = render partial: 'pagy/nav', locals: { pagy: @pagy }

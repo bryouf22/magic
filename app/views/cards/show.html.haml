@@ -1,4 +1,4 @@
 = render partial: 'card', locals: { card: @card }
 
 - if current_user && current_user.is_admin?
-  = link_to 'supprimer cette carte', remove_card_path(card_id: @card.id), class: 'btn btn-sm btn-danger', method: :post
+  = link_to 'remove', remove_card_path(card_id: @card.id), class: 'btn btn-sm btn-danger', method: :post

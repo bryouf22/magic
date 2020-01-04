@@ -1,18 +1,30 @@
 %h3= @deck.name
 
-%p= "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
+%p
+  = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
+  - if @deck.format.positive?
+    , Format(s):
+    = @deck.formats
 
-- if @deck.user_id == current_user.id
-  %p
-    = link_to 'editer', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
+%p
+  - if @deck.user_id == current_user&.id
+    = link_to 'Edit', edit_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-warning'
+    = link_to 'Classic view', my_deck_path(slug: @deck.slug), class: 'btn btn-xs btn-primary'
+    = link_to 'Export', export_deck_path(@deck.slug), class: 'btn btn-xs btn-primary'
+    = #link_to 'Generate boosters', generate_draft_path(@deck.id), class: 'btn btn-xs btn-primary'
+    = link_to 'Sort by colors', my_deck_by_color_path(@deck.slug), class: 'btn btn-xs btn-primary'
+  - elsif current_user&.id
+    = link_to 'Copy', copy_public_deck_path(id: @deck.id), class: 'btn btn-xs btn-primary', method: :post
 
-Main :
+- main_cards_count = @main_cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum
+
+= "Main (#{main_cards_count}) :"
 %table.table
   %thead
     %tr
-      %td.col-md-3 Nom
+      %td.col-md-3 Name
       %td.col-md-3
-      %td.col-md-2 Dans ma collection
+      %td.col-md-2 In my collection ?
   %tbody
     - card_in_collection = CardCollection::RetrieveMissingCardFromDeck.call(deck_id: @deck.id, user_id: current_user.id).resultat
     - sort_cards_by_type(@main_cards.decorate).each do |card|
@@ -31,7 +43,8 @@ Main :
 
     - if @sideboards.any?
       %tr
-        %td{ colspan: 3 } Sideboard
+        - sideboard_count = @sideboards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_sideboard }.sum
+        %td{ colspan: 3 }= "Sideboard (#{sideboard_count}) :"
       - sort_cards_by_type(@sideboards.decorate).each do |card|
         - occurrence_in_deck = @deck.card_decks.where(card_id: card.id).first.occurences_in_sideboard
         %tr
