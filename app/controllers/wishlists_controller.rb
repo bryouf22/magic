@@ -62,6 +62,10 @@ class WishlistsController < ApplicationController
 
   private
 
+  def view
+    return 'visual' if params['view'].present?
+  end
+
   def wishlist_params
     params.require('wishlist').permit(:name, wishlist_card_ids: [])
   end

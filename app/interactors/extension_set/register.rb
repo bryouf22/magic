@@ -14,9 +14,9 @@ class ExtensionSet::Register
               break
             end
           end
-          card.update(first_edition: is_first_edition)
+          card.update(first_edition: is_first_edition) unless card.first_edition == is_first_edition
         else
-          card.update(first_edition: true)
+          card.update(first_edition: true) unless card.first_edition == true
         end
       end
 
