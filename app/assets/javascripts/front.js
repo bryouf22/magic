@@ -218,7 +218,7 @@ $(document).ready(function() {
     _this = $(this);
     $.ajax({
       type: "GET",
-      url: "reprint-from-" + _this.data('cardId'),
+      url: "/reprint-from-" + _this.data('cardId'),
       dataType: 'json',
       success: function (data, textStatus, jqXHR) {
         $.each(data, function (index) {
