@@ -35,7 +35,7 @@ class Deck < ApplicationRecord
 
   enum status: { personal: 1, published: 2 }
 
-  bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander
+  bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander, 16 => :pioneer
   bitfield :color, 1 => :black, 2 => :red, 4 => :blue, 8 => :green, 16 => :white
 
   scope :publics, -> { where(is_public: true) }
