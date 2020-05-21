@@ -1,12 +1,24 @@
+%br
+%br
 = form_for(@deck, url: url, method: method, html: { class: 'deck-form' }) do |form|
   - errors = @deck.errors&.messages || {}
-  .form-group{ class: errors[:name].present? ? 'has-error has-feedback' : ''}
-    = form.label(:name, errors[:name]&.first || 'Name')
-    = form.text_field(:name, class: 'form-control')
-    - if (errors[:name])
-      %span.glyphicon.glyphicon-remove.form-control-feedback
+  .row
+    .col-sm-5
+      .form-group
+        = form.text_field(:name, class: 'form-control')
+    - if current_user.categories.any?
+      .col-sm-5
+        .form-group
+          - select_options = options_for_select(current_user.categories.collect { |category| [category.name, category.id] }, @deck.category_id)
+          = form.select(:category_id, select_options || [], { include_blank: true }, { class: 'form-control' })
+    .col-sm-2
+      .checkbox
+        = form.check_box :is_public
+        Public ?
   .form-group
-    Public ?
-    = form.check_box :is_public
+    - rows = @deck.new_record? ? 3 : @deck.description.count("\r") + 1
+    - rows = 3 if rows < 3
+    = form.text_area(:description, class: 'form-control', placeholder: 'Description', rows: rows)
   .form-group
-    = form.submit('Validate', class: 'btn btn-primary')
+    .text-right
+      = form.submit('Save', class: 'btn btn-primary')

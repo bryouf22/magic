@@ -132,6 +132,8 @@ $(document).ready(function() {
     ajax: {
     url: '/rechercher',
     dataType: 'json',
+    placeholder: 'Search a card',
+     allowClear: true,
     data: function (params) {
       var query = {
         "card_search[term]" : params.term,

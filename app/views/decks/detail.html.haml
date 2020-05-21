@@ -18,7 +18,7 @@
       %td.col-md-3
       %td.col-md-2 In my collection ?
   %tbody
-    - card_in_collection = CardCollection::RetrieveMissingCardFromDeck.call(deck_id: @deck.id, user_id: current_user.id).resultat
+    - card_in_collection = CardCollection::RetrieveCardsInCollectionFromDeck.call(deck_id: @deck.id, user_id: current_user.id).resultat
     - sort_cards_by_type(@main_cards.decorate).each do |card|
       - occurrence_in_deck = @deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck
       %tr

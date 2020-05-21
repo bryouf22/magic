@@ -14,17 +14,22 @@
       %td.col-md-2 Name
       %td.col-md-2
       %td.col-md-2 In collection
-      %td.col-md-2 Add
+      %td.col-md-2 Quantity to add
+      %td.col-md-2
   %tbody
     - @cards.each do |card_id, card_count|
       - card = Card.find(card_id).decorate
       - card_collection = current_user.card_collection.card_lists.find { |c| c.card.name == card.name }
-      %tr
-        %td
-          = link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
-          = "x #{card_count}"
-        %td= show_mana_cost(card)
-        %td
-          = card_collection&.number || 0
-        %td
-          = number_field(:add_collection, card.id, value: card_count)
+      = form_for(:add_collection, url: deck_add_collection_path(deck_id: @deck.id), html: { class: 'deck-collection-form' }, method: :post, remote: !true) do |form|
+        %tr
+          %td
+            = link_to card.title(show_rarity: true), extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
+            = "x #{card_count}"
+          %td= show_mana_cost(card)
+          %td
+            = card_collection&.number || 0
+          %td
+            = hidden_field(:add_collection, :card_id, value: card.id)
+            = number_field(:add_collection, :count, value: card_count)
+          %td
+            = form.submit('Add', class: 'btn btn-success')

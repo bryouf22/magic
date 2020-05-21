@@ -47,13 +47,13 @@ class DecksController < ApplicationController
   end
 
   def add_cards
-    deck = current_user.decks.where(slug: params['slug']).first
+    @deck = current_user.decks.where(slug: params['slug']).first
     params['deck_card_ids']&.each do |card_id|
-      Deck::AddCard.call(deck_id: deck.id, card_id: card_id)
+      Deck::AddCard.call(deck_id: @deck.id, card_id: card_id)
     end
-    deck.update(update_params)
+    build_deck_for_show
     respond_to do |format|
-      format.html { redirect_to edit_deck_path(slug: deck.slug) }
+      format.html { redirect_to edit_deck_path(slug: @deck.slug) }
       format.js
     end
   end
@@ -199,6 +199,14 @@ class DecksController < ApplicationController
     end
   end
 
+  def add_cards_to_collection
+    CardCollection::AddCards.call(add_to_collection_params.merge(card_collection_id: current_user.card_collection.id))
+    respond_to do |format|
+      format.js
+      format.html { redirect_to add_to_collection_deck_path(params['id']) }
+    end
+  end
+
   def card_list
     results = {}
     current_user.decks.each do |deck|
@@ -227,7 +235,7 @@ class DecksController < ApplicationController
   def cards_sorted(deck)
     result = {}
     deck.card_decks.each do |card|
-      next if card.card.basic_land?
+      # next if card.card.basic_land?
       count = card.occurences_in_main_deck.to_i + card.occurences_in_sideboard.to_i
       card_id = card.card.id
       if result[card_id].present?
@@ -244,6 +252,10 @@ class DecksController < ApplicationController
   def build_deck_for_show
     @main_cards = Card.where(id: @deck.card_decks.main_deck.collect(&:card_id))
     @sideboards = Card.where(id: @deck.card_decks.sideboard.collect(&:card_id))
+  end
+
+  def add_to_collection_params
+    params.require(:add_collection).permit(:card_id, :count)
   end
 
   def add_card_params

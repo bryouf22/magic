@@ -1,27 +1,16 @@
 = render partial: 'deck_form', locals: { deck: @deck, method: :patch, url: update_deck_path(slug: @deck.slug) }
 
-= form_for(:deck, url: deck_add_card_path(slug: @deck.slug), html: { class: 'deck-quantity-form' }, remote: !true) do |form|
-  - if current_user.categories.any?
-    .form-group
-      %label Category :
-      - select_options = options_for_select(current_user.categories.collect { |category| [category.name, category.id] }, @deck.category_id)
-      = form.select(:category_id, select_options || [], { include_blank: true }, { class: 'form-control' })
-  .form-group
-    %label add cards :
-    = select_tag('deck_card_ids[]', [], id: 'card-search', class: 'form-control' )
-  .form-group
-    %label Description :
-    = form.text_area(:description, class: 'form-control')
-  = form.submit('Add', class: 'btn btn-success')
-%br
-Main :
-%ul.cards-list.visual.main-deck.edition
-  - @main_cards.decorate.each do |card|
-    = render partial: 'decks/edit/card_in_maindeck', locals: { card: card, deck: @deck }
-Sideboard :
-%ul.cards-list.visual.side-board.edition
-  - @sideboards.decorate.each do |card|
-    = render partial: 'decks/edit/card_in_sideboard', locals: { card: card, deck: @deck }
+= form_for(:deck, url: deck_add_card_path(slug: @deck.slug), html: { class: 'deck-quantity-form' }, remote: true) do |form|
+  .row
+    .col-sm-6
+      .form-group
+        = select_tag('deck_card_ids[]', '', id: 'card-search', class: 'form-control', data: { placeholder: 'search a card' })
+    .col-sm-2
+      = form.submit('Add cards', class: 'btn btn-success')
+
+.deck-edit-view
+  = render partial: 'edit_quantity'
+
 
 #edit-visual.modal.fade{ role: :dialog, tabindex: "-1" }
   .modal-dialog{ role: :document }
