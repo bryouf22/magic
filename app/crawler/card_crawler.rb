@@ -3,17 +3,21 @@ class CardCrawler < BaseCrawler
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
   def initialize(url, set_id)
-    html    = html_from_url(url)
-    success = if double_card?(html)
+    begin
+      html    = html_from_url(url)
+      success = if double_card?(html)
                 import_double_card(html, set_id, url)
               else
                 import_simple_card(html, set_id, url)
               end
 
-    if success && (gatherer_url = GathererCardUrl.where(url: url, extension_set_id: set_id)&.first)
-      gatherer_url.destroy
-    elsif !success && GathererCardUrl.where(url: url, extension_set_id: set_id).none?
-      GathererCardUrl.create(url: url, extension_set_id: set_id)
+      if success && (gatherer_url = GathererCardUrl.where(url: url, extension_set_id: set_id)&.first)
+        gatherer_url.destroy
+      elsif !success && GathererCardUrl.where(url: url, extension_set_id: set_id).none?
+        GathererCardUrl.create(url: url, extension_set_id: set_id)
+      end
+    rescue
+      GathererCardUrl.create(url: url, extension_set_id: set_id) if GathererCardUrl.where(url: url, extension_set_id: set_id).none?
     end
   end
 
