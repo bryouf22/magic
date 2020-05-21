@@ -70,11 +70,9 @@ class BaseCrawler
 
   def import_set_names
     [
-      'Guild+Kit%3a+Azorius',
-      'Guild+Kit%3a+Gruul',
-      'Guild+Kit%3a+Orzhov',
-      'Guild+Kit%3a+Rakdos',
-      'Guild+Kit%3a+Simic'
+      'Ikoria Commander',
+      'heros Beyond Death',
+      'Ikoria%3a Lair of Behemoths',
     ]
   end
 
