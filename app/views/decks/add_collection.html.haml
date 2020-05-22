@@ -19,7 +19,7 @@
   %tbody
     - @cards.each do |card_id, card_count|
       - card = Card.find(card_id).decorate
-      - card_collection = current_user.card_collection.card_lists.find { |c| c.card.name == card.name }
+      - count_in_collection = current_user.card_collection.card_lists.where(card_id: [card.id, card.reprint_cards.ids].flatten).sum { |c| c.number.to_i + c.foils_number.to_i }
       = form_for(:add_collection, url: deck_add_collection_path(deck_id: @deck.id), html: { class: 'deck-collection-form' }, method: :post, remote: !true) do |form|
         %tr
           %td
@@ -27,7 +27,7 @@
             = "x #{card_count}"
           %td= show_mana_cost(card)
           %td
-            = card_collection&.number || 0
+            = count_in_collection || 0
           %td
             = hidden_field(:add_collection, :card_id, value: card.id)
             = number_field(:add_collection, :count, value: card_count)
