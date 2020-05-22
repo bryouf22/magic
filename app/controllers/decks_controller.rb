@@ -8,8 +8,14 @@ class DecksController < ApplicationController
 
   before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
+
+  def calculate_complete_percent
+    current_user.decks.map(&:update_complete_percent!)
+    redirect_to user_decks_path
+  end
+
   def user_decks
-    @pagy, @decks = pagy(current_user.decks.order('name ASC'), items: 50)
+    @pagy, @decks = pagy(current_user.decks.order('complete_percent ASC, name ASC'), items: 50)
     set_meta_tags title: 'My decks'
   end
 

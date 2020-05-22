@@ -40,7 +40,8 @@ Rails.application.routes.draw do
   get 'add-to-wishlist/(:id)',   to: 'decks#add_wishlist',   as: :add_to_wishlist_deck
   get 'add-to-collection/(:id)', to: 'decks#add_collection', as: :add_to_collection_deck
 
-  post 'add-to-collection/:id', to: 'decks#add_cards_to_collection', as: :deck_add_collection
+  post 'add-to-collection/:id',       to: 'decks#add_cards_to_collection', as: :deck_add_collection
+  post 'my-decks-calculate-complete', to: 'decks#calculate_complete_percent',              as: :calculate_complete_percent_decks
 
   get    'generer-draft/:id', to: 'decks#generate_draft', as: :generate_draft
 

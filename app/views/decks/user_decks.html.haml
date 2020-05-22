@@ -11,7 +11,10 @@
 = link_to categories_path, class: 'btn btn-xs btn-primary' do
   %span.glyphicon.glyphicon-plus
   Organize categories
-
+= ''
+= link_to calculate_complete_percent_decks_path, method: :post, class: 'btn btn-xs btn-primary' do
+  %span.glyphicon.glyphicon-signal
+  Calculate complete percent
 %br
 %br
 
@@ -19,23 +22,24 @@
   - if @decks.any?
     %table
       %tr
+        %th
         %th Name
-        %th Category
         %th Colors
+        %th Category
         %th Format
-        %th Public ?
         %th
       - @decks.each do |deck|
         %tr
+          %td.col-sm-1.text-right
+            = "#{deck.complete_percent} %"
+            = "&nbsp;".html_safe # fix with css
+            = "&nbsp;".html_safe # fix with css
           %td.col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
-          %td.col-sm-2= deck.category&.name
           %td.col-sm-2
             .hidden= deck.colors.sort.join(' ')
             = show_mana_cost(deck)
+          %td.col-sm-2= deck.category&.name
           %td.col-sm-2= deck.formats
-          %td.col-sm-1
-            - if deck.is_public?
-              %span.glyphicon.glyphicon-eye-open
           %td.col-sm-2
             = link_to 'Edit', edit_deck_path(slug: deck.slug), class: 'warning'
             = link_to 'Destroy', destroy_deck_path(slug: deck.slug), method: :post, class: 'danger', data: { confirm: "Supprimer le deck #{deck.name} ?" }

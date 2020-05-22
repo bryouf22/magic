@@ -18,6 +18,7 @@
 #  description       :text
 #  category_id       :integer
 #  format            :integer          default(0), not null
+#  complete_percent  :integer          default(0)
 #
 
 class Deck < ApplicationRecord
@@ -60,6 +61,14 @@ class Deck < ApplicationRecord
 
   def formats
     bitfield_values(:format).collect { |n, v| n if v }.compact.join(', ').humanize
+  end
+
+  def update_complete_percent!
+    update_column(:complete_percent, Deck::CalculatePercentComplete.call(deck_id: id).complete_percent)
+  end
+
+  def missing_cards
+    CardCollection::RetrieveMissingCardFromDeck.call(user_id: user.id, deck_id: id).result
   end
 
   private

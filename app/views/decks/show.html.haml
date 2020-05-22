@@ -1,14 +1,13 @@
 %h3= @deck.name
-- missings = CardCollection::RetrieveMissingCardFromDeck.call(user_id: current_user.id, deck_id: @deck.id).result
+
 
 %p
   = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
   - if @deck.format.positive?
     , Format(s):
     = @deck.formats
-  - completed_at = 100 - (missings.sum {|k, v| v }.to_f / 75 * 100)
   %br
-  = " completed at #{completed_at.round(2)}%"
+  = " completed at #{@deck.complete_percent} %"
 %p= render 'deck_menu', locals: { view: 'classic' }
 
 - main_cards_count = @main_cards.collect { |c| @deck.card_decks.where(card_id: c.id).first.occurences_in_main_deck }.sum
@@ -35,7 +34,7 @@
 
 .desc
   = simple_format @deck.description
-  - if missings.present?
+  - if (missings = @deck.missing_cards).present?
     %br
     Cards missings to complete :
     %ul

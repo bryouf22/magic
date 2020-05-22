@@ -27,9 +27,9 @@
 #  loyalty          :integer
 #  format           :integer          default(0), not null
 #  first_edition    :boolean
-#  is_double_card   :boolean
-#  is_double_part   :boolean
-#  hybrid           :boolean
+#  is_double_card   :boolean          default(FALSE)
+#  is_double_part   :boolean          default(FALSE)
+#  hybrid           :boolean          default(FALSE)
 #  alternative_type :integer          default("recto_verso")
 #
 

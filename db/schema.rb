@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_22_234028) do
+ActiveRecord::Schema.define(version: 2020_05_22_214852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2019_12_22_234028) do
     t.integer "loyalty"
     t.integer "format", default: 0, null: false
     t.boolean "first_edition"
-    t.boolean "is_double_card"
-    t.boolean "is_double_part"
-    t.boolean "hybrid"
+    t.boolean "is_double_card", default: false
+    t.boolean "is_double_part", default: false
+    t.boolean "hybrid", default: false
     t.integer "alternative_type", default: 1
     t.index ["name"], name: "index_cards_on_name"
   end
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_12_22_234028) do
     t.text "description"
     t.integer "category_id"
     t.integer "format", default: 0, null: false
+    t.integer "complete_percent", default: 0
   end
 
   create_table "extension_sets", force: :cascade do |t|
