@@ -41,7 +41,7 @@ class Deck < ApplicationRecord
 
   scope :publics, -> { where(is_public: true) }
 
-  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck # , :validate_formats
+  before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :update_complete_percent # , :validate_formats
 
   def colors
     colors = []
@@ -61,10 +61,6 @@ class Deck < ApplicationRecord
 
   def formats
     bitfield_values(:format).collect { |n, v| n if v }.compact.join(', ').humanize
-  end
-
-  def update_complete_percent!
-    update_column(:complete_percent, Deck::CalculatePercentComplete.call(deck_id: id).complete_percent)
   end
 
   def missing_cards
@@ -87,6 +83,10 @@ class Deck < ApplicationRecord
       c_ids << Color.__send__(color_name)
     end
     self['color_ids'] = c_ids
+  end
+
+  def update_complete_percent
+    self['complete_percent'] = Deck::CalculatePercentComplete.call(deck_id: id).complete_percent
   end
 
   def update_slug

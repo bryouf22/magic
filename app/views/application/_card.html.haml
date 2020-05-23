@@ -4,14 +4,17 @@
 .row.card-view
   .col-md-3
     = image_show(@card) if @card.image.present?
-    - if current_user.present? && current_user.is_admin?
-      %br
-      %br
-      %ul
-        %li= link_to 'Create from ...', new_admin_card_path(from: @card.id), class: 'btn btn-xs btn-primary'
   .col-md-4
     %ul
       %li= link_to 'see on gatherer', @card.gatherer_link, target: '_blank'
+      - if user_signed_in?
+        %li
+          = current_user.card_collection.card_lists.where(card_id: [card.id, card.reprint_cards.ids].flatten).sum { |c| c.number.to_i + c.foils_number.to_i }
+          dans ma collection
+        - if (decks = CardDeck.where(deck_id: current_user.decks.ids).where(card_id: [@card.id, @card.reprint_cards.ids].flatten).collect { |d| { d.deck_id => [d.deck.name, d.deck.slug] } }).any?
+          %li présent dans :
+          - decks.each do |deck_data|
+            %li= link_to deck_data.values.first.first, my_deck_path(slug: deck_data.values.first.last)
       - if accessible? && user_signed_in?
         %li ajouter a la wishlist
         %li.add-to-deck

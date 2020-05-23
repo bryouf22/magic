@@ -1,1 +1,3 @@
-debugger;
+row = $('.js-in-collection-table tr.card-id-<%= @card.id %>');
+row.after("<%= escape_javascript render(:partial => 'decks/add_collection_row.html.haml', :locals => { card: @card.decorate, card_count: @cards[@card.id] }) %>");
+row.remove();

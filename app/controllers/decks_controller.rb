@@ -8,9 +8,8 @@ class DecksController < ApplicationController
 
   before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
-
   def calculate_complete_percent
-    current_user.decks.map(&:update_complete_percent!)
+    current_user.decks.where(id: params['id']).first.save
     redirect_to user_decks_path
   end
 
@@ -206,9 +205,17 @@ class DecksController < ApplicationController
   end
 
   def add_cards_to_collection
-    CardCollection::AddCards.call(add_to_collection_params.merge(card_collection_id: current_user.card_collection.id))
+    if params['commit'] == 'Remove'
+      CardCollection::RemoveCards.call(add_to_collection_params.merge(card_collection_id: current_user.card_collection.id))
+    else
+      CardCollection::AddCards.call(add_to_collection_params.merge(card_collection_id: current_user.card_collection.id))
+    end
     respond_to do |format|
-      format.js
+      format.js do
+        @card = Card.find(add_to_collection_params['card_id'])
+        @deck = Deck.find(params['id'])
+        @cards = cards_sorted(@deck)
+      end
       format.html { redirect_to add_to_collection_deck_path(params['id']) }
     end
   end
