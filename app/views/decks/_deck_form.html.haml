@@ -16,7 +16,7 @@
         = form.check_box :is_public
         Public ?
   .form-group
-    - rows = @deck.new_record? ? 3 : @deck.description.count("\r") + 1
+    - rows = @deck.new_record? ? 3 : @deck.description&.count("\r").to_i + 1
     - rows = 3 if rows < 3
     = form.text_area(:description, class: 'form-control', placeholder: 'Description', rows: rows)
   .form-group
