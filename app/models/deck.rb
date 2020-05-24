@@ -86,7 +86,7 @@ class Deck < ApplicationRecord
   end
 
   def update_complete_percent
-    self['complete_percent'] = Deck::CalculatePercentComplete.call(deck_id: id).complete_percent unless new_records?
+    self['complete_percent'] = Deck::CalculatePercentComplete.call(deck_id: id).complete_percent unless new_record?
   end
 
   def update_slug
