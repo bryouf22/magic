@@ -314,4 +314,6 @@ $(document).ready(function() {
           .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
           .forEach(tr => table.appendChild(tr) );
   })));
+
+  $('[data-toggle="tooltip"]').tooltip({ container: 'body' });
 });

@@ -213,3 +213,29 @@ hr {
     margin-top: 3px;
   }
 }
+
+.js-collect-action {
+  padding: 2px 15px 3px;
+  font-size: 11px;
+  border-radius: 0;
+  font-weight: bold;
+  background-color: #292929;
+  border-color: #292929;
+}
+
+.js-in-collection-table {
+  td.set-icons {
+    i {
+      font-size: 16px;
+      & +i {
+        margin-left: 2px;
+      }
+    }
+  }
+  td {
+    padding: 6px !important;
+    form input {
+      font-size: 12px;
+    }
+  }
+}
