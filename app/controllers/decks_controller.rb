@@ -239,8 +239,24 @@ class DecksController < ApplicationController
           results[card_name] = { count: count, id: card.card.id, decks: [deck.name] }
         end
       end
-    end;nil
+    end
     results
+  end
+
+  def missing_card_from_decks
+    @missings = {}
+    @decks    = current_user.decks.where(id: params['missing_card_from_dekcs']['deck_ids'])
+
+    @decks.collect(&:missing_cards).each do |m|
+      next unless m.present?
+      m.each do |name, count|
+        if @missings[name].nil?
+          @missings[name] = count
+        elsif count > @missings[name]
+          @missings[name] = count
+        end
+      end
+    end
   end
 
   private

@@ -16,31 +16,36 @@
 
 %section.deck-list
   - if @decks.any?
-    %table
-      %tr
-        %th
-        %th Name
-        %th Colors
-        %th Category
-        %th Format
-        %th
-      - @decks.each do |deck|
+    = form_for(:missing_card_from_dekcs, url: missing_card_from_decks_path, method: :post) do |f|
+      %table
         %tr
-          %td.col-sm-1.text-right
-            = "#{deck.complete_percent} %"
-            = "&nbsp;".html_safe # fix with css
-            = "&nbsp;".html_safe # fix with css
-          %td.col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
-          %td.col-sm-2
-            .hidden= deck.colors.sort.join(' ')
-            = show_mana_cost(deck)
-          %td.col-sm-2= deck.category&.name
-          %td.col-sm-2= deck.formats
-          %td.col-sm-2
-            = link_to 'Edit', edit_deck_path(slug: deck.slug), class: ''
-            = link_to 'Destroy', destroy_deck_path(slug: deck.slug), method: :post, class: '', data: { confirm: "Supprimer le deck #{deck.name} ?" }
-            = link_to calculate_complete_percent_decks_path(deck.id), method: :post, class: '' do
-              referesh
+          %th
+          %th Name
+          %th Colors
+          %th Category
+          %th Format
+          %th
+        - @decks.each do |deck|
+          %tr
+            %td.col-sm-1.text-right
+              = "#{deck.complete_percent} %"
+              = "&nbsp;".html_safe # fix with css
+              = "&nbsp;".html_safe # fix with css
+            %td.col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
+            %td.col-sm-2
+              .hidden= deck.colors.sort.join(' ')
+              = show_mana_cost(deck)
+            %td.col-sm-2= deck.category&.name
+            %td.col-sm-2= deck.formats
+            %td.col-sm-2
+              = link_to 'Edit', edit_deck_path(slug: deck.slug), class: ''
+              = link_to 'Destroy', destroy_deck_path(slug: deck.slug), method: :post, class: '', data: { confirm: "Supprimer le deck #{deck.name} ?" }
+              = link_to calculate_complete_percent_decks_path(deck.id), method: :post, class: '' do
+                referesh
+              = f.check_box :deck_ids, { multiple: true }, deck.id, nil
+        %tr
+          %td{ colspan: 5 }
+          %td= f.submit('cartes manquantes')
     = render partial: 'pagy/nav', locals: { pagy: @pagy }
   - else
     %p

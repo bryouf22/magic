@@ -1,0 +1,29 @@
+%h3 Missing Cards from decks
+
+%p= @decks.collect(&:name).join(', ')
+
+
+%table.table.js-in-collection-table
+  %thead
+    %tr
+      %td.col-md-1
+      %td.col-md-2 Name
+      %td.col-md-2 sets
+      %td.col-md-1 own
+      %td.col-md-5 decks
+  %tbody
+    - @missings.each do |card_name, card_count|
+      - card = Card.where(name: card_name).first.decorate
+      - card_ids = [card.id, card.reprint_cards.ids].flatten
+      - count_in_collection = current_user.card_collection.card_lists.where(card_id: card_ids).sum { |c| c.number.to_i + c.foils_number.to_i }
+
+      %tr{ class: "card-id-#{card.id}" }
+        %td.text-right= show_mana_cost(card)
+        %td
+          = link_to card.name, extension_set_card_path(slug: card.extension_set.slug, id: card.id), data: { toggle: :popover, content: image_tag(card.image_url) }
+          = "x #{card_count}"
+        %td.set-icons
+          = card.set_and_reprint_icons
+        %td
+          = count_in_collection || 0
+        %td= @decks.joins(:card_decks).where('card_decks.card_id in (?)', card_ids).collect(&:name).join(', ')
