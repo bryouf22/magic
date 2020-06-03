@@ -14,7 +14,10 @@ class DecksController < ApplicationController
   end
 
   def user_decks
-    @pagy, @decks = pagy(current_user.decks.order('complete_percent ASC, name ASC'), items: 50)
+    user_decks_search_params = search_params
+    user_decks_search_params['card_ids'].reject!(&:blank?) if user_decks_search_params['card_ids'].present?
+    @search = DeckSearch.new(user_decks_search_params.merge(current_user_id: current_user.id))
+    @pagy, @decks = pagy(@search.results.order('complete_percent ASC, name ASC'), items: 100)
     set_meta_tags title: 'My decks'
   end
 
@@ -293,5 +296,13 @@ class DecksController < ApplicationController
 
   def update_params
     params.require(:deck).permit(:name, :is_public, :description, :category_id)
+  end
+
+  def search_params
+    if params['deck_search'].present?
+      params.require('deck_search').permit(card_ids: [])
+    else
+      {}
+    end
   end
 end

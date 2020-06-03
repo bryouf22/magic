@@ -40,6 +40,7 @@ class Deck < ApplicationRecord
   bitfield :color, 1 => :black, 2 => :red, 4 => :blue, 8 => :green, 16 => :white
 
   scope :publics, -> { where(is_public: true) }
+  scope :complets, -> { where(complete_percent: 100) }
 
   before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :update_complete_percent # , :validate_formats
 

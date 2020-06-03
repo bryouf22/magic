@@ -15,9 +15,17 @@
 %br
 
 %section.deck-list
+  .row
+    = form_for(@search, url: user_decks_path, method: :get) do |f|
+      .col-md-4
+        .form-group
+          - options = options_for_select(Card.where(id: @search.card_ids).collect {|card| { card.name => card.id } }.first, @search.card_ids) if @search.card_ids.present?
+          = f.select('card_ids', options, { multiple: true }, { multiple: true, id: 'card-search', class: 'form-control', data: { placeholder: 'search a card' } })
+      .col-sm-2
+        = f.submit('Filter', class: 'btn btn-success')
   - if @decks.any?
     = form_for(:missing_card_from_dekcs, url: missing_card_from_decks_path, method: :post) do |f|
-      %table
+      %table{ style: "width: 100%;" }
         %tr
           %th
           %th Name
@@ -46,7 +54,7 @@
         %tr
           %td{ colspan: 5 }
           %td= f.submit('cartes manquantes')
-    = render partial: 'pagy/nav', locals: { pagy: @pagy }
+      = render partial: 'pagy/nav', locals: { pagy: @pagy } if @pagy.count > @pagy.items
   - else
     %p
       You have no deck !
