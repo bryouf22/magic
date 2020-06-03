@@ -20,7 +20,7 @@
       .col-md-4
         .form-group
           - options = options_for_select(Card.where(id: @search.card_ids).collect {|card| { card.name => card.id } }.first, @search.card_ids) if @search.card_ids.present?
-          = f.select('card_ids', options, { multiple: true }, { multiple: true, id: 'card-search', class: 'form-control', data: { placeholder: 'search a card' } })
+          = f.select('card_ids', options || [], { multiple: true }, { multiple: true, id: 'card-search', class: 'form-control', data: { placeholder: 'search a card' } })
       .col-sm-2
         = f.submit('Filter', class: 'btn btn-success')
   - if @decks.any?
