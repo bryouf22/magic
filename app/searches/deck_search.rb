@@ -5,7 +5,7 @@ class DeckSearch < Searchlight::Search
 
   def initialize(raw_options = {}) # TODO REFACTOR THIS
     super
-    @decks = User.find(raw_options.delete('current_user_id')).decks if raw_options['current_user_id']
+    @decks = User.find(raw_options.delete(:current_user_id)).decks if raw_options[:current_user_id]
   end
 
   def base_query
