@@ -33,4 +33,4 @@
   - cards = list.values.first
   - if cards.any?
     %h3= list.keys.first.to_s.humanize
-    %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card, locals: { show_collection: true }
+    %ul.cards-list.classic.collection= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card, locals: { show_collection: true }

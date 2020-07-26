@@ -211,3 +211,36 @@ figcaption {
 .content ul.cards-list li.playset a {
   color: #730083;
 }
+
+
+.set-add-collection-form {
+  display: inline;
+}
+.cards-list.classic.collection span {
+  width: 50%;
+  display: inline-block;
+}
+.set-add-collection-form .disable {
+  visibility: hidden;
+}
+.set-add-collection-form .btn-xs {
+  line-height: 1;
+  height: 18px;
+  padding: 4px 4px 6px;
+  font-size: 9px;
+  font-weight: bolder;
+  vertical-align: top;
+}
+
+.form-occurances {
+  display: inline;
+  max-width: 45px;
+  height: 18px;
+  margin-bottom: 2px;
+  border: 1px solid #e6e6e6;
+  -moz-appearance: textfield;
+}
+.form-occurances:hover, .form-occurances:focus {
+  border: 1px solid #282828;
+  -moz-appearance: number-input;
+}

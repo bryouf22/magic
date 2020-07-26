@@ -36,6 +36,12 @@ class CardsController < ApplicationController
     end
   end
 
+  def add_card_collection
+    @card = Card.find(params['card_id'])
+    @set = ExtensionSet.find(params['set_id'])
+    CardCollection::AddCards.call(card_collection_id: current_user.card_collection.id, card_id: @card.id, count: params.require(:add_collection).permit(:occur)[:occur].to_i)
+  end
+
   def add_to
     case action_params
     when 'collection'

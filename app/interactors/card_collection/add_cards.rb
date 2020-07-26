@@ -10,8 +10,9 @@ class CardCollection::AddCards
       if (card_list = CardList.where(card_id: card_id, card_listable_type: 'CardCollection', card_listable_id: card_collection.id).first)
         card_list.update(number: card_list.number.to_i + count.to_i)
       else
-        CardList.create(card_id: card_id, card_listable_type: 'CardCollection', card_listable_id: card_collection.id, number: count)
+        card_list = CardList.create(card_id: card_id, card_listable_type: 'CardCollection', card_listable_id: card_collection.id, number: count)
       end
+      card_list.destroy if card_list.number.to_i.zero? && card_list.foils_number.to_i.zero?
     end
   end
 end
