@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get    'carte/:id', to: 'cards#show',     as: :card
   post   'add_card',  to: 'decks#add_card', as: :add_card_to_deck
+  post   'add_cards_collection/:card_id',  to: 'cards#add_card_collection', as: :add_card_collection
 
   get    'extensions',          to: 'extension_sets#index',      as: :extension_sets
   get    'extension-:slug',     to: 'extension_sets#show',       as: :extension_set

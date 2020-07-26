@@ -4,7 +4,6 @@ class DecksController < ApplicationController
   include Pagy::Backend
 
   add_breadcrumb "home", :root_path
-  add_breadcrumb "My decks", :user_decks_path
 
   before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
@@ -18,6 +17,7 @@ class DecksController < ApplicationController
     user_decks_search_params['card_ids'].reject!(&:blank?) if user_decks_search_params['card_ids'].present?
     @search = DeckSearch.new(user_decks_search_params.merge(current_user_id: current_user.id))
     @pagy, @decks = pagy(@search.results.order('complete_percent ASC, name ASC'), items: 100)
+    add_breadcrumb "My decks", :user_decks_path
     set_meta_tags title: 'My decks'
   end
 
@@ -37,6 +37,7 @@ class DecksController < ApplicationController
   end
 
   def export
+    add_breadcrumb "My decks", :user_decks_path
     @deck = current_user.decks.where(slug: params[:slug]).first
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
     add_breadcrumb "Export"
@@ -79,6 +80,7 @@ class DecksController < ApplicationController
   end
 
   def detail
+    add_breadcrumb "My decks", :user_decks_path
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
@@ -87,6 +89,7 @@ class DecksController < ApplicationController
   end
 
   def show
+    add_breadcrumb "My decks", :user_decks_path
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
@@ -94,6 +97,7 @@ class DecksController < ApplicationController
   end
 
   def show_by_color
+    add_breadcrumb "My decks", :user_decks_path
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name
@@ -101,6 +105,7 @@ class DecksController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "My decks", :user_decks_path
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
@@ -187,6 +192,7 @@ class DecksController < ApplicationController
   end
 
   def add_wishlist
+    add_breadcrumb "My decks", :user_decks_path
     if (@deck = current_user.decks.where(id: params['id']).first)
       @cards = cards_sorted(@deck)
       add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
@@ -198,6 +204,7 @@ class DecksController < ApplicationController
   end
 
   def add_collection
+    add_breadcrumb "My decks", :user_decks_path
     if (@deck = current_user.decks.where(id: params['id']).first)
       @cards = cards_sorted(@deck)
       add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
@@ -248,6 +255,7 @@ class DecksController < ApplicationController
   end
 
   def missing_card_from_decks
+    add_breadcrumb "My decks", :user_decks_path
     @missings = {}
     @decks    = current_user.decks.where(id: params['missing_card_from_dekcs']['deck_ids'])
 

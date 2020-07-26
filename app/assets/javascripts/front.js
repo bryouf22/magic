@@ -316,4 +316,8 @@ $(document).ready(function() {
   })));
 
   $('[data-toggle="tooltip"]').tooltip({ container: 'body' });
+
+  $('.js-form-enable').on('change', function (e) {
+    $(this).next().attr('disabled', false).removeClass('disable');
+  });
 });

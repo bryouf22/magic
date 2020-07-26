@@ -1,0 +1,4 @@
+$('.js-item-id-<%= @card.id %>').replaceWith("<%= escape_javascript render(:partial => 'extension_sets/simple_view.html.haml', :locals => { card: @card.decorate, show_collection: true }) %>");
+$('.js-item-id-<%= @card.id %> .js-form-enable').on('change', function (e) {
+    $(this).next().attr('disabled', false).removeClass('disable');
+  });
