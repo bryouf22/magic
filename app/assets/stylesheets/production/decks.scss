@@ -1,5 +1,20 @@
-@import "colors";
-@import "base";
+.link {
+  color: #9e5f00;
+  &:hover {
+    color: #de8708;
+  }
+}
+
+.btn-action {
+  color: #FFFFFF;
+  background-color: #de8708;
+  border: none;
+  padding: 2px 8px 3px 8px;
+  border-radius: 3px;
+  &:hover {
+    background-color: #E8AC55;
+  }
+}
 
 .content ul.cards-list {
   padding-left: 0;

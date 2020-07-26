@@ -1,6 +1,20 @@
-@import "colors";
-@import "base";
+.link {
+  color: #9e5f00;
+  &:hover {
+    color: #de8708;
+  }
+}
 
+.btn-action {
+  color: #FFFFFF;
+  background-color: #de8708;
+  border: none;
+  padding: 2px 8px 3px 8px;
+  border-radius: 3px;
+  &:hover {
+    background-color: #E8AC55;
+  }
+}
 body {
   margin: 0;
 }
@@ -13,7 +27,7 @@ h1 {
   padding: 0;
   font-size: 26px;
   font-family: Verdana;
-  color: $black;
+  color: #282828;
   margin: 0 0 20px 0;
   font-weight: bold;
   line-height: 1;
@@ -26,9 +40,9 @@ h2 {
 }
 
 .link {
-  color: $brown;
+  color: #9e5f00;
   &:hover {
-    color: $orange-dark;
+    color: #de8708;
   }
 }
 
@@ -39,7 +53,7 @@ h2 {
 }
 
 .content p, .content th, .content td {
-  color: $black;
+  color: #282828;
   font-family: Verdana;
   font-size: 14px;
   margin: 20px 0;
@@ -58,12 +72,12 @@ h2 {
 }
 
 .content p a {
-  color: $brown;
+  color: #9e5f00;
   text-decoration: none;
 }
 
 .content p a:hover {
-  color: $orange-dark;
+  color: #de8708;
   text-decoration: underline;
 }
 
@@ -74,12 +88,12 @@ h2 {
 
 .content ul li::before {
   content: "■";
-  color: $orange-dark;
+  color: #de8708;
   margin-right: 6px;
 }
 
 .content ul li {
-  color: $black;
+  color: #282828;
   font-family: Verdana;
   font-size: 14px;
   line-height: 1.4;
@@ -88,7 +102,7 @@ h2 {
 fieldset.decklist {
   width: fit-content;
   padding: 20px;
-  border: $grey solid 1px;
+  border: #888888 solid 1px;
   border-radius: 2px;
 }
 
@@ -97,7 +111,7 @@ fieldset.decklist ul {
 }
 
 fieldset.decklist span {
-  color: $black;
+  color: #282828;
   font-family: Verdana;
   font-size: 19px;
 }
@@ -125,7 +139,7 @@ fieldset.decklist ul li.desc::before {
 }
 
 .deckslist table thead th {
-  border-bottom: 1px solid $black;
+  border-bottom: 1px solid #282828;
   padding: 0;
 }
 
@@ -145,14 +159,14 @@ i.edit::before {
 }
 
 nav.page.pagination {
-  background-color: $white;
+  background-color: #FFFFFF;
   text-align: center;
   text-align: center;
   width: 100%;
 }
 
 nav.page.pagination ul li {
-  background-color: $orange-dark;
+  background-color: #de8708;
   border-radius: 4px;
   height: 21px;
   display: inline-block;
@@ -161,12 +175,12 @@ nav.page.pagination ul li {
 nav.page.pagination a, nav.page.pagination span {
   padding: 5px;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-  color: $white;
+  color: #FFFFFF;
   font-size: 13px;
 }
 
 nav.page.pagination a:hover {
-  background-color: $orange-light;
+  background-color: #E8AC55;
 }
 
 .content nav.page.pagination ul li::before {
@@ -177,13 +191,13 @@ figcaption {
   font-size: 13px;
   font-style: italic;
   text-align: center;
-  color: $grey;
+  color: #888888;
 }
 
 .breadcrumb  {
   padding: 0;
   margin-bottom: 40px;
-  background-color: $white;
+  background-color: #FFFFFF;
   a {
     @extend .link;
   }

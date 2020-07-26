@@ -1,7 +1,5 @@
-@import "colors";
-
 nav {
-  background-color: $orange-dark;
+  background-color: #de8708;
 }
 
 .main-nav {
@@ -48,7 +46,7 @@ nav {
 .main-nav ul li:hover ul {
   display: block;
   position: absolute;
-  background-color: $orange-dark;
+  background-color: #de8708;
   margin: 0;
   top: 46px;
   z-index: 1;
@@ -67,7 +65,7 @@ nav {
 
 .main-nav ul li a {
   text-transform: uppercase;
-  color: $white;
+  color: #FFFFFF;
   font-size: 14px;
   text-decoration: none;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -84,7 +82,7 @@ nav {
 }
 
 .main-nav ul li ul li a {
-  background: $orange-light;
+  background: #E8AC55;
   font-size: 14px;
   width: inherit;
   padding: 7px 20px;
@@ -93,7 +91,7 @@ nav {
 }
 
 .main-nav ul li ul li a:hover {
-  background-color: $orange-dark;
+  background-color: #de8708;
 }
 
 .main-nav ul li ul li a::first-letter {
@@ -124,5 +122,5 @@ nav {
 }
 
 .main-nav li:hover {
-  background-color: $orange-light;
+  background-color: #E8AC55;
 }

@@ -1,5 +1,3 @@
-@import "colors";
-
 form ul li::before {
    content: '' !important;
 }
@@ -13,13 +11,13 @@ form ul li::before {
       .select2-selection__choice {
         padding: 2px 20px 2px 1px;
         position: relative;
-        background: $orange-super-light;
-        border-color: $brown;
-        color: $black;
+        background: #F6EBD6AD;
+        border-color: #9e5f00;
+        color: #282828;
         .select2-selection__choice__remove {
           position: absolute;
           right: 2px;
-          color: $black;
+          color: #282828;
         }
       }
     }
