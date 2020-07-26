@@ -1,0 +1,27 @@
+@import "colors";
+
+form ul li::before {
+   content: '' !important;
+}
+
+.select2-container {
+  margin-right: 20px;
+  .select2-selection--multiple {
+    min-width: 100px;
+    width: min-content;
+    .select2-selection__rendered {
+      .select2-selection__choice {
+        padding: 2px 20px 2px 1px;
+        position: relative;
+        background: $orange-super-light;
+        border-color: $brown;
+        color: $black;
+        .select2-selection__choice__remove {
+          position: absolute;
+          right: 2px;
+          color: $black;
+        }
+      }
+    }
+  }
+}

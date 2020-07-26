@@ -1,0 +1,19 @@
+@import "colors";
+@import "base";
+
+.content ul.cards-list {
+  padding-left: 0;
+  li {
+    &::before {
+      content: '';
+    }
+    a {
+      @extend .link;
+    }
+  }
+}
+
+form.deck-quantity-form {
+  display: inline;
+
+}

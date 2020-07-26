@@ -1,0 +1,66 @@
+@import "colors";
+
+@media (min-width: 768px) {
+  .container {
+      width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+      width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+      width: 1170px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+      width: 1300px;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .main-nav .nav-wrapper {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .main-nav .nav-wrapper {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main-nav .nav-wrapper {
+    width: 1170px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .main-nav .nav-wrapper {
+    width: 1300px;
+  }
+}
+
+.btn-primary, .btn-success, .btn-warning {
+  text-transform: uppercase;
+  background-color: $orange-dark;
+  border-color: $orange-dark;
+  letter-spacing: 2px;
+  &:hover {
+    background-color: $orange-light;
+    border-color: $orange-light;
+  }
+}
+
+.form-control:focus {
+  border-color: $orange-dark;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px $orange-dark;
+}

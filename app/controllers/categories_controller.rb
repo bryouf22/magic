@@ -2,6 +2,10 @@ class CategoriesController < ApplicationController
 
   before_action :authenticate_user!
 
+  add_breadcrumb "home", :root_path
+  add_breadcrumb "My decks", :user_decks_path
+  add_breadcrumb "Categories", :categories_path
+
   def index
     @categories = current_user.categories
   end

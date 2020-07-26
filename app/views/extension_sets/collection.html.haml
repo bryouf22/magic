@@ -1,0 +1,36 @@
+%h1
+  %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
+  = @set.name
+
+%ul.set-infos
+  %li
+    Release date :
+    = @set.release_date.strftime("%m/%d/%Y")
+  %li
+    Total cards :
+    = @set.card_count
+  %li
+    New cards :
+    = @set.new_card_count
+  %li
+    Reprints (*) :
+    = @set.reprint_count
+
+.views-selection
+  = 'list |'
+  = link_to 'images', extension_set_path(slug: @set.slug, params: { view: :images })
+  - if current_user.present?
+    = ' | '
+    = link_to 'collection', extension_set_collection_path(slug: @set.slug)
+
+- if accessible?
+  = form_for(:add, url: add_to_path, method: :post) do |form|
+    = render partial: 'actions_and_filters', locals: { form: form }
+
+%hr
+
+- [{ white: @white_cards }, { blue: @blue_cards }, { black: @black_cards }, { red: @red_cards }, { green: @green_cards }, { gold: @gold_cards }, { artefact: @colorless_artefact_cards }, { land: @land_cards }, { other: @colorless_non_artefact }, { double_card: @double_cards }, { hybrid: @hybrid_cards }].each do |list|
+  - cards = list.values.first
+  - if cards.any?
+    %h3= list.keys.first.to_s.humanize
+    %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card, locals: { show_collection: true }

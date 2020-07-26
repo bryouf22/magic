@@ -1,4 +1,5 @@
 class ExtensionSetsController < ApplicationController
+
   add_breadcrumb 'home', :root_path
   add_breadcrumb 'Extensions', :extension_sets_path
 
@@ -13,6 +14,14 @@ class ExtensionSetsController < ApplicationController
         @block_sets << ExtensionSet.where(set_type: type).reorder('extension_sets.release_date DESC')
       end
     end
+  end
+
+  def collection
+    @set = ExtensionSet.where(slug: params[:slug]).first!
+    list_by_colors(@set.cards.order('name_clean ASC'))
+    add_breadcrumb @set.name, extension_set_path(slug: @set.slug)
+    add_breadcrumb 'collection'
+    set_meta_tags title: @set.name
   end
 
   def search

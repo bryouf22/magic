@@ -1,15 +1,9 @@
 %h1 My decks
 
-= link_to new_deck_path, class: 'btn btn-xs btn-primary' do
-  %span.glyphicon.glyphicon-plus
+= link_to new_deck_path, class: 'link' do
   Create a deck
-= ''
-= link_to import_deck_path, class: 'btn btn-xs btn-success' do
-  %span.glyphicon.glyphicon-arrow-down
-  Import from a list
-= ''
-= link_to categories_path, class: 'btn btn-xs btn-primary' do
-  %span.glyphicon.glyphicon-plus
+= '/'
+= link_to categories_path, class: 'link' do
   Organize categories
 %br
 %br
@@ -26,13 +20,6 @@
   - if @decks.any?
     = form_for(:missing_card_from_dekcs, url: missing_card_from_decks_path, method: :post) do |f|
       %table{ style: "width: 100%;" }
-        %tr
-          %th
-          %th Name
-          %th Colors
-          %th Category
-          %th Format
-          %th
         - @decks.each do |deck|
           %tr
             %td.col-sm-1.text-right

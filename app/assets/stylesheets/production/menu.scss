@@ -1,0 +1,128 @@
+@import "colors";
+
+nav {
+  background-color: $orange-dark;
+}
+
+.main-nav {
+  letter-spacing: 0.9px;
+  position: relative;
+}
+
+.main-nav .nav-wrapper {
+  position: relative;
+  margin: auto;
+}
+
+.main-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 50px 0 0;
+  display: inline-block;
+}
+
+.main-nav ul + ul {
+  position: absolute;
+  right: 0;
+  margin: 0;
+}
+
+.main-nav ul li {
+  display: inline-block;
+  padding: 0;
+  position: relative;
+}
+
+.main-nav ul li {
+  margin: 0 -2px;
+}
+
+.main-nav ul li ul {
+  display: none;
+  left: 0;
+  border-radius: 0 0 4px 4px;
+  width: min-content;
+  min-width: 100%;
+}
+
+.main-nav ul li:hover ul {
+  display: block;
+  position: absolute;
+  background-color: $orange-dark;
+  margin: 0;
+  top: 46px;
+  z-index: 1;
+}
+
+.main-nav ul li:hover ul li {
+  width:100%;
+  display: inline-block;
+}
+
+.main-nav ul li > a {
+  display: inline-block;
+  padding: 11px 12px 12px;
+  text-align: center;
+}
+
+.main-nav ul li a {
+  text-transform: uppercase;
+  color: $white;
+  font-size: 14px;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.main-nav ul li a::first-letter {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.main-nav ul li ul li {
+  width: -webkit-fill-available;
+  margin: 0;
+}
+
+.main-nav ul li ul li a {
+  background: $orange-light;
+  font-size: 14px;
+  width: inherit;
+  padding: 7px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.main-nav ul li ul li a:hover {
+  background-color: $orange-dark;
+}
+
+.main-nav ul li ul li a::first-letter {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.main-nav ul li ul li a span.left {
+  position: absolute;
+  top: 6px;
+  visibility: hidden;
+  left: 7px;
+}
+
+.main-nav ul li ul li a span.right {
+  position: absolute;
+  top: 6px;
+  visibility: hidden;
+  right: 7px;
+}
+
+.main-nav ul li ul li:hover a span.left {
+  visibility: visible;
+}
+
+.main-nav ul li ul li:hover a span.right {
+  visibility: visible;
+}
+
+.main-nav li:hover {
+  background-color: $orange-light;
+}

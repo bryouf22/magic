@@ -14,6 +14,7 @@
  *= require select2
  *= require select2-bootstrap
  *= require production/library
+ *= require production/fix_bootstrap
  *= require_tree ./production
  *= require_self
  */

@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def sort_deck_cards(cards)
-    { 'Créatures' => cards.creatures.decorate, 'Autres' => cards.others.decorate, 'Terrains' => cards.land.decorate }.reject { |k, v| v.none? }
+    { 'Creatures' => cards.creatures.decorate, 'Others' => cards.others.decorate, 'Lands' => cards.land.decorate }.reject { |k, v| v.none? }
   end
 
   def fr_ordinalize(number)

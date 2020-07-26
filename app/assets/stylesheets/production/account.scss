@@ -1,19 +1,14 @@
+@import "colors";
+
 .login-pannel {
-  max-width: 500px;
-  margin: 0 auto;
-  border: 1px solid #d3d3d3;
-  border-radius: 5px;
-  padding: 25px;
-  h2 {
-    padding-bottom: 20px;
-  }
-  .block {
-    margin-bottom: 15px;
-    small {
-      display: block;
-    }
-    .underline {
-      text-decoration: underline;
-    }
-  }
+  max-width: 400px;
+  margin: auto;
+}
+
+.login-pannel a {
+  color: $brown;
+}
+
+.login-pannel a:hover {
+  color: $orange-dark;
 }

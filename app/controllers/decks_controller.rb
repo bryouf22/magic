@@ -153,6 +153,7 @@ class DecksController < ApplicationController
   end
 
   def import
+    add_breadcrumb "new deck", new_deck_path
     add_breadcrumb "Import"
     set_meta_tags title: "Import a deck"
   end

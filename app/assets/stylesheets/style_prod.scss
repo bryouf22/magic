@@ -1,0 +1,241 @@
+p, a, h1, h2, li {
+  font-family: 'Roboto', sans-serif;
+}
+a {
+  color: #a82010;
+  &.card-link {
+    color: #4e4e4d;
+  }
+  &:hover, &:active, &:focus {
+    color: #ab4d42;
+  }
+}
+.navbar-default .navbar-nav > li > a {
+  color: #4e4e4d;
+  &:active, &:focus, &:hover, &.active {
+    color: #ab4d42;
+  }
+}
+.btn {
+  border-radius: 0px;
+}
+.btn-success {
+  background-color: #793030;
+  border-color: #793030;
+  &:hover, &:active, &:focus {
+    border-color: #ab4d42;
+    background-color: #ab4d42;
+  }
+}
+i.ss {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+// hr {
+//   border: 1px solid #d8d8d8;
+// }
+// END CURRENT WORK
+form.deck-quantity-form {
+  display: inline;
+}
+html {
+  overflow-y: visible;
+}
+img.list-set-logo {
+  max-width: 150px;
+  width: auto;
+  max-height: 50px;
+  height: auto;
+}
+h3 {
+  font-size: 18px;
+}
+.navbar {
+  min-height: unset;
+  // max-width: 1300px;
+  // margin-left: auto;
+  // margin-right: auto;
+  // background: #fffaf5;
+  // border-radius: 0;
+  // border: 1px solid #d8d8d8;
+  // border-top: none;
+  margin-bottom: 0;
+  .container-fluid {
+    max-width: 1300px;
+    width: 100%;
+    .navbar-brand {
+      min-height: unset;
+      padding-left: 0;
+    }
+    #menu-card-search {
+      margin-right: -45px;
+    }
+  }
+  .connexion-link {
+    font-weight: bold;
+  }
+  .navbar-nav li a {
+    padding: 10px 7px;
+  }
+  .navbar-brand {
+    padding: 10px 10px 10px 0;
+    height: unset;
+  }
+  .navbar-form {
+    margin-top: 3px;
+    margin-bottom: 2px;
+  }
+  &.admin-navbar {
+    .navbar-nav li:first-of-type a {
+      padding-left: 0;
+    }
+  }
+}
+
+.main-container {
+  max-width: 1300px;
+  margin: auto;
+  width: 100%;
+  // height: 100%;
+  // min-height: 1000px;
+  padding: 30px;
+  // background-color: #fffaf5;
+  // border-left: 1px solid #d8d8d8;
+  // border-right: 1px solid #d8d8d8;
+  p.notice {
+    border: 2px solid #055400;
+    background-color: #5ec981;
+    font-weight: bold;
+    border-radius: 0;
+    padding: 20px;
+  }
+  p.alert {
+    background-color: #ffc4c4;
+    font-weight: bold;
+    border: 2px solid #db0000;
+    border-radius: 0;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .main-container {
+    padding: 30px 50px;
+  }
+}
+
+
+img.rotate {
+  transform: rotate(90deg);
+}
+
+img.verso {
+  display: none;
+  transform: rotate(180deg);
+}
+
+hr {
+  border-top: 1px solid #702828;
+}
+
+.set-list-name {
+  width: -moz-fit-content;
+  padding: 4px 40px 4px 40px;
+  text-align: left;
+  border: #fff solid 1px;
+  border-radius: 3px;
+  color: #a82010;
+  font-size: 19px;
+}
+
+.ext-bloc {
+  border-bottom: 1px solid #702828;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.ext-date {
+  visibility: hidden;
+}
+
+.ext-set:hover {
+  color: #7c0d00;
+  a {
+    text-decoration: underline;
+  }
+  .ext-date {
+     visibility: visible;
+  }
+}
+
+.admin-set-list td {
+  vertical-align: middle !important;
+}
+
+// Decks
+
+.deck-list-export {
+  padding: 10px;
+  width: 400px;
+  border-radius: 3px;
+  border: solid #d8d8d8 1px;
+  overflow: hidden;
+}
+
+.deck-list {
+  table {
+    .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+    tr:hover {
+      background-color: #f0f0f0;
+    }
+  }
+  .danger {
+    color: #919191;
+    &:hover {
+      color: #db0000;
+    }
+  }
+  .warning {
+    color: #919191;
+    &:hover {
+      color: #cf9b00;
+    }
+  }
+}
+
+.deck-form .checkbox {
+  margin-top: 7px;
+  input {
+    margin-top: 3px;
+  }
+}
+
+.js-collect-action {
+  padding: 2px 15px 3px;
+  font-size: 11px;
+  border-radius: 0;
+  font-weight: bold;
+  background-color: #292929;
+  border-color: #292929;
+}
+
+.js-in-collection-table {
+  td.set-icons {
+    i {
+      font-size: 16px;
+      & +i {
+        margin-left: 2px;
+      }
+    }
+  }
+  td {
+    padding: 6px !important;
+    form input {
+      font-size: 12px;
+    }
+  }
+}

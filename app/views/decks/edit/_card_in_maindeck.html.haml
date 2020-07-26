@@ -1,22 +1,22 @@
 - if deck.card_decks.where(card_id: card.id).first&.occurences_in_main_deck&.positive?
   %li{ data: { card_id: card.id}}
     = image_tag(card.image_url, class: 'img-responsive')
-    %div= "#{card.title(show_rarity: true) } x <span class=\"occurence\">#{deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}</span>".html_safe
+    %div= "#{card.title(show_rarity: true) } x&nbsp;<span class=\"occurence\">#{deck.card_decks.where(card_id: card.id).first.occurences_in_main_deck}</span>".html_safe
     = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
       = form.hidden_field(:card_id, value: card.id)
       = form.hidden_field(:deck_id, value: deck.id)
       = form.hidden_field(:operator, value: 'plus_maindeck')
-      = form.submit('+', class: '')
+      = form.submit('+', class: 'btn-action')
     = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
       = form.hidden_field(:card_id, value: card.id)
       = form.hidden_field(:deck_id, value: deck.id)
       = form.hidden_field(:operator, value: 'minus_maindeck')
-      = form.submit('-', class: '')
+      = form.submit('-', class: 'btn-action')
     = form_for(:deck, url: manage_card_path, html: { class: 'deck-quantity-form' }, remote: true) do |form|
       = form.hidden_field(:card_id, value: card.id)
       = form.hidden_field(:deck_id, value: deck.id)
       = form.hidden_field(:operator, value: 'move_sideboard')
-      = form.submit('SB', class: '')
+      = form.submit('SB', class: 'btn-action')
     - if card.reprints.any?
       = link_to '#', class: 'js-change-visual', data: { 'card-id' => card.id } do
         %span.glyphicon.glyphicon-picture{ style: 'color: #282828' }

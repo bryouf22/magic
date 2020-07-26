@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   get    'extensions',          to: 'extension_sets#index',      as: :extension_sets
   get    'extension-:slug',     to: 'extension_sets#show',       as: :extension_set
+  get    'extension-:slug/collection', to: 'extension_sets#collection', as: :extension_set_collection
   get    'extension-:slug/:id', to: 'extension_sets/cards#show', as: :extension_set_card
 
   get    'my-decks',              to: 'decks#user_decks',    as: :user_decks
@@ -90,4 +91,8 @@ Rails.application.routes.draw do
     resources :blocs, except: %i[new show edit update]
     resources :formats
   end
+
+  get 'layout', to: 'welcome#layout'
+
+  get 'random-card', to: 'cards#random', as: :random_card
 end

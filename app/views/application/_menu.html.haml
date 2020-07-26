@@ -1,37 +1,82 @@
-%nav.navbar.navbar-default
-  .container-fluid
-    .navbar-header
-      = link_to 'Lordyawgmoth.com', root_path, class: 'navbar-brand'
-    .collapse.navbar-collapse
-      %ul.nav.navbar-nav
-        %li= link_to 'SETS', extension_sets_path
-        - if current_user.present? && current_user.is_admin?
+%nav.main-nav
+  .nav-wrapper
+    %ul
+      %li= link_to 'Home', root_path
+      %li
+        = link_to 'Decks', public_decks_path
+        %ul
           %li
-            = link_to 'ADMIN', admin_root_path
-        - if accessible?
-          %li
-            = link_to 'DECK', public_decks_path
-        - if user_signed_in?
-          %li
-            = link_to wishlists_path do
-              WISHLIST
+            = link_to '#' do
+              %span.left> -
+              New&nbsp;deck
+              %span.right -
           %li
             = link_to user_decks_path do
-              MY DECKS
+              %span.left> -
+              My&nbsp;decks
+              %span.right -
           %li
-            = link_to card_collection_path do
-              COLLECTION
-      - if accessible?
-        = form_for :card_search, url: card_search_path, method: :get, html: { id: 'menu-card-search', class: 'navbar-form navbar-right' } do |form|
-          .form-group
-            = form.text_field(:term, value: @term.presence, class: 'form-control', placeholder: "Rechercher une carte")
-      %ul.nav.navbar-nav.navbar-right
-        - if user_signed_in?
-          - if accessible?
-            %li
-              = link_to user_account_path do
-                ACCOUNT
-          %li= link_to 'LOGOUT', destroy_user_session_path, method: :delete, class: 'connexion-link'
-        - else
-          - if accessible?
-            %li= link_to 'LOGIN', login_path, class: 'connexion-link'
+            = link_to public_decks_path do
+              %span.left> -
+              All&nbsp;decks
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              Search&nbsp;decks
+              %span.right -
+      %li= link_to 'Sets', extension_sets_path
+      %li
+        = link_to 'Formats', '#'
+        %ul
+          %li
+            = link_to '#' do
+              %span.left> -
+              Vintage
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              Legacy
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              Modern
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              Pioneer
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              Standard
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              Others
+              %span.right -
+      %li= link_to 'Collection', card_collection_path
+      %li= link_to 'Wants', wishlists_path
+      %li
+        = link_to 'Search', '#'
+        %ul
+          %li
+            = link_to '#' do
+              %span.left> -
+              deck
+              %span.right -
+          %li
+            = link_to '#' do
+              %span.left> -
+              card
+              %span.right -
+    %ul
+      - if user_signed_in?
+        %li= link_to 'Account', user_account_path
+        %li= link_to 'Logout', destroy_user_session_path, method: :delete
+      - else
+        %li= link_to 'Login', login_path

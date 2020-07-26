@@ -71,6 +71,10 @@ class CardsController < ApplicationController
     end
   end
 
+  def random
+    @card = Card::RandomGeneration.call
+  end
+
   private
 
   def create_default_wishlist

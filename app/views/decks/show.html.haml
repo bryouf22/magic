@@ -2,9 +2,9 @@
 
 
 %p
-  = "#{@deck.card_number} #{'carte'.pluralize(@deck.card_number)}"
+  = "#{@deck.card_number} #{'card'.pluralize(@deck.card_number)}"
   - if @deck.format.positive?
-    , Format(s):
+    %br
     = @deck.formats
   %br
   = " completed at #{@deck.complete_percent} %"

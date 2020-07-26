@@ -19,6 +19,9 @@
 .views-selection
   = 'list |'
   = link_to 'images', extension_set_path(slug: @set.slug, params: { view: :images })
+  - if user_signed_in?
+    = ' | '
+    = link_to 'collection', extension_set_collection_path(slug: @set.slug)
 
 - if accessible?
   = form_for(:add, url: add_to_path, method: :post) do |form|
@@ -37,4 +40,4 @@
     - cards = list.values.first
     - if cards.any?
       %h3= list.keys.first.to_s.humanize
-      %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card
+      %ul.cards-list.classic= render partial: 'simple_view', collection: cards.order('name ASC'), as: :card, locals: { show_collection: false }
