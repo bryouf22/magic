@@ -40,6 +40,7 @@ class ExtensionSet < ApplicationRecord
     masterpiece:    11,
     commander:      12,
     guild_kit:      13,
+    global_series:  14,
   }
 
   def cards_for_list
