@@ -26,7 +26,7 @@ class Deck < ApplicationRecord
 
   validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
   validates :name,    uniqueness: { scope: :user_id, message: 'Vous possèdez déjà un deck avec ce nom !' }
-  validates :user_id, optional: true
+  validates :user_id, presence: true
 
   belongs_to :user
   belongs_to :category, optional: true
