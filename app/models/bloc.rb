@@ -16,7 +16,7 @@ class Bloc < ApplicationRecord
     extension_sets.order('extension_sets.release_date ASC').collect(&:name).join(' / ').presence || 'Nouveau bloc'
   end
 
-  def set_sate
+  def set_date
     self[:release_date] = extension_sets.order('release_date ASC').first.release_date if extension_sets.any?
   end
 end
