@@ -1,3 +1,89 @@
+
+.sets-container {
+  display: flex;
+
+  .ext-type {
+    width: 50%;
+
+    &.block {
+      padding: 0 20px 0 0;
+
+      .ext-bloc {
+        margin: 10px 0;
+        display: block;
+        border: 1px solid gray;
+        border-radius: 3px;
+        padding: 3px 10px;
+        a {
+          display: inline-block;
+          &.quart {
+            width: 25%;
+          }
+          &.third {
+            width: 33%;
+          }
+          &.semi {
+            width: 50%;
+          }
+          &.full {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    &.others {
+      flex-wrap: wrap;
+      display: flex;
+      flex-direction: column;
+      max-height: 1800px;
+
+      .ext-list-type {
+        width: 32%;
+
+        .ext-base {
+          margin: 10px 0;
+          border: 1px solid gray;
+          border-radius: 3px;
+          padding: 3px 10px;
+          display: flex;
+          flex-direction: column;
+
+          a {
+            position: relative;
+            padding-left: 20px;
+            margin: 3px;
+
+            i {
+              position: absolute;
+              top: 50%;
+              left: 0;
+              transform: translate(0, -50%);
+            }
+          }
+        }
+
+        &.last {
+          order: 12;
+        }
+      }
+    }
+    a {
+      color: #626363;
+      &:hover, &:focus, &:active {
+        color: black;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
 @media (min-width: 992px) {
   ul.cards-list.classic li {
     width: 33%;
@@ -77,39 +163,5 @@ ul {
       display: table;
       clear: both;
     }
-  }
-}
-
-
-.ext-type {
-  text-align: center;
-}
-.ext-bloc {
-
-}
-.ext-set {
-  display: inline-block;
-  width:20%;
-  transition: 300ms;
-  padding: 10px;
-
-  &:hover {
-    text-decoration: none;
-  }
-
-  p {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  i.ss {
-    font-size: 4em;
-    opacity: .5;
-    transition: 300ms;
-  }
-
-  &:hover i.ss {
-    opacity: 1;
   }
 }

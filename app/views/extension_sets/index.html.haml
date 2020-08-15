@@ -1,21 +1,28 @@
-- @block_sets.each do |sets_by_type|
-  .ext-type
-    - if sets_by_type.class == Array
-      %h4.set-list-name Bloc
-      - sets_by_type.each do |sets_by_block|
-        .ext-bloc
-          - sets_by_block.each do |set|
+.sets-container
+  - blocs = @block_sets.first
+  .ext-type.block
+    %h4.set-list-name Blocs
+    - blocs.each do |sets_by_block|
+      .ext-bloc
+        - sets_by_block.each do |set|
+          - size = "semi" if (sets_by_block.count % 2).zero?
+          - size = "third" if (sets_by_block.count % 3).zero?
+          - size = "full" if sets_by_block.one?
+          = link_to extension_set_path(slug: set.slug), { class: "ext-set #{size}" } do
+            - if false && set.release_date
+              .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
+            %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
+            = set.name
+
+  .ext-type.others
+    - @block_sets.each_with_index do |sets_by_type, index|
+      - next if index.zero?
+      .ext-list-type{ class: (sets_by_type.first.dual_deck? ? 'last' : '') }
+        %h4.set-list-name= I18n.t("enum.extension_set.set_type.#{sets_by_type.first.set_type}")
+        .ext-base
+          - sets_by_type.each do |set|
             = link_to extension_set_path(slug: set.slug), { class: "ext-set" } do
-              - if set.release_date
+              - if false && set.release_date
                 .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
               %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
-              %p= set.name
-    - else
-      %h4.set-list-name= I18n.t("enum.extension_set.set_type.#{sets_by_type.first.set_type}")
-      - sets_by_type.each do |set|
-        = link_to extension_set_path(slug: set.slug), { class: "ext-set" } do
-          - if set.release_date
-            .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
-          %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
-          %p= set.name
-    %hr
+              = set.name

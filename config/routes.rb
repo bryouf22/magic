@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+
   default_url_options :host => 'localhost:3000'
 
   devise_scope :user do
-    get '/login' => 'devise/sessions#new', as: :login
+    get '/login' => 'devise/sessions#new',             as: :login
     get '/registration' => 'devise/registrations#new', as: :new_user_registration
   end
 
