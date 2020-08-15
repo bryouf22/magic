@@ -26,7 +26,7 @@ class Deck < ApplicationRecord
 
   validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
   validates :name,    uniqueness: { scope: :user_id, message: 'Vous possèdez déjà un deck avec ce nom !' }
-  validates :user_id, presence: true
+  validates :user_id, optional: true
 
   belongs_to :user
   belongs_to :category, optional: true
@@ -39,7 +39,7 @@ class Deck < ApplicationRecord
   bitfield :format, 1 => :modern, 2 => :legacy, 4 => :standard, 8 => :commander, 16 => :pioneer
   bitfield :color, 1 => :black, 2 => :red, 4 => :blue, 8 => :green, 16 => :white
 
-  scope :publics, -> { where(is_public: true) }
+  scope :publics,  -> { where(is_public: true) }
   scope :complets, -> { where(complete_percent: 100) }
 
   before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :update_complete_percent # , :validate_formats
