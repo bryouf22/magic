@@ -70,9 +70,8 @@ class BaseCrawler
 
   def import_set_names
     [
-      'Ikoria Commander',
-      'heros Beyond Death',
-      'Ikoria%3a Lair of Behemoths',
+      'Double+Masters',
+      'Core+Set+2021',
     ]
   end
 

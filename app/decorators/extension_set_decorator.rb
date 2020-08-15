@@ -9,6 +9,7 @@ class ExtensionSetDecorator < Draper::Decorator
         .gsub('Duel Decks:', '')
         .gsub('Duel Decks Anthology:', '')
         .gsub('Premium Deck Series:', '')
+        .gsub('Global Series', '')
         .gsub('Guild Kit:', '').strip
   end
 end
