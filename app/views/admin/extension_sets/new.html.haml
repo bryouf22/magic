@@ -1,0 +1,25 @@
+.row
+  .col-md-6
+    = form_for(@set, url: admin_extension_sets_path, method: :post) do |form|
+      .form-group
+        = label_tag(:extension_set_name, 'Nom :')
+        = form.text_field(:name, class: 'form-control')
+      .form-group
+        = label_tag(:extension_set_release_date, 'Date de sortie :')
+        .input-group.date.datepicker
+          = form.text_field(:release_date, class: 'form-control')
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+      .form-group
+        = label_tag(:extension_set_set_type, 'Type :')
+        - options = options_for_select(ExtensionSet.set_types.collect { |label, value| [I18n.t("enum.extension_set.set_type.#{label}"), label] }, @set.set_type)
+        = form.select(:set_type, options, { include_blank: true }, { class: 'form-control' })
+      .form-group
+        = label_tag(:extension_set_bloc_id, 'Bloc :')
+        - options = options_for_select(Bloc.all.collect { |bloc| [bloc.name, bloc.id] }, @set.bloc_id)
+        = form.select(:bloc_id, options, { include_blank: true }, { class: 'form-control' })
+      .form-group
+        = label_tag(:extension_set_code, 'Code')
+        = form.text_field(:code, class: 'form-control')
+      .form-group
+        = form.submit('Valider', class: 'btn btn-success')

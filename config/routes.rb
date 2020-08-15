@@ -81,6 +81,10 @@ Rails.application.routes.draw do
   get '/admin', to: 'admin/welcome#index', as: :admin_root
   namespace 'admin' do
     resources :extension_sets do
+      member do
+        post :find_reeditions
+        post :update_data
+      end
       resources :gatherer_card_urls, controller: 'extension_sets/gatherer_card_urls'
     end
 
