@@ -20,6 +20,24 @@ class Admin::ExtensionSetsController < AdminController
     end
   end
 
+  def new
+    @set = ExtensionSet.new
+  end
+
+  def create
+    ExtensionSet.create(update_params)
+    redirect_to admin_extension_sets_path
+  end
+
+  def find_reeditions
+    CreateReprintsJob.perform_now(params['id'].to_i)
+    redirect_to admin_extension_set_path(params['id'])
+  end
+
+  def update_data
+    ExtensionSet::Register.call(set_id: params['id'].to_i)
+  end
+
   private
 
   def find_set

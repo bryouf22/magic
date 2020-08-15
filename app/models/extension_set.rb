@@ -27,20 +27,21 @@ class ExtensionSet < ApplicationRecord
   before_create :generate_slug
 
   enum set_type: {
-    block_set:      1,
-    basic_edition:  2,
-    from_the_vault: 3,
-    dual_deck:      4,
-    reedition:      5,
-    premium_deck:   6,
-    humouristic:    7,
-    starter:        8,
-    other:          9,
-    online:         10,
-    masterpiece:    11,
-    commander:      12,
-    guild_kit:      13,
-    global_series:  14,
+    block_set:        1,
+    basic_edition:    2,
+    from_the_vault:   3,
+    dual_deck:        4,
+    reedition:        5,
+    premium_deck:     6,
+    humouristic:      7,
+    starter:          8,
+    other:            9,
+    online:           10,
+    masterpiece:      11,
+    commander:        12,
+    guild_kit:        13,
+    global_series:    14,
+    mythic_editions:  15,
   }
 
   def cards_for_list

@@ -3,6 +3,10 @@
   = @set.name
 %hr
 
+= link_to "Matcher reimpression", find_reeditions_admin_extension_set_path(@set.id), method: :post, class: 'btn btn-success btn-sm'
+= link_to "Update data", update_data_admin_extension_set_path(@set.id), method: :post, class: 'btn btn-success btn-sm'
+
+%hr
 - if @white_cards.any?
   %h3 White
   %ul.cards-list.classic= render partial: 'extension_sets/simple_view', collection: @white_cards, as: :card, locals: { show_collection: false }

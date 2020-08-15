@@ -1,5 +1,17 @@
 %h3 Extension Sets
+
+= link_to 'New', new_admin_extension_set_path, class: 'btn btn-success'
+%br
+%br
 %table.table.admin-set-list
+  %thead
+    %tr
+      %td.c-md-1
+      %td.c-md-1 Sortie le
+      %td.c-md-2 Nom
+      %td.c-md-2 Total
+      %td.c-md-2= "Erreurs (#{GathererCardUrl.all.count})"
+      %td.c-md-2 Actions
   - @sets.each do |set|
     %tr
       %td.col-md-1.text-center
@@ -10,8 +22,7 @@
         = "#{set.name} (#{type})"
       %td.col-md-2= set.cards.count
       %td.col-md-2
-        - errors = set.gatherer_card_urls.count
-        - if errors.positive?
+        - if (errors = set.gatherer_card_urls.count).positive?
           = link_to "#{errors} erreurs d'importation", admin_extension_set_gatherer_card_urls_path(set.id)
 
       %td.col-md-2
