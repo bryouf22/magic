@@ -12,7 +12,7 @@
             - if false && set.release_date
               .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
             %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
-            = set.name
+            = set.title_for_list
 
   .ext-type.others
     - @block_sets.each_with_index do |sets_by_type, index|
@@ -25,4 +25,4 @@
               - if false && set.release_date
                 .ext-date= "#{set.release_date.day}/#{set.release_date.month}/#{set.release_date.year}"
               %i{ class: "ss ss-common ss-#{set.code&.downcase}" }
-              = set.name
+              = set.title_for_list
