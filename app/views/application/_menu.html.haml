@@ -1,82 +1,111 @@
-%nav.main-nav
-  .nav-wrapper
-    %ul
-      %li= link_to 'Home', root_path
-      %li
-        = link_to 'Decks', public_decks_path
-        %ul
-          %li
-            = link_to '#' do
-              %span.left> -
-              New&nbsp;deck
-              %span.right -
-          %li
-            = link_to user_decks_path do
-              %span.left> -
-              My&nbsp;decks
-              %span.right -
-          %li
-            = link_to public_decks_path do
-              %span.left> -
-              All&nbsp;decks
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              Search&nbsp;decks
-              %span.right -
-      %li= link_to 'Sets', extension_sets_path
-      %li
-        = link_to 'Formats', '#'
-        %ul
-          %li
-            = link_to '#' do
-              %span.left> -
-              Vintage
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              Legacy
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              Modern
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              Pioneer
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              Standard
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              Others
-              %span.right -
-      %li= link_to 'Collection', card_collection_path
-      %li= link_to 'Wants', wishlists_path
-      %li
-        = link_to 'Search', '#'
-        %ul
-          %li
-            = link_to '#' do
-              %span.left> -
-              deck
-              %span.right -
-          %li
-            = link_to '#' do
-              %span.left> -
-              card
-              %span.right -
-    %ul
-      - if user_signed_in?
-        %li= link_to 'Account', user_account_path
-        %li= link_to 'Logout', destroy_user_session_path, method: :delete
-      - else
-        %li= link_to 'Login', login_path
+.fix-menu-container
+  %nav.main-nav
+    .nav-wrapper
+      %ul
+        %li= link_to 'Home', root_path
+        %li
+          = link_to 'Decks', public_decks_path
+          %ul
+            %li
+              = link_to '#' do
+                %span.left> -
+                New&nbsp;deck
+                %span.right -
+            %li
+              = link_to user_decks_path do
+                %span.left> -
+                My&nbsp;decks
+                %span.right -
+            %li
+              = link_to public_decks_path do
+                %span.left> -
+                All&nbsp;decks
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                Search&nbsp;decks
+                %span.right -
+        %li= link_to 'Sets', extension_sets_path
+        %li
+          = link_to 'Formats', '#'
+          %ul
+            %li
+              = link_to '#' do
+                %span.left> -
+                Vintage
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                Legacy
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                Modern
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                Pioneer
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                Standard
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                Others
+                %span.right -
+        %li= link_to 'Collection', card_collection_path
+        %li= link_to 'Wants', wishlists_path
+        %li
+          = link_to 'Search', '#'
+          %ul
+            %li
+              = link_to '#' do
+                %span.left> -
+                deck
+                %span.right -
+            %li
+              = link_to '#' do
+                %span.left> -
+                card
+                %span.right -
+      %ul
+        - if user_signed_in?
+          - if current_user.is_admin?
+            %li
+              = link_to 'Admin', admin_root_path
+              %ul
+                %li
+                  = link_to admin_extension_sets_path do
+                    %span.left> -
+                    Extensions
+                    %span.right -
+                %li
+                  = link_to admin_users_path do
+                    %span.left> -
+                    Utilisateurs
+                    %span.right -
+                %li
+                  = link_to admin_blocs_path do
+                    %span.left> -
+                    Blocs
+                    %span.right -
+                %li
+                  = link_to admin_set_lists_path do
+                    %span.left> -
+                    Set Listes
+                    %span.right -
+                  = link_to admin_formats_path do
+                    %span.left> -
+                    Formats
+                    %span.right -
+          %li= link_to 'Account', user_account_path
+          %li= link_to 'Logout', destroy_user_session_path, method: :delete
+        - else
+          %li= link_to 'Login', login_path

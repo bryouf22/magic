@@ -1,3 +1,18 @@
+
+.fix-menu-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: white;
+  z-index: 1;
+  height: 55px;
+
+  & + .container {
+    margin-top: 85px;
+  }
+}
+
 nav {
   background-color: #de8708;
 }
@@ -48,7 +63,7 @@ nav {
   position: absolute;
   background-color: #de8708;
   margin: 0;
-  top: 46px;
+  top: 38px;
   z-index: 1;
 }
 
@@ -59,7 +74,7 @@ nav {
 
 .main-nav ul li > a {
   display: inline-block;
-  padding: 11px 12px 12px;
+  padding: 9px 12px;
   text-align: center;
 }
 
@@ -69,11 +84,6 @@ nav {
   font-size: 14px;
   text-decoration: none;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.main-nav ul li a::first-letter {
-  font-size: 16px;
-  font-weight: bold;
 }
 
 .main-nav ul li ul li {
