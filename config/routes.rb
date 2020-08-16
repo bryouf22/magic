@@ -96,6 +96,10 @@ Rails.application.routes.draw do
     resources :set_lists
     resources :blocs, except: %i[new show edit update]
     resources :formats
+
+    post :add_version, to: 'cards#add_version', as: :card_add_version
+
+    get '/duplicate-card-:id', to: 'cards#duplicate', as: :duplicate_card
   end
 
   get 'layout', to: 'welcome#layout'

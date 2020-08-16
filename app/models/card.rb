@@ -96,6 +96,7 @@ class Card < ApplicationRecord
   has_one :alternative
   has_one :alternative_card, through: :alternative
 
+  has_many :alternate_frames
   has_many :reprints, foreign_key: :card_id, dependent: :destroy
   has_many :reprint_cards, through: :reprints
 

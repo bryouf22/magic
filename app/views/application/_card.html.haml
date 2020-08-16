@@ -4,6 +4,14 @@
 .row.card-view
   .col-md-3
     = image_show(@card) if @card.image.present?
+    - if current_user&.is_admin?
+      %h3 Ajouter une version
+      = form_for(:add_version, url: admin_card_add_version_path, method: :post) do |form|
+        = form.hidden_field(:card_id, value: @card.id)
+        = form.text_field(:url)
+        = form.submit('Ajouter', class: 'btn btn-success btn-xs')
+      %br
+      = link_to 'Dupliquer dans une édition', admin_duplicate_card_path(@card), class: 'btn btn-xs btn-success'
   .col-md-4
     %ul
       %li= link_to 'see on gatherer', @card.gatherer_link, target: '_blank'
@@ -16,7 +24,7 @@
           - decks.each do |deck_data|
             %li= link_to deck_data.values.first.first, my_deck_path(slug: deck_data.values.first.last)
       - if accessible? && user_signed_in?
-        %li ajouter a la wishlist
+        %li ajouter à la wishlist
         %li.add-to-deck
           ajouter à
           = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|

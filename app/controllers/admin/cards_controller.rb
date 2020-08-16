@@ -1,4 +1,7 @@
 class Admin::CardsController < AdminController
+
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
   def new
     if params['from'].present?
       @card = Card.new(Card.find(params['from']).attributes)
@@ -6,6 +9,14 @@ class Admin::CardsController < AdminController
     else
       @card = Card.new
     end
+  end
+
+  def add_version
+    version_params = params.require(:add_version).permit(:card_id, :url)
+    card = Card.find(version_params['card_id'])
+
+    AlternateFrame.create(card_id: card.id, image: open(version_params['url']))
+    redirect_to extension_set_card_path(slug: card.extension_set.slug, id: card.id)
   end
 
   def create
@@ -35,6 +46,10 @@ class Admin::CardsController < AdminController
 
   def index
     @blocs = Bloc.all.order('release_date ASC')
+  end
+
+  def duplicate
+    @card = Card.find(params['id'])
   end
 
   def destroy
