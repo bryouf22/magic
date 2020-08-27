@@ -1,3 +1,17 @@
 .row
   .col-md-6
-    todo
+    %h1= "Dupliquer #{@card.name}"
+    = form_for(@card, url: create_duplicate_admin_card_path(@card), method: :post, class: 'form_duplicate_card') do |form|
+      .form-group
+        %label{ for: 'card_gatherer_id' } Id Gatherer
+        = form.text_field(:gatherer_id, value: '', class: 'form-control', placeholder: 'ID Gatherer')
+      .form-group
+        %label{ for: 'card_image' } Visuel
+        = form.text_field(:image, value: '', class: 'form-control', placeholder: 'Url')
+      .form-group
+        %label Extension
+        = form.select(:extension_set_id, '', {}, { id: 'extension-set-search', class: 'form-control', data: { multiple: false, placeholder: 'Choose Extension' } })
+      .form-group
+        %label{ for: 'card_number_in_set' } Numéro
+        = form.text_field(:card_number_in_set, value: '', class: 'form-control', placeholder: 'Numéro')
+      = form.submit('Dupliquer', class: 'btn btn-xs btn-success')

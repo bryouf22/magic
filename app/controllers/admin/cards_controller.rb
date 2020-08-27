@@ -15,7 +15,7 @@ class Admin::CardsController < AdminController
     version_params = params.require(:add_version).permit(:card_id, :url)
     card = Card.find(version_params['card_id'])
 
-    AlternateFrame.create(card_id: card.id, image: open(version_params['url']))
+    AlternateFrame.create(card_id: card.id, image: open(version_params['url'])) # HERE
     redirect_to extension_set_card_path(slug: card.extension_set.slug, id: card.id)
   end
 
@@ -55,11 +55,25 @@ class Admin::CardsController < AdminController
   def destroy
   end
 
+  def create_duplicate
+    if (@card = Card.find(params['id']))
+      card_attribute = @card.attributes.except('created_at', 'updated_at', 'gatherer_id', 'gatherer_link', 'id')
+      card_attribute.merge!(card_params)
+      card_attribute.merge!(image: open(card_attribute['image']))
+      @card = Card.create(card_attribute)
+      create_reprints(@card)
+      extension_set = @card.extension_set
+      extension_set.update(card_count: extension_set.card_count.to_i + 1, reprint_count: extension_set.reprint_count.to_i + 1)
+      redirect_to card_path(@card)
+    end
+  end
+
   private
 
   def create_reprints(card)
     Card.where(name: card.name).where.not(id: card.id).find_each do |same_card|
       if Reprint.where(card_id: card.id, reprint_card_id: same_card.id).none?
+        Reprint.create(card_id: same_card.id, reprint_card_id: card.id)
         Reprint.create(card_id: card.id, reprint_card_id: same_card.id)
       end
     end

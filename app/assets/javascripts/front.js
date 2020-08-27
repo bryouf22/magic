@@ -150,7 +150,7 @@ $(document).ready(function() {
   });
 
   $('#extension-set-search').select2({
-    multiple: true,
+    multiple: ($(this).data('multiple') !== undefined ? $(this).data('multiple') : true),
     ajax: {
       url: '/rechercher-set',
       dataType: 'json',
@@ -320,4 +320,8 @@ $(document).ready(function() {
   $('.js-form-enable').on('change', function (e) {
     $(this).next().attr('disabled', false).removeClass('disable');
   });
+  $('.js-switch-img').on('click', function () {
+    _this = $(this);
+    $('.image-container img').attr('src', _this.data('url'));
+  })
 });

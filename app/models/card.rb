@@ -106,7 +106,7 @@ class Card < ApplicationRecord
 
   mount_uploader :image, CardImageUploader
 
-  validates_uniqueness_of :gatherer_id, unless: proc { |c| c.has_alternative? || c.is_alternative? }
+  validates_uniqueness_of :gatherer_id, unless: proc { |c| c.gatherer_id.nil? || c.has_alternative? || c.is_alternative? }
 
   BASIC_LANDS_NAMES = [
     'Snow-Covered Island',

@@ -91,15 +91,16 @@ Rails.application.routes.draw do
     post '/admin/export', to: 'welcome#export',        as: :export
     post 'deck-validity', to: 'welcome#deck_validity', as: :deck_validity
 
-    resources :cards, only: [:new, :edit, :update, :destroy, :create]
+    resources :cards, only: [:new, :edit, :update, :destroy, :create] do
+      member { post 'create_duplicate' }
+    end
+    get '/duplicate-card-:id', to: 'cards#duplicate', as: :duplicate_card
     resources :users
     resources :set_lists
     resources :blocs, except: %i[new show edit update]
     resources :formats
 
     post :add_version, to: 'cards#add_version', as: :card_add_version
-
-    get '/duplicate-card-:id', to: 'cards#duplicate', as: :duplicate_card
   end
 
   get 'layout', to: 'welcome#layout'

@@ -14,9 +14,9 @@ class CardImageUploader < CarrierWave::Uploader::Base
     if model.class.name == 'AlternateFrame'
       if model.card.number_in_set.present?
         model.card.basic_land?
-        "#{model.card.number_in_set}-#{model.card.name.parameterize}-#{model.card.alternate_frames.count + 1}.jpg"
+        "#{model.card.number_in_set}-#{model.card.name.parameterize}-#{model.card.alternate_frames.where.not(id: model.id).count + 1}.jpg"
       else
-        "gid-#{model.gatherer_id}-#{model.name.parameterize}-#{model.card.alternate_frames.count + 1}.jpg"
+        "gid-#{model.gatherer_id}-#{model.name.parameterize}-#{model.card.alternate_frames.where.not(id: model.id).count + 1}.jpg"
       end
     else
       if original_filename.present?

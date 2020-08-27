@@ -2,8 +2,15 @@
   %h1= "#{@card.name} - #{@card.extension_set.name}"
 
 .row.card-view
-  .col-md-3
+  .col-md-3.image-container
     = image_show(@card) if @card.image.present?
+    - if (alternate_frames = @card.alternate_frames).any?
+      .other-frames
+        %ul
+          %li= link_to '1', '#', class: 'js-switch-img', data: { url: @card.image_url }
+          - alternate_frames.each_with_index do |frame, num|
+            %li= link_to num + 2, '#', class: 'js-switch-img', data: { url: frame.image_url}
+
     - if current_user&.is_admin?
       %h3 Ajouter une version
       = form_for(:add_version, url: admin_card_add_version_path, method: :post) do |form|
@@ -42,4 +49,4 @@
       Editions :
       %ul
         - @card.reprint_cards.each do |reprint|
-          %li= link_to "Version #{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
+          %li= link_to "#{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
