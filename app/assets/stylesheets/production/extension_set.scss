@@ -16,6 +16,7 @@
         padding: 3px 10px;
         a {
           display: inline-block;
+          text-align: center;
           &.quart {
             width: 25%;
           }
@@ -162,6 +163,30 @@ ul {
       content: "";
       display: table;
       clear: both;
+    }
+  }
+}
+
+.image-container img {
+  max-width: 223px;
+  display: block;
+  margin: auto;
+}
+
+.other-frames ul {
+  text-align: center;
+  li {
+    display: inline;
+    &:before {
+      content: none !important;
+    }
+    &:after {
+      content: ',';
+    }
+    &:last-of-type {
+      &:after {
+        content: none;
+      }
     }
   }
 }
