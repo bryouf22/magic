@@ -42,6 +42,7 @@ class ExtensionSet < ApplicationRecord
     guild_kit:        13,
     global_series:    14,
     mythic_editions:  15,
+    signature_spellbooks: 16
   }
 
   def cards_for_list
