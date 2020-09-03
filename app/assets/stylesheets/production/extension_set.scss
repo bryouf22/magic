@@ -86,8 +86,31 @@
 
 
 @media (min-width: 992px) {
-  ul.cards-list.classic li {
-    width: 33%;
+  .cards-list.classic {
+    display: flex;
+    .group {
+      width: 20%;
+      a {
+        color: #282828;
+      }
+      a:hover {
+        &.rarity-common {
+          color: #1A1718;
+        }
+        &.rarity-uncommon {
+          color: #707883;
+        }
+        &.rarity-rare {
+          color: #A58E4A;
+        }
+        &.rarity-mythic {
+          color: #BF4427;
+        }
+        &.rarity-timeshifted {
+          color: #BF4427
+        }
+      }
+    }
   }
 }
 
