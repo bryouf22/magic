@@ -1,3 +1,8 @@
+.set-show-title {
+  font-size: 28px;
+  color: #636363;
+  -webkit-text-stroke: 0.5px #2d2d2d;
+}
 
 .sets-container {
   display: flex;
@@ -78,12 +83,6 @@
     }
   }
 }
-
-
-
-
-
-
 
 @media (min-width: 992px) {
   .cards-list.classic {
@@ -211,5 +210,81 @@ ul {
         content: none;
       }
     }
+  }
+}
+
+.set-card-group {
+  padding: 15px;
+  border-radius: 4px;
+  .bloc-mana {
+    font-size: 15px;
+    margin-bottom: 3px;
+    display: inline-block;
+  }
+  .list-group-title {
+    margin: 5px 0 10px 0;
+    h3 {
+      margin: 0;
+      display: inline-block;
+      text-shadow: #080808 1px 1px 1px;
+    }
+  }
+  .cards-list + .list-group-title {
+    margin: 15px 0 10px 0;
+  }
+  + .set-card-group {
+    margin-top: 20px;
+  }
+  &.white {
+    background: #f9f1b821;
+    color: #f9f1b8;
+    border: 1px solid #f9f1b8;
+  }
+  &.blue {
+    background: #c3ecf92e;
+    color: #00c4ff;
+    border: 1px solid #00c4ff;
+  }
+  &.black {
+    background: #46464624;
+    color: #333333;
+    border: 1px solid #333333;
+  }
+  &.red {
+    background: #ff88881a;
+    color: #ff5454;
+    border: 1px solid #ff5454;
+  }
+  &.green {
+    background: #94ef9421;
+    color: #5a9c5a;
+    border: 1px solid #5a9c5a;
+  }
+  &.gold, &.hybrid {
+    background: #f1da9d24;
+    color: #f3b919;
+    border: 1px solid #f3b919;
+  }
+  &.artefact {
+    background: #d6d6d62e;
+    color: #a5a4a4;
+    border: 1px solid #a5a4a4;
+  }
+  &.land {
+    background: #fbec8026;
+    color: #fbec80;
+    border: 1px solid #fbec80;
+  }
+  &.colorless {
+    background: #d6d6d62e;
+    color: #717171;
+    border: 1px solid #717171;
+  }
+}
+
+
+a.card-link {
+  i.ss-grad {
+    margin-right: 5px;
   }
 }

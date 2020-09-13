@@ -14,6 +14,36 @@ module ApplicationHelper
     other:              10
   }
 
+  def mana_for_list(list_name)
+    mana_icons  = case list_name.to_s.downcase
+                  when 'green'
+                    Color::SYMBOL_FILE_MAPPING[:g]
+                  when 'red'
+                    Color::SYMBOL_FILE_MAPPING[:r]
+                  when 'blue'
+                    Color::SYMBOL_FILE_MAPPING[:u]
+                  when 'black'
+                    Color::SYMBOL_FILE_MAPPING[:b]
+                  when 'white'
+                    Color::SYMBOL_FILE_MAPPING[:w]
+                  when 'colorless'
+                    return nil
+                  when 'artefact'
+                    return nil
+                  when 'gold'
+                    [Color::SYMBOL_FILE_MAPPING[:g], Color::SYMBOL_FILE_MAPPING[:u]]
+                  when 'double_card'
+                    return nil
+                  when 'hybrid'
+                    [Color::SYMBOL_FILE_MAPPING[:j], Color::SYMBOL_FILE_MAPPING[:l]]
+                  when 'land'
+                    return nil
+                  else
+                    return nil
+                  end
+    Array.wrap(mana_icons).map(&:to_s).map { |c_ico| "ms-#{c_ico}" }
+  end
+
   def pretty_checkbox(name, options = {})
     # TODO : recup args dans un hash
     # puis faire un delete de pretty class/label et passer le reste au helper checkbox
