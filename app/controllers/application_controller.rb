@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     @green_cards              ||= cards.only_green.decorate
     @gold_cards               ||= cards.gold.decorate
     @colorless_artefact_cards ||= cards.colorless_artefact.decorate
-    @land_cards               ||= cards.land.decorate
+    @land_cards               ||= cards.lands.decorate
     @colorless_non_artefact   ||= cards.colorless_non_artefact.decorate
     @double_cards             ||= cards.doubles.decorate
     @hybrid_cards             ||= cards.hybrids.decorate

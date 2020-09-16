@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_214419) do
+ActiveRecord::Schema.define(version: 2020_09_16_223418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,10 @@ ActiveRecord::Schema.define(version: 2020_08_15_214419) do
     t.boolean "is_double_part", default: false
     t.boolean "hybrid", default: false
     t.integer "alternative_type", default: 1
+    t.boolean "legend", default: false
+    t.boolean "snow", default: false
+    t.boolean "tribal", default: false
+    t.string "subtypes"
     t.index ["name"], name: "index_cards_on_name"
   end
 
