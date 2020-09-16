@@ -31,6 +31,10 @@
 #  is_double_part   :boolean          default(FALSE)
 #  hybrid           :boolean          default(FALSE)
 #  alternative_type :integer          default("recto_verso")
+#  legend           :boolean          default(FALSE)
+#  snow             :boolean          default(FALSE)
+#  tribal           :boolean          default(FALSE)
+#  subtypes         :string
 #
 
 class Card < ApplicationRecord
@@ -51,26 +55,32 @@ class Card < ApplicationRecord
   scope :black,                   -> { where('? = ANY(color_ids)', Color.black)}
   scope :green,                   -> { where('? = ANY(color_ids)', Color.green)}
   scope :white,                   -> { where('? = ANY(color_ids)', Color.white)}
-  scope :colorless_artefact,      -> { where('color_ids is ?', nil).also_artefacts }
-  scope :also_artefacts,          -> { where(card_type: [5, 6]) }
-  scope :colorless_non_artefact,  -> { colorless.where('cards.card_type NOT IN (2, 5, 6) OR cards.card_type IS NULL') }
+  scope :colorless_artefact,      -> { where('color_ids is ?', nil).artefacts }
+  scope :artefacts,               -> { where(card_type: [5, 6]) }
+  scope :colorless_non_artefact,  -> { colorless.where('cards.card_type NOT IN (2, 5, 6, 11) OR cards.card_type IS NULL') }
   scope :basic_lands,             -> { where('name in (?)', BASIC_LANDS_NAMES) }
   scope :creatures,               -> { where('card_type in (?)', [4, 6]) }
   scope :others,                  -> { where('card_type in (?)', [1, 3, 5, 6, 7, 8, 9, 10, nil]) }
   scope :hybrids,                 -> { where(hybrid: true) }
   scope :doubles,                 -> { where(alternative_type: :double_card) }
+  scope :lands,                   -> { where('card_type in (?)', [2, 12]) }
+  scope :snows,                   -> { where(snow: true) }
+  scope :tribals,                 -> { where(tribal: true) }
+  scope :legends,                 -> { where(legend: true) }
 
   enum card_type: {
-    instant:            1,
-    land:               2,
-    sorcery:            3,
-    creature:           4,
-    artifact:           5,
-    creature_artifact:  6,
-    enchantement:       7,
-    planeswalker:       8,
-    tribal:             9,
-    other:              10
+    instant:              1,
+    land:                 2,
+    sorcery:              3,
+    creature:             4,
+    artifact:             5,
+    creature_artifact:    6,
+    enchantment:          7,
+    planeswalker:         8,
+    enchantment_creature: 9,
+    other:               10,
+    token:               11,
+    creature_land:       12,
   }
 
   enum rarity: {
@@ -100,8 +110,7 @@ class Card < ApplicationRecord
   has_many :reprints, foreign_key: :card_id, dependent: :destroy
   has_many :reprint_cards, through: :reprints
 
-  before_create :set_colors, :clean_names
-  before_save   :set_colors, :set_type
+  before_create :set_colors, :clean_names, :set_type
   before_save   :rename, if: proc { |card| card.has_alternative? && !card.name.include?('/') }
 
   mount_uploader :image, CardImageUploader
@@ -155,6 +164,11 @@ class Card < ApplicationRecord
     self[:name_clean] = I18n.transliterate(name || '').downcase.parameterize
   end
 
+  def set_type!
+    set_type
+    save
+  end
+
   private
 
   def set_colors
@@ -176,13 +190,29 @@ class Card < ApplicationRecord
   end
 
   def set_type
-    # TODO
-    # TODO
+    if detailed_type.include?(' — ')
+      self.subtypes = detailed_type.split(' — ').last
+      c_type = detailed_type.split(' — ').first
+    else
+      c_type = detailed_type
+    end
+
     self.card_type = :other
-    self.card_type = :creature_artifact if detailed_type&.include?('Artifact Creature')
-    self.card_type = :artifact          if detailed_type&.include?('Artifact')
-    self.card_type = :land              if detailed_type&.include?('Land') || basic_land?
-    self.card_type = :creature          if detailed_type&.include?('Creature')
+    self.card_type = :creature              if c_type.in?(['Creature', 'Summon', 'Eaturecray', 'Legendary Creature', 'Host Creature', 'Snow Creature'])
+    self.card_type = :artifact              if c_type.in?(['Artifact', 'Legendary Artifact', 'Tribal Artifact'])
+    self.card_type = :creature_artifact     if c_type.in?(['Legendary Artifact Creature', 'Artifact Creature', 'Host Artifact Creature', 'Snow Artifact Creature'])
+    self.card_type = :enchantment_creature  if c_type.in?(['Enchantment Creature', 'Legendary Enchantment Creature'])
+    self.card_type = :enchantment           if c_type.in?(['Snow Enchantment', 'Tribal Enchantment', 'Legendary Enchantment', 'Enchantment'])
+    self.card_type = :sorcery               if c_type.in?(['Tribal Sorcery', 'Sorcery'])
+    self.card_type = :instant               if c_type.in?(['Instant', 'Tribal Instant'])
+    self.card_type = :planeswalker          if c_type.in?(['Legendary Planeswalker'])
+    self.card_type = :land                  if c_type.in?(['Basic Land', 'Basic Snow Land', 'Land'])
+    self.card_type = :token                 if c_type.in?(['Creature token'])
+    self.card_type = :creature_land         if c_type.in?(['Land Creature'])
+
+    self.tribal = true  if c_type.include?('Tribal')
+    self.snow = true    if c_type.include?('Snow')
+    self.legend = true  if c_type.include?('Legendary')
   end
 
   def rename

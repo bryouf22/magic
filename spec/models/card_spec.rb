@@ -31,6 +31,10 @@
 #  is_double_part   :boolean          default(FALSE)
 #  hybrid           :boolean          default(FALSE)
 #  alternative_type :integer          default("recto_verso")
+#  legend           :boolean          default(FALSE)
+#  snow             :boolean          default(FALSE)
+#  tribal           :boolean          default(FALSE)
+#  subtypes         :string
 #
 
 require 'rails_helper'

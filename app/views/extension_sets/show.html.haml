@@ -38,7 +38,7 @@
         %ul.cards-list.classic= render partial: 'card_checkbox_view', collection: cards.order('name ASC'), as: :card
 - else
   - [[{ colorless: @colorless_non_artefact }, { artefact: @colorless_artefact_cards }], [{ white: @white_cards }], [{ blue: @blue_cards }], [{ black: @black_cards }], [{ red: @red_cards }], [{ green: @green_cards }], [{ gold: @gold_cards }, { double_card: @double_cards }, { hybrid: @hybrid_cards }], [{ land: @land_cards }]].each do |lists|
-    - if lists.find { |list| lists.first.values.first.count.positive? }.present?
+    - if lists.find { |list| list.values.first.count.positive? }.present?
       .set-card-group{ class: lists.first.keys.first }
         - lists.each do |list|
           - cards = list.values.first
