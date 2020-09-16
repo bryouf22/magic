@@ -56,7 +56,7 @@ class Card < ApplicationRecord
   scope :green,                   -> { where('? = ANY(color_ids)', Color.green)}
   scope :white,                   -> { where('? = ANY(color_ids)', Color.white)}
   scope :colorless_artefact,      -> { where('color_ids is ?', nil).artefacts }
-  scope :artefacts,               -> { where(card_type: [5, 6]) }
+  scope :artefacts,               -> { where(card_type: [5, 6, 13]) }
   scope :colorless_non_artefact,  -> { colorless.where('cards.card_type NOT IN (2, 5, 6, 11) OR cards.card_type IS NULL') }
   scope :basic_lands,             -> { where('name in (?)', BASIC_LANDS_NAMES) }
   scope :creatures,               -> { where('card_type in (?)', [4, 6]) }
@@ -81,6 +81,7 @@ class Card < ApplicationRecord
     other:               10,
     token:               11,
     creature_land:       12,
+    artifact_land:       13,
   }
 
   enum rarity: {
@@ -206,9 +207,10 @@ class Card < ApplicationRecord
     self.card_type = :sorcery               if c_type.in?(['Tribal Sorcery', 'Sorcery'])
     self.card_type = :instant               if c_type.in?(['Instant', 'Tribal Instant'])
     self.card_type = :planeswalker          if c_type.in?(['Legendary Planeswalker'])
-    self.card_type = :land                  if c_type.in?(['Basic Land', 'Basic Snow Land', 'Land'])
+    self.card_type = :land                  if c_type.in?(['Basic Land', 'Basic Snow Land', 'Land', 'Legendary Land', 'Legendary Snow Land'])
     self.card_type = :token                 if c_type.in?(['Creature token'])
     self.card_type = :creature_land         if c_type.in?(['Land Creature'])
+    self.card_type = :artifact_land         if c_type.in?(['Artifact Land'])
 
     self.tribal = true  if c_type.include?('Tribal')
     self.snow = true    if c_type.include?('Snow')
