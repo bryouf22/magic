@@ -56,7 +56,7 @@ class Card < ApplicationRecord
   scope :green,                   -> { where('? = ANY(color_ids)', Color.green)}
   scope :white,                   -> { where('? = ANY(color_ids)', Color.white)}
   scope :colorless_artefact,      -> { where('color_ids is ?', nil).artefacts }
-  scope :artefacts,               -> { where(card_type: [5, 6, 13]) }
+  scope :artefacts,               -> { where(card_type: [5, 6, 13, 14]) }
   scope :colorless_non_artefact,  -> { colorless.where('cards.card_type NOT IN (2, 5, 6, 11) OR cards.card_type IS NULL') }
   scope :basic_lands,             -> { where('name in (?)', BASIC_LANDS_NAMES) }
   scope :creatures,               -> { where('card_type in (?)', [4, 6]) }
@@ -69,19 +69,20 @@ class Card < ApplicationRecord
   scope :legends,                 -> { where(legend: true) }
 
   enum card_type: {
-    instant:              1,
-    land:                 2,
-    sorcery:              3,
-    creature:             4,
-    artifact:             5,
-    creature_artifact:    6,
-    enchantment:          7,
-    planeswalker:         8,
-    enchantment_creature: 9,
-    other:               10,
-    token:               11,
-    creature_land:       12,
-    artifact_land:       13,
+    instant:               1,
+    land:                  2,
+    sorcery:               3,
+    creature:              4,
+    artifact:              5,
+    creature_artifact:     6,
+    enchantment:           7,
+    planeswalker:          8,
+    enchantment_creature:  9,
+    other:                10,
+    token:                11,
+    creature_land:        12,
+    artifact_land:        13,
+    enchantment_artifact: 14,
   }
 
   enum rarity: {
@@ -199,18 +200,19 @@ class Card < ApplicationRecord
     end
 
     self.card_type = :other
-    self.card_type = :creature              if c_type.in?(['Creature', 'Summon', 'Eaturecray', 'Legendary Creature', 'Host Creature', 'Snow Creature'])
-    self.card_type = :artifact              if c_type.in?(['Artifact', 'Legendary Artifact', 'Tribal Artifact'])
+    self.card_type = :creature              if c_type.in?(['Creature', 'Summon', 'Eaturecray', 'Legendary Creature', 'Host Creature', 'Snow Creature', 'Scariest Creature You’ll Ever See'])
+    self.card_type = :artifact              if c_type.in?(['Artifact', 'Legendary Artifact', 'Tribal Artifact', 'Snow Artifact'])
     self.card_type = :creature_artifact     if c_type.in?(['Legendary Artifact Creature', 'Artifact Creature', 'Host Artifact Creature', 'Snow Artifact Creature'])
     self.card_type = :enchantment_creature  if c_type.in?(['Enchantment Creature', 'Legendary Enchantment Creature'])
-    self.card_type = :enchantment           if c_type.in?(['Snow Enchantment', 'Tribal Enchantment', 'Legendary Enchantment', 'Enchantment'])
-    self.card_type = :sorcery               if c_type.in?(['Tribal Sorcery', 'Sorcery'])
-    self.card_type = :instant               if c_type.in?(['Instant', 'Tribal Instant'])
+    self.card_type = :enchantment           if c_type.in?(['Snow Enchantment', 'Tribal Enchantment', 'Legendary Enchantment', 'Enchantment', 'World Enchantment', 'Legendary Snow Enchantment'])
+    self.card_type = :sorcery               if c_type.in?(['Tribal Sorcery', 'Sorcery', 'Legendary Sorcery'])
+    self.card_type = :instant               if c_type.in?(['Instant', 'Tribal Instant', 'instant'])
     self.card_type = :planeswalker          if c_type.in?(['Legendary Planeswalker'])
-    self.card_type = :land                  if c_type.in?(['Basic Land', 'Basic Snow Land', 'Land', 'Legendary Land', 'Legendary Snow Land'])
+    self.card_type = :land                  if c_type.in?(['Basic Land', 'Basic Snow Land', 'Land', 'Legendary Land', 'Legendary Snow Land', 'Snow Land'])
     self.card_type = :token                 if c_type.in?(['Creature token'])
     self.card_type = :creature_land         if c_type.in?(['Land Creature'])
     self.card_type = :artifact_land         if c_type.in?(['Artifact Land'])
+    self.card_type = :enchantment_artifact  if c_type.in?(['Legendary Enchantment Artifact'])
 
     self.tribal = true  if c_type.include?('Tribal')
     self.snow = true    if c_type.include?('Snow')
