@@ -191,10 +191,6 @@ class Card < ApplicationRecord
     self['color_ids'] = c_ids.any? ? c_ids.uniq.sort : nil
   end
 
-  def self.fix_card_type
-    Card.find(11664).update(detailed_type: 'Creature — Elemental')
-  end
-
   def set_type
     if detailed_type.include?(' — ')
       self.subtypes = detailed_type.split(' — ').last
