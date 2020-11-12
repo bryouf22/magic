@@ -10,6 +10,7 @@ class BaseCrawler
       set_id = retrieve_or_create_set(set_name)
       retrieve_urls(set_name).each do |card_url|
         next if card_url.include?('&part=') && set_name == 'Throne of Eldraine'
+
         CardCrawler.new(card_url, set_id)
       end
     end
@@ -35,6 +36,7 @@ class BaseCrawler
       html = html_from_url("#{GATHERER_BASE_URL}/Search/Default.aspx?action=advanced&set=[%22#{extension_set_name_for_url(set_name)}%22]&page=#{page}")
       card_urls = html.css('span.cardTitle a').collect { |a| a.attribute('href').value.sub('..', GATHERER_BASE_URL) }
       break if hrefs.include?(card_urls.first) || card_urls.empty?
+
       hrefs += card_urls
       page += 1
     end
@@ -60,7 +62,7 @@ class BaseCrawler
   private
 
   def retrieve_or_create_set(set_name)
-    name = set_name.gsub("+", ' ').gsub("%3a", ': ')
+    name = set_name.gsub('+', ' ').gsub('%3a', ': ')
     if (set = ExtensionSet.where(name: name).first)
       set.id
     else
@@ -71,7 +73,7 @@ class BaseCrawler
   def import_set_names
     [
       'Double+Masters',
-      'Core+Set+2021',
+      'Core+Set+2021'
     ]
   end
 
@@ -80,15 +82,15 @@ class BaseCrawler
   end
 
   def extension_set_name_for_url(set_name)
-    set_name.gsub(" ", "%20")
+    set_name.gsub(' ', '%20')
   end
 
   def alternative_types(set_name)
-    if set_name == "Throne of Eldraine"
+    if set_name == 'Throne of Eldraine'
       :adventure
     else
       0
-      # TODO see model alternative for mapping
+      # NOTE : SEE MODEL ALTERNATIVE FOR MAPPING
 
       # recto_verso: 1,
       # double_card: 2,

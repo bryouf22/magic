@@ -18,14 +18,12 @@ class CardImageUploader < CarrierWave::Uploader::Base
       else
         "gid-#{model.gatherer_id}-#{model.name.parameterize}-#{model.card.alternate_frames.where.not(id: model.id).count + 1}.jpg"
       end
-    else
-      if original_filename.present?
-        if model.number_in_set.present?
-          model.basic_land?
-          "#{model.number_in_set}-#{model.name.parameterize}.jpg"
-        else
-          "gid-#{model.gatherer_id}-#{model.name.parameterize}.jpg"
-        end
+    elsif original_filename.present?
+      if model.number_in_set.present?
+        model.basic_land?
+        "#{model.number_in_set}-#{model.name.parameterize}.jpg"
+      else
+        "gid-#{model.gatherer_id}-#{model.name.parameterize}.jpg"
       end
     end
   end

@@ -1,12 +1,11 @@
 class ExtensionSets::CardsController < ApplicationController
-
-  add_breadcrumb "home", :root_path
-  add_breadcrumb "Extensions", :extension_sets_path
+  add_breadcrumb 'home', :root_path
+  add_breadcrumb 'Extensions', :extension_sets_path
 
   def show
     @set  = ExtensionSet.where(slug: params[:slug]).first!
     @card = @set.cards.where(id: params[:id]).first&.decorate
-    if !@card && @set.name.parameterize == "time-spiral"
+    if !@card && @set.name.parameterize == 'time-spiral'
       @card = ExtensionSet.where(slug: 'time-spiral-timeshifted').first.cards.where(id: params[:id]).first&.decorate
     end
     add_breadcrumb @set.name, extension_set_path(slug: @set.slug)

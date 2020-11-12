@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_16_223418) do
+ActiveRecord::Schema.define(version: 2020_11_12_002043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,12 +90,20 @@ ActiveRecord::Schema.define(version: 2020_09_16_223418) do
     t.boolean "is_double_card", default: false
     t.boolean "is_double_part", default: false
     t.boolean "hybrid", default: false
-    t.integer "alternative_type", default: 1
+    t.integer "alternative_type", default: 0
     t.boolean "legend", default: false
     t.boolean "snow", default: false
     t.boolean "tribal", default: false
     t.string "subtypes"
+    t.index ["card_type"], name: "index_cards_on_card_type"
+    t.index ["cmc"], name: "index_cards_on_cmc"
+    t.index ["detailed_type"], name: "index_cards_on_detailed_type"
+    t.index ["extension_set_id"], name: "index_cards_on_extension_set_id"
+    t.index ["mana_cost"], name: "index_cards_on_mana_cost"
     t.index ["name"], name: "index_cards_on_name"
+    t.index ["name_clean"], name: "index_cards_on_name_clean"
+    t.index ["subtypes"], name: "index_cards_on_subtypes"
+    t.index ["text"], name: "index_cards_on_text"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -121,7 +129,7 @@ ActiveRecord::Schema.define(version: 2020_09_16_223418) do
     t.text "description"
     t.integer "category_id"
     t.integer "format", default: 0, null: false
-    t.integer "complete_percent", default: 0
+    t.integer "complete_percent"
   end
 
   create_table "extension_sets", force: :cascade do |t|

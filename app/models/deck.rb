@@ -24,10 +24,6 @@
 class Deck < ApplicationRecord
   include Bitfields
 
-  validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
-  validates :name,    uniqueness: { scope: :user_id, message: 'Vous possèdez déjà un deck avec ce nom !' }
-  validates :user_id, presence: true
-
   belongs_to :user
   belongs_to :category, optional: true
 
@@ -41,6 +37,10 @@ class Deck < ApplicationRecord
 
   scope :publics,  -> { where(is_public: true) }
   scope :complets, -> { where(complete_percent: 100) }
+
+  validates :name,    presence: { message: 'Vous devez renseigner un nom.' }
+  validates :name,    uniqueness: { scope: :user_id, message: 'Vous possèdez déjà un deck avec ce nom !' }
+  validates :user_id, presence: true
 
   before_save :update_slug, :set_colors, :set_card_numbers, :set_card_in_main_deck, :update_complete_percent # , :validate_formats
 
@@ -75,7 +75,7 @@ class Deck < ApplicationRecord
   end
 
   def set_card_in_main_deck
-    self['card_in_main_deck'] = card_decks.sum { |card_deck| card_deck.occurences_in_main_deck }
+    self['card_in_main_deck'] = card_decks.sum(&:occurences_in_main_deck)
   end
 
   def set_colors

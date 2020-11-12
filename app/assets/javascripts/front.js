@@ -130,23 +130,42 @@ $(document).ready(function() {
   $('#card-search').select2({
     multiple: true,
     ajax: {
-    url: '/rechercher',
-    dataType: 'json',
-    placeholder: 'Search a card',
-     allowClear: true,
-    data: function (params) {
-      var query = {
-        "card_search[term]" : params.term,
-        type: 'public'
-      }
-      return query;
-    },
-    processResults: function (data, params) {
-      return {
-        results: data,
-      };
-    },
-  }
+      url: '/rechercher',
+      dataType: 'json',
+      placeholder: 'Search a card',
+      allowClear: true,
+      data: function (params) {
+        var query = {
+          "card_search[term]" : params.term
+        }
+        return query;
+      },
+      processResults: function (data, params) {
+        return {
+          results: data,
+        };
+      },
+    }
+  });
+
+  $('#extension-set-id').select2({
+    multiple: false,
+    ajax: {
+      url: '/rechercher-set',
+      dataType: 'json',
+      allowClear: true,
+      data: function (params) {
+        var query = {
+          "extension_set_search[term]" : params.term
+        }
+        return query;
+      },
+      processResults: function (data, params) {
+        return {
+          results: data,
+        };
+      },
+    }
   });
 
   $('#extension-set-search').select2({
@@ -287,12 +306,12 @@ $(document).ready(function() {
   });
 
   $('.verso').on('click', function () {
-    $('.verso').hide();
-    $('.recto').show();
+    $('.verso').css("display", "none");
+    $('.recto').css("display", "block");
   });
   $('.recto').on('click', function () {
-    $('.recto').hide();
-    $('.verso').show();
+    $('.recto').css("display", "none");
+    $('.verso').css("display", "block");
   });
   $('.flip').on('click', function () {
     if ($(this).css('transform') == 'none') {

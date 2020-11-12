@@ -52,9 +52,10 @@
   background-color: #de8708;
   border-color: #de8708;
   letter-spacing: 2px;
-  &:hover {
-    background-color: #E8AC55;
-    border-color: #E8AC55;
+  &:hover, &:active, &:focus {
+    background-color: #E8AC55 !important;
+    border-color: #E8AC55 !important;
+    box-shadow: none !important;
   }
 }
 

@@ -1,0 +1,127 @@
+
+%h1 Nouvelle carte
+
+= form_for(@card, url: admin_cards_path(from: :card_url), method: :post, html: { class: 'admin-form' }) do |form|
+  %div
+    %ul.nav.nav-tabs{ 'role' => "tablist" }
+      %li.active{ 'role' => "presentation" }
+        %a{ 'href' => "#simple-card", 'aria-controls' => "simple-card", 'role' => "tab", 'data-toggle' => "tab" }
+          Carte simple
+      %li{ 'role' => "presentation" }
+        %a{ 'href' => "#double-card", 'aria-controls' => "double-card", 'role' => "tab", 'data-toggle' => "tab" }
+          Carte double
+    .tab-content.create-card-content-tab
+      .tab-pane.active{ 'role' => "tabpanel", 'id' => "simple-card"}
+        .row
+          .col-lg-8.col-sm-12
+            .row
+              .col-sm-12
+                .form-group
+                  %label{ for: :card_url } Url
+                  .flex
+                    = text_field_tag(:card_url, @url.presence || '', class: 'form-control control-btn', placehold: 'Url')
+                    %btn.btn.btn-success.js-retrieve-card-data
+                      %span.glyphicon.glyphicon-refresh
+                  - if @url.present?
+                    %div
+                      %small
+                        = link_to 'Visiter', @url, target: '_blank'
+            .row
+              .col-sm-6
+                .form-group
+                  %label{ for: :card_name } Nom
+                  = form.text_field(:name, class: 'form-control', placeholder: 'Nom')
+              .col-sm-3.mana-container
+                .form-group
+                  %label{ for: :card_mana_cost } Coût de mana
+                  = form.hidden_field(:mana_cost)
+                  %span.js-choose-mana-cost Définir
+                  %span.js-mana-cost.form-control
+                  .hidden.js-mana-panel
+                    = render partial: 'mana_selector'
+              .col-sm-3
+                .form-group
+                  %label{ for: :card_color_indicator } Couleur (indicateur)
+                  - opt = options_for_select([''] + Color::COLORS_MAPPING.keys.collect { |color| [color.to_s.humanize] })
+                  = form.select(:color_indicator, opt, {}, class: 'form-control')
+            .row
+              .col-sm-12
+                .form-group
+                  %label{ for: :card_detailed_type } Type
+                  = form.text_field(:detailed_type, class: 'form-control', placeholder: 'Type')
+            .row
+              .col-sm-6
+                .form-group
+                  %label{ for: :card_card_type } Sur type
+                  - surtypes = options_for_select(all_surtypes, retrieve_surtype(@card.detailed_type))
+                  = form.select(:card_type, surtypes, {}, class: 'form-control')
+              .col-sm-6
+                .form-group
+                  %label{ for: :card_rarity } Rareté
+                  - rarities = options_for_select(Card.rarities.keys.collect { |rarity| [rarity.humanize, rarity] })
+                  = form.select(:rarity, rarities, {}, class: 'form-control', placeholder: 'Rareté')
+            .row
+              .col-sm-6
+                .form-group
+                  %label{ for: :card_subtypes } Sous type
+                  = form.text_field(:subtypes, class: 'form-control', placeholder: 'Sous type')
+              .col-sm-6
+                .form-group
+                  %label{ for: 'extension-set-id' } Extension
+                  - options = options_for_select([[@set.name, @set.id]], @set.id) if @set.present?
+                  = form.select('extension_set_id', options || [], { multiple: false }, { multiple: false, id: 'extension-set-id', class: 'form-control', data: { placeholder: 'Extension' } })
+            .row
+              .col-sm-12
+                .form-group
+                  %label{ for: :card_text } Texte
+                  = form.text_area(:text, class: 'form-control')
+            .row
+              .col-sm-12
+                .form-group
+                  %label{ for: :card_flavor_text } Texte Texte d'ambiance
+                  = form.text_area(:flavor_text, class: 'form-control')
+            .row
+              .col-sm-4
+                .form-group
+                  %label{ for: :card_artist_name } Artiste
+                  = form.text_field(:artist_name, class: 'form-control')
+              .col-sm-2
+                .form-group
+                  %label{ for: :card_number_in_set } Numéro
+                  = form.text_field(:number_in_set, class: 'form-control')
+              .col-sm-2
+                .form-group
+                  %label{ for: :card_gatherer_id } ID Gatherer
+                  = form.text_field(:gatherer_id, class: 'form-control')
+              .col-sm-2.js-powerdef
+                .form-group
+                  %label{ for: :card_power_str } Force
+                  = form.text_field(:power_str, class: 'form-control', placeholder: 'Force')
+              .col-sm-2.js-powerdef
+                .form-group
+                  %label{ for: :card_defense_str } Endurance
+                  = form.text_field(:defense_str, class: 'form-control', placeholder: 'Endurance')
+              .col-sm-2.hidden.js-loyalty
+                .form-group
+                  %label{ for: :card_loyalty } Loyauté
+                  = form.text_field(:loyalty, class: 'form-control', placeholder: 'Loyauté')
+            .row
+              = form.hidden_field(:is_double_card, value: false, class: '')
+              = form.hidden_field(:is_double_card, value: false, class: '')
+              .col-sm-4
+                .form-group
+                  - options = options_for_select(Card.alternative_types.collect { |type, type_id| [I18n.t("enum.card.alternative_type.#{type}"), type_id] }, 0)
+                  = form.select(:alternative_type, options, {}, class: 'form-control', placeholder: 'Type de carte double')
+          .col-sm-12.col-lg-3
+            %input{ type: :hidden, id: 'card_image_url', name: 'card[image_url]', class: 'js-card-image-url' }
+            .row
+              .form-group.js-card-image-uploader
+                %label Visuel
+                = form.file_field :image
+              .js-card-image.hidden
+                .card-image
+                  %img{ src: "" }
+
+      .tab-pane{ 'role' => "tabpanel", 'id' => "double-card" }
+        double-card
+  = form.submit('Créer', class: 'btn btn-sm btn-success')

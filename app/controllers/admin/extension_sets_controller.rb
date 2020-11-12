@@ -1,5 +1,5 @@
 class Admin::ExtensionSetsController < AdminController
-  before_action :find_set, only: %i[show edit update]
+  before_action :find_set, only: %i[show edit update create_card]
 
   def index
     @sets = ExtensionSet.all.order('release_date DESC')
@@ -22,6 +22,17 @@ class Admin::ExtensionSetsController < AdminController
 
   def new
     @set = ExtensionSet.new
+  end
+
+  def create_card
+    @card = Card.new(extension_set_id: @set.id)
+    if params['gatherer_url_id']
+      @url = @set.gatherer_card_urls.where(id: params['gatherer_url_id']).first.url
+    end
+    add_breadcrumb 'home', :root_path
+    add_breadcrumb 'Extensions', extension_sets_path
+    add_breadcrumb @set.name, extension_set_path(@set.slug)
+    add_breadcrumb 'Nouvelle carte'
   end
 
   def create

@@ -12,6 +12,7 @@ class Bloc < ApplicationRecord
   has_many :extension_sets
 
   before_save :set_sate
+
   def name
     extension_sets.order('extension_sets.release_date ASC').collect(&:name).join(' / ').presence || 'Nouveau bloc'
   end

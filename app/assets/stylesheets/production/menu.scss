@@ -4,12 +4,15 @@
   top: 0;
   width: 100%;
   z-index: 1;
-  background-color: white;
+  background-color: #f0f0f0;
   z-index: 1;
-  height: 55px;
+  // height: 55px;
 
   & + .container {
-    margin-top: 85px;
+    // margin-top: 55px;
+    margin-top: 39px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 }
 

@@ -1,4 +1,4 @@
-class Deck::RemoveCard
+class Deck::Organizer
   include Interactor
 
   def call
@@ -18,16 +18,14 @@ class Deck::RemoveCard
           else
             basics[card_name] = count
           end
+        elsif others[card_name].present?
+          others[card_name][:count] = count if count > others[card_name][:count]
+          others[card_name][:decks] << "#{deck.name} (x#{count})"
         else
-          if others[card_name].present?
-            others[card_name][:count] = count if count > others[card_name][:count]
-            others[card_name][:decks] << "#{deck.name} (x#{count})"
-          else
-            others[card_name] = {
-              count: count,
-              decks: ["#{deck.name} (x#{count})"]
-            }
-          end
+          others[card_name] = {
+            count: count,
+            decks: ["#{deck.name} (x#{count})"]
+          }
         end
       end
     end
@@ -37,12 +35,8 @@ class Deck::RemoveCard
       deck_name = ''
 
       if data[:decks].one?
-
         deck_name = data[:decks].first.split(' (x').first
         count     = data[:decks].first.split(' ').last.match(/\(x(\d+)\)$/)[1]
-
-        result[deck_name] = [] if result[deck_name].nil?
-        result[deck_name] << "#{card_name} (x#{data[:count]})"
       else
         deck_names = []
 
@@ -53,10 +47,10 @@ class Deck::RemoveCard
           deck_names << deck_name
         end
         deck_name = deck_names.join(' / ')
-
-        result[deck_name] = [] if result[deck_name].nil?
-        result[deck_name] << "#{card_name} (x#{data[:count]})"
       end
+
+      result[deck_name] = [] if result[deck_name].nil?
+      result[deck_name] << "#{card_name} (x#{data[:count]})"
     end
   end
 end

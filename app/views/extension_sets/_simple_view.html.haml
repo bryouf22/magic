@@ -1,5 +1,7 @@
-- number_in_collection = 0
-- item_color = ""
+- show_number_in_set    = local_assigns.fetch(:show_number_in_set, false)
+- number_in_collection  = 0
+- item_color            = ""
+
 - if show_collection && current_user.card_collection.cards.where(name: card.name).any?
   - card_collection = current_user.card_collection.card_lists.joins(:card).where('cards.name = ?', card.name).first
   - number_in_collection = card_collection.number.to_i + card_collection.foils_number.to_i
@@ -7,7 +9,8 @@
     - item_color = " playset"
   - else
     - item_color = " in_collection"
-.card{ class: "js-item-id-#{card.id} js-color js-rarity#{item_color}", 'data-colors' => (card.color_ids || []).join('-') }
+- add_class = show_number_in_set ? " admin-view" : ''
+.card{ class: "js-item-id-#{card.id} js-color js-rarity#{item_color}#{add_class}", 'data-colors' => (card.color_ids || []).join('-') }
   %span
     = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id), class: "card-link rarity-#{card.rarity}"#, data: { toggle: :popover, content: image_tag(card.image_url) }
     - unless card.first_edition?
@@ -16,3 +19,5 @@
     = form_for(:add_collection, url: add_card_collection_path(card_id: card.id, set_id: @set.id), remote: true, method: :post, html: { class: 'set-add-collection-form' }) do |form|
       = form.number_field(:occur, value: number_in_collection, class: 'form-occurances js-form-enable')
       = form.submit('add', class: 'disable btn btn-success btn-xs', disabled: :disabled)
+  - if show_number_in_set
+    %span= "#{card.number_in_set} / #{card.extension_set.card_count}"

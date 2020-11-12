@@ -8,7 +8,6 @@
 #
 
 class Reprint < ApplicationRecord
-
   belongs_to :card
   belongs_to :reprint_card, class_name: 'Card'
 end

@@ -18,3 +18,12 @@ en:
         global_series: 'Global Series'
         mythic_editions: 'Mythic Editions'
         signature_spellbooks: 'Signature Spellbook'
+    card:
+      alternative_type:
+        no_double: Non double
+        recto_verso: Recto verso
+        double_card: Double carte
+        flip_card: Flip carte
+        adventure: Aventure
+        two_part: Deux partie
+        partenair: Partenaire

@@ -1,9 +1,9 @@
-require "searchlight/adapters/action_view"
+require 'searchlight/adapters/action_view'
 
 class DeckSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
-  def initialize(raw_options = {}) # TODO REFACTOR THIS
+  def initialize(raw_options = {}) # TODO : REFACTOR THIS
     super
     @decks = User.find(raw_options.delete(:current_user_id)).decks if raw_options[:current_user_id]
   end

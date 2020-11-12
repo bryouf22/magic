@@ -5,6 +5,8 @@ class Color
     red: :r, green: :g, black: :b, white: :w, blue: :u
   }.freeze
 
+  HYBRID_SYMBOLS = %w[a c d e f h i j k l].freeze
+
   MANA_COST_MAPPING = {
     w: :white,
     u: :blue,

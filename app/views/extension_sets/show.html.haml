@@ -2,6 +2,13 @@
   %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
   = @set.name
 
+- if current_user&.admin?
+  = link_to "Update data", update_data_admin_extension_set_path(@set.id), method: :post, class: 'btn btn-success btn-xs'
+  = link_to "Ajouter une carte", create_card_admin_extension_set_path(@set.id), class: 'btn btn-success btn-xs'
+
+  %br
+  %br
+
 %ul.set-infos
   %li
     Release date :

@@ -1,0 +1,29 @@
+.admin-form {
+    label {
+        margin-bottom: 0px;
+        font-size: 12px;
+    }
+}
+
+.control-btn {
+  display: inline;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.js-retrieve-card-data {
+  display: inline;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.create-card-content-tab {
+  padding: 20px 10px;
+  border: 1px solid #ddd;
+  border-top: none;
+  margin-bottom: 20px;
+}
+
+.admin-view span:first-child {
+  width: 300px;
+  display: inline-block;
+}

@@ -3,7 +3,7 @@ require 'pagy'
 class DecksController < ApplicationController
   include Pagy::Backend
 
-  add_breadcrumb "home", :root_path
+  add_breadcrumb 'home', :root_path
 
   before_action :authenticate_user!, except: %i[public_decks public_deck_show copy_public_deck]
 
@@ -17,13 +17,13 @@ class DecksController < ApplicationController
     user_decks_search_params['card_ids'].reject!(&:blank?) if user_decks_search_params['card_ids'].present?
     @search = DeckSearch.new(user_decks_search_params.merge(current_user_id: current_user.id))
     @pagy, @decks = pagy(@search.results.order('complete_percent ASC, name ASC'), items: 100)
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     set_meta_tags title: 'My decks'
   end
 
   def new
     @deck = current_user.decks.new
-    add_breadcrumb "new deck"
+    add_breadcrumb 'new deck'
     set_meta_tags title: 'New deck'
   end
 
@@ -37,10 +37,10 @@ class DecksController < ApplicationController
   end
 
   def export
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     @deck = current_user.decks.where(slug: params[:slug]).first
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-    add_breadcrumb "Export"
+    add_breadcrumb 'Export'
     set_meta_tags title: "Export #{@deck.name}"
   end
 
@@ -80,16 +80,16 @@ class DecksController < ApplicationController
   end
 
   def detail
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-    add_breadcrumb "Advanced view"
+    add_breadcrumb 'Advanced view'
     set_meta_tags title: @deck.name
   end
 
   def show
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
@@ -97,7 +97,7 @@ class DecksController < ApplicationController
   end
 
   def show_by_color
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     @deck = Deck.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name
@@ -105,11 +105,11 @@ class DecksController < ApplicationController
   end
 
   def edit
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     @deck = current_user.decks.where(slug: params[:slug]).first
     build_deck_for_show
     add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-    add_breadcrumb "Edition"
+    add_breadcrumb 'Edition'
     set_meta_tags title: "Edit #{@deck.name}"
   end
 
@@ -158,9 +158,9 @@ class DecksController < ApplicationController
   end
 
   def import
-    add_breadcrumb "new deck", new_deck_path
-    add_breadcrumb "Import"
-    set_meta_tags title: "Import a deck"
+    add_breadcrumb 'new deck', new_deck_path
+    add_breadcrumb 'Import'
+    set_meta_tags title: 'Import a deck'
   end
 
   def import_create
@@ -192,11 +192,11 @@ class DecksController < ApplicationController
   end
 
   def add_wishlist
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     if (@deck = current_user.decks.where(id: params['id']).first)
       @cards = cards_sorted(@deck)
       add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-      add_breadcrumb "Add cards to wishlist"
+      add_breadcrumb 'Add cards to wishlist'
     else
       @cards = card_list
       render :decks_cards
@@ -204,11 +204,11 @@ class DecksController < ApplicationController
   end
 
   def add_collection
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     if (@deck = current_user.decks.where(id: params['id']).first)
       @cards = cards_sorted(@deck)
       add_breadcrumb @deck.name, my_deck_path(slug: @deck.slug)
-      add_breadcrumb "Add cards to collection"
+      add_breadcrumb 'Add cards to collection'
     else
       @cards = card_list
       render :decks_cards
@@ -235,17 +235,15 @@ class DecksController < ApplicationController
     results = {}
     current_user.decks.each do |deck|
       next if deck.name.match(/cube/i).present?
+
       deck.card_decks.each do |card|
         next if card.card.basic_land?
+
         count = card.occurences_in_main_deck.to_i + card.occurences_in_sideboard.to_i
         card_name = card.card.name
         if results[card_name].present?
-          unless results[card_name][:decks].include?(deck.name)
-            results[card_name][:decks] << deck.name
-          end
-          if results[card_name][:count] < count
-            results[card_name][:count] = count
-          end
+          results[card_name][:decks] << deck.name unless results[card_name][:decks].include?(deck.name)
+          results[card_name][:count] = count if results[card_name][:count] < count
         else
           results[card_name] = { count: count, id: card.card.id, decks: [deck.name] }
         end
@@ -255,12 +253,13 @@ class DecksController < ApplicationController
   end
 
   def missing_card_from_decks
-    add_breadcrumb "My decks", :user_decks_path
+    add_breadcrumb 'My decks', :user_decks_path
     @missings = {}
     @decks    = current_user.decks.where(id: params['missing_card_from_dekcs']['deck_ids'])
 
     @decks.collect(&:missing_cards).each do |m|
       next unless m.present?
+
       m.each do |name, count|
         if @missings[name].nil?
           @missings[name] = count
@@ -280,9 +279,7 @@ class DecksController < ApplicationController
       count = card.occurences_in_main_deck.to_i + card.occurences_in_sideboard.to_i
       card_id = card.card.id
       if result[card_id].present?
-        if result[card_id] < count
-          result[card_id] = count
-        end
+        result[card_id] = count if result[card_id] < count
       else
         result[card_id] = count
       end

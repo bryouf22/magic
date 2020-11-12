@@ -1,9 +1,9 @@
-require "searchlight/adapters/action_view"
+require 'searchlight/adapters/action_view'
 
 class CardSearch < Searchlight::Search
   include Searchlight::Adapters::ActionView
 
-  def initialize(raw_options = {}) # TODO REFACTOR THIS
+  def initialize(raw_options = {}) # TODO : REFACTOR THIS
     super
     @user_cards = User.find(raw_options.delete('current_user_id')).card_collection.cards if raw_options['current_user_id']
   end

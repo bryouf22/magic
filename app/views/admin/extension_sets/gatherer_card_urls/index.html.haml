@@ -1,6 +1,13 @@
 %h1 Gatherer Card Urls
 
-%ul
+%table.table
   - @gatherer_card_urls.each do |gatherer_card_url|
-    %li= link_to gatherer_card_url.url, gatherer_card_url.url, target: '_blank'
+    %tr
+      %td.col-sm-8
+        = link_to gatherer_card_url.url, gatherer_card_url.url, target: '_blank'
+      %td.col-sm-2
+        - if @card.present? && gatherer_card_url.include?(@card.gatherer_id)
+          = link_to 'Voir la carte', extension_set_card_path(slug: @card.extension_set.slug, id: @card.id), target: '_blank'
+      %td.col-sm-2
+        = link_to 'Créer via cette url', create_card_admin_extension_set_path(@set.id, params: { gatherer_url_id: gatherer_card_url.id }), class: 'btn btn-xs btn-success'
 

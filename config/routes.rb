@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  default_url_options :host => 'localhost:3000'
+  default_url_options host: 'localhost:3000'
 
   devise_scope :user do
     get '/login' => 'devise/sessions#new',             as: :login
@@ -12,18 +11,20 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   get    'mon-compte',        to: 'account#index',         as: :user_account
+
   get    'rechercher',        to: 'cards#search',          as: :card_search
   get    'recherche-avancee', to: 'cards#adv_search',      as: :adv_card_search
   get    'rechercher-set',    to: 'extension_sets#search', as: :extension_set_search
 
   get    'carte/:id', to: 'cards#show',     as: :card
   post   'add_card',  to: 'decks#add_card', as: :add_card_to_deck
-  post   'add_cards_collection/:card_id',  to: 'cards#add_card_collection', as: :add_card_collection
+  post   'add_cards_collection/:card_id', to: 'cards#add_card_collection', as: :add_card_collection
 
   get    'extensions',          to: 'extension_sets#index',      as: :extension_sets
   get    'extension-:slug',     to: 'extension_sets#show',       as: :extension_set
   get    'extension-:slug/collection', to: 'extension_sets#collection', as: :extension_set_collection
   get    'extension-:slug/:id', to: 'extension_sets/cards#show', as: :extension_set_card
+
 
   get    'my-decks',              to: 'decks#user_decks',    as: :user_decks
   get    'my-decks/import',       to: 'decks#import',        as: :import_deck
@@ -45,7 +46,7 @@ Rails.application.routes.draw do
   get 'add-to-wishlist/(:id)',   to: 'decks#add_wishlist',   as: :add_to_wishlist_deck
   get 'add-to-collection/(:id)', to: 'decks#add_collection', as: :add_to_collection_deck
 
-  post 'add-to-collection/:id',       to: 'decks#add_cards_to_collection', as: :deck_add_collection
+  post 'add-to-collection/:id', to: 'decks#add_cards_to_collection', as: :deck_add_collection
   post 'my-decks-calculate-complete/:id', to: 'decks#calculate_complete_percent', as: :calculate_complete_percent_decks
 
   get    'generer-draft/:id', to: 'decks#generate_draft', as: :generate_draft
@@ -84,16 +85,19 @@ Rails.application.routes.draw do
       member do
         post :find_reeditions
         post :update_data
+        get :create_card
       end
       resources :gatherer_card_urls, controller: 'extension_sets/gatherer_card_urls'
     end
+    get :retrieve_data, defaults: { format: :json }
 
     post '/admin/export', to: 'welcome#export',        as: :export
     post 'deck-validity', to: 'welcome#deck_validity', as: :deck_validity
 
-    resources :cards, only: [:new, :edit, :update, :destroy, :create] do
+    resources :cards, only: %i[new edit update destroy create] do
       member { post 'create_duplicate' }
     end
+
     get '/duplicate-card-:id', to: 'cards#duplicate', as: :duplicate_card
     resources :users
     resources :set_lists
@@ -101,9 +105,9 @@ Rails.application.routes.draw do
     resources :formats
 
     post :add_version, to: 'cards#add_version', as: :card_add_version
+
+    post :crawl_card_data, to: 'crawler#crawl_card_data', as: :crawl_card_data, default: { format: :js }
   end
 
   get 'layout', to: 'welcome#layout'
-
-  get 'random-card', to: 'cards#random', as: :random_card
 end

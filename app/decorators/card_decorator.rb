@@ -16,7 +16,12 @@ class CardDecorator < Draper::Decorator
   end
 
   def set_icon
-    h.content_tag(:i, '', class: "ss ss-#{extension_set.code&.downcase} ss-#{card.rarity} ss-grad", title: extension_set.name, data: { toggle: :tooltip, placement: :bottom })
+    h.content_tag(
+      :i,
+      '',
+      class: "ss ss-#{extension_set.code&.downcase} ss-#{card.rarity} ss-grad",
+      title: extension_set.name, data: { toggle: :tooltip, placement: :bottom }
+    )
   end
 
   def set_and_reprint_icons

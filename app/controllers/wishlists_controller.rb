@@ -1,19 +1,18 @@
 class WishlistsController < ApplicationController
-
   before_action :authenticate_user!
 
-  add_breadcrumb "home", :root_path
-  add_breadcrumb "Listes de souhaits", :wishlists_path
+  add_breadcrumb 'home', :root_path
+  add_breadcrumb 'Listes de souhaits', :wishlists_path
 
   def index
     @wishlists = current_user.wishlists
-    set_meta_tags title: "Mes listes de souhait"
+    set_meta_tags title: 'Mes listes de souhait'
   end
 
   def new
-    set_meta_tags title: "Nouvelle liste de souhait"
+    set_meta_tags title: 'Nouvelle liste de souhait'
     @wishlist = Wishlist.new(user_id: current_user.id)
-    add_breadcrumb "Nouvelle liste"
+    add_breadcrumb 'Nouvelle liste'
   end
 
   def create
@@ -40,7 +39,7 @@ class WishlistsController < ApplicationController
   def edit
     @wishlist = current_user.wishlists.where(slug: params['slug']).first
     add_breadcrumb @wishlist.name, wishlist_path(slug: @wishlist.slug)
-    add_breadcrumb "Édition"
+    add_breadcrumb 'Édition'
     set_meta_tags title: "Éditer #{@wishlist.name}"
   end
 

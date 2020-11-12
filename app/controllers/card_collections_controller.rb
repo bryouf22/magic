@@ -1,11 +1,10 @@
 class CardCollectionsController < ApplicationController
-
   before_action :authenticate_user!
 
   skip_before_action :verify_authenticity_token, only: :update_occurrence
 
-  add_breadcrumb "home", :root_path
-  add_breadcrumb "My collection", :card_collection_path
+  add_breadcrumb 'home', :root_path
+  add_breadcrumb 'My collection', :card_collection_path
 
   def show
     @card_collection = current_user.card_collection
@@ -16,18 +15,15 @@ class CardCollectionsController < ApplicationController
       @search = CardSearch.new
       list_by_colors(Card.none)
     end
-    set_meta_tags title: "My collection"
+    set_meta_tags title: 'My collection'
     render :visual if view == 'visual'
   end
 
   def update_occurrence
     card_list = current_user.card_collection.card_lists.where(card_id: params[:card_id]).first
-    if card_list.update(number: params[:occurrence])
-      respond_to do |format|
-        format.json { render status: '200', body: nil }
-      end
-    else
-      #ERROR
+    card_list.update(number: params[:occurrence])
+    respond_to do |format|
+      format.json { render status: '200', body: nil }
     end
   end
 

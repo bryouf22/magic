@@ -10,8 +10,9 @@
 
 class CardCollection < ApplicationRecord
   belongs_to :user
-  validates :user, presence: true, uniqueness: true
 
   has_many :card_lists, as: :card_listable
   has_many :cards, through: :card_lists
+
+  validates :user, presence: true, uniqueness: true
 end

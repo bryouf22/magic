@@ -10,9 +10,7 @@
 #
 
 class AlternateFrame < ApplicationRecord
-
   belongs_to :card
 
   mount_uploader :image, CardImageUploader
-
 end

@@ -16,10 +16,13 @@
       gtag('config', 'UA-148146929-1');
   %body
     = render 'application/menu'
-    .container.main-container
-      = render_breadcrumbs(separator: ' / ')
-      - if notice
-        %p.notice= notice
-      - if alert
-        %p.alert= alert
-      = yield
+    .container
+      .content
+        - if (breadcrumb = render_breadcrumbs(separator: ' / ')).present?
+          .breadcrumb.nav= breadcrumb
+        - if notice
+          %p.notice= notice
+        - if alert
+          %p.alert= alert
+        = yield
+    = render 'application/footer'

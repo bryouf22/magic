@@ -11,7 +11,7 @@
           - alternate_frames.each_with_index do |frame, num|
             %li= link_to num + 2, '#', class: 'js-switch-img', data: { url: frame.image_url}
 
-    - if current_user&.is_admin?
+    - if current_user&.admin?
       %h3 Ajouter une version
       = form_for(:add_version, url: admin_card_add_version_path, method: :post) do |form|
         = form.hidden_field(:card_id, value: @card.id)

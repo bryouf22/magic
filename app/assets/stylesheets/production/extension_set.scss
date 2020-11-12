@@ -42,7 +42,7 @@
       flex-wrap: wrap;
       display: flex;
       flex-direction: column;
-      max-height: 1380px;
+      max-height: 1460px;
 
       .ext-list-type {
         width: 32%;
@@ -193,6 +193,9 @@ ul {
   max-width: 223px;
   display: block;
   margin: auto;
+  &.verso {
+    display: none;
+  }
 }
 
 .other-frames ul {
@@ -239,6 +242,9 @@ ul {
     background: #f9f1b821;
     color: #f9f1b8;
     border: 1px solid #edd211;
+    .card span {
+      color: #daa642;
+    }
   }
   &.blue {
     background: #c3ecf92e;
@@ -276,7 +282,7 @@ ul {
     border: 1px solid #a15e2d;
   }
   &.colorless {
-    background: #d6d6d62e;
+    background: #e2e1e12e;
     color: #717171;
     border: 1px solid #717171;
   }

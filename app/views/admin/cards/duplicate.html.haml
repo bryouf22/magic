@@ -12,6 +12,10 @@
         %label Extension
         = form.select(:extension_set_id, '', {}, { id: 'extension-set-search', class: 'form-control', data: { multiple: false, placeholder: 'Choose Extension' } })
       .form-group
+        %label Rareté
+        - options = options_for_select(([['Commune', :common], ['Peu communes', :uncommon], ['Rare', :rare], ['Mythique', :mythic], ['Time Shifted', :timeshifted]]), @card.rarity)
+        = form.select(:rarity, options, { include_blank: false }, { class: 'form-control' })
+      .form-group
         %label{ for: 'card_number_in_set' } Numéro
-        = form.text_field(:card_number_in_set, value: '', class: 'form-control', placeholder: 'Numéro')
+        = form.text_field(:number_in_set, value: '', class: 'form-control', placeholder: 'Numéro')
       = form.submit('Dupliquer', class: 'btn btn-xs btn-success')

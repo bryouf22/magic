@@ -64,7 +64,7 @@ class CardsController < ApplicationController
   end
 
   def destroy
-    if current_user.present? && current_user.is_admin?
+    if current_user.present? && current_user.admin?
       @card = Card.find(params['card_id'])
       if CardDeck.where(card_id: @card).present? || CardList.where(card_id: @card.id).present? || FormatCard.where(card_id: @card.id).present?
         redirect_to card_path(@card)
@@ -75,10 +75,6 @@ class CardsController < ApplicationController
     else
       redirect_to root_path
     end
-  end
-
-  def random
-    @card = Card::RandomGeneration.call
   end
 
   private

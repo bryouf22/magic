@@ -20,28 +20,34 @@ class Admin::CardsController < AdminController
   end
 
   def create
-    @card = Card.create(card_params)
-    if (card_from = Card.where(id: params['card']['from_card_id']).first)
-      @card.update(
-        card_type: card_from.card_type,
-        detailed_type: card_from.detailed_type,
-        rarity: card_from.rarity,
-        text: card_from.text,
-        cmc: card_from.cmc,
-        mana_cost: card_from.mana_cost,
-        color_ids: card_from.color_ids,
-        artist_name: card_from.artist_name,
-        flavor_text: card_from.flavor_text,
-        power_str: card_from.power_str,
-        defense_str: card_from.defense_str,
-        color_indicator: card_from.color_indicator,
-        loyalty: card_from.loyalty,
-        format: card_from.format,
-        first_edition: card_from.first_edition
-      )
+    if params['from'].present? && params['from'] == 'card_url'
+      if (@card = CardServices::CreateFromUrl.call(card_from_url_params).card)
+        return redirect_to admin_extension_set_gatherer_card_urls_path(@card.extension_set_id)
+      end
+    else
+      @card = Card.create(card_params)
+      if (card_from = Card.where(id: params['card']['from_card_id']).first)
+        @card.update(
+          card_type: card_from.card_type,
+          detailed_type: card_from.detailed_type,
+          rarity: card_from.rarity,
+          text: card_from.text,
+          cmc: card_from.cmc,
+          mana_cost: card_from.mana_cost,
+          color_ids: card_from.color_ids,
+          artist_name: card_from.artist_name,
+          flavor_text: card_from.flavor_text,
+          power_str: card_from.power_str,
+          defense_str: card_from.defense_str,
+          color_indicator: card_from.color_indicator,
+          loyalty: card_from.loyalty,
+          format: card_from.format,
+          first_edition: card_from.first_edition
+        )
+      end
+      create_reprints(@card)
+      return redirect_to admin_extension_set_path(@card.extension_set)
     end
-    create_reprints(@card)
-    redirect_to admin_extension_set_path(@card.extension_set)
   end
 
   def index
@@ -69,6 +75,28 @@ class Admin::CardsController < AdminController
   end
 
   private
+
+  def card_from_url_params
+    params.require(:card).permit(:name,
+                                 :mana_cost,
+                                 :color_indicator,
+                                 :detailed_type,
+                                 :card_type,
+                                 :rarity,
+                                 :subtypes,
+                                 :extension_set_id,
+                                 :text,
+                                 :flavor_text,
+                                 :artist_name,
+                                 :number_in_set,
+                                 :gatherer_id,
+                                 :power_str,
+                                 :defense_str,
+                                 :loyalty,
+                                 :is_double_card,
+                                 :alternative_type,
+                                 :image_url)
+  end
 
   def create_reprints(card)
     Card.where(name: card.name).where.not(id: card.id).find_each do |same_card|
