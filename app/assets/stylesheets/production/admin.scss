@@ -27,3 +27,9 @@
   width: 300px;
   display: inline-block;
 }
+
+.admin-set-list {
+  td {
+    vertical-align: middle !important;
+  }
+}

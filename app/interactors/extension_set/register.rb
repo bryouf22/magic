@@ -25,7 +25,7 @@ class ExtensionSet::Register
           set.update(
             reprint_count:  set.cards.where(first_edition: false).count,
             card_count:     set.cards.count,
-            new_card_count: (set.cards.count - set.cards.where(first_edition: false).count)
+            new_card_count: (set.cards.count - set.cards.where(first_edition: false).count) || 0
           )
         end
       end

@@ -15,6 +15,7 @@
 #  card_count     :integer
 #  new_card_count :integer
 #  reprint_count  :integer
+#  configured     :boolean          default(FALSE)
 #
 
 class ExtensionSet < ApplicationRecord

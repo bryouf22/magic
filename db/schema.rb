@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_002043) do
+ActiveRecord::Schema.define(version: 2020_11_14_111830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 2020_11_12_002043) do
     t.integer "card_count"
     t.integer "new_card_count"
     t.integer "reprint_count"
+    t.boolean "configured", default: false
   end
 
   create_table "format_cards", force: :cascade do |t|

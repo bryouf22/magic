@@ -18,7 +18,7 @@
 #  description       :text
 #  category_id       :integer
 #  format            :integer          default(0), not null
-#  complete_percent  :integer          default(0)
+#  complete_percent  :integer
 #
 
 class Deck < ApplicationRecord

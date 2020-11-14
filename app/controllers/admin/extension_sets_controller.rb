@@ -56,6 +56,6 @@ class Admin::ExtensionSetsController < AdminController
   end
 
   def update_params
-    params.require(:extension_set).permit(:name, :set_type, :release_date, :bloc_id, :code)
+    params.require(:extension_set).permit(:name, :set_type, :release_date, :bloc_id, :code, :configured)
   end
 end

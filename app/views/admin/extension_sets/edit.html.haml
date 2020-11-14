@@ -21,5 +21,9 @@
       .form-group
         = label_tag(:extension_set_code, 'Code')
         = form.text_field(:code, class: 'form-control')
+      .checkbox
+        %label
+          = form.check_box :configured
+          Configurée ?
       .form-group
         = form.submit('Valider', class: 'btn btn-success')
