@@ -1,5 +1,5 @@
 class AccountController < ApplicationController
-x  add_breadcrumb 'home', :root_path
+  add_breadcrumb 'home', :root_path
   add_breadcrumb 'My account', :user_account_path
 
   def index
