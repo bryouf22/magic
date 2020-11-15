@@ -35,6 +35,7 @@
 #  snow             :boolean          default(FALSE)
 #  tribal           :boolean          default(FALSE)
 #  subtypes         :string
+#  has_image        :boolean
 #
 
 require 'rails_helper'

@@ -37,6 +37,7 @@
 #  snow             :boolean          default(FALSE)
 #  tribal           :boolean          default(FALSE)
 #  subtypes         :string
+#  has_image        :boolean
 #
 
 class Card < ApplicationRecord
@@ -193,6 +194,17 @@ class Card < ApplicationRecord
 
   def reset_colors!
     set_colors
+    save
+  end
+
+  def image_is_present?
+    return false unless image.present?
+
+    File.exist?("#{Rails.root}/public#{image_url}")
+  end
+
+  def set_has_image!
+    self[:has_image] = image_is_present?
     save
   end
 
