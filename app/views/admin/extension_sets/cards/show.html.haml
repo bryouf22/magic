@@ -1,6 +1,10 @@
-%h1 Nouvelle carte
+%h1= "Éditer : #{@card.name}"
 
-= form_for(@card, url: admin_cards_path(from: :card_url), method: :post, html: { class: 'admin-form' }) do |form|
+%p
+  ou
+  = link_to 'dupliquer dans une édition', admin_duplicate_card_path(@card)
+
+= form_for(@card, url: admin_extension_set_card_path(extension_set_id: @set.id, id: @card.id, from: :extension_set_card), method: :put, html: { class: 'admin-form' }) do |form|
   %div
     %ul.nav.nav-tabs{ 'role' => "tablist" }
       %li.active{ 'role' => "presentation" }
@@ -14,18 +18,6 @@
         .row
           .col-lg-8.col-sm-12
             .row
-              .col-sm-12
-                .form-group
-                  %label{ for: :card_url } Url
-                  .flex
-                    = text_field_tag(:card_url, @url.presence || '', class: 'form-control control-btn', placehold: 'Url')
-                    %btn.btn.btn-success.js-retrieve-card-data
-                      %span.glyphicon.glyphicon-refresh
-                  - if @url.present?
-                    %div
-                      %small
-                        = link_to 'Visiter', @url, target: '_blank'
-            .row
               .col-sm-6
                 .form-group
                   %label{ for: :card_name } Nom
@@ -37,7 +29,7 @@
                   %span.js-choose-mana-cost Définir
                   %span.js-mana-cost.form-control
                   .hidden.js-mana-panel
-                    = render partial: 'mana_selector'
+                    = render partial: 'admin/extension_sets/mana_selector'
               .col-sm-3
                 .form-group
                   %label{ for: :card_color_indicator } Couleur (indicateur)
@@ -117,9 +109,9 @@
               .form-group.js-card-image-uploader
                 %label Visuel
                 = form.file_field :image
-              .js-card-image.hidden
+              .js-card-image
                 .card-image
-                  %img{ src: "" }
+                  %img{ src: @card.image_url }
 
       .tab-pane{ 'role' => "tabpanel", 'id' => "double-card" }
         double-card

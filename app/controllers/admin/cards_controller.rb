@@ -11,6 +11,10 @@ class Admin::CardsController < AdminController
     end
   end
 
+  def without_image
+    @cards = Card.where(has_image: false).decorate
+  end
+
   def add_version
     version_params = params.require(:add_version).permit(:card_id, :url)
     card = Card.find(version_params['card_id'])

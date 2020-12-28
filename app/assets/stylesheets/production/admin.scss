@@ -23,9 +23,23 @@
   margin-bottom: 20px;
 }
 
-.admin-view span:first-child {
-  width: 300px;
-  display: inline-block;
+.admin-view {
+  ul.cards-list.classic {
+    display: flex;
+    flex-wrap: wrap;
+    li.admin-list {
+      span {
+        display: inline-block;
+        &:first-child {
+          width: 85px;
+          text-align: right;
+        }
+        &:last-child {
+          width: 205px;
+        }
+      }
+    }
+  }
 }
 
 .admin-set-list {

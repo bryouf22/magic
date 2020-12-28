@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_101824) do
+ActiveRecord::Schema.define(version: 2020_11_16_000056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,8 @@ ActiveRecord::Schema.define(version: 2020_11_15_101824) do
     t.boolean "tribal", default: false
     t.string "subtypes"
     t.boolean "has_image"
+    t.integer "frame_type", default: 0, null: false
+    t.string "specific_frame_type"
     t.index ["card_type"], name: "index_cards_on_card_type"
     t.index ["cmc"], name: "index_cards_on_cmc"
     t.index ["detailed_type"], name: "index_cards_on_detailed_type"

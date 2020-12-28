@@ -10,7 +10,7 @@
   - else
     - item_color = " in_collection"
 - add_class = show_number_in_set ? " admin-view" : ''
-.card{ class: "js-item-id-#{card.id} js-color js-rarity#{item_color}#{add_class}", 'data-colors' => (card.color_ids || []).join('-') }
+%li.card{ class: "js-item-id-#{card.id} js-color js-rarity#{item_color}#{add_class}", 'data-colors' => (card.color_ids || []).join('-') }
   %span
     = link_to card.title(show_rarity: true), extension_set_card_path(slug: @set.slug, id: card.id), class: "card-link rarity-#{card.rarity}"#, data: { toggle: :popover, content: image_tag(card.image_url) }
     - unless card.first_edition?

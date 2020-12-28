@@ -54,6 +54,46 @@ class ExtensionSet < ApplicationRecord
     # > adventure : ne pas afficher l'aventure
   end
 
+  def resort_card_number!
+    i = 1
+    cards.only_white.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.only_blue.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.only_black.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.only_red.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.only_green.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.colorless_artefact.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.lands.order(name: :asc).each do |card|
+      next if card.basic_land?
+
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.lands.order(name: :asc).each do |card|
+      next unless card.basic_land?
+
+      card.update(number_in_set: i)
+      i += 1
+    end
+  end
+
   private
 
   def generate_slug

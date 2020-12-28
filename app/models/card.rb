@@ -4,40 +4,42 @@
 #
 # Table name: cards
 #
-#  id               :bigint           not null, primary key
-#  name             :string
-#  extension_set_id :integer
-#  card_type        :integer
-#  detailed_type    :string
-#  rarity           :integer
-#  text             :text
-#  cmc              :integer
-#  mana_cost        :string
-#  color_ids        :integer          is an Array
-#  image            :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  artist_name      :string
-#  number_in_set    :integer
-#  gatherer_link    :string
-#  gatherer_id      :integer
-#  name_clean       :string
-#  flavor_text      :text
-#  power_str        :string
-#  defense_str      :string
-#  color_indicator  :string
-#  loyalty          :integer
-#  format           :integer          default(0), not null
-#  first_edition    :boolean
-#  is_double_card   :boolean          default(FALSE)
-#  is_double_part   :boolean          default(FALSE)
-#  hybrid           :boolean          default(FALSE)
-#  alternative_type :integer          default("no_double")
-#  legend           :boolean          default(FALSE)
-#  snow             :boolean          default(FALSE)
-#  tribal           :boolean          default(FALSE)
-#  subtypes         :string
-#  has_image        :boolean
+#  id                  :bigint           not null, primary key
+#  name                :string
+#  extension_set_id    :integer
+#  card_type           :integer
+#  detailed_type       :string
+#  rarity              :integer
+#  text                :text
+#  cmc                 :integer
+#  mana_cost           :string
+#  color_ids           :integer          is an Array
+#  image               :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  artist_name         :string
+#  number_in_set       :integer
+#  gatherer_link       :string
+#  gatherer_id         :integer
+#  name_clean          :string
+#  flavor_text         :text
+#  power_str           :string
+#  defense_str         :string
+#  color_indicator     :string
+#  loyalty             :integer
+#  format              :integer          default(0), not null
+#  first_edition       :boolean
+#  is_double_card      :boolean          default(FALSE)
+#  is_double_part      :boolean          default(FALSE)
+#  hybrid              :boolean          default(FALSE)
+#  alternative_type    :integer          default("no_double")
+#  legend              :boolean          default(FALSE)
+#  snow                :boolean          default(FALSE)
+#  tribal              :boolean          default(FALSE)
+#  subtypes            :string
+#  has_image           :boolean
+#  frame_type          :integer          default("classic"), not null
+#  specific_frame_type :string
 #
 
 class Card < ApplicationRecord
@@ -106,6 +108,16 @@ class Card < ApplicationRecord
     adventure: 4,
     two_part: 5, # ex Big furry monster
     partenair: 6  # ex Battlebond edition
+  }
+
+  enum frame_type: {
+    classic: 0,
+    extended_art: 1,
+    borderless: 2,
+    showcase: 3,
+    promo_pack: 4,
+    bundle: 5,
+    specific: 6
   }
 
   belongs_to :extension_set

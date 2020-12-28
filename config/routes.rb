@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   get    'extension-:slug/collection', to: 'extension_sets#collection', as: :extension_set_collection
   get    'extension-:slug/:id', to: 'extension_sets/cards#show', as: :extension_set_card
 
-
   get    'my-decks',              to: 'decks#user_decks',    as: :user_decks
   get    'my-decks/import',       to: 'decks#import',        as: :import_deck
   get    'my-decks/:slug/edit',   to: 'decks#edit',          as: :edit_deck
@@ -87,6 +86,7 @@ Rails.application.routes.draw do
         post :update_data
         get :create_card
       end
+      resources :cards, controller: 'extension_sets/cards'
       resources :gatherer_card_urls, controller: 'extension_sets/gatherer_card_urls'
     end
     get :retrieve_data, defaults: { format: :json }
@@ -96,6 +96,7 @@ Rails.application.routes.draw do
 
     resources :cards, only: %i[new edit update destroy create] do
       member { post 'create_duplicate' }
+      collection { get 'without_image' }
     end
 
     get '/duplicate-card-:id', to: 'cards#duplicate', as: :duplicate_card

@@ -1,0 +1,6 @@
+%li.card{ class: "js-item-id-#{card.id} js-color js-rarity admin-list", 'data-colors' => (card.color_ids || []).join('-') }
+  %span= "#{card.number_in_set} / #{card.extension_set.card_count}"
+  %span
+    = link_to card.title(show_rarity: true), admin_extension_set_card_path(@set.id, card.id), class: "card-link rarity-#{card.rarity}"#, data: { toggle: :popover, content: image_tag(card.image_url) }
+    - unless card.first_edition?
+      *
