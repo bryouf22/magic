@@ -84,6 +84,7 @@ Rails.application.routes.draw do
       member do
         post :find_reeditions
         post :update_data
+        post :update_card_numerotation
         get :create_card
       end
       resources :cards, controller: 'extension_sets/cards'

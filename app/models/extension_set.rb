@@ -56,37 +56,49 @@ class ExtensionSet < ApplicationRecord
 
   def resort_card_number!
     i = 1
-    cards.only_white.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).colorless_non_artefact.order(name: :asc).each do |card|
       card.update(number_in_set: i)
       i += 1
     end
-    cards.only_blue.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).only_white.order(name: :asc).each do |card|
       card.update(number_in_set: i)
       i += 1
     end
-    cards.only_black.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).only_blue.order(name: :asc).each do |card|
       card.update(number_in_set: i)
       i += 1
     end
-    cards.only_red.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).only_black.order(name: :asc).each do |card|
       card.update(number_in_set: i)
       i += 1
     end
-    cards.only_green.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).only_red.order(name: :asc).each do |card|
       card.update(number_in_set: i)
       i += 1
     end
-    cards.colorless_artefact.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).only_green.order(name: :asc).each do |card|
       card.update(number_in_set: i)
       i += 1
     end
-    cards.lands.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).gold_not_hybrids.not_double.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.where(set_extra_card: [nil, false]).hybrids.not_double.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.where(set_extra_card: [nil, false]).colorless_artefact.order(name: :asc).each do |card|
+      card.update(number_in_set: i)
+      i += 1
+    end
+    cards.where(set_extra_card: [nil, false]).lands.order(name: :asc).each do |card|
       next if card.basic_land?
 
       card.update(number_in_set: i)
       i += 1
     end
-    cards.lands.order(name: :asc).each do |card|
+    cards.where(set_extra_card: [nil, false]).lands.order(name: :asc).each do |card|
       next unless card.basic_land?
 
       card.update(number_in_set: i)

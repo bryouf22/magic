@@ -40,6 +40,7 @@
 #  has_image           :boolean
 #  frame_type          :integer          default("classic"), not null
 #  specific_frame_type :string
+#  set_extra_card      :boolean
 #
 
 class Card < ApplicationRecord
@@ -74,6 +75,7 @@ class Card < ApplicationRecord
   scope :tribals,                 -> { where(tribal: true) }
   scope :legends,                 -> { where(legend: true) }
   scope :snows,                   -> { where(snow:   true) }
+  scope :not_double,              -> { where.not(is_double_card: true, is_double_part: true) }
 
   enum card_type: {
     instant: 1,
@@ -130,8 +132,8 @@ class Card < ApplicationRecord
   has_many :reprint_cards, through: :reprints
 
   before_create :set_colors, :clean_names, :set_type, :set_hybrid
-
-  before_save   :rename, if: proc { |card| card.has_alternative? && !card.name.include?('/') }
+  before_save :set_type, if: :will_save_change_to_detailed_type?
+  before_save :rename, if: proc { |card| card.has_alternative? && !card.name.include?('/') }
 
   mount_uploader :image, CardImageUploader
 

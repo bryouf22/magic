@@ -8,6 +8,8 @@
       .form-group
         %label{ for: 'card_image' } Visuel
         = form.text_field(:image, value: '', class: 'form-control', placeholder: 'Url')
+        %label{ for: 'card_image' } Visuel
+        = form.file_field :image_file
       .form-group
         %label Extension
         = form.select(:extension_set_id, '', {}, { id: 'extension-set-search', class: 'form-control', data: { multiple: false, placeholder: 'Choose Extension' } })

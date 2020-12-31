@@ -49,7 +49,7 @@
               .col-sm-6
                 .form-group
                   %label{ for: :card_rarity } Rareté
-                  - rarities = options_for_select(Card.rarities.keys.collect { |rarity| [rarity.humanize, rarity] })
+                  - rarities = options_for_select(Card.rarities.keys.collect { |rarity| [rarity.humanize, rarity] }, @card.rarity)
                   = form.select(:rarity, rarities, {}, class: 'form-control', placeholder: 'Rareté')
             .row
               .col-sm-6
@@ -98,11 +98,20 @@
                   = form.text_field(:loyalty, class: 'form-control', placeholder: 'Loyauté')
             .row
               = form.hidden_field(:is_double_card, value: false, class: '')
-              = form.hidden_field(:is_double_card, value: false, class: '')
+              = form.hidden_field(:is_double_part, value: false, class: '')
               .col-sm-4
                 .form-group
-                  - options = options_for_select(Card.alternative_types.collect { |type, type_id| [I18n.t("enum.card.alternative_type.#{type}"), type_id] }, 0)
+                  %label{ for: :alternative_type } Spécificité
+                  - options = options_for_select(Card.alternative_types.collect { |type, type_id| [I18n.t("enum.card.alternative_type.#{type}"), type] }, :no_double)
                   = form.select(:alternative_type, options, {}, class: 'form-control', placeholder: 'Type de carte double')
+              .col-sm-4
+                .form-group
+                  %label{ for: :card_specific_frame_type } Type de frame
+                  = form.text_field(:specific_frame_type, class: 'form-control', placeholder: 'Type de frame')
+              .col-sm-4
+                .form-group
+                  %label{ for: :card_set_extra_card } Carte de Set Additionnel ?
+                  = form.check_box(:set_extra_card, class: 'form-control')
           .col-sm-12.col-lg-3
             %input{ type: :hidden, id: 'card_image_url', name: 'card[image_url]', class: 'js-card-image-url' }
             .row

@@ -28,7 +28,7 @@ class Admin::CardsController < AdminController
       if (@card = CardServices::CreateFromUrl.call(card_from_url_params).card)
         return redirect_to admin_extension_set_gatherer_card_urls_path(@card.extension_set_id)
       end
-    else
+    elsif params['card']['from_card_id'].present?
       @card = Card.create(card_params)
       if (card_from = Card.where(id: params['card']['from_card_id']).first)
         @card.update(
@@ -49,9 +49,11 @@ class Admin::CardsController < AdminController
           first_edition: card_from.first_edition
         )
       end
-      create_reprints(@card)
-      return redirect_to admin_extension_set_path(@card.extension_set)
+    else
+      @card = Card.create(card_params.merge({ mana_cost: '', detailed_type: '' }))
     end
+    create_reprints(@card)
+    return redirect_to admin_extension_set_path(@card.extension_set)
   end
 
   def index
@@ -69,7 +71,11 @@ class Admin::CardsController < AdminController
     if (@card = Card.find(params['id']))
       card_attribute = @card.attributes.except('created_at', 'updated_at', 'gatherer_id', 'gatherer_link', 'id')
       card_attribute.merge!(card_params)
-      card_attribute.merge!(image: open(card_attribute['image']))
+      if params['card']['image_file'].present?
+        card_attribute.merge!(image: open(params['card']['image_file']))
+      else
+        card_attribute.merge!('image' => open(card_attribute['image']))
+      end
       @card = Card.create(card_attribute)
       create_reprints(@card)
       extension_set = @card.extension_set

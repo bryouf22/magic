@@ -38,6 +38,7 @@
 #  has_image           :boolean
 #  frame_type          :integer          default("classic"), not null
 #  specific_frame_type :string
+#  set_extra_card      :boolean
 #
 
 require 'rails_helper'

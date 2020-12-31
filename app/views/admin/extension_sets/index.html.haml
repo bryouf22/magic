@@ -8,8 +8,9 @@
     %tr
       %td.c-md-1
       %td.c-md-1 Sortie le
-      %td.c-md-5 Nom
+      %td.c-md-4 Nom
       %td.c-md-1 Total
+      %td.c-md-1 Sans num.
       %td.c-md-2= "Erreurs (#{GathererCardUrl.all.count})"
       %td.c-md-2 Actions
   - @sets.each do |set|
@@ -17,10 +18,11 @@
       %td.col-md-1.text-center
         %i{ class: "ss ss-common ss-2x ss-#{set.code&.downcase}" }
       %td.col-md-1= set.release_date&.strftime("%m/%d/%Y")
-      %td.col-md-5
+      %td.col-md-4
         - type = set.set_type ? I18n.t("enum.extension_set.set_type.#{set.set_type}") : 'NC'
         = "#{set.name} (#{type})"
       %td.col-md-1= set.cards.count
+      %td.col-md-1= set.cards.where(number_in_set: nil).count
       %td.col-md-2
         - if (errors = set.gatherer_card_urls.count).positive?
           = link_to "#{errors} erreurs d'importation", admin_extension_set_gatherer_card_urls_path(set.id)
@@ -28,3 +30,4 @@
       %td.col-md-2
         = link_to 'voir', admin_extension_set_path(set), class: 'btn btn-primary btn-xs'
         = link_to 'editer', edit_admin_extension_set_path(set), class: 'btn btn-warning btn-xs'
+        = link_to 'Maj. Num', update_card_numerotation_admin_extension_set_path(set), method: :post, class: 'btn btn-warning btn-xs'

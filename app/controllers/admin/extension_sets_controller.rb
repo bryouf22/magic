@@ -20,6 +20,12 @@ class Admin::ExtensionSetsController < AdminController
     end
   end
 
+  def update_card_numerotation
+    set = ExtensionSet.find(params['id'])
+    set.resort_card_number!
+    redirect_to admin_extension_sets_path
+  end
+
   def new
     @set = ExtensionSet.new
   end
