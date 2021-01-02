@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   get    'extensions',          to: 'extension_sets#index',      as: :extension_sets
   get    'extension-:slug',     to: 'extension_sets#show',       as: :extension_set
   get    'extension-:slug/collection', to: 'extension_sets#collection', as: :extension_set_collection
+  get    'extension-:slug/goto-card', to: 'extension_sets/cards#search_num', as: :extension_set_search_num
   get    'extension-:slug/:id', to: 'extension_sets/cards#show', as: :extension_set_card
-
   get    'my-decks',              to: 'decks#user_decks',    as: :user_decks
   get    'my-decks/import',       to: 'decks#import',        as: :import_deck
   get    'my-decks/:slug/edit',   to: 'decks#edit',          as: :edit_deck

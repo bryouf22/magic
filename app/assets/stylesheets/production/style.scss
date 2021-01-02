@@ -272,3 +272,18 @@ figcaption {
     color: #de8708;
   }
 }
+
+.show-hover {
+  display: none;
+}
+.wrapper-show-hover:hover {
+  .show-hover {
+    display: inline;
+  }
+}
+
+
+.card-number {
+  color: #777777 !important;
+  font-size: 12px;
+}

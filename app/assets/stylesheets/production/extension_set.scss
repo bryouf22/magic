@@ -294,3 +294,32 @@ a.card-link {
     margin-right: 5px;
   }
 }
+
+.card-show {
+  header {
+    text-align: center;
+  }
+  .set-navigation {
+    text-align: center;
+    padding: 10px 0 30px;
+    a {
+      color: #8c8c8c;
+      font-size: 13px;
+      &:first-child {
+        margin-right: 10px;
+      }
+      &:last-child {
+        margin-left: 10px;
+      }
+    }
+    form {
+      display: inline;
+      input {
+        max-width: 50px;
+        text-align: center;
+        border-radius: 4px;
+        border: #ccc solid 1px;
+      }
+    }
+  }
+}

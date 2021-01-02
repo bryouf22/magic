@@ -1,52 +1,65 @@
-%header
-  %h1= "#{@card.name} - #{@card.extension_set.name}"
+- context = local_assigns.fetch(:context, :set)
+- set = @card.extension_set
 
-.row.card-view
-  .col-md-3.image-container
-    = image_show(@card) if @card.image.present?
-    - if (alternate_frames = @card.alternate_frames).any?
-      .other-frames
-        %ul
-          %li= link_to '1', '#', class: 'js-switch-img', data: { url: @card.image_url }
-          - alternate_frames.each_with_index do |frame, num|
-            %li= link_to num + 2, '#', class: 'js-switch-img', data: { url: frame.image_url}
+.card-show
+  %header
+    %h1= "#{@card.name} - #{@card.extension_set.name}"
 
-    - if current_user&.admin?
-      %h3 Ajouter une version
-      = form_for(:add_version, url: admin_card_add_version_path, method: :post) do |form|
-        = form.hidden_field(:card_id, value: @card.id)
-        = form.text_field(:url)
-        = form.submit('Ajouter', class: 'btn btn-success btn-xs')
-      %br
-      = link_to 'Dupliquer dans une édition', admin_duplicate_card_path(@card), class: 'btn btn-xs btn-success'
-  .col-md-4
-    %ul
-      %li= link_to 'see on gatherer', @card.gatherer_link, target: '_blank'
-      - if user_signed_in?
-        %li
-          = current_user.card_collection.card_lists.where(card_id: [card.id, card.reprint_cards.ids].flatten).sum { |c| c.number.to_i + c.foils_number.to_i }
-          dans ma collection
-        - if (decks = CardDeck.where(deck_id: current_user.decks.ids).where(card_id: [@card.id, @card.reprint_cards.ids].flatten).collect { |d| { d.deck_id => [d.deck.name, d.deck.slug] } }).any?
-          %li présent dans :
-          - decks.each do |deck_data|
-            %li= link_to deck_data.values.first.first, my_deck_path(slug: deck_data.values.first.last)
-      - if accessible? && user_signed_in?
-        %li ajouter à la wishlist
-        %li.add-to-deck
-          ajouter à
-          = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
-            - if current_user.decks.any?
-              - decks = current_user.decks.collect { |d| [d.name, d.id] }
-              - decks << ['nouveau deck', nil]
-            - else
-              - decks = [['nouveau deck', nil]]
-            = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
-              = form.hidden_field(:card_id, value: @card.id)
-              = form.select(:deck_id, options_for_select(decks))
-              = form.submit('ok', class: 'btn btn-xs btn-success')
-
-    - if @card.reprint_cards.any?
-      Editions :
+  - if context == :set && @card.number_in_set.present?
+    .set-navigation
+      - unless @card.number_in_set == 1
+        - previous_c = set.cards.where(number_in_set: @card.number_in_set - 1).first
+        = link_to previous_c.name, extension_set_card_path(set.slug, previous_c.id)
+      = form_for(:card, url: extension_set_search_num_path(set.slug), method: :get) do |form|
+        = form.text_field(:num, value: @card.number_in_set)
+      - if (next_c = set.cards.where(number_in_set: @card.number_in_set + 1).first)
+        = link_to next_c.name, extension_set_card_path(set.slug, next_c.id)
+  .row.card-view
+    .col-md-4
       %ul
-        - @card.reprint_cards.each do |reprint|
-          %li= link_to "#{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
+        %li= link_to 'Gatherer', @card.gatherer_link, target: '_blank'
+        - if user_signed_in?
+          %li<
+            = "#{current_user.card_collection.card_lists.where(card_id: [card.id, card.reprint_cards.ids].flatten).sum { |c| c.number.to_i + c.foils_number.to_i }} en collection."
+          - if (decks = CardDeck.where(deck_id: current_user.decks.ids).where(card_id: [@card.id, @card.reprint_cards.ids].flatten).collect { |d| { d.deck_id => [d.deck.name, d.deck.slug] } }).any?
+            %li Dans les decks :
+            - decks.each do |deck_data|
+              %li= link_to deck_data.values.first.first, my_deck_path(slug: deck_data.values.first.last)
+        - if accessible? && user_signed_in?
+          %li ajouter à la wishlist
+          %li.add-to-deck
+            ajouter à
+            = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
+              - if current_user.decks.any?
+                - decks = current_user.decks.collect { |d| [d.name, d.id] }
+                - decks << ['nouveau deck', nil]
+              - else
+                - decks = [['nouveau deck', nil]]
+              = form_for(:add_to_deck, url: add_card_to_deck_path, html: { class: 'add-to-deck'}) do |form|
+                = form.hidden_field(:card_id, value: @card.id)
+                = form.select(:deck_id, options_for_select(decks))
+                = form.submit('ok', class: 'btn btn-xs btn-success')
+
+      - if @card.reprint_cards.any?
+        Autres éditions :
+        %ul
+          - @card.reprint_cards.each do |reprint|
+            %li= link_to "#{reprint.extension_set.name}", extension_set_card_path(slug: reprint.extension_set.slug, id: reprint.id)
+    .col-md-4.image-container
+      .center
+        = image_show(@card) if @card.image.present?
+      - if (alternate_frames = @card.alternate_frames).any?
+        .other-frames
+          %ul
+            %li= link_to '1', '#', class: 'js-switch-img', data: { url: @card.image_url }
+            - alternate_frames.each_with_index do |frame, num|
+              %li= link_to num + 2, '#', class: 'js-switch-img', data: { url: frame.image_url}
+    .col-md-4
+      - if current_user&.admin?
+        %h3 Ajouter une version
+        = form_for(:add_version, url: admin_card_add_version_path, method: :post) do |form|
+          = form.hidden_field(:card_id, value: @card.id)
+          = form.text_field(:url)
+          = form.submit('Ajouter', class: 'btn btn-success btn-xs')
+        %br
+        = link_to 'Dupliquer dans une édition', admin_duplicate_card_path(@card), class: 'btn btn-xs btn-success'
