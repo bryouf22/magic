@@ -22,8 +22,8 @@ class CardServices::CreateFromUrl
         card.remote_image_url = context.image_url
       else
         # TODO
+        0/0
       end
-      0/0
       if card.save
         create_reprint(card)
         context.card = card
