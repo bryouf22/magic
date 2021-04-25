@@ -1,0 +1,27 @@
+= link_to 'back', set_datas_path(page: @back_page)
+
+.text-left
+  %h3= @set.name
+= link_to 'visuels', visuals_set_data_path(@set, back_page: @back_page)
+
+%table.table
+  %thead
+    %tr
+      %td Nom
+      %td Coût
+      %td Couleur
+      %td Rareté
+      %td Numero
+  %tbody
+    - @cards.each do |card|
+      %tr
+        %td= link_to card.name, set_data_card_data_path(@set, card)
+        %td= card.mana_cost
+        %td
+          -if card.colors.present?
+            -if card.colors.one?
+              = card.colors.first
+            - else
+              Gold
+        %td= card.rarity
+        %td= card.number

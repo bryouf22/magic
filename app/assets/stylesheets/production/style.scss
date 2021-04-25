@@ -104,7 +104,7 @@ h3 {
   padding-left: 5px;
 }
 
-.content ul li::before {
+.content ul:not(.pagination, .visual) li::before {
   content: "■";
   color: #de8708;
   margin-right: 6px;

@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -87,3 +87,5 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 
 # Breadcrumb
 gem "breadcrumbs_on_rails"
+
+gem 'mtg_sdk'

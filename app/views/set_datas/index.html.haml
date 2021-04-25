@@ -1,0 +1,25 @@
+.text-left
+  = paginate(@sets, theme: :classic_small)
+
+%table.table
+  %thead
+    %tr
+      %td Nom
+      %td Type
+      %td Date de sortie
+      %td Block
+      %td Nb de Cartes
+      %td Image manquantes
+  %tbody
+    - @sets.each do |set|
+      %tr
+        %td= link_to set.name, set_data_path(set, back_page: params['page'])
+        %td= set.set_type
+        %td= set.release_date
+        %td= set.block
+        %td= set.cards.count
+        %td
+          - if (missing_images = set.cards.where(image_url: nil).count).positive?
+            = missing_images
+.text-center
+  = paginate(@sets, theme: :classic)

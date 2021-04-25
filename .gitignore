@@ -32,5 +32,6 @@
 
 # Ignore public folder
 /public/
+/json_sources/
 
 /config/deploy/production.rb

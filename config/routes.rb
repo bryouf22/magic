@@ -112,4 +112,9 @@ Rails.application.routes.draw do
   end
 
   get 'layout', to: 'welcome#layout'
+
+  resources :set_datas, only: [:index, :show] do
+    member { get :visuals }
+    resources :card_datas, only: :show
+  end
 end

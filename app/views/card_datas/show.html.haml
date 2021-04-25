@@ -1,0 +1,23 @@
+= link_to @set.name, set_data_path(@set)
+
+.text-left
+  %h3= @card.name
+
+.row
+  .col-sm-6
+    %table.table
+      %tr
+        %td= @card.name
+      %tr
+        %td= @card.mana_cost
+      %tr
+        %td= @card.colors
+      %tr
+        %td= @card.rarity
+      %tr
+        %td= @card.number
+  .col-sm-6.text-center
+    - if @card.image_url.present?
+      = image_tag(@card.image_url)
+    - else
+      = image_tag(asset_path('card-background.jpg'))

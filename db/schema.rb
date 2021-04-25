@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_232729) do
+ActiveRecord::Schema.define(version: 2021_04_25_000331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,73 @@ ActiveRecord::Schema.define(version: 2020_12_29_232729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "card_data", force: :cascade do |t|
+    t.string "name"
+    t.string "mana_cost"
+    t.string "cmc"
+    t.string "colors", array: true
+    t.string "color_identity", array: true
+    t.string "card_type"
+    t.string "types", array: true
+    t.string "subtypes", array: true
+    t.string "rarity"
+    t.string "set"
+    t.string "set_name"
+    t.string "text"
+    t.string "artist"
+    t.string "number_tmp"
+    t.string "power"
+    t.string "toughness"
+    t.string "layout"
+    t.string "multiverseid"
+    t.string "image_url"
+    t.string "variations", array: true
+    t.string "printings", array: true
+    t.string "original_text"
+    t.string "original_type"
+    t.string "api_id"
+    t.string "flavor"
+    t.string "supertypes", array: true
+    t.string "loyalty"
+    t.string "hand"
+    t.string "life"
+    t.string "watermark"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "set_data_id"
+    t.integer "number"
+  end
+
+  create_table "card_datas_foreign_names", force: :cascade do |t|
+    t.integer "card_data_id"
+    t.string "name"
+    t.string "text"
+    t.string "foreign_name_type"
+    t.string "flavor"
+    t.string "image_url"
+    t.string "language"
+    t.integer "multiverseid"
+    t.string "face_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_datas_legalities", force: :cascade do |t|
+    t.integer "card_data_id"
+    t.string "format"
+    t.string "legality"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "card_datas_rullings", force: :cascade do |t|
+    t.integer "card_data_id"
+    t.string "date"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "card_decks", force: :cascade do |t|
@@ -192,6 +259,16 @@ ActiveRecord::Schema.define(version: 2020_12_29_232729) do
     t.index ["card_id", "reprint_card_id"], name: "index_reprints_on_card_id_and_reprint_card_id"
     t.index ["card_id"], name: "index_reprints_on_card_id"
     t.index ["reprint_card_id"], name: "index_reprints_on_reprint_card_id"
+  end
+
+  create_table "set_data", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "set_type"
+    t.string "booster", array: true
+    t.string "release_date"
+    t.string "block"
+    t.boolean "online_only"
   end
 
   create_table "set_lists", force: :cascade do |t|

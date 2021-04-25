@@ -1,0 +1,10 @@
+%h1= link_to @set.name, set_data_path(@set)
+
+%ul.cards-list.visual
+  - @cards.each do |card|
+    %li
+      - if card.image_url.present?
+        = image_tag(card.image_url, class: 'img-responsive')
+        = link_to card.name, set_data_card_data_path(@set, card)
+      - else
+        = image_tag(asset_path('card-background.jpg'), class: 'img-responsive')
