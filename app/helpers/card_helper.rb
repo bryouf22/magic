@@ -1,4 +1,16 @@
 module CardHelper
+  def card_scryfall_image_url(card)
+    api_url = "https://api.scryfall.com/cards/#{card.json_set.code.downcase}/#{card.number}"
+    client = HTTPClient.new(default_header: { 'Accept-Language' => 'en-US' }).get(api_url)
+
+    json = JSON.parse(client.body)
+    if (url = json.dig('image_uris', 'normal'))
+      url
+    else
+      asset_path('card-background.jpg')
+    end
+  end
+
   def image_show(card)
     if card.has_alternative?
       case card.alternative_type

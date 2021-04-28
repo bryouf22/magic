@@ -6,13 +6,13 @@ class SetDatasController < ApplicationController
 
   def show
     @set = SetData.find(params['id'])
-    @cards = @set.cards.order(number: :asc)
+    @cards = @set.card_datas.order(number: :asc)
     @back_page = params['back_page'].presence
   end
 
   def visuals
     @set = SetData.find(params['id'])
-    @cards = @set.cards.order(number: :asc)
+    @cards = @set.card_datas.order(number: :asc)
     @back_page = params['back_page'].presence
   end
 end

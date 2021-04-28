@@ -1,0 +1,20 @@
+= link_to 'back', json_sets_path(page: @back_page)
+
+.text-left
+  %h3= @set.name
+= #link_to 'visuels', visuals_json_set_path(@set, back_page: @back_page)
+
+%table.table
+  %thead
+    %tr
+      %td Nom
+      %td Numero
+  %tbody
+    - @cards.each do |card|
+      %tr
+        %td= link_to card.name, json_set_json_card_path(@set, card)
+        %td= card.number
+    - @tokens.each do |token|
+      %tr
+        %td= link_to token.name, json_set_json_token_path(@set, token)
+        %td

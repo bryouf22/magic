@@ -1,0 +1,15 @@
+= link_to @set.name, set_data_path(@set)
+
+.text-left
+  %h3= @token.name
+
+.row
+  .col-sm-6
+    %table.table
+      %tr
+        %td= @token.name
+  .col-sm-6.text-center
+    - if false && @token.image_url.present?
+      = image_tag(@token.image_url)
+    - else
+      = image_tag(asset_path('card-background.jpg'))

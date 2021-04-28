@@ -117,4 +117,10 @@ Rails.application.routes.draw do
     member { get :visuals }
     resources :card_datas, only: :show
   end
+
+  resources :json_sets, only: [:index, :show] do
+    member { get :visuals }
+    resources :json_cards, only: :show
+    resources :json_tokens, only: :show
+  end
 end

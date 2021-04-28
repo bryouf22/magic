@@ -1,0 +1,19 @@
+.text-left
+  = paginate(@sets, theme: :classic_small)
+
+%table.table
+  %thead
+    %tr
+      %td Nom
+      %td Type
+      %td Date de sortie
+      %td Nb de Cartes
+  %tbody
+    - @sets.each do |set|
+      %tr
+        %td= link_to "#{set.name} (#{set.code})", json_set_path(set, back_page: params['page'])
+        %td= set.set_type
+        %td= set.release_date
+        %td= set.json_cards.count
+.text-center
+  = paginate(@sets, theme: :classic)

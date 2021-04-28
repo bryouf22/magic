@@ -1,0 +1,7 @@
+%h1= link_to @set.name, json_set_path(@set)
+
+%ul.cards-list.visual
+  - @cards.each do |card|
+    %li
+      = image_tag(card_scryfall_image_url(card), class: 'img-responsive')
+      = link_to card.name, json_set_json_card_path(@set, card)

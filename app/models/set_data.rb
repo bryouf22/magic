@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: set_data
+# Table name: set_datas
 #
 #  id           :bigint           not null, primary key
 #  code         :string
@@ -12,8 +12,9 @@
 #  online_only  :boolean
 #
 
-
 class SetData < ApplicationRecord
 
-  has_many :cards, class_name: 'CardData', foreign_key: :set_data_id
+  self.table_name = "set_datas"
+
+  has_many :card_datas
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_25_000331) do
+ActiveRecord::Schema.define(version: 2021_04_28_152924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_000331) do
     t.integer "user_id"
   end
 
-  create_table "card_data", force: :cascade do |t|
+  create_table "card_datas", force: :cascade do |t|
     t.string "name"
     t.string "mana_cost"
     t.string "cmc"
@@ -253,6 +253,30 @@ ActiveRecord::Schema.define(version: 2021_04_25_000331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "json_cards", force: :cascade do |t|
+    t.integer "json_set_id"
+    t.string "name"
+    t.json "json_data"
+    t.string "uuid"
+    t.integer "number"
+  end
+
+  create_table "json_sets", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.json "json_data"
+    t.string "set_type"
+    t.string "release_date"
+    t.integer "total_set_size"
+  end
+
+  create_table "json_tokens", force: :cascade do |t|
+    t.string "uuid"
+    t.string "name"
+    t.integer "json_set_id"
+    t.json "json_data"
+  end
+
   create_table "reprints", force: :cascade do |t|
     t.bigint "card_id"
     t.bigint "reprint_card_id"
@@ -261,7 +285,7 @@ ActiveRecord::Schema.define(version: 2021_04_25_000331) do
     t.index ["reprint_card_id"], name: "index_reprints_on_reprint_card_id"
   end
 
-  create_table "set_data", force: :cascade do |t|
+  create_table "set_datas", force: :cascade do |t|
     t.string "code"
     t.string "name"
     t.string "set_type"
@@ -300,4 +324,8 @@ ActiveRecord::Schema.define(version: 2021_04_25_000331) do
     t.string "slug", null: false
   end
 
+  add_foreign_key "card_datas", "set_datas"
+  add_foreign_key "cards", "extension_sets"
+  add_foreign_key "json_cards", "json_sets"
+  add_foreign_key "json_tokens", "json_sets"
 end

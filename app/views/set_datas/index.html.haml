@@ -13,13 +13,13 @@
   %tbody
     - @sets.each do |set|
       %tr
-        %td= link_to set.name, set_data_path(set, back_page: params['page'])
+        %td= link_to "#{set.name} (#{set.code})", set_data_path(set, back_page: params['page'])
         %td= set.set_type
         %td= set.release_date
         %td= set.block
-        %td= set.cards.count
+        %td= set.card_datas.count
         %td
-          - if (missing_images = set.cards.where(image_url: nil).count).positive?
+          - if (missing_images = set.card_datas.where(image_url: nil).count).positive?
             = missing_images
 .text-center
   = paginate(@sets, theme: :classic)
