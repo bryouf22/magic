@@ -1,6 +1,7 @@
 module CardHelper
   def card_scryfall_image_url(card)
-    api_url = "https://api.scryfall.com/cards/#{card.json_set.code.downcase}/#{card.number}"
+    api_url = "https://api.scryfall.com/cards/#{card.json_data['identifiers']['scryfallId']}"
+    # api_url = "https://api.scryfall.com/cards/#{card.json_set.code.downcase}/#{card.number}"
     client = HTTPClient.new(default_header: { 'Accept-Language' => 'en-US' }).get(api_url)
 
     json = JSON.parse(client.body)

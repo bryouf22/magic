@@ -9,7 +9,4 @@
       %tr
         %td= @token.name
   .col-sm-6.text-center
-    - if false && @token.image_url.present?
-      = image_tag(@token.image_url)
-    - else
-      = image_tag(asset_path('card-background.jpg'))
+    = image_tag(card_scryfall_image_url(@token), class: 'img-responsive')

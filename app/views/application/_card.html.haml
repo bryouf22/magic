@@ -8,8 +8,8 @@
   - if context == :set && @card.number_in_set.present?
     .set-navigation
       - unless @card.number_in_set == 1
-        - previous_c = set.cards.where(number_in_set: @card.number_in_set - 1).first
-        = link_to previous_c.name, extension_set_card_path(set.slug, previous_c.id)
+        - if (previous_c = set.cards.where(number_in_set: @card.number_in_set - 1).first)
+          = link_to previous_c.name, extension_set_card_path(set.slug, previous_c.id)
       = form_for(:card, url: extension_set_search_num_path(set.slug), method: :get) do |form|
         = form.text_field(:num, value: @card.number_in_set)
       - if (next_c = set.cards.where(number_in_set: @card.number_in_set + 1).first)

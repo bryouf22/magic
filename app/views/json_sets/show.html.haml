@@ -17,4 +17,4 @@
     - @tokens.each do |token|
       %tr
         %td= link_to token.name, json_set_json_token_path(@set, token)
-        %td
+        %td= token.number
