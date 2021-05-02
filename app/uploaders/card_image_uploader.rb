@@ -15,9 +15,7 @@ class CardImageUploader < CarrierWave::Uploader::Base
   def filename
     if model.class.name == 'JsonCard' || model.class.name == 'JsonToken'
       if model.number.present?
-        "#{model.face_name.parameterize}-#{model.number}.jpg"
-      else
-        "#{model.face_name.parameterize}-#{model.uuid[0..4]}.jpg"
+        "#{model.uuid[0..4]}-#{model.face_name.parameterize}-#{model.number}.jpg"
       end
     elsif model.class.name == 'AlternateFrame'
       if model.card.number_in_set.present?

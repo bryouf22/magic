@@ -14,11 +14,9 @@ class MtgJson::ImportImages
     if context.json_set.present?
       context.json_set.json_cards.where(image: nil).find_each do |card|
         import_image(card)
-        sleep((4..12).to_a.sample)
       end
       context.json_set.json_tokens.where(image: nil).find_each do |token|
         import_image(token)
-        sleep((4..12).to_a.sample)
       end
     else
       JsonCard.where(image: nil).find_each do |card|
@@ -32,17 +30,30 @@ class MtgJson::ImportImages
 
   private
 
-  def import_image(model)
-    api_url = "https://api.scryfall.com/cards/#{model.json_data['identifiers']['scryfallId']}"
-    client = HTTPClient.new(default_header: { 'Accept-Language' => 'en-US' }).get(api_url)
+  def clean
+    paths = []
+    JsonCard.where.not(image: nil).find_each do |card|
+      file_path = "/home/deploy/magic/shared/public/#{card.image.store_dir}/#{card.image.filename}"
+      paths << file_path
+      card.image = File.open("/home/deploy/magic/shared/public#{card.image_url}")
+      card.save
+    end
+  end
 
-    json = JSON.parse(client.body)
-    if (url = json.dig('image_uris', 'normal'))
-      model.image = open(url)
-      model.save
-    elsif model.json_data['faceName'].present? && (url = json["card_faces"].find { |cf| cf['name'] == model.json_data['faceName'] }.dig('image_uris', 'normal'))
-      model.image = open(url)
-      model.save
+  def import_image(model)
+    begin
+      api_url = "https://api.scryfall.com/cards/#{model.json_data['identifiers']['scryfallId']}"
+      client = HTTPClient.new(default_header: { 'Accept-Language' => 'en-US' }).get(api_url)
+
+      json = JSON.parse(client.body)
+      if (url = json.dig('image_uris', 'normal'))
+        model.image = open(url)
+        model.save
+      elsif model.json_data['faceName'].present? && (url = json["card_faces"].find { |cf| cf['name'] == model.json_data['faceName'] }.dig('image_uris', 'normal'))
+        model.image = open(url)
+        model.save
+      end
+    rescue
     end
   end
 end
