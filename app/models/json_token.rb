@@ -18,5 +18,7 @@ class JsonToken < ApplicationRecord
 
   mount_uploader :image, CardImageUploader
 
-  json_data['faceName'].presence || name
+  def face_name
+    json_data['faceName'].presence || name
+  end
 end
