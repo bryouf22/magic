@@ -7,6 +7,8 @@ module CardHelper
     json = JSON.parse(client.body)
     if (url = json.dig('image_uris', 'normal'))
       url
+    elsif card.json_data['faceName'].present? && (url = json["card_faces"].find { |cf| cf['name'] == card.json_data['faceName'] }.dig('image_uris', 'normal'))
+      url
     else
       asset_path('card-background.jpg')
     end

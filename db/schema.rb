@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_30_222855) do
+ActiveRecord::Schema.define(version: 2021_05_02_112112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -260,6 +260,7 @@ ActiveRecord::Schema.define(version: 2021_04_30_222855) do
     t.string "uuid"
     t.string "number"
     t.integer "sort_number"
+    t.string "image"
   end
 
   create_table "json_sets", force: :cascade do |t|
@@ -278,6 +279,7 @@ ActiveRecord::Schema.define(version: 2021_04_30_222855) do
     t.json "json_data"
     t.string "number"
     t.integer "sort_number"
+    t.string "image"
   end
 
   create_table "reprints", force: :cascade do |t|
