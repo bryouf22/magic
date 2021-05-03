@@ -30,16 +30,6 @@ class MtgJson::ImportImages
 
   private
 
-  def clean
-    paths = []
-    JsonCard.where.not(image: nil).find_each do |card|
-      file_path = "/home/deploy/magic/shared/public/#{card.image.store_dir}/#{card.image.filename}"
-      paths << file_path
-      card.image = File.open("/home/deploy/magic/shared/public#{card.image_url}")
-      card.save
-    end
-  end
-
   def import_image(model)
     begin
       api_url = "https://api.scryfall.com/cards/#{model.json_data['identifiers']['scryfallId']}"
