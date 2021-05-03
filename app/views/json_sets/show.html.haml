@@ -2,7 +2,7 @@
 
 .text-left
   %h3= @set.name
-= #link_to 'visuels', visuals_json_set_path(@set, back_page: @back_page)
+= link_to 'visuels', visuals_json_set_path(@set, back_page: @back_page)
 
 %table.table
   %thead
