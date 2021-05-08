@@ -1,11 +1,10 @@
-- if accessible?
-  - if current_user.present?
-    %h1 Magic Project
-    %ul
-      %li Voir mes decks
-      %li Ma collection
-      %li Mes listes de souhait
-  - else
-    = render 'login_form'
-- else
-  = ''
+.text-center
+  %h1 Très prochainement...
+
+.text-center
+  = image_tag('intro.png')
+
+.text-center.intro-text
+  %span Créez vos decks
+  et
+  %span ajoutez votre collection !

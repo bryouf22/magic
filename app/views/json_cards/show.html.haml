@@ -1,7 +1,4 @@
-= link_to @set.name, json_set_path(@set)
-
-.text-left
-  %h3= @card.name
+%h3= @card.name
 
 .row
   .col-sm-6
@@ -11,4 +8,5 @@
       %tr
         %td= @card.number
   .col-sm-6.text-center
-    = image_tag(card_scryfall_image_url(@card), class: 'img-responsive')
+    %span.visual-wrapper= image_tag(card_scryfall_image_url(@card), class: 'img-responsive')
+

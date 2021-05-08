@@ -3,18 +3,7 @@ module CardHelper
     if card.image_url.present?
       card.image_url
     else
-      api_url = "https://api.scryfall.com/cards/#{card.json_data['identifiers']['scryfallId']}"
-      # api_url = "https://api.scryfall.com/cards/#{card.json_set.code.downcase}/#{card.number}"
-      client = HTTPClient.new(default_header: { 'Accept-Language' => 'en-US' }).get(api_url)
-
-      json = JSON.parse(client.body)
-      if (url = json.dig('image_uris', 'normal'))
-        url
-      elsif card.json_data['faceName'].present? && (url = json["card_faces"].find { |cf| cf['name'] == card.json_data['faceName'] }.dig('image_uris', 'normal'))
-        url
-      else
-        asset_path('card-background.jpg')
-      end
+      asset_path('card-background.jpg')
     end
   end
 

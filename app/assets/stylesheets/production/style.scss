@@ -1,7 +1,58 @@
+body {
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+body * {
+  font-family: 'OpenSans';
+}
+
+h1 {
+  padding: 0;
+  font-size: 26px;
+  color: #282828;
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+  font-family: "Oxygen";
+  font-weight: 700;
+}
+
+h2, h3, h4, h5, h6 {
+  font-family: "Oxygen";
+  font-weight: 700;
+}
+
+h2 {
+  @extend h1;
+  font-size: 22px;
+  margin: 15px 0 10px;
+}
+
+h3 {
+  font-size: 18px;
+  margin: 14px 0 10px;
+}
+
+.intro-text {
+  font-size: 20px;
+  font-style: italic;
+  span {
+    font-size: 24px;
+    font-style: normal;
+    display: block;
+    margin: 10px;
+  }
+  color: black;
+  font-weight: 800;
+  font-family: Oxygen;
+  margin: 50px;
+}
+
 .link {
-  color: #9e5f00;
+  color: #016456;
+
   &:hover {
-    color: #de8708;
+    color: #016456;
   }
 }
 
@@ -11,71 +62,31 @@
 
 .btn-action {
   color: #FFFFFF;
-  background-color: #de8708;
+  background-color: #016456;
   border: none;
   padding: 2px 8px 3px 8px;
   border-radius: 3px;
   &:hover {
-    background-color: #E8AC55;
-  }
-}
-body {
-  margin: 0;
-  background-color: #f0f0f0;
-}
-
-body * {
-  font-family: Verdana;
-}
-
-h1 {
-  padding: 0;
-  font-size: 26px;
-  color: #282828;
-  margin: 0 0 20px 0;
-  line-height: 1;
-  font-family: "Beleren small caps";
-}
-
-h2, h3 {
-  font-family: "Beleren";
-}
-
-h2 {
-  @extend h1;
-  font-size: 22px;
-  margin: 14px 0;
-}
-
-h3 {
-  font-size: 18px;
-}
-
-.link {
-  color: #9e5f00;
-  &:hover {
-    color: #de8708;
+    background-color: #236852;
   }
 }
 
 .container {
-  background-color: white;
+  background-color: #FFFFFF;
   border-left: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
-  padding: 0;
-  margin-top: 40px;
-  margin-bottom: 60px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
+  margin-top: 40px 0 60px;
 }
 
 .content p, .content th, .content td {
   color: #282828;
-  font-family: Verdana;
+  font-family: 'OpenSans';
+  font-weight: 400;
   font-size: 14px;
-  margin: 20px 0;
-  line-height: 1.4;
+  line-height: 1.6;
+  margin: 8px 0;
 }
 
 .top-left {
@@ -90,12 +101,11 @@ h3 {
 }
 
 .content p a {
-  color: #9e5f00;
-  text-decoration: none;
+  color: #016456;
 }
 
 .content p a:hover {
-  color: #de8708;
+  color: #016456;
   text-decoration: underline;
 }
 
@@ -106,15 +116,15 @@ h3 {
 
 .content ul:not(.pagination, .visual) li::before {
   content: "■";
-  color: #de8708;
+  color: #016456;
   margin-right: 6px;
 }
 
 .content ul li {
   color: #282828;
-  font-family: Verdana;
+  font-family: 'OpenSans';
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 fieldset.decklist {
@@ -130,7 +140,7 @@ fieldset.decklist ul {
 
 fieldset.decklist span {
   color: #282828;
-  font-family: Verdana;
+  font-family: 'OpenSans';
   font-size: 19px;
 }
 
@@ -184,7 +194,7 @@ nav.page.pagination {
 }
 
 nav.page.pagination ul li {
-  background-color: #de8708;
+  background-color: #016456;
   border-radius: 4px;
   height: 21px;
   display: inline-block;
@@ -192,13 +202,14 @@ nav.page.pagination ul li {
 
 nav.page.pagination a, nav.page.pagination span {
   padding: 5px;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-family: "OpenSans";
+  font-weight: 300;
   color: #FFFFFF;
   font-size: 13px;
 }
 
 nav.page.pagination a:hover {
-  background-color: #E8AC55;
+  background-color: #236852;
 }
 
 .content nav.page.pagination ul li::before {
@@ -214,13 +225,9 @@ figcaption {
 
 .breadcrumb  {
   padding: 0;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   background-color: #FFFFFF;
-  a {
-    @extend .link;
-  }
 }
-
 
 .content ul.cards-list li.in_collection a {
   color: #249f01;
@@ -237,13 +244,16 @@ figcaption {
 .set-add-collection-form {
   display: inline;
 }
+
 .cards-list.classic.collection span {
   width: 50%;
   display: inline-block;
 }
+
 .set-add-collection-form .disable {
   visibility: hidden;
 }
+
 .set-add-collection-form .btn-xs {
   line-height: 1;
   height: 18px;
@@ -261,27 +271,28 @@ figcaption {
   border: 1px solid #e6e6e6;
   -moz-appearance: textfield;
 }
+
 .form-occurances:hover, .form-occurances:focus {
   border: 1px solid #282828;
   -moz-appearance: number-input;
 }
 
 .views-selection a {
-  color: #9e5f00;
+  color: #016456;
   &:hover {
-    color: #de8708;
+    color: #016456;
   }
 }
 
 .show-hover {
   display: none;
 }
+
 .wrapper-show-hover:hover {
   .show-hover {
     display: inline;
   }
 }
-
 
 .card-number {
   color: #777777 !important;

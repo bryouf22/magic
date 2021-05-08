@@ -1,13 +1,13 @@
 .link {
-  color: #9e5f00;
+  color: inherit;
   &:hover {
-    color: #de8708;
+    color: inherit;
   }
 }
 
 .btn-action {
   color: #FFFFFF;
-  background-color: #de8708;
+  background-color: #016456;
   border: none;
   padding: 2px 8px 3px 8px;
   border-radius: 3px;
@@ -30,5 +30,4 @@
 
 form.deck-quantity-form {
   display: inline;
-
 }

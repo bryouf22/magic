@@ -1,5 +1,5 @@
 class ExtensionSetsController < ApplicationController
-  add_breadcrumb 'home', :root_path
+
   add_breadcrumb 'Extensions', :extension_sets_path
 
   def index

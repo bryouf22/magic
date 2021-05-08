@@ -13,11 +13,18 @@ class MtgJson::Import
   def call
     FileUtils.rm_rf(BOUSE_OUT)
     FileUtils.mkdir_p(BOUSE_OUT)
-
     retrieve_json
-    import_sets
-    import_cards
-    import_tokens
+
+    if context.recent
+      limit_date = Date.current - 10.days
+      import_sets(limit_date)
+      import_cards(limit_date)
+      import_tokens(limit_date)
+    else
+      import_sets
+      import_cards
+      import_tokens
+    end
   end
 
   private
@@ -40,8 +47,10 @@ class MtgJson::Import
     @content ||= JSON.parse(File.open("#{BOUSE_OUT}/AllPrintings.json").read)
   end
 
-  def import_sets
+  def import_sets(date = nil)
     json_content['data'].each do |key, value|
+      next if date && value['releaseDate'].to_date < date
+
       set = JsonSet.where(code: key).first || JsonSet.new
       set.code = key            if set.new_record?
       set.name = value['name']  if set.new_record?
@@ -54,9 +63,11 @@ class MtgJson::Import
     end
   end
 
-  def import_cards
+  def import_cards(date = nil)
     json_content['data'].keys.each do |key|
       if (set = JsonSet.where(code: key).first)
+        next if date && json_content['data'][key]['releaseDate'].to_date < date
+
         json_content['data'][key]['cards'].each do |card|
           next if JsonCard.where(uuid: card['uuid']).any?
 
@@ -72,7 +83,7 @@ class MtgJson::Import
     end
   end
 
-  def import_tokens
+  def import_tokens(date = nil)
     json_content['data'].keys.each do |key|
       if (set = JsonSet.where(code: key).first)
         json_content['data'][key]['tokens'].each do |token|

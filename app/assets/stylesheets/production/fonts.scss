@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: "Beleren";
   font-weight: bold;
   src: font-url('Beleren2016-Bold.svg'), font-url('Beleren2016-Bold.ttf'), font-url('Beleren2016-Bold.woff');
@@ -13,4 +13,39 @@
   font-family: "Beleren small caps";
   font-weight: bold;
   src: font-url('Beleren2016SmallCaps-Bold.svg'), font-url('Beleren2016SmallCaps-Bold.ttf'), font-url('Beleren2016SmallCaps-Bold.woff');
+} */
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 300;
+  src: font-url('OpenSans-Light.ttf');
+}
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 400;
+  src: font-url('OpenSans-Regular.ttf');
+}
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 600;
+  src: font-url('OpenSans-SemiBold.ttf');
+}
+@font-face {
+  font-family: "OpenSans";
+  font-weight: 700;
+  src: font-url('OpenSans-Bold.ttf');
+}
+@font-face {
+  font-family: "Oxygen";
+  font-weight: 300;
+  src: font-url('Oxygen-Light.ttf');
+}
+@font-face {
+  font-family: "Oxygen";
+  font-weight: 400;
+  src: font-url('Oxygen-Regular.ttf');
+}
+@font-face {
+  font-family: "Oxygen";
+  font-weight: 700;
+  src: font-url('Oxygen-Bold.ttf');
 }

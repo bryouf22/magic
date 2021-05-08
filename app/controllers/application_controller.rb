@@ -1,8 +1,15 @@
 class ApplicationController < ActionController::Base
+
   helper_method :accessible?
 
   def accessible?
     false
+  end
+
+  before_action :set_no_index
+
+  def set_no_index
+    set_meta_tags noindex: true
   end
 
   private

@@ -1,14 +1,13 @@
-= link_to 'back', json_sets_path(page: @back_page)
-
 .text-left
   %h3= @set.name
-= link_to 'visuels', visuals_json_set_path(@set, back_page: @back_page)
+
+= link_to 'Gallerie', visuals_json_set_path(@set)
 
 %table.table
   %thead
     %tr
       %td Nom
-      %td Numero
+      %td Numéro
   %tbody
     - @cards.each do |card|
       %tr

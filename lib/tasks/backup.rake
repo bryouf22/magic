@@ -6,6 +6,8 @@ namespace :backup do
 
   # scp deploy@lordyawgmoth.com:/home/deploy/backups/jeu.sql .
   # scp deploy@lordyawgmoth.com:/home/deploy/backups/public_card.zip .
+  # scp deploy@lordyawgmoth.com:/mnt/vdb/json_card.zip .
+  # scp deploy@lordyawgmoth.com:/mnt/vdb/json_token.zip .
 
   desc "export users in xml file (user with collection wish list and decks)"
   task users: :environment do

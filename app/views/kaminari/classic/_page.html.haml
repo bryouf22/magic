@@ -1,6 +1,4 @@
 - if page.current?
-  %li.active
-    = content_tag :a, page, data: { remote: remote }, rel: page.rel
+  %li.active= content_tag :a, page, data: { remote: remote }, rel: page.rel
 - else
-  %li
-    = link_to page, url, remote: remote, rel: page.rel
+  %li= link_to page, url, remote: remote, rel: page.rel

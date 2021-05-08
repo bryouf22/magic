@@ -1,4 +1,4 @@
-%h1.set-show-title
+%h1
   %i{ class: "ss ss-common ss-#{@set.code&.downcase}" }
   = @set.name
 
@@ -11,21 +11,21 @@
 
 %ul.set-infos
   %li
-    Release date :
+    Date de sortie :
     = @set.release_date.strftime("%m/%d/%Y")
   %li
-    Total cards :
+    Nombre de cartes :
     = @set.card_count
   %li
-    New cards :
+    Nouvelles cartes :
     = @set.new_card_count
   %li
-    Reprints (*) :
+    Réimpression (*) :
     = @set.reprint_count
 
 .views-selection
-  = 'list |'
-  = link_to 'images', extension_set_path(slug: @set.slug, params: { view: :images })
+  = 'Vue liste |'
+  = link_to 'Gallerie', extension_set_path(slug: @set.slug, params: { view: :images })
   - if user_signed_in?
     = ' | '
     = link_to 'collection', extension_set_collection_path(slug: @set.slug)
