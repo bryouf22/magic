@@ -1,6 +1,11 @@
 class ApplicationController < ActionController::Base
 
   helper_method :accessible?
+  helper_method :current_user
+
+  def current_user
+    nil
+  end
 
   def accessible?
     false
