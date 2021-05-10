@@ -3,6 +3,7 @@ footer {
   bottom: 0;
   width: 100%;
   z-index: 4;
+
   ul {
     background-color: #016456;
     list-style-type: none;
@@ -11,9 +12,11 @@ footer {
     text-align: center;
     width: 100%;
     margin-bottom: 0;
+
     li {
       display: inline-block;
       margin: 0 20px;
+
       a {
         color: #f0f0f0;
         text-decoration: none;
@@ -22,6 +25,7 @@ footer {
         font-weight: 700;
         letter-spacing: 1.1px;
         font-size: 13px;
+
         &:hover, &:active, &:focus {
           color: #f0f0f0;
           text-decoration: none;

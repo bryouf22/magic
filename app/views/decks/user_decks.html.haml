@@ -1,9 +1,9 @@
 %h1 My decks
 
-= link_to new_deck_path, class: 'link' do
+= link_to new_deck_path do
   Create a deck
 = '/'
-= link_to categories_path, class: 'link' do
+= link_to categories_path do
   Organize categories
 %br
 %br
@@ -24,8 +24,8 @@
           %tr
             %td.col-sm-1.text-right
               = "#{deck.complete_percent} %"
-              = "&nbsp;".html_safe # fix with css
-              = "&nbsp;".html_safe # fix with css
+              = "&nbsp;".html_safe
+              = "&nbsp;".html_safe
             %td.col-sm-3= link_to deck.name.truncate(35), my_deck_path(slug: deck.slug)
             %td.col-sm-2
               .hidden= deck.colors.sort.join(' ')

@@ -1,6 +1,6 @@
 %h1 new deck
 
-= link_to import_deck_path, class: 'link' do
+= link_to import_deck_path do
   Import from a list
 
 = render partial: 'deck_form', locals: { deck: @deck, method: :post, url: create_deck_path }

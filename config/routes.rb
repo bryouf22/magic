@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   default_url_options host: 'localhost:3000'
 
-  get 'legals', to: 'welcome#legals', as: :legals
+  get 'mentions-legales', to: 'welcome#legals', as: :legals
 
   get    'extensions',          to: 'extension_sets#index',      as: :extension_sets
   get    'extension-:slug',     to: 'extension_sets#show',       as: :extension_set

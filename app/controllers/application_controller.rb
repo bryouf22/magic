@@ -1,10 +1,15 @@
 class ApplicationController < ActionController::Base
 
   helper_method :accessible?
+  helper_method :user_signed_in?
   helper_method :current_user
 
   def current_user
     nil
+  end
+
+  def user_signed_in?
+    false
   end
 
   def accessible?

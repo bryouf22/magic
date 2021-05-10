@@ -1,24 +1,24 @@
-= #link_to 'Generate boosters', generate_draft_path(@deck.id), class: 'link'
+= #link_to 'Generate boosters', generate_draft_path(@deck.id)
 
 - if current_user&.id
   - if @deck.user_id == current_user&.id
-    = link_to 'Edit', edit_deck_path(slug: @deck.slug), class: 'link'
+    = link_to 'Edit', edit_deck_path(slug: @deck.slug)
     = '/'
     - unless locals[:view] == "classic"
-      = link_to 'Classic view', my_deck_path(slug: @deck.slug), class: 'link'
+      = link_to 'Classic view', my_deck_path(slug: @deck.slug)
       = '/'
     - unless locals[:view] == "advanced"
-      = link_to 'Advanced view', detail_deck_path(slug: @deck.slug), class: 'link'
+      = link_to 'Advanced view', detail_deck_path(slug: @deck.slug)
       = '/'
     - unless locals[:view] == "colors"
-      = link_to 'Sort by colors', my_deck_by_color_path(@deck.slug), class: 'link'
+      = link_to 'Sort by colors', my_deck_by_color_path(@deck.slug)
       = '/'
-    = link_to 'Export', export_deck_path(@deck.slug), class: 'link'
+    = link_to 'Export', export_deck_path(@deck.slug)
     = '/'
     - unless locals[:view] == "wishlist"
-      = link_to 'Add to wishlist', add_to_wishlist_deck_path(@deck.id), class: 'link'
+      = link_to 'Add to wishlist', add_to_wishlist_deck_path(@deck.id)
       = '/'
     - unless locals[:view] == "collection"
-      = link_to 'Add to collection', add_to_collection_deck_path(@deck.id), class: 'link'
+      = link_to 'Add to collection', add_to_collection_deck_path(@deck.id)
 - elsif current_user&.id
-  = link_to 'Copy', copy_public_deck_path(id: @deck.id), class: 'link', method: :post
+  = link_to 'Copy', copy_public_deck_path(id: @deck.id), method: :post
