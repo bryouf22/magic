@@ -3,11 +3,10 @@
   %head
     %meta{ content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type" }
     %meta{ name: "viewport", content: "width=device-width, initial-scale=1" }
-    = display_meta_tags site: 'lordyawgmoth.com', separator: '-'
+    = display_meta_tags site: 'lordyawgmoth', separator: '-'
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all'
-    %link{ href: "https://fonts.googleapis.com/css?family=Roboto&amp;display=swap", rel: "stylesheet" }
+    = stylesheet_link_tag 'application', media: 'all', rel: :preload
     = # javascript_include_tag 'application'
     - if false
       %script{ async: "", src: "https://www.googletagmanager.com/gtag/js?id=UA-148146929-1" }
