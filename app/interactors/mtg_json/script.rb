@@ -8,6 +8,10 @@ class MtgJson::Script
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
   def call
+    JsonCard.order(id: :desc).limit(393).each do |card|
+      import_image(card)
+    end
+    import_missings_token_images
   end
 
   private
