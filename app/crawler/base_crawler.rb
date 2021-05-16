@@ -71,9 +71,18 @@ class BaseCrawler
   end
 
   def import_set_names
+    #
+    # timespiral remastered
+    # Commander Collection: Green
     [
+      'Zendikar+Rising',
+      'Zendikar+Rising+Commander',
+      'Zendikar+Rising+Expeditions',
+      'Kaldheim',
+      'Kaldheim+Commander',
+      'Strixhaven%3a+School+of+Mages',
+      'Strixhaven+Mystical+Archive',
       'Double+Masters',
-      'Core+Set+2021'
     ]
   end
 
