@@ -8,19 +8,11 @@
         %li= link_to 'Extensions', extension_sets_path
         %li= link_to 'Mtgjson.com', json_sets_path
       %ul
-        - if user_signed_in?
+        - if current_user && user_signed_in?
           - if current_user.admin?
             %li
               = link_to 'Admin', admin_root_path
-              %ul
-                %li= link_to 'Extensions', admin_extension_sets_path
-                %li= link_to 'Sans visuel', without_image_admin_cards_path
-                %li= link_to 'Utilisateurs', admin_users_path
-                %li= link_to 'Blocs', admin_blocs_path
-                %li= link_to 'Set Listes', admin_set_lists_path
-                %li= link_to 'Formats', admin_formats_path
 
-          %li= link_to 'Account', user_account_path
           %li= link_to 'Logout', destroy_user_session_path, method: :delete
         - elsif false
           %li= link_to 'Login', login_path

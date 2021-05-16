@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   default_url_options host: 'localhost:3000'
 
+  devise_scope :user do
+    get '/login' => 'devise/sessions#new',             as: :login
+    get '/registration' => 'devise/registrations#new', as: :new_user_registration
+  end
+
   get 'mentions-legales', to: 'welcome#legals', as: :legals
 
   get    'extensions',          to: 'extension_sets#index',      as: :extension_sets
@@ -20,12 +25,7 @@ Rails.application.routes.draw do
     resources :json_tokens, only: :show
   end
 
-  # devise_scope :user do
-  #   get '/login' => 'devise/sessions#new',             as: :login
-  #   get '/registration' => 'devise/registrations#new', as: :new_user_registration
-  # end
-
-  # devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   root to: 'welcome#index'
 

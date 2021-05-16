@@ -4,7 +4,11 @@ class CardCrawler < BaseCrawler
   BASE_SELECTOR = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_'
 
   def initialize(url, set_id = nil)
-    if set_id.present?
+    binding.pry
+    puts "------------"
+    puts url
+    puts "------------"
+    if !set_id.present?
       html = html_from_url(url)
       @data = retrieve_card_attributes(html, url)
       @data.merge!(set_name: retrieve_set_name)
@@ -59,6 +63,8 @@ class CardCrawler < BaseCrawler
     card = Card.create(card_attributes)
     if card.valid?
       import_other_basic_lands(url, html, set_id) if card.basic_land?
+      true
+    elsif ExtensionSet.find(240).cards.where(name: card.name).any?
       true
     else
       false
