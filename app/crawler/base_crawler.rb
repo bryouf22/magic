@@ -83,6 +83,8 @@ class BaseCrawler
       'Strixhaven%3a+School+of+Mages',
       'Strixhaven+Mystical+Archive',
       'Double+Masters',
+      'Commander+2021',
+      'Time+Spiral+Remastered',
     ]
   end
 

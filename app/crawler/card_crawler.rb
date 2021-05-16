@@ -3,27 +3,27 @@ class CardCrawler < BaseCrawler
 
   BASE_SELECTOR = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_'
 
-  def initialize(url, set_id)
-    html    = html_from_url(url)
-    success = if double_card?(html)
-                import_double_card(html, set_id, url)
-              else
-                import_simple_card(html, set_id, url)
-              end
+  def initialize(url, set_id = nil)
+    if set_id.present?
+      html = html_from_url(url)
+      @data = retrieve_card_attributes(html, url)
+      @data.merge!(set_name: retrieve_set_name)
+    else
+      html    = html_from_url(url)
+      success = if double_card?(html)
+                  import_double_card(html, set_id, url)
+                else
+                  import_simple_card(html, set_id, url)
+                end
 
-    if success && (gatherer_url = GathererCardUrl.where(url: url, extension_set_id: set_id)&.first)
-      gatherer_url.destroy
-    elsif !success && GathererCardUrl.where(url: url, extension_set_id: set_id).none?
-      GathererCardUrl.create(url: url, extension_set_id: set_id)
+      if success && (gatherer_url = GathererCardUrl.where(url: url, extension_set_id: set_id)&.first)
+        gatherer_url.destroy
+      elsif !success && GathererCardUrl.where(url: url, extension_set_id: set_id).none?
+        GathererCardUrl.create(url: url, extension_set_id: set_id)
+      end
+    rescue
+      GathererCardUrl.create(url: url, extension_set_id: set_id) if GathererCardUrl.where(url: url, extension_set_id: set_id).none?
     end
-  rescue
-    GathererCardUrl.create(url: url, extension_set_id: set_id) if GathererCardUrl.where(url: url, extension_set_id: set_id).none?
-  end
-
-  def initialize(url)
-    html = html_from_url(url)
-    @data = retrieve_card_attributes(html, url)
-    @data.merge!(set_name: retrieve_set_name)
   end
 
   def retrieve_data(url, rotate = false)
