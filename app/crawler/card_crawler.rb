@@ -4,7 +4,6 @@ class CardCrawler < BaseCrawler
   BASE_SELECTOR = 'ctl00_ctl00_ctl00_MainContent_SubContent_SubContent_'
 
   def initialize(url, set_id = nil)
-    binding.pry
     puts "------------"
     puts url
     puts "------------"
